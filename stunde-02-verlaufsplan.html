@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verlaufsplan Stunde 2: Wie tickt ein Betrieb?</title>
+<style>
+  :root { --navy:#14324a; --teal:#4f9aa6; --teal-hell:#eaf4f4; --orange:#f2994a; --orange-hell:#fdeee0; --ink:#20303d; --linie:#b9c7ce; --gruen:#2f8f5b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Trebuchet MS","Verdana","Segoe UI",sans-serif; font-size:8.6pt; line-height:1.3; color:var(--ink); background:#e8e8e8; }
+  .blatt { width:297mm; min-height:210mm; margin:15px auto; padding:11mm 12mm; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.15); }
+  .kopf { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--navy); padding-bottom:2.5mm; margin-bottom:3.5mm; }
+  .kopf .label { font-size:8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--teal); font-weight:800; }
+  .kopf h1 { font-size:18pt; color:var(--navy); line-height:1.1; }
+  .kopf .meta { text-align:right; font-size:8.6pt; color:#4a5a63; }
+  .ziele { display:grid; grid-template-columns:1.2fr 1fr; gap:4mm; margin-bottom:3.5mm; }
+  .box { border:1.5px solid var(--linie); border-radius:3mm; padding:2.5mm 4mm; }
+  .box.ziel { background:var(--orange-hell); border-color:var(--orange); }
+  .box h3 { font-size:8.2pt; letter-spacing:.5px; text-transform:uppercase; color:var(--navy); margin-bottom:1mm; }
+  .box ul { padding-left:4mm; }
+  table { width:100%; border-collapse:collapse; table-layout:fixed; }
+  th { background:var(--navy); color:#fff; font-size:8.4pt; text-align:left; padding:1.6mm 2.4mm; }
+  td { vertical-align:top; padding:1.4mm 2.2mm; border:1px solid var(--linie); font-size:8.2pt; }
+  td.phase { font-weight:800; color:var(--navy); }
+  td.phase small { display:block; font-weight:700; color:var(--teal); }
+  tr.einstieg td.phase { border-left:6px solid var(--orange); }
+  tr.input td.phase { border-left:6px solid var(--teal); }
+  tr.erarbeitung td.phase { border-left:6px solid var(--navy); }
+  tr.sicherung td.phase { border-left:6px solid var(--gruen); }
+  td ul { padding-left:3.6mm; }
+  td b { color:var(--navy); }
+  .unten { display:grid; grid-template-columns:1fr 1fr 1fr; gap:3mm; margin-top:2.5mm; font-size:8.2pt; }
+  .btn-bar { width:297mm; margin:0 auto 10px auto; text-align:right; }
+  .btn { font-family:system-ui,sans-serif; font-size:13px; padding:8px 16px; border-radius:6px; border:none; background:var(--navy); color:#fff; cursor:pointer; }
+  @page { size:A4 landscape; margin:0; }
+  @media print { body { background:#fff; } .blatt { margin:0; box-shadow:none; width:100%; min-height:0; padding:6mm 9mm; } .btn-bar { display:none; } tr, .box { page-break-inside:avoid; } }
+</style>
+</head>
+<body>
+<div class="btn-bar"><button class="btn" onclick="window.print()">Als PDF speichern</button></div>
+<div class="blatt">
+  <div class="kopf">
+    <div><div class="label">Wirtschaft und Beruf &middot; Verlaufsplan für die Lehrkraft</div><h1>Stunde 2: Wie tickt ein Betrieb?</h1></div>
+    <div class="meta">Klasse 8 M-Zweig &middot; 45 Min. &middot; Mini-Firma<br>Folien: <b>stunde-02-folien.html</b></div>
+  </div>
+
+  <div class="ziele">
+    <div class="box ziel"><h3>Lernziel</h3>Die Schüler nennen die fünf Grundfunktionen eines Betriebs (Beschaffung, Produktion, Absatz, Ökologie, Arbeitsplätze) und wenden sie auf die eigene Mini-Firma an.</div>
+    <div class="box"><h3>Vorher bereitlegen</h3><ul>
+      <li>Betriebs-Steckbrief (material-02), 1 pro Team</li>
+      <li>Rollenkarten + Investorenkarten (material-16), je Team 1 Satz ausgeschnitten</li>
+      <li>Merkblatt Grundfunktionen (material-12), 1 pro Schüler</li>
+      <li>Zettel "überlebt" und "ist pleite" für die Positionslinie</li>
+    </ul></div>
+  </div>
+
+  <table>
+    <colgroup><col style="width:15%"><col style="width:12%"><col style="width:23%"><col style="width:26%"><col style="width:24%"></colgroup>
+    <tr><th>Phase und Zeit</th><th>Folie</th><th>Methode</th><th>Lehrkraft</th><th>Schüler</th></tr>
+    <tr class="einstieg"><td class="phase">Einstieg<small>8 Min.</small></td><td>3<br>Katastrophentag</td><td><b>Positionslinie.</b> Fünf Pannen der Bäckerei Sonnenschein, die Klasse stellt sich zwischen "überlebt" und "ist pleite" auf.</td><td>Karten nacheinander einblenden, pro Karte 2 Schüler begründen lassen, nicht auflösen. Am Ende fragen: Wie viele Bereiche braucht ein Betrieb?</td><td>Stehen auf, positionieren sich, begründen, tippen die Zahl der Bereiche.</td></tr>
+    <tr class="input"><td class="phase">Input<small>10 Min.</small></td><td>4, 5<br>Funktionen, Blitz-Check</td><td><b>Direkte Instruktion</b> mit Zuordnung der Pannen, danach <b>Fingerabfrage</b> (1 bis 5) mit 5 Beispielsätzen.</td><td>Pro Funktion eine Spalte aufdecken, Panne von eben zuordnen lassen. Blitz-Check nur bis alle sicher sind. Merkblatt austeilen.</td><td>Hören zu, ordnen zu, zeigen Finger, kleben das Merkblatt erst am Stundenende ein.</td></tr>
+    <tr class="erarbeitung"><td class="phase">Erarbeitung<small>18 Min.</small></td><td>6, 7<br>Auftrag, Investoren</td><td><b>Teamarbeit mit Rollen.</b> 4 Min. allein, 8 Min. Abteilungsrunde, 6 Min. Investoren-Check beim Nachbarteam.</td><td>Rollenkarten verteilen, Steckbriefe auslegen, herumgehen und mithören. Beim Investoren-Check wandert genau eine Person im Uhrzeigersinn. Timer pro Schritt per Klick.</td><td>Füllen ihre Abteilung im Steckbrief aus, präsentieren im Team, beantworten als Firma die Investorenfragen, tauschen die Rollen.</td></tr>
+    <tr class="sicherung"><td class="phase">Sicherung<small>9 Min.</small></td><td>8, 9<br>Pitch, Merksatz</td><td><b>Blitz-Pitch</b> (30 Sek. pro Firma) mit Daumen-Jury, dann <b>Lückensatz</b> und Hefteintrag.</td><td>Firma antippen startet den Timer. Danach Merksatz Lücke für Lücke aufdecken, Merkblatt einkleben lassen, Steckbriefe einsammeln.</td><td>Stellen die Firma in 30 Sek. vor, bewerten per Daumen, schreiben den Merksatz ins Heft.</td></tr>
+    <tr><td class="phase">Ausblick<small>1 Min.</small></td><td>10</td><td>Impuls</td><td>Betriebsbesichtigung ankündigen, Beobachtungsfrage nennen.</td><td>Wissen, worauf sie beim Rundgang achten.</td></tr>
+  </table>
+
+  <div class="unten">
+    <div class="box"><h3>Stolpersteine und Plan B</h3><ul>
+      <li>Positionslinie klappt im vollen Raum schlecht: stattdessen Daumen hoch, quer, runter.</li>
+      <li>Team hat nur 4 Personen: Personalchef übernimmt die Ökologie mit (steht auf der Karte).</li>
+      <li>Zeit knapp: Blitz-Check überspringen, Merksatz bleibt.</li>
+      <li>Beamer fällt aus: Folien als PDF drucken (Strg/Cmd+P), jede Folie ist eine Seite.</li>
+    </ul></div>
+    <div class="box"><h3>Hefteintrag (Merksatz)</h3>Jeder Betrieb braucht <b>5</b> Grundfunktionen: <b>Beschaffung</b>, <b>Produktion</b>, <b>Absatz</b>, <b>Ökologie</b> und <b>Arbeitsplätze</b>. Nur wenn alle zusammenspielen, kann ein Betrieb <b>bestehen</b>.</div>
+    <div class="box"><h3>Bedienung der Folien</h3><ul>
+      <li>Pfeil rechts oder Leertaste: weiter, Pfeil links: zurück</li>
+      <li>N: Lehrernotizen ein und aus, F: Vollbild</li>
+      <li>Klick auf den Timer: Start und Pause, R: zurücksetzen</li>
+      <li>Auf dem iPad: nach links und rechts wischen</li>
+    </ul></div>
+  </div>
+</div>
+</body>
+</html>

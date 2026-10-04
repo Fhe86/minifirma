@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verlaufsplan Stunde 4: Lohnt sich unsere Idee?</title>
+<style>
+  :root { --navy:#14324a; --teal:#4f9aa6; --teal-hell:#eaf4f4; --orange:#f2994a; --orange-hell:#fdeee0; --ink:#20303d; --linie:#b9c7ce; --gruen:#2f8f5b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Trebuchet MS","Verdana","Segoe UI",sans-serif; font-size:8.6pt; line-height:1.3; color:var(--ink); background:#e8e8e8; }
+  .blatt { width:297mm; min-height:210mm; margin:15px auto; padding:11mm 12mm; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.15); }
+  .kopf { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--navy); padding-bottom:2.5mm; margin-bottom:3.5mm; }
+  .kopf .label { font-size:8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--teal); font-weight:800; }
+  .kopf h1 { font-size:18pt; color:var(--navy); line-height:1.1; }
+  .kopf .meta { text-align:right; font-size:8.6pt; color:#4a5a63; }
+  .ziele { display:grid; grid-template-columns:1.2fr 1fr; gap:4mm; margin-bottom:3.5mm; }
+  .box { border:1.5px solid var(--linie); border-radius:3mm; padding:2.5mm 4mm; }
+  .box.ziel { background:var(--orange-hell); border-color:var(--orange); }
+  .box h3 { font-size:8.2pt; letter-spacing:.5px; text-transform:uppercase; color:var(--navy); margin-bottom:1mm; }
+  .box ul { padding-left:4mm; }
+  table { width:100%; border-collapse:collapse; table-layout:fixed; }
+  th { background:var(--navy); color:#fff; font-size:8.4pt; text-align:left; padding:1.6mm 2.4mm; }
+  td { vertical-align:top; padding:1.4mm 2.2mm; border:1px solid var(--linie); font-size:8.2pt; }
+  td.phase { font-weight:800; color:var(--navy); }
+  td.phase small { display:block; font-weight:700; color:var(--teal); }
+  tr.einstieg td.phase { border-left:6px solid var(--orange); }
+  tr.input td.phase { border-left:6px solid var(--teal); }
+  tr.erarbeitung td.phase { border-left:6px solid var(--navy); }
+  tr.sicherung td.phase { border-left:6px solid var(--gruen); }
+  td ul { padding-left:3.6mm; }
+  td b { color:var(--navy); }
+  .unten { display:grid; grid-template-columns:1fr 1fr 1fr; gap:3mm; margin-top:2.5mm; font-size:8.2pt; }
+  .btn-bar { width:297mm; margin:0 auto 10px auto; text-align:right; }
+  .btn { font-family:system-ui,sans-serif; font-size:13px; padding:8px 16px; border-radius:6px; border:none; background:var(--navy); color:#fff; cursor:pointer; }
+  @page { size:A4 landscape; margin:0; }
+  @media print { body { background:#fff; } .blatt { margin:0; box-shadow:none; width:100%; min-height:0; padding:6mm 9mm; } .btn-bar { display:none; } tr, .box { page-break-inside:avoid; } }
+</style>
+</head>
+<body>
+<div class="btn-bar"><button class="btn" onclick="window.print()">Als PDF speichern</button></div>
+<div class="blatt">
+  <div class="kopf">
+    <div><div class="label">Wirtschaft und Beruf &middot; Verlaufsplan für die Lehrkraft</div><h1>Stunde 4: Lohnt sich unsere Idee?</h1></div>
+    <div class="meta">Klasse 8 M-Zweig &middot; 45 Min. &middot; Mini-Firma<br>Folien: <b>stunde-04-folien.html</b></div>
+  </div>
+
+  <div class="ziele">
+    <div class="box ziel"><h3>Lernziel</h3>Die Schüler erstellen einen einfachen Geschäftsplan (Produkt, Zielgruppe, Preis, Stückzahl, Kosten) und berechnen den Gewinn als Einnahmen minus Kosten. Sie recherchieren echte Preise und prüfen ihren Plan im Feedback des Nachbarteams.</div>
+    <div class="box"><h3>Vorher bereitlegen</h3><ul>
+      <li>Geschäftsplan (material-04), 1 pro Team</li>
+      <li>Pitch-Arbeitsauftrag (material-10), 1 pro Schüler, erst am Stundenende austeilen</li>
+      <li>Feedback-Karten (material-19, Seite 2), 12 Stück bei 4 Teams, Preisliste (Seite 1) als Plan B</li>
+      <li>Klebepunkte grün und orange, je Team etwa 3 von jeder Farbe</li>
+      <li>Handys oder iPads für die Preisrecherche freigeben</li>
+    </ul></div>
+  </div>
+
+  <table>
+    <colgroup><col style="width:13%"><col style="width:11%"><col style="width:24%"><col style="width:28%"><col style="width:24%"></colgroup>
+    <tr><th>Phase und Zeit</th><th>Folie</th><th>Methode</th><th>Lehrkraft</th><th>Schüler</th></tr>
+    <tr class="einstieg"><td class="phase">Einstieg<small>6 Min.</small></td><td>3<br>Schätzspiel</td><td><b>Schätzspiel mit Fingerabfrage.</b> Drei Mini-Firmen (Limo, Kuchen, Armbänder), A, B oder C, dann Auflösung. Eine endet im Verlust.</td><td>Karte einblenden, Schätzfrage stellen, Finger zeigen lassen, 2 bis 3 Begründungen, dann auflösen.</td><td>Schätzen, begründen, merken: Einnahmen sind nicht Gewinn.</td></tr>
+    <tr class="input"><td class="phase">Input<small>8 Min.</small></td><td>4, 5<br>Rechenbeispiel, Rechner</td><td><b>Direkte Instruktion</b> am Limo-Stand (acht Schritte), danach <b>Gewinn-Rechner</b> zum Ausprobieren und Break-even.</td><td>Vor jedem Schritt rechnen lassen, dann aufdecken. Am Rechner mit den Knöpfen Was-wäre-wenn zeigen, vorher schätzen lassen.</td><td>Rechnen mit, schätzen "Gewinn oder Verlust?", erklären Break-even in eigenen Worten.</td></tr>
+    <tr class="erarbeitung"><td class="phase">Erarbeitung<small>19 Min.</small></td><td>6, 7<br>Auftrag, Rechenhilfe</td><td><b>Teamarbeit mit Rollen</b> (Finanzchef, Einkäufer, Verkaufschef, Qualitätscheck), vier Schritte mit Timer: 3 Start, 6 Preise, 7 Rechnen, 3 Realitätscheck.</td><td>Geschäftsplan verteilen, Internet freigeben, herumgehen. Auf einmalige Kosten und realistische Stückzahl achten. Schwächeren Teams Stufe 1 zeigen.</td><td>Recherchieren echte Preise, füllen den Plan aus, rechnen gegen, prüfen, ob die Zahlen glaubwürdig sind.</td></tr>
+    <tr class="sicherung"><td class="phase">Sicherung<small>12 Min.</small></td><td>8, 9, 10<br>Galerie, Merksatz, Pitch</td><td><b>Galeriegang mit Klebepunkten</b> (3 mal 2 Min. plus 1 Min. zurück), <b>Lückensatz</b>, dann <b>Pitch-Arbeitsauftrag</b> austeilen.</td><td>Rundenknopf startet den Timer. Karten ausgeben, Punkte kontrollieren. Merksatz aufdecken. Arbeitsauftrag austeilen, Kriterien kurz vorlesen.</td><td>Rechnen fremde Pläne nach, kreuzen an, kleben Punkte, schreiben den Merksatz ab, lesen den Auftrag.</td></tr>
+  </table>
+
+  <div class="unten">
+    <div class="box"><h3>Stolpersteine und Plan B</h3><ul>
+      <li>Kein Internet: Preisliste (material-19, Seite 1) auslegen.</li>
+      <li>Team rechnet unsicher: Stufe 1 auf Folie 7 (Gewinn = Einnahmen minus Kosten), einmalige Kosten weglassen.</li>
+      <li>Einmalige Kosten gehören im Geschäftsplan zu "Sonstige Kosten" oder werden bei den Gesamtkosten addiert.</li>
+      <li>Zeit knapp: Folie 5 (Rechner) überspringen, der Galeriegang auf 2 Runden kürzen.</li>
+      <li>Keine Klebepunkte: mit grünem und orangem Stift Punkte malen.</li>
+      <li>Beamer fällt aus: Folien als PDF drucken, jede Folie ist eine Seite.</li>
+    </ul></div>
+    <div class="box"><h3>Hefteintrag (Merksatz)</h3><b>Gewinn</b> = Einnahmen − Kosten.<br>Einnahmen = Preis × <b>Stückzahl</b>.<br>Zu den Kosten zählen auch die <b>einmaligen</b> Kosten.<br>Ist das Ergebnis negativ, macht die Firma <b>Verlust</b>.<br><br><b>Break-even:</b> ab dieser Stückzahl sind alle Kosten wieder drin.</div>
+    <div class="box"><h3>Bedienung der Folien</h3><ul>
+      <li>Pfeil rechts oder Leertaste: weiter, Pfeil links: zurück</li>
+      <li>N: Lehrernotizen ein und aus, F: Vollbild</li>
+      <li>Klick auf den Timer: Start und Pause, R: zurücksetzen</li>
+      <li>Folie 3: Antwort der Klasse antippen markiert sie orange</li>
+      <li>Folie 8: Rundenknopf startet den Timer, oben die Teamzahl wählen</li>
+      <li>Auf dem iPad: nach links und rechts wischen</li>
+    </ul></div>
+  </div>
+</div>
+</body>
+</html>

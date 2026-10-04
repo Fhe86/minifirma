@@ -7,57 +7,65 @@
 <style>
   :root { --navy:#14324a; --teal:#4f9aa6; --teal-hell:#eaf4f4; --orange:#f2994a; --orange-hell:#fdeee0; --ink:#20303d; --linie:#b9c7ce; }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:"Trebuchet MS","Verdana","Segoe UI",sans-serif; font-size:10.3pt; line-height:1.42; color:var(--ink); background:#e8e8e8; }
+  body { font-family:"Trebuchet MS","Verdana","Segoe UI",sans-serif; font-size:10.1pt; line-height:1.4; color:var(--ink); background:#e8e8e8; }
   .blatt { max-width:210mm; margin:15px auto; padding:15mm; background:white; box-shadow:0 2px 10px rgba(0,0,0,0.15); }
+  .blatt + .blatt { margin-top:24px; }
 
   .kopf { border:2px solid var(--navy); border-radius:5mm; padding:4mm 6mm; margin-bottom:5mm; display:flex; align-items:center; gap:5mm; background:var(--teal-hell); }
   .kopf img.side { width:14mm; height:14mm; object-fit:contain; flex-shrink:0; }
   .kopf-mitte { flex:1; text-align:center; }
   .fach-label { font-size:8.5pt; text-transform:uppercase; letter-spacing:.5px; color:var(--teal); font-weight:800; }
-  .kopf-titel { font-size:20pt; font-weight:800; color:var(--navy); margin:1mm 0; }
+  .kopf-titel { font-size:19pt; font-weight:800; color:var(--navy); margin:1mm 0; }
   .jgst-badge { display:inline-block; background:var(--navy); color:white; font-size:8pt; font-weight:700; padding:1mm 4mm; border-radius:10mm; }
 
-  .info-box { display:flex; justify-content:space-between; align-items:center; border:1px solid var(--linie); border-radius:3mm; padding:3mm 4mm; margin-bottom:6mm; font-size:9.5pt; }
-  .info-box .feld-linie { display:inline-block; border-bottom:1px solid #999; min-width:32mm; }
-  .punkte-feld { display:flex; align-items:center; gap:2mm; border:2px solid var(--orange); border-radius:3mm; padding:2mm 4mm; }
-  .punkte-feld .icon { font-size:14pt; }
+  .info-box { display:flex; justify-content:space-between; align-items:center; border:1px solid var(--linie); border-radius:3mm; padding:2.5mm 4mm; margin-bottom:4mm; font-size:9.3pt; }
+  .info-box .feld-linie { display:inline-block; border-bottom:1px solid #999; min-width:30mm; }
+  .punkte-feld { display:flex; align-items:center; gap:2mm; border:2px solid var(--orange); border-radius:3mm; padding:1.8mm 4mm; }
+  .punkte-feld .icon { font-size:13pt; }
   .punkte-feld .zahl { font-weight:800; color:var(--navy); }
 
-  .aufgabe { margin-bottom:6mm; page-break-inside:avoid; }
-  .aufgabe-kopf { display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid var(--navy); padding-bottom:1.5mm; margin-bottom:3mm; }
-  .aufgabe-titel { font-weight:800; font-size:12.5pt; color:var(--navy); }
-  .aufgabe-punkte { font-weight:700; font-size:9.5pt; color:var(--orange); background:var(--orange-hell); padding:1mm 3mm; border-radius:3mm; }
+  .aufgabe { margin-bottom:3mm; page-break-inside:avoid; }
+  .aufgabe-kopf { display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid var(--navy); padding-bottom:1mm; margin-bottom:1.5mm; }
+  .aufgabe-titel { font-weight:800; font-size:12pt; color:var(--navy); }
+  .aufgabe-punkte { font-weight:700; font-size:9.3pt; color:var(--orange); background:var(--orange-hell); padding:0.8mm 3mm; border-radius:3mm; }
 
-  .teilaufgabe { margin-bottom:3.5mm; }
-  .teilaufgabe-text { font-size:9.8pt; margin-bottom:2mm; }
-  .teilaufgabe-text .tp { float:right; font-size:8.5pt; color:var(--teal); font-weight:700; }
-  .schreib-linie { border-bottom:1px dotted #aab8bf; height:6mm; }
+  .teilaufgabe { margin-bottom:1.8mm; }
+  .teilaufgabe-text { font-size:9.5pt; margin-bottom:1.5mm; }
+  .teilaufgabe-text .tp { float:right; font-size:8.3pt; color:var(--teal); font-weight:700; }
+  .schreib-linie { border-bottom:1px dotted #aab8bf; height:5mm; }
 
-  table.zuordnung { width:100%; border-collapse:collapse; margin-bottom:2mm; }
-  table.zuordnung th { background:var(--navy); color:white; font-size:8.6pt; padding:2mm 2.5mm; text-align:left; }
-  table.zuordnung td { border:1px solid var(--linie); padding:2.3mm 2.5mm; font-size:9.2pt; }
-  table.zuordnung td.antwort { width:38mm; }
+  table.zuordnung { width:100%; border-collapse:collapse; margin-bottom:1.5mm; }
+  table.zuordnung th { background:var(--navy); color:white; font-size:8.4pt; padding:1.6mm 2.5mm; text-align:left; }
+  table.zuordnung td { border:1px solid var(--linie); padding:1.7mm 2.5mm; font-size:9pt; }
+  table.zuordnung td.antwort { width:36mm; }
 
-  .kreislauf-diagramm { display:flex; align-items:center; justify-content:center; gap:0; margin:4mm 0 3mm 0; }
-  .kd-box { border:2px solid var(--navy); border-radius:3mm; background:var(--teal-hell); width:34mm; height:16mm; display:flex; align-items:center; justify-content:center; text-align:center; }
-  .kd-box .linie { border-bottom:1.5px solid var(--navy); min-width:26mm; }
-  .kd-arrow { display:flex; flex-direction:column; align-items:center; gap:1mm; width:34mm; font-size:8pt; color:#3a4a55; }
-  .kd-arrow .pfeile { font-size:12pt; color:var(--orange); }
-  .kd-arrow .linie { border-bottom:1px dotted #9fb0b8; min-width:24mm; height:4mm; }
+  .kreislauf-diagramm { display:flex; align-items:center; justify-content:center; gap:0; margin:3mm 0 2.5mm 0; }
+  .kd-box { border:2px solid var(--navy); border-radius:3mm; background:var(--teal-hell); width:32mm; height:14mm; display:flex; align-items:center; justify-content:center; text-align:center; }
+  .kd-box .linie { border-bottom:1.5px solid var(--navy); min-width:24mm; }
+  .kd-arrow { display:flex; flex-direction:column; align-items:center; gap:0.8mm; width:32mm; font-size:7.6pt; color:#3a4a55; }
+  .kd-arrow .pfeile { font-size:11pt; color:var(--orange); }
+  .kd-arrow .linie { border-bottom:1px dotted #9fb0b8; min-width:22mm; height:3.5mm; }
 
-  .wortspeicher { border:1.5px dashed var(--teal); border-radius:4mm; background:var(--teal-hell); padding:2.5mm 4mm; font-size:9pt; margin-bottom:4mm; text-align:center; }
-  .wortspeicher .titel { font-weight:800; color:var(--navy); font-size:8.3pt; text-transform:uppercase; letter-spacing:.3px; margin-bottom:1mm; }
+  .wortspeicher { border:1.5px dashed var(--teal); border-radius:4mm; background:var(--teal-hell); padding:2mm 4mm; font-size:8.7pt; margin-bottom:2.5mm; text-align:center; }
+  .wortspeicher .titel { font-weight:800; color:var(--navy); font-size:8pt; text-transform:uppercase; letter-spacing:.3px; margin-bottom:0.8mm; }
 
-  .rechenbox { border:2px solid var(--orange); border-radius:4mm; background:var(--orange-hell); padding:3.5mm 5mm; margin-top:2mm; }
-  .rechenbox .platz { min-height:16mm; }
+  .rechenbox { border:2px solid var(--orange); border-radius:4mm; background:var(--orange-hell); padding:1.8mm 5mm; margin-top:1mm; }
+  .rechenbox .platz { min-height:10mm; }
 
-  .notenschluessel { border:2px solid var(--navy); border-radius:4mm; padding:3.5mm 5mm; margin-top:8mm; page-break-inside:avoid; }
-  .notenschluessel .titel { font-weight:800; color:var(--navy); font-size:11pt; margin-bottom:2.5mm; }
-  table.noten { width:100%; border-collapse:collapse; font-size:9pt; }
-  table.noten th { background:var(--navy); color:white; padding:1.8mm 2mm; }
-  table.noten td { border:1px solid var(--linie); padding:1.8mm 2mm; text-align:center; }
+  .stellungnahme-box { border:2px solid var(--teal); border-radius:4mm; padding:2.5mm 5mm; margin-top:1.5mm; }
+  .pro-contra { display:flex; gap:4mm; margin-top:1mm; }
+  .pro-contra .spalte { flex:1; }
+  .pro-contra .label { font-weight:800; font-size:8.6pt; text-transform:uppercase; letter-spacing:.3px; margin-bottom:1mm; }
+  .pro-contra .label.pro { color:var(--teal); }
+  .pro-contra .label.contra { color:var(--orange); }
 
-  .viel-erfolg { text-align:center; font-weight:800; color:var(--orange); font-size:12pt; margin-top:5mm; }
+  .notenschluessel { border:2px solid var(--navy); border-radius:4mm; padding:2mm 5mm; margin-top:3mm; page-break-inside:avoid; }
+  .notenschluessel .titel { font-weight:800; color:var(--navy); font-size:10.5pt; margin-bottom:2mm; }
+  table.noten { width:100%; border-collapse:collapse; font-size:8.7pt; }
+  table.noten th { background:var(--navy); color:white; padding:1.6mm 2mm; }
+  table.noten td { border:1px solid var(--linie); padding:1.6mm 2mm; text-align:center; }
+
+  .viel-erfolg { text-align:center; font-weight:800; color:var(--orange); font-size:11pt; margin-top:2mm; }
 
   .lehrerhinweis { max-width:210mm; margin:0 auto 10px auto; background:#fff3cd; border:1px solid #b8860b; border-radius:6px; padding:8px 16px; font-family:system-ui,sans-serif; font-size:12.5px; color:#5c4400; }
   .btn-bar { max-width:210mm; margin:0 auto 10px auto; text-align:right; }
@@ -65,13 +73,18 @@
   .btn:hover { background:#1d4463; }
 
   @page { size:A4; margin:15mm; }
-  @media print { body{background:white;} .blatt{margin:0;padding:0;box-shadow:none;max-width:100%;} .btn-bar,.lehrerhinweis{display:none;} }
+  @media print {
+    body{background:white;}
+    .blatt{margin:0;padding:0;box-shadow:none;max-width:100%;page-break-after:always;}
+    .blatt:last-child{page-break-after:auto;}
+    .btn-bar,.lehrerhinweis{display:none;}
+  }
 </style>
 </head>
 <body>
 
 <div class="lehrerhinweis">
-  <strong>Hinweis für die Lehrkraft:</strong> Großer (schriftlicher) Leistungsnachweis, deckt die gesamte Sequenz ab. Notenschlüssel unten ist ein üblicher Richtwert — an eigenen/schulinternen Schlüssel anpassen. Lösungen bewusst NICHT in diesem Dokument, sondern separat und nicht öffentlich gehostet (siehe Projektnotizen) — dieses Blatt landet über die Hub-Seite auch bei den Schülern.
+  <strong>Hinweis für die Lehrkraft:</strong> Großer (schriftlicher) Leistungsnachweis, 50 Punkte, kalibriert auf M-Zweig-Niveau (Mittlere-Reife-Klasse) — Mischung aus Reproduktion, Transfer auf neue Situationen und einer echten Bewertungsaufgabe (5b), passend zu den LehrplanPLUS-Kompetenzverben "anwenden", "vergleichen und bewerten", "überprüfen". Lösungen bewusst NICHT in diesem Dokument, sondern separat und nicht öffentlich gehostet (siehe Projektnotizen).
 </div>
 <div class="btn-bar"><button class="btn" onclick="window.print()">Als PDF speichern</button></div>
 
@@ -90,16 +103,16 @@
     <div>
       Name: <span class="feld-linie"></span> &nbsp;&nbsp; Klasse: <span class="feld-linie" style="min-width:14mm;"></span> &nbsp;&nbsp; Datum: <span class="feld-linie" style="min-width:22mm;"></span>
     </div>
-    <div class="punkte-feld"><span class="icon">🏆</span><span class="zahl">&nbsp;/ 40 Punkte</span></div>
+    <div class="punkte-feld"><span class="icon">🏆</span><span class="zahl">&nbsp;/ 50 Punkte</span></div>
   </div>
 
   <div class="aufgabe">
-    <div class="aufgabe-kopf"><span class="aufgabe-titel">1 &middot; Die Grundfunktionen eines Betriebs</span><span class="aufgabe-punkte">8 P</span></div>
+    <div class="aufgabe-kopf"><span class="aufgabe-titel">1 &middot; Die Grundfunktionen eines Betriebs</span><span class="aufgabe-punkte">10 P</span></div>
 
     <div class="teilaufgabe">
       <div class="teilaufgabe-text">a) Ordne jedem Beispiel die passende Grundfunktion zu.<span class="tp">5 P</span></div>
       <table class="zuordnung">
-        <tr><th>Beispiel</th><th style="width:38mm;">Grundfunktion</th></tr>
+        <tr><th>Beispiel</th><th style="width:36mm;">Grundfunktion</th></tr>
         <tr><td>Ein Bäcker bestellt Mehl bei seinem Lieferanten.</td><td class="antwort"></td></tr>
         <tr><td>Ein Friseursalon achtet darauf, beim Haarewaschen wenig Wasser zu verbrauchen.</td><td class="antwort"></td></tr>
         <tr><td>Eine Nachhilfelehrerin stellt ihrer Kundschaft nach der Stunde eine Rechnung.</td><td class="antwort"></td></tr>
@@ -110,14 +123,14 @@
     </div>
 
     <div class="teilaufgabe">
-      <div class="teilaufgabe-text">b) Erkläre in eigenen Worten, warum ein Betrieb ohne die Grundfunktion "Absatz" nicht überleben kann.<span class="tp">3 P</span></div>
+      <div class="teilaufgabe-text">b) Eure Mini-Firma stellt fest, dass zu viel Verpackungsmüll entsteht. Welche Grundfunktion ist davon betroffen, und was könntet ihr konkret ändern?<span class="tp">5 P</span></div>
       <div class="schreib-linie"></div>
       <div class="schreib-linie"></div>
     </div>
   </div>
 
   <div class="aufgabe">
-    <div class="aufgabe-kopf"><span class="aufgabe-titel">2 &middot; Der Wirtschaftskreislauf</span><span class="aufgabe-punkte">10 P</span></div>
+    <div class="aufgabe-kopf"><span class="aufgabe-titel">2 &middot; Der Wirtschaftskreislauf</span><span class="aufgabe-punkte">12 P</span></div>
 
     <div class="teilaufgabe">
       <div class="teilaufgabe-text">a) Beschrifte das Schaubild mit den passenden Begriffen aus dem Wortspeicher.<span class="tp">6 P</span></div>
@@ -132,29 +145,36 @@
     </div>
 
     <div class="teilaufgabe">
-      <div class="teilaufgabe-text">b) Erkläre kurz: Wofür verwendet der Staat die Steuern, die er von den Unternehmen bekommt?<span class="tp">4 P</span></div>
+      <div class="teilaufgabe-text">b) Stell dir vor, Unternehmen müssten plötzlich keine Steuern mehr an den Staat zahlen. Erkläre je eine Folge für den Staat und für die Haushalte.<span class="tp">6 P</span></div>
+      <div class="schreib-linie"></div>
       <div class="schreib-linie"></div>
       <div class="schreib-linie"></div>
     </div>
   </div>
 
   <div class="aufgabe">
-    <div class="aufgabe-kopf"><span class="aufgabe-titel">3 &middot; Löhne und Gehälter</span><span class="aufgabe-punkte">8 P</span></div>
+    <div class="aufgabe-kopf"><span class="aufgabe-titel">3 &middot; Löhne und Gehälter</span><span class="aufgabe-punkte">10 P</span></div>
 
     <div class="teilaufgabe">
-      <div class="teilaufgabe-text">a) Erkläre den Unterschied zwischen Stundenlohn und Akkordlohn.<span class="tp">4 P</span></div>
-      <div class="schreib-linie"></div>
+      <div class="teilaufgabe-text">a) Erkläre den Unterschied zwischen Stundenlohn und Akkordlohn.<span class="tp">3 P</span></div>
       <div class="schreib-linie"></div>
     </div>
 
     <div class="teilaufgabe">
-      <div class="teilaufgabe-text">b) Anna arbeitet in den Sommerferien 3 Wochen lang je 20 Stunden pro Woche. Sie bekommt 12 € Stundenlohn. Wie viel verdient sie insgesamt? Rechenweg zeigen!<span class="tp">4 P</span></div>
-      <div class="rechenbox"><div class="platz"></div></div>
+      <div class="teilaufgabe-text">b) Ben arbeitet im Akkordlohn in einer Fahrradwerkstatt und bekommt 8 € pro repariertem Rad. An einem Tag repariert er 6 Räder in 5 Stunden.<span class="tp">7 P</span></div>
+      <div class="rechenbox">
+        <div style="font-size:9.3pt; margin-bottom:1mm;">① Wie viel verdient Ben an diesem Tag insgesamt?</div>
+        <div class="platz"></div>
+        <div style="font-size:9.3pt; margin:1.5mm 0 1mm 0;">② Wie viel verdient er im Schnitt pro Stunde?</div>
+        <div class="platz"></div>
+        <div style="font-size:9.3pt; margin:1.5mm 0 1mm 0;">③ Ein Kollege bekommt für die gleiche Arbeit 11 € Stundenlohn. Wer verdient an diesem Tag mehr — Ben oder der Kollege?</div>
+        <div class="platz"></div>
+      </div>
     </div>
   </div>
 
   <div class="aufgabe">
-    <div class="aufgabe-kopf"><span class="aufgabe-titel">4 &middot; Vom Brutto zum Netto</span><span class="aufgabe-punkte">8 P</span></div>
+    <div class="aufgabe-kopf"><span class="aufgabe-titel">4 &middot; Vom Brutto zum Netto</span><span class="aufgabe-punkte">10 P</span></div>
 
     <div class="teilaufgabe">
       <div class="teilaufgabe-text">a) Erkläre die Begriffe Bruttolohn und Nettolohn in eigenen Worten.<span class="tp">4 P</span></div>
@@ -163,23 +183,27 @@
     </div>
 
     <div class="teilaufgabe">
-      <div class="teilaufgabe-text">b) Nenne zwei Abzüge, die vom Bruttolohn abgezogen werden, bevor der Nettolohn ausgezahlt wird.<span class="tp">4 P</span></div>
-      <div class="schreib-linie"></div>
+      <div class="teilaufgabe-text">b) Paula hat einen Bruttolohn von 1.800 €. Ihre Abzüge (Steuern und Sozialabgaben zusammen) betragen 22 %. Berechne ihren Nettolohn. Zeige deinen Rechenweg.<span class="tp">6 P</span></div>
+      <div class="rechenbox"><div class="platz"></div></div>
     </div>
   </div>
 
   <div class="aufgabe">
-    <div class="aufgabe-kopf"><span class="aufgabe-titel">5 &middot; Gerecht bezahlt?</span><span class="aufgabe-punkte">6 P</span></div>
+    <div class="aufgabe-kopf"><span class="aufgabe-titel">5 &middot; Gerecht bezahlt?</span><span class="aufgabe-punkte">8 P</span></div>
 
     <div class="teilaufgabe">
       <div class="teilaufgabe-text">a) Nenne zwei Ursachen, warum Frauen in Deutschland im Durchschnitt weniger verdienen als Männer.<span class="tp">4 P</span></div>
       <div class="schreib-linie"></div>
-      <div class="schreib-linie"></div>
     </div>
 
     <div class="teilaufgabe">
-      <div class="teilaufgabe-text">b) Was bedeutet der Grundsatz "gleicher Lohn für gleiche Arbeit"?<span class="tp">2 P</span></div>
-      <div class="schreib-linie"></div>
+      <div class="teilaufgabe-text">b) Nimm Stellung: Sollte der Staat gesetzlich vorschreiben, dass alle Unternehmen ihre Gehälter offenlegen müssen? Nenne je ein Argument dafür und dagegen.<span class="tp">4 P</span></div>
+      <div class="stellungnahme-box">
+        <div class="pro-contra">
+          <div class="spalte"><div class="label pro">Dafür</div><div class="schreib-linie"></div></div>
+          <div class="spalte"><div class="label contra">Dagegen</div><div class="schreib-linie"></div></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -187,7 +211,7 @@
     <div class="titel">Notenschlüssel (Richtwert)</div>
     <table class="noten">
       <tr><th>Note</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
-      <tr><th>Punkte</th><td>38–40</td><td>33–37</td><td>26–32</td><td>19–25</td><td>11–18</td><td>0–10</td></tr>
+      <tr><th>Punkte</th><td>46–50</td><td>40–45</td><td>33–39</td><td>25–32</td><td>15–24</td><td>0–14</td></tr>
     </table>
   </div>
 

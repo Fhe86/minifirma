@@ -68,6 +68,19 @@
   details.anleitung[open] summary::before { content: "▾ "; }
   details.anleitung .inhalt { background: var(--teal-hell); border-radius: 8px; padding: 10px 14px; margin-top: 4px; color: #2b3a45; }
 
+  /* Stundenverlauf */
+  .verlauf { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:4px 0 12px 0; }
+  .v-phase { background:var(--teal-hell); border-radius:10px; padding:8px 10px; border-top:4px solid var(--teal); }
+  .v-phase.einstieg { border-top-color:var(--orange); background:var(--orange-hell); }
+  .v-phase.erarbeitung { border-top-color:var(--navy); background:#e4edf3; }
+  .v-phase.sicherung { border-top-color:#2f8f5b; background:#e6f1e9; }
+  .v-phase .v-min { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.4px; color:var(--muted); }
+  .v-phase .v-name { font-weight:800; font-size:13.5px; color:var(--navy); }
+  .v-phase .v-was { font-size:12px; color:#2b3a45; line-height:1.35; margin-top:2px; }
+  @media (max-width: 640px) { .verlauf { grid-template-columns:1fr 1fr; } }
+  .t-link.stark { background:var(--orange); color:#3b2200; }
+  .t-link.stark:hover { background:#e0862f; color:#fff; }
+
   /* Wandertag Sonderstil */
   .t-item.wandertag .t-node { background: var(--orange); }
   .t-item.wandertag .t-card { border: 2px solid var(--orange); background: var(--orange-hell); }
@@ -83,6 +96,8 @@
   .b-card .b-stunde { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: var(--teal); }
   .b-card .b-text { font-size: 12.5px; color: var(--muted); flex: 1; }
   .b-card.gross { grid-column: span 2; }
+  .b-gruppe { font-size:15px; font-weight:800; color:var(--navy); margin:26px 0 10px 0; letter-spacing:.2px; }
+  .b-gruppe:first-of-type { margin-top:6px; }
   @media (max-width: 720px) { .bento { grid-template-columns: repeat(2, 1fr); } .b-card.gross { grid-column: span 2; } }
   @media (max-width: 460px) { .bento { grid-template-columns: 1fr; } .b-card.gross { grid-column: span 1; } }
 
@@ -126,13 +141,13 @@
   <div class="section-sub">Überblick auf einen Blick — Details und Ablauf pro Stunde in der Timeline darunter.</div>
   <table class="ueberblick">
     <tr><th>Std.</th><th>Thema</th><th>Material</th></tr>
-    <tr><td>1</td><td>Kickoff: Wir gründen eine Firma</td><td>Ideen-Canvas &amp; Gründungsurkunde</td></tr>
-    <tr><td>2</td><td>Wie tickt ein Betrieb? <em>(15 Min Input)</em></td><td>Merkblatt Grundfunktionen + Betriebs-Steckbrief</td></tr>
+    <tr><td>1</td><td>Kickoff: Wir gründen eine Firma</td><td>Folien, Ideen-Canvas &amp; Urkunde, Impulskarten</td></tr>
+    <tr><td>2</td><td>Wie tickt ein Betrieb? <em>(Katastrophentag, Input, Rollenarbeit)</em></td><td>Folien, Merkblatt Grundfunktionen, Steckbrief, Rollenkarten</td></tr>
     <tr class="highlight"><td>🚌</td><td>Betriebsbesichtigung (Wandertag, außerhalb der Wochenstunden)</td><td>Notizzettel</td></tr>
-    <tr><td>3</td><td>Kurz-Auswertung Betriebsbesichtigung</td><td>Update-Box im Steckbrief</td></tr>
-    <tr><td>4</td><td>Geschäftsplan &amp; Kalkulation</td><td>Geschäftsplan, Pitch-Arbeitsauftrag wird ausgeteilt</td></tr>
-    <tr class="highlight"><td>5</td><td>Pitch-Tag — <strong>Referat-Note</strong></td><td>Pitch-Bewertungsbogen</td></tr>
-    <tr><td>6</td><td>Wirtschaftskreislauf live <em>(15 Min Input)</em></td><td>Merkblatt Kreislauf + Rollenkarten &amp; Spielgeld</td></tr>
+    <tr><td>3</td><td>Kurz-Auswertung Betriebsbesichtigung</td><td>Folien, Update-Box im Steckbrief, Plan B</td></tr>
+    <tr><td>4</td><td>Geschäftsplan &amp; Kalkulation</td><td>Folien, Geschäftsplan, Preisliste, Pitch-Arbeitsauftrag</td></tr>
+    <tr class="highlight"><td>5</td><td>Pitch-Tag — <strong>Referat-Note</strong></td><td>Folien (Regiebuch), Jury-Bogen, Urkunden</td></tr>
+    <tr><td>6</td><td>Wirtschaftskreislauf live <em>(15 Min Input)</em></td><td>Folien, Merkblatt, Rollenkarten, Spielgeld, Ereigniskarten</td></tr>
     <tr><td>7</td><td>Ökologie im Kreislauf (Puffer)</td><td>—</td></tr>
     <tr><td>8</td><td>Was wärt ihr wert? <em>(10 Min Input)</em></td><td>Merkblatt Löhne + Gehalts-Recherche</td></tr>
     <tr><td>9</td><td>Gerecht bezahlt?</td><td>Diskussionskarten</td></tr>
@@ -151,9 +166,18 @@
       <div class="t-node">1</div>
       <div class="t-card">
         <div class="t-titel">Kickoff: Wir gründen eine Firma</div>
-        <div class="t-text">Teams entstehen, Ideen-Brainstorming, Mehrheitsentscheid pro Team, feierlicher Abschluss mit Gründungsurkunde.</div>
+        <div class="t-text">Aus einer Idee wird eine Firma: Teams sammeln Ideen auf dem Marktplatz, stimmen ab, wählen einen Namen und gründen feierlich.</div>
+        <div class="verlauf">
+          <div class="v-phase einstieg"><div class="v-min">10 Min</div><div class="v-name">Einstieg</div><div class="v-was">Rätsel, Urkunde umdrehen, Weg der Sequenz</div></div>
+          <div class="v-phase"><div class="v-min">5 Min</div><div class="v-name">Input</div><div class="v-was">Brainstorming-Regeln und Beispiel</div></div>
+          <div class="v-phase erarbeitung"><div class="v-min">22 Min</div><div class="v-name">Erarbeitung</div><div class="v-was">Marktplatz, Abstimmung, Firmenname</div></div>
+          <div class="v-phase sicherung"><div class="v-min">8 Min</div><div class="v-name">Sicherung</div><div class="v-was">Gründungszeremonie mit Stempel</div></div>
+        </div>
         <div class="t-actions">
-          <a class="t-link" href="material-01-gruendungsurkunde.html" target="_blank">Material öffnen</a>
+          <a class="t-link stark" href="stunde-01-folien.html" target="_blank">Folien öffnen</a>
+          <a class="t-link" href="stunde-01-verlaufsplan.html" target="_blank">Verlaufsplan</a>
+          <a class="t-link" href="material-17-impulskarten-namenswerkstatt.html" target="_blank">Impulskarten, Namens-Werkstatt, Tischschilder</a>
+          <a class="t-link" href="material-01-gruendungsurkunde.html" target="_blank">Ideen-Canvas und Urkunde</a>
         </div>
         <details class="anleitung"><summary>Für dich: Anleitung</summary>
           <div class="inhalt">Teams vorher bewusst mischen (Sozialgefüge beachten), nicht dem Zufall überlassen. Beispielideen parat haben, falls eine Gruppe blockiert: Fahrradreparatur-Service, Nachhilfe-Tandem-Börse, Pausenverkauf gesunder Snacks, Event-Orga für Schulfeste, Merch-Design. Diskussion nach 15 Min per Mehrheitsentscheid beenden.</div>
@@ -164,11 +188,20 @@
     <div class="t-item">
       <div class="t-node">2</div>
       <div class="t-card">
-        <div class="t-titel">Wie tickt ein Betrieb? <span style="font-weight:400; color:var(--teal); font-size:12px;">— 15 Min Input</span></div>
-        <div class="t-text">Erst Merkblatt + Kurzvortrag zu den 5 Grundfunktionen, dann direkt an der eigenen Idee durchgespielt.</div>
+        <div class="t-titel">Wie tickt ein Betrieb? <span style="font-weight:400; color:var(--teal); font-size:12px;">· komplette Stunde</span></div>
+        <div class="t-text">Eine komplette Stunde: Katastrophentag als Einstieg, die 5 Grundfunktionen mit Blitz-Check, dann Teamarbeit mit Rollen und Investoren-Check an der eigenen Firma.</div>
+        <div class="verlauf">
+          <div class="v-phase einstieg"><div class="v-min">8 Min</div><div class="v-name">Einstieg</div><div class="v-was">Katastrophentag bei der Bäckerei, Positionslinie</div></div>
+          <div class="v-phase"><div class="v-min">10 Min</div><div class="v-name">Input</div><div class="v-was">5 Grundfunktionen, Blitz-Check mit Fingern</div></div>
+          <div class="v-phase erarbeitung"><div class="v-min">18 Min</div><div class="v-name">Erarbeitung</div><div class="v-was">Rollen im Team, Steckbrief, Investoren-Check</div></div>
+          <div class="v-phase sicherung"><div class="v-min">9 Min</div><div class="v-name">Sicherung</div><div class="v-was">30-Sekunden-Pitch, Merksatz</div></div>
+        </div>
         <div class="t-actions">
-          <a class="t-link" href="material-12-merkblatt-betriebsfunktionen.html" target="_blank">Merkblatt öffnen</a>
-          <a class="t-link" href="material-02-betriebssteckbrief.html" target="_blank">Steckbrief öffnen</a>
+          <a class="t-link stark" href="stunde-02-folien.html" target="_blank">Folien öffnen</a>
+          <a class="t-link" href="stunde-02-verlaufsplan.html" target="_blank">Verlaufsplan</a>
+          <a class="t-link" href="material-12-merkblatt-betriebsfunktionen.html" target="_blank">Merkblatt</a>
+          <a class="t-link" href="material-02-betriebssteckbrief.html" target="_blank">Steckbrief</a>
+          <a class="t-link" href="material-16-rollen-investorenkarten.html" target="_blank">Rollen- und Investorenkarten</a>
         </div>
         <details class="anleitung"><summary>Für dich: Anleitung</summary>
           <div class="inhalt">Der Betrieb für die Betriebsbesichtigung sollte bis hier schon angefragt/bestätigt sein — mindestens 3-4 Wochen Vorlauf für die Terminfindung einplanen. Marke im Einstieg an die tatsächlichen Interessen der Klasse anpassen.</div>
@@ -196,9 +229,18 @@
       <div class="t-node">3</div>
       <div class="t-card">
         <div class="t-titel">Kurz-Auswertung Betriebsbesichtigung</div>
-        <div class="t-text">1-2 Learnings in die Update-Box des eigenen Betriebs-Steckbriefs eintragen — bewusst kurz, keine zweite Vergleichsrunde.</div>
+        <div class="t-text">Kurze Auswertung der Besichtigung: Aus echten Eindrücken werden ein bis zwei Ideen für die eigene Firma, danach 15 Minuten Werkstattzeit für Geschäftsplan und Pitch.</div>
+        <div class="verlauf">
+          <div class="v-phase einstieg"><div class="v-min">8 Min</div><div class="v-name">Einstieg</div><div class="v-was">Blitzlicht im Doppelkreis</div></div>
+          <div class="v-phase"><div class="v-min">5 Min</div><div class="v-name">Input</div><div class="v-was">Brauchbar oder zu vage?</div></div>
+          <div class="v-phase erarbeitung"><div class="v-min">10 Min</div><div class="v-name">Erarbeitung</div><div class="v-was">Update-Box im Team füllen</div></div>
+          <div class="v-phase sicherung"><div class="v-min">7 Min</div><div class="v-name">Sicherung</div><div class="v-was">Learnings teilen, Merksatz</div></div>
+        </div>
         <div class="t-actions">
-          <a class="t-link" href="material-02-betriebssteckbrief.html" target="_blank">Material öffnen</a>
+          <a class="t-link stark" href="stunde-03-folien.html" target="_blank">Folien öffnen</a>
+          <a class="t-link" href="stunde-03-verlaufsplan.html" target="_blank">Verlaufsplan</a>
+          <a class="t-link" href="material-02-betriebssteckbrief.html" target="_blank">Steckbrief mit Update-Box</a>
+          <a class="t-link" href="material-18-plan-b-interview-video.html" target="_blank">Plan B: Interview und Video</a>
         </div>
         <details class="anleitung"><summary>Für dich: Anleitung</summary>
           <div class="inhalt">Max. 30 Min gesamt, Rest der Stunde als Puffer/Vorbereitungszeit nutzbar. Falls die Besichtigung ausfällt: Ersatz ist ein Interview mit einem Elternteil/Bekannten, der einen Betrieb leitet, oder ein Firmenportrait-Video.</div>
@@ -210,10 +252,19 @@
       <div class="t-node">4</div>
       <div class="t-card">
         <div class="t-titel">Geschäftsplan &amp; Kalkulation</div>
-        <div class="t-text">Echte Preise recherchieren, einfache Gewinn-Verlust-Rechnung aufstellen, Feedback vom Nachbarteam einholen. Am Ende: Pitch-Arbeitsauftrag austeilen.</div>
+        <div class="t-text">Teams rechnen nach, ob ihre Firma Gewinn oder Verlust macht, recherchieren echte Preise und holen Feedback vom Nachbarteam.</div>
+        <div class="verlauf">
+          <div class="v-phase einstieg"><div class="v-min">6 Min</div><div class="v-name">Einstieg</div><div class="v-was">Schätzspiel: Gewinn oder Verlust?</div></div>
+          <div class="v-phase"><div class="v-min">8 Min</div><div class="v-name">Input</div><div class="v-was">Rechenbeispiel und Gewinn-Rechner</div></div>
+          <div class="v-phase erarbeitung"><div class="v-min">19 Min</div><div class="v-name">Erarbeitung</div><div class="v-was">Geschäftsplan im Team mit Rollen</div></div>
+          <div class="v-phase sicherung"><div class="v-min">12 Min</div><div class="v-name">Sicherung</div><div class="v-was">Galeriegang mit Klebepunkten, Pitch-Auftrag</div></div>
+        </div>
         <div class="t-actions">
-          <a class="t-link" href="material-04-geschaeftsplan.html" target="_blank">Geschäftsplan öffnen</a>
-          <a class="t-link" href="material-10-pitch-arbeitsauftrag.html" target="_blank">Pitch-Arbeitsauftrag öffnen</a>
+          <a class="t-link stark" href="stunde-04-folien.html" target="_blank">Folien öffnen</a>
+          <a class="t-link" href="stunde-04-verlaufsplan.html" target="_blank">Verlaufsplan</a>
+          <a class="t-link" href="material-04-geschaeftsplan.html" target="_blank">Geschäftsplan</a>
+          <a class="t-link" href="material-19-preisliste-feedbackkarten.html" target="_blank">Preisliste und Feedback-Karten</a>
+          <a class="t-link" href="material-10-pitch-arbeitsauftrag.html" target="_blank">Pitch-Auftrag</a>
         </div>
         <details class="anleitung"><summary>Für dich: Anleitung</summary>
           <div class="inhalt">iPads/Handys für Preisrecherche freigeben oder Preislisten vorab vorbereiten. Vereinfachte Formel für schwächere Teams: Gewinn = Einnahmen − Kosten. Pitch-Arbeitsauftrag jetzt austeilen, damit bis Stunde 5 Vorbereitungszeit bleibt (Referat-Note).</div>
@@ -225,10 +276,19 @@
       <div class="t-node">5</div>
       <div class="t-card">
         <div class="t-titel">Pitch-Tag <span style="font-weight:400; color:var(--orange); font-size:12px;">— Referat-Note</span></div>
-        <div class="t-text">3 Min Pitch + 2 Min Fragen pro Team vor der "Jury" (Klasse + optional Gast). Kriterien identisch mit dem Arbeitsauftrag aus Stunde 4.</div>
+        <div class="t-text">Eine komplette Stunde: Show-Eröffnung mit Auslosung, Pitches mit sichtbarem Doppel-Timer für jedes Team, dann Ehrung per Handzeichen.</div>
+        <div class="verlauf">
+          <div class="v-phase einstieg"><div class="v-min">8 Min</div><div class="v-name">Einstieg</div><div class="v-was">Show-Start, Regeln, Auslosung</div></div>
+          <div class="v-phase erarbeitung"><div class="v-min">26 Min</div><div class="v-name">Pitch-Bühne</div><div class="v-was">3 Min Pitch, 2 Min Fragen, 1 Min Bewertung</div></div>
+          <div class="v-phase sicherung"><div class="v-min">8 Min</div><div class="v-name">Ehrung</div><div class="v-was">Handzeichen-Abstimmung, Urkunden</div></div>
+          <div class="v-phase sicherung"><div class="v-min">3 Min</div><div class="v-name">Abschluss</div><div class="v-was">Bögen einsammeln, Ausblick</div></div>
+        </div>
         <div class="t-actions">
-          <a class="t-link" href="material-05-pitch-bewertungsbogen.html" target="_blank">Jury-Bogen öffnen</a>
-          <a class="t-link" href="material-10-pitch-arbeitsauftrag.html" target="_blank">Schüler-Arbeitsauftrag öffnen</a>
+          <a class="t-link stark" href="stunde-05-folien.html" target="_blank">Folien öffnen</a>
+          <a class="t-link" href="stunde-05-verlaufsplan.html" target="_blank">Verlaufsplan</a>
+          <a class="t-link" href="material-05-pitch-bewertungsbogen.html" target="_blank">Jury-Bogen</a>
+          <a class="t-link" href="material-10-pitch-arbeitsauftrag.html" target="_blank">Arbeitsauftrag Pitch</a>
+          <a class="t-link" href="material-20-ehrenurkunden-feedbackkarten.html" target="_blank">Urkunden und Feedback-Karten</a>
         </div>
         <details class="anleitung"><summary>Für dich: Anleitung</summary>
           <div class="inhalt">Kollegin/Schulleitung rechtzeitig als Gastjury anfragen (optional, aber motivierend). Reihenfolge auslosen. Zeit sichtbar stoppen (Handy-Timer) — gehört zum echten Pitch-Gefühl dazu. Notenvergabe direkt nach dem Bewertungsbogen.</div>
@@ -239,11 +299,20 @@
     <div class="t-item">
       <div class="t-node">6</div>
       <div class="t-card">
-        <div class="t-titel">Wirtschaftskreislauf live <span style="font-weight:400; color:var(--teal); font-size:12px;">— 15 Min Input</span></div>
-        <div class="t-text">Erst Merkblatt zum Modell, dann Simulation mit Spielgeld und Waren-/Leistungskärtchen: Haushalte, Unternehmen (die 4 Mini-Firmen) und Staat im echten Geldfluss.</div>
+        <div class="t-titel">Wirtschaftskreislauf live <span style="font-weight:400; color:var(--teal); font-size:12px;">· komplette Stunde</span></div>
+        <div class="t-text">Die Klasse spielt den Wirtschaftskreislauf mit Spielgeld, Waren, Staat und Ereigniskarten nach und zeichnet ihn danach selbst ins Heft.</div>
+        <div class="verlauf">
+          <div class="v-phase einstieg"><div class="v-min">5 Min</div><div class="v-name">Einstieg</div><div class="v-was">Rätsel: Wohin geht dein Euro vom Kiosk?</div></div>
+          <div class="v-phase"><div class="v-min">10 Min</div><div class="v-name">Input</div><div class="v-was">Animierter Kreislauf, Blitz-Check</div></div>
+          <div class="v-phase erarbeitung"><div class="v-min">20 Min</div><div class="v-name">Erarbeitung</div><div class="v-was">Live-Simulation, 4 Runden, Ereigniskarte</div></div>
+          <div class="v-phase sicherung"><div class="v-min">10 Min</div><div class="v-name">Sicherung</div><div class="v-was">Taschengeld-Frage, Skizze, Merksatz</div></div>
+        </div>
         <div class="t-actions">
-          <a class="t-link" href="material-13-merkblatt-wirtschaftskreislauf.html" target="_blank">Merkblatt öffnen</a>
-          <a class="t-link" href="material-06-wirtschaftskreislauf.html" target="_blank">Simulation öffnen</a>
+          <a class="t-link stark" href="stunde-06-folien.html" target="_blank">Folien öffnen</a>
+          <a class="t-link" href="stunde-06-verlaufsplan.html" target="_blank">Verlaufsplan</a>
+          <a class="t-link" href="material-13-merkblatt-wirtschaftskreislauf.html" target="_blank">Merkblatt</a>
+          <a class="t-link" href="material-06-wirtschaftskreislauf.html" target="_blank">Spielgeld und Rollenkarten</a>
+          <a class="t-link" href="material-21-ereigniskarten-kassenzettel.html" target="_blank">Ereigniskarten und Kassenzettel</a>
         </div>
         <details class="anleitung"><summary>Für dich: Anleitung</summary>
           <div class="inhalt">Spielgeld vorher ausschneiden (oder als Hausaufgabe nach Stunde 5 mitgeben). Klassenzimmer für Bewegung freiräumen. Rollen klar verteilen, nicht mehr als 3-4 Runden spielen.</div>
@@ -310,7 +379,7 @@
       <div class="t-node">11</div>
       <div class="t-card">
         <div class="t-titel">Leistungsnachweis <span style="font-weight:400; color:var(--orange); font-size:12px;">— große Note</span></div>
-        <div class="t-text">Schriftliche Abschlussprüfung über die ganze Sequenz: Grundfunktionen, Wirtschaftskreislauf, Löhne, Brutto/Netto, Lohnunterschiede. 40 Punkte.</div>
+        <div class="t-text">Schriftliche Abschlussprüfung über die ganze Sequenz: Grundfunktionen, Wirtschaftskreislauf, Löhne, Brutto/Netto, Lohnunterschiede — mit Transferaufgaben und einer Stellungnahme, M-Zweig-Niveau. 50 Punkte auf 2 Seiten.</div>
         <div class="t-actions">
           <a class="t-link" href="material-11-leistungsnachweis.html" target="_blank">Material öffnen</a>
         </div>
@@ -327,12 +396,52 @@
   <div class="section-titel">Alle Materialien</div>
   <div class="section-sub">Zum Öffnen und Ausdrucken — jedes Material ist eigenständig, mit Print-Button.</div>
 
+    <h3 class="b-gruppe">Stunde 1: Kickoff, wir gründen eine Firma</h3>
   <div class="bento">
-    <a class="b-card gross" href="material-01-gruendungsurkunde.html" target="_blank">
+    <a class="b-card gross" href="stunde-01-folien.html" target="_blank">
+      <div class="b-icon">🎞️</div>
+      <div class="b-stunde">Stunde 1 · Folien</div>
+      <div class="b-titel">Foliendeck: Wir gründen eine Firma</div>
+      <div class="b-text">10 Folien mit Rätsel, Urkunden-Überraschung, Marktplatz, Namen-Würfler und Gründungszeremonie.</div>
+    </a>
+    <a class="b-card" href="stunde-01-verlaufsplan.html" target="_blank">
+      <div class="b-icon">🗓️</div>
+      <div class="b-stunde">Stunde 1 · Lehrkraft</div>
+      <div class="b-titel">Verlaufsplan</div>
+      <div class="b-text">Eine Seite zum Mitnehmen: Phasen, Methoden, Plan B.</div>
+    </a>
+    <a class="b-card" href="material-17-impulskarten-namenswerkstatt.html" target="_blank">
+      <div class="b-icon">🃏</div>
+      <div class="b-stunde">Stunde 1</div>
+      <div class="b-titel">Impulskarten und Namens-Werkstatt</div>
+      <div class="b-text">Karten, Namens-Rezepte und Tischschilder.</div>
+    </a>
+    <a class="b-card" href="material-01-gruendungsurkunde.html" target="_blank">
       <div class="b-icon">📜</div>
       <div class="b-stunde">Stunde 1</div>
       <div class="b-titel">Ideen-Canvas &amp; Gründungsurkunde</div>
       <div class="b-text">Ideen sammeln, abstimmen, offiziell gründen.</div>
+    </a>
+  </div>
+  <h3 class="b-gruppe">Stunde 2: Wie tickt ein Betrieb?</h3>
+  <div class="bento">
+    <a class="b-card gross" href="stunde-02-folien.html" target="_blank">
+      <div class="b-icon">🎞️</div>
+      <div class="b-stunde">Stunde 2 · Folien</div>
+      <div class="b-titel">Foliendeck: Wie tickt ein Betrieb?</div>
+      <div class="b-text">10 Folien mit Katastrophentag, Blitz-Check, Rollen-Auftrag, Investorenkarten, Timer und Lehrernotizen.</div>
+    </a>
+    <a class="b-card" href="stunde-02-verlaufsplan.html" target="_blank">
+      <div class="b-icon">🗓️</div>
+      <div class="b-stunde">Stunde 2 · Lehrkraft</div>
+      <div class="b-titel">Verlaufsplan</div>
+      <div class="b-text">Eine Seite zum Mitnehmen: Phasen, Methoden, Plan B.</div>
+    </a>
+    <a class="b-card" href="material-16-rollen-investorenkarten.html" target="_blank">
+      <div class="b-icon">🎭</div>
+      <div class="b-stunde">Stunde 2</div>
+      <div class="b-titel">Rollen- und Investorenkarten</div>
+      <div class="b-text">Zum Ausschneiden, ein Set pro Team.</div>
     </a>
     <a class="b-card" href="material-12-merkblatt-betriebsfunktionen.html" target="_blank">
       <div class="b-icon">📖</div>
@@ -346,11 +455,53 @@
       <div class="b-titel">Betriebs-Steckbrief</div>
       <div class="b-text">Die 5 Grundfunktionen der eigenen Firma.</div>
     </a>
+  </div>
+  <h3 class="b-gruppe">Betriebsbesichtigung und Stunde 3</h3>
+  <div class="bento">
+    <a class="b-card gross" href="stunde-03-folien.html" target="_blank">
+      <div class="b-icon">🎞️</div>
+      <div class="b-stunde">Stunde 3 · Folien</div>
+      <div class="b-titel">Foliendeck: Was nehmen wir mit?</div>
+      <div class="b-text">11 Folien mit Doppelkreis, Update-Check, Plan A und Plan B und Werkstattzeit.</div>
+    </a>
+    <a class="b-card" href="stunde-03-verlaufsplan.html" target="_blank">
+      <div class="b-icon">🗓️</div>
+      <div class="b-stunde">Stunde 3 · Lehrkraft</div>
+      <div class="b-titel">Verlaufsplan</div>
+      <div class="b-text">Eine Seite zum Mitnehmen: Phasen, Methoden, Plan B.</div>
+    </a>
+    <a class="b-card" href="material-18-plan-b-interview-video.html" target="_blank">
+      <div class="b-icon">🎬</div>
+      <div class="b-stunde">Stunde 3</div>
+      <div class="b-titel">Plan B: Interview und Video</div>
+      <div class="b-text">Leitfaden und Notizen, falls die Besichtigung ausfällt.</div>
+    </a>
     <a class="b-card" href="material-03-beobachtungsbogen.html" target="_blank">
       <div class="b-icon">🔍</div>
       <div class="b-stunde">Betriebsbesichtigung</div>
       <div class="b-titel">Notizzettel</div>
       <div class="b-text">Kurzer Zettel fürs Stehen/Gehen während der Führung.</div>
+    </a>
+  </div>
+  <h3 class="b-gruppe">Stunde 4: Geschäftsplan und Kalkulation</h3>
+  <div class="bento">
+    <a class="b-card gross" href="stunde-04-folien.html" target="_blank">
+      <div class="b-icon">🎞️</div>
+      <div class="b-stunde">Stunde 4 · Folien</div>
+      <div class="b-titel">Foliendeck: Lohnt sich unsere Idee?</div>
+      <div class="b-text">10 Folien mit Schätzspiel, Rechenbeispiel, Gewinn-Rechner, Rollen-Auftrag und Galeriegang.</div>
+    </a>
+    <a class="b-card" href="stunde-04-verlaufsplan.html" target="_blank">
+      <div class="b-icon">🗓️</div>
+      <div class="b-stunde">Stunde 4 · Lehrkraft</div>
+      <div class="b-titel">Verlaufsplan</div>
+      <div class="b-text">Eine Seite zum Mitnehmen: Phasen, Methoden, Plan B.</div>
+    </a>
+    <a class="b-card" href="material-19-preisliste-feedbackkarten.html" target="_blank">
+      <div class="b-icon">🏷️</div>
+      <div class="b-stunde">Stunde 4</div>
+      <div class="b-titel">Preisliste und Feedback-Karten</div>
+      <div class="b-text">Preise ohne Internet und Karten für den Galeriegang.</div>
     </a>
     <a class="b-card" href="material-04-geschaeftsplan.html" target="_blank">
       <div class="b-icon">📊</div>
@@ -358,11 +509,59 @@
       <div class="b-titel">Geschäftsplan</div>
       <div class="b-text">Kalkulation &amp; Gewinn-Verlust-Rechnung.</div>
     </a>
+    <a class="b-card" href="material-10-pitch-arbeitsauftrag.html" target="_blank">
+      <div class="b-icon">📋</div>
+      <div class="b-stunde">Stunde 4 &amp; 5</div>
+      <div class="b-titel">Pitch-Arbeitsauftrag</div>
+      <div class="b-text">Leitfaden &amp; Bewertungsraster für die Referat-Note.</div>
+    </a>
+  </div>
+  <h3 class="b-gruppe">Stunde 5: Pitch-Tag</h3>
+  <div class="bento">
+    <a class="b-card gross" href="stunde-05-folien.html" target="_blank">
+      <div class="b-icon">🎞️</div>
+      <div class="b-stunde">Stunde 5 · Folien</div>
+      <div class="b-titel">Foliendeck: Pitch-Tag</div>
+      <div class="b-text">8 Folien als Regiebuch mit Auslosung, Doppel-Timer, Pitch-Bühne und Ehrung.</div>
+    </a>
+    <a class="b-card" href="stunde-05-verlaufsplan.html" target="_blank">
+      <div class="b-icon">🗓️</div>
+      <div class="b-stunde">Stunde 5 · Lehrkraft</div>
+      <div class="b-titel">Verlaufsplan</div>
+      <div class="b-text">Eine Seite zum Mitnehmen: Phasen, Methoden, Plan B.</div>
+    </a>
+    <a class="b-card" href="material-20-ehrenurkunden-feedbackkarten.html" target="_blank">
+      <div class="b-icon">🏅</div>
+      <div class="b-stunde">Stunde 5</div>
+      <div class="b-titel">Ehrenurkunden und Feedback-Karten</div>
+      <div class="b-text">Vier Urkunden und Karten "Zwei Sterne und ein Wunsch".</div>
+    </a>
     <a class="b-card" href="material-05-pitch-bewertungsbogen.html" target="_blank">
       <div class="b-icon">🎤</div>
       <div class="b-stunde">Stunde 5</div>
       <div class="b-titel">Pitch-Bewertungsbogen</div>
       <div class="b-text">Für alle Jurymitglieder am Pitch-Tag.</div>
+    </a>
+  </div>
+  <h3 class="b-gruppe">Stunde 6: Wirtschaftskreislauf live</h3>
+  <div class="bento">
+    <a class="b-card gross" href="stunde-06-folien.html" target="_blank">
+      <div class="b-icon">🎞️</div>
+      <div class="b-stunde">Stunde 6 · Folien</div>
+      <div class="b-titel">Foliendeck: Wirtschaftskreislauf live</div>
+      <div class="b-text">15 Folien mit animiertem Kreislauf, Blitz-Check, Spielleitung für 4 Runden und Ereigniskarten.</div>
+    </a>
+    <a class="b-card" href="stunde-06-verlaufsplan.html" target="_blank">
+      <div class="b-icon">🗓️</div>
+      <div class="b-stunde">Stunde 6 · Lehrkraft</div>
+      <div class="b-titel">Verlaufsplan</div>
+      <div class="b-text">Eine Seite zum Mitnehmen: Phasen, Methoden, Plan B.</div>
+    </a>
+    <a class="b-card" href="material-21-ereigniskarten-kassenzettel.html" target="_blank">
+      <div class="b-icon">🎲</div>
+      <div class="b-stunde">Stunde 6</div>
+      <div class="b-titel">Ereigniskarten und Kassenzettel</div>
+      <div class="b-text">Für die Simulation ohne Beamer, plus Kassenzettel.</div>
     </a>
     <a class="b-card" href="material-13-merkblatt-wirtschaftskreislauf.html" target="_blank">
       <div class="b-icon">📖</div>
@@ -376,6 +575,9 @@
       <div class="b-titel">Wirtschaftskreislauf: Rollenkarten &amp; Spielgeld</div>
       <div class="b-text">Spielanleitung, Rollenkarten, Wirtschafts-Taler und Waren-/Leistungskärtchen zum Ausschneiden.</div>
     </a>
+  </div>
+  <h3 class="b-gruppe">Stunde 8 bis 11: Löhne, Abrechnung, Leistungsnachweis</h3>
+  <div class="bento">
     <a class="b-card" href="material-14-merkblatt-loehne.html" target="_blank">
       <div class="b-icon">📖</div>
       <div class="b-stunde">Stunde 8 · Input</div>
@@ -406,17 +608,11 @@
       <div class="b-titel">Lohnabrechnung &amp; Lernbilanz</div>
       <div class="b-text">Brutto/Netto-Check und Abschluss-Reflexion.</div>
     </a>
-    <a class="b-card" href="material-10-pitch-arbeitsauftrag.html" target="_blank">
-      <div class="b-icon">📋</div>
-      <div class="b-stunde">Stunde 4 &amp; 5</div>
-      <div class="b-titel">Pitch-Arbeitsauftrag</div>
-      <div class="b-text">Leitfaden &amp; Bewertungsraster für die Referat-Note.</div>
-    </a>
     <a class="b-card gross" href="material-11-leistungsnachweis.html" target="_blank">
       <div class="b-icon">🏆</div>
       <div class="b-stunde">Stunde 11</div>
       <div class="b-titel">Leistungsnachweis (große Note)</div>
-      <div class="b-text">Schriftliche Abschlussprüfung über die gesamte Sequenz, 40 Punkte, mit Notenschlüssel.</div>
+      <div class="b-text">Schriftliche Abschlussprüfung über die gesamte Sequenz, 50 Punkte, M-Zweig-Niveau, mit Notenschlüssel.</div>
     </a>
   </div>
 </section>

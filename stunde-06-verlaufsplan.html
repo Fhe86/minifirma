@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verlaufsplan Stunde 6: Wirtschaftskreislauf live</title>
+<style>
+  :root { --navy:#14324a; --teal:#4f9aa6; --teal-hell:#eaf4f4; --orange:#f2994a; --orange-hell:#fdeee0; --ink:#20303d; --linie:#b9c7ce; --gruen:#2f8f5b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Trebuchet MS","Verdana","Segoe UI",sans-serif; font-size:8.4pt; line-height:1.28; color:var(--ink); background:#e8e8e8; }
+  .blatt { width:297mm; min-height:210mm; margin:15px auto; padding:10mm 12mm; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.15); }
+  .kopf { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--navy); padding-bottom:2.2mm; margin-bottom:3mm; }
+  .kopf .label { font-size:8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--teal); font-weight:800; }
+  .kopf h1 { font-size:17pt; color:var(--navy); line-height:1.1; }
+  .kopf .meta { text-align:right; font-size:8.4pt; color:#4a5a63; }
+  .ziele { display:grid; grid-template-columns:1fr 1.25fr; gap:4mm; margin-bottom:3mm; }
+  .box { border:1.5px solid var(--linie); border-radius:3mm; padding:2.2mm 4mm; }
+  .box.ziel { background:var(--orange-hell); border-color:var(--orange); }
+  .box h3 { font-size:8.1pt; letter-spacing:.5px; text-transform:uppercase; color:var(--navy); margin-bottom:.8mm; }
+  .box ul { padding-left:4mm; }
+  table { width:100%; border-collapse:collapse; table-layout:fixed; }
+  th { background:var(--navy); color:#fff; font-size:8.2pt; text-align:left; padding:1.4mm 2.4mm; }
+  td { vertical-align:top; padding:1.2mm 2.2mm; border:1px solid var(--linie); font-size:8pt; }
+  td.phase { font-weight:800; color:var(--navy); }
+  td.phase small { display:block; font-weight:700; color:var(--teal); }
+  tr.einstieg td.phase { border-left:6px solid var(--orange); }
+  tr.input td.phase { border-left:6px solid var(--teal); }
+  tr.erarbeitung td.phase { border-left:6px solid var(--navy); }
+  tr.sicherung td.phase { border-left:6px solid var(--gruen); }
+  td ul { padding-left:3.4mm; }
+  td b { color:var(--navy); }
+  .unten { display:grid; grid-template-columns:1.25fr 1fr 1fr; gap:3mm; margin-top:2.4mm; font-size:8pt; }
+  .btn-bar { width:297mm; margin:0 auto 10px auto; text-align:right; }
+  .btn { font-family:system-ui,sans-serif; font-size:13px; padding:8px 16px; border-radius:6px; border:none; background:var(--navy); color:#fff; cursor:pointer; }
+  @page { size:A4 landscape; margin:0; }
+  @media print { body { background:#fff; } .blatt { margin:0; box-shadow:none; width:100%; min-height:0; padding:5mm 9mm; } .btn-bar { display:none; } tr, .box { page-break-inside:avoid; } }
+</style>
+</head>
+<body>
+<div class="btn-bar"><button class="btn" onclick="window.print()">Als PDF speichern</button></div>
+<div class="blatt">
+  <div class="kopf">
+    <div><div class="label">Wirtschaft und Beruf &middot; Verlaufsplan für die Lehrkraft</div><h1>Stunde 6: Wirtschaftskreislauf live</h1></div>
+    <div class="meta">Klasse 8 M-Zweig &middot; 45 Min. &middot; Mini-Firma<br>Folien: <b>stunde-06-folien.html</b></div>
+  </div>
+
+  <div class="ziele">
+    <div class="box ziel"><h3>Lernziel</h3>Die Schüler erklären den einfachen Wirtschaftskreislauf (Haushalte, Unternehmen, Staat, Geld- und Güterstrom) und zeigen, wohin ihr eigenes Taschengeld darin fließt.</div>
+    <div class="box"><h3>Vorher bereitlegen</h3><ul>
+      <li>Taler aus material-06, Seite 3: ca. 4 Seiten ausgeschnitten (20 Taler pro Haushalt plus Wechselgeld). Waren-Kärtchen: 1 Seite pro Firma. Rollenkarten (Seite 2).</li>
+      <li>Ereigniskarten (6 Stück, Plan B ohne Beamer) und Kassenzettel aus material-21: 4 Firmenzettel, 1 Staat-Kassenbuch.</li>
+      <li>Merkblatt Wirtschaftskreislauf (material-13), 1 pro Schüler. Zettel und Stifte für Preisschilder.</li>
+      <li>Raum: Mitte frei, 4 Firmenstände und 1 Staatstisch. Stühle an die Wand.</li>
+    </ul></div>
+  </div>
+
+  <table>
+    <colgroup><col style="width:12%"><col style="width:11%"><col style="width:23%"><col style="width:29%"><col style="width:25%"></colgroup>
+    <tr><th>Phase und Zeit</th><th>Folie</th><th>Methode</th><th>Lehrkraft</th><th>Schüler</th></tr>
+    <tr class="einstieg"><td class="phase">Einstieg<small>5 Min.</small></td><td>3<br>Kiosk-Rätsel</td><td><b>Alltagsrätsel.</b> "Du kaufst ein Eis für 2 Euro. Wohin geht dein Geld?" Der Weg des Euros wird Station für Station aufgedeckt.</td><td>Erst raten lassen, dann pro Station einen Pfeil rechts. Begriffe Unternehmen, Haushalt, Steuern fallen hier zum ersten Mal.</td><td>Tippen den Weg, merken: Die Verkäuferin ist selbst Haushalt, das Geld kommt zurück.</td></tr>
+    <tr class="input"><td class="phase">Input<small>10 Min.</small></td><td>4, 5<br>Kreislauf, Blitz-Check</td><td><b>Direkte Instruktion</b> mit animiertem Kreislauf (5 Klicks, Punkte fließen), danach <b>Blitz-Check</b> Geldstrom oder Güterstrom (6 Fragen, Faust oder flache Hand).</td><td>Pro Klick ein Pfeil erklären, Rückbezug zum Rätsel. Blitz-Check nur so lange, bis alle sicher sind. Merkblatt austeilen.</td><td>Hören zu, erklären Pfeile in eigenen Worten, zeigen Faust oder Hand.</td></tr>
+    <tr class="erarbeitung"><td class="phase">Simulation<small>20 Min.</small></td><td>6 bis 11<br>Regeln, Runden 1 bis 4, Kassensturz</td><td><b>Live-Simulation.</b> Regeln 2 Min., Runde 1 Markt 5 Min., Runde 2 Steuern 3 Min., Runde 3 Staat kauft und Löhne 4 Min., Runde 4 mit Ereigniskarte 4 Min., Kassensturz 2 Min. Der Timer läuft pro Runde.</td><td>Rollen zuteilen, Möbel räumen. Pro Runde "Runde starten", herumgehen, nach dem Klingeln stoppen und den passenden Pfeil benennen. In Runde 4 Ereigniskarte ziehen und vorlesen.</td><td>4 Unternehmer, 2 Staat, alle anderen Haushalte. Kaufen, verkaufen, Steuern zählen, Löhne zahlen, Kassenzettel führen.</td></tr>
+    <tr class="sicherung"><td class="phase">Sicherung<small>10 Min.</small></td><td>12, 13, 14<br>Taschengeld, Skizze, Merksatz</td><td><b>Think-Pair-Share</b> zur Transferfrage (4 Min.), <b>Kreislauf-Skizze</b> ins Heft mit Lücken zum Aufdecken (3 Min.), <b>Lückensatz</b> und Hefteintrag (3 Min.).</td><td>Beispielantworten sammeln, Kette aufdecken. Skizze und Merksatz lückenweise erarbeiten, Merkblatt einkleben lassen.</td><td>Notieren den Weg ihres Taschengelds, vergleichen, zeichnen die Skizze, schreiben den Merksatz ab.</td></tr>
+    <tr><td class="phase">Ausblick<small>0,5 Min.</small></td><td>15</td><td>Impuls</td><td>Frage zur Umwelt im Kreislauf stellen, auf Stunde 7 verweisen.</td><td>Nehmen die Frage mit.</td></tr>
+  </table>
+
+  <div class="unten">
+    <div class="box"><h3>Stolpersteine und Plan B</h3><ul>
+      <li>Zeit knapp: Blitz-Check nach Frage 4 beenden, Runde 4 verkürzen (nur kurzer Einkauf, dann Steuern), Skizze als Hausaufgabe.</li>
+      <li>Wenig Platz: Firmen bleiben am Tisch, Haushalte gehen in zwei Schüben (Hälfte Runde 1, Hälfte Runde 4).</li>
+      <li>Preis-Streit oder Chaos: Regel "Mindestens 5 Taler, höchstens 20 Taler". Der Staat hat das letzte Wort bei Zahlen.</li>
+      <li>Keine Panne-Karte am Beamer: ausgedruckte Ereigniskarten ziehen lassen, Firmennummer nennen.</li>
+      <li>Beamer fällt aus: Folien als PDF drucken, Tafelbild mit den Pfeilen nach jeder Runde.</li>
+    </ul></div>
+    <div class="box"><h3>Hefteintrag (Merksatz)</h3>Im Wirtschaftskreislauf geben <b>Haushalte</b> Geld für Waren und Dienstleistungen aus. Die <b>Unternehmen</b> zahlen davon <b>Löhne</b> und <b>Steuern</b>. Der <b>Staat</b> gibt das Geld wieder aus. Geld und Güter fließen <b>gegenläufig</b>.<br><br>Dazu: Kreislauf-Skizze (3 Kästchen, 5 Pfeile) und Merkblatt einkleben.</div>
+    <div class="box"><h3>Bedienung der Folien</h3><ul>
+      <li>Pfeil rechts oder Leertaste: weiter, Pfeil links: zurück</li>
+      <li>N: Lehrernotizen ein und aus, F: Vollbild</li>
+      <li>Klick auf den Timer oder "Runde starten": Start und Pause, R: zurücksetzen</li>
+      <li>Runde 4: "Karte ziehen" mischt die Ereignisse (6 Stück)</li>
+      <li>Auf dem iPad: nach links und rechts wischen</li>
+    </ul></div>
+  </div>
+</div>
+</body>
+</html>

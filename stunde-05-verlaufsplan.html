@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verlaufsplan Stunde 5: Pitch-Tag</title>
+<style>
+  :root { --navy:#14324a; --teal:#4f9aa6; --teal-hell:#eaf4f4; --orange:#f2994a; --orange-hell:#fdeee0; --ink:#20303d; --linie:#b9c7ce; --gruen:#2f8f5b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Trebuchet MS","Verdana","Segoe UI",sans-serif; font-size:8.4pt; line-height:1.28; color:var(--ink); background:#e8e8e8; }
+  .blatt { width:297mm; min-height:210mm; margin:15px auto; padding:11mm 12mm; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.15); }
+  .kopf { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--navy); padding-bottom:2.5mm; margin-bottom:3mm; }
+  .kopf .label { font-size:8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--teal); font-weight:800; }
+  .kopf h1 { font-size:18pt; color:var(--navy); line-height:1.1; }
+  .kopf .meta { text-align:right; font-size:8.6pt; color:#4a5a63; }
+  .ziele { display:grid; grid-template-columns:1.2fr 1fr; gap:4mm; margin-bottom:3mm; }
+  .box { border:1.5px solid var(--linie); border-radius:3mm; padding:2.2mm 4mm; }
+  .box.ziel { background:var(--orange-hell); border-color:var(--orange); }
+  .box h3 { font-size:8.2pt; letter-spacing:.5px; text-transform:uppercase; color:var(--navy); margin-bottom:1mm; }
+  .box ul { padding-left:4mm; }
+  table { width:100%; border-collapse:collapse; table-layout:fixed; }
+  th { background:var(--navy); color:#fff; font-size:8.4pt; text-align:left; padding:1.5mm 2.4mm; }
+  td { vertical-align:top; padding:1.3mm 2.2mm; border:1px solid var(--linie); font-size:8.1pt; }
+  td.phase { font-weight:800; color:var(--navy); }
+  td.phase small { display:block; font-weight:700; color:var(--teal); }
+  tr.einstieg td.phase { border-left:6px solid var(--orange); }
+  tr.erarbeitung td.phase { border-left:6px solid var(--navy); }
+  tr.sicherung td.phase { border-left:6px solid var(--gruen); }
+  td b { color:var(--navy); }
+  .unten { display:grid; grid-template-columns:1.25fr 1fr 1fr; gap:3mm; margin-top:2.5mm; font-size:8.1pt; }
+  .btn-bar { width:297mm; margin:0 auto 10px auto; text-align:right; }
+  .btn { font-family:system-ui,sans-serif; font-size:13px; padding:8px 16px; border-radius:6px; border:none; background:var(--navy); color:#fff; cursor:pointer; }
+  @page { size:A4 landscape; margin:0; }
+  @media print { body { background:#fff; } .blatt { margin:0; box-shadow:none; width:100%; min-height:0; padding:6mm 9mm; } .btn-bar { display:none; } tr, .box { page-break-inside:avoid; } }
+</style>
+</head>
+<body>
+<div class="btn-bar"><button class="btn" onclick="window.print()">Als PDF speichern</button></div>
+<div class="blatt">
+  <div class="kopf">
+    <div><div class="label">Wirtschaft und Beruf &middot; Verlaufsplan für die Lehrkraft</div><h1>Stunde 5: Pitch-Tag</h1></div>
+    <div class="meta">Klasse 8 M-Zweig &middot; 45 Min. &middot; Mini-Firma &middot; Referat-Note<br>Folien: <b>stunde-05-folien.html</b></div>
+  </div>
+
+  <div class="ziele">
+    <div class="box ziel"><h3>Lernziel</h3>Die Teams präsentieren ihre Mini-Firma überzeugend in 3 Minuten, beantworten 2 Minuten lang Fragen der Jury und geben begründetes Feedback. Die Kriterien Kreativität, Realismus, Nachhaltigkeit und Präsentation sind identisch mit dem Arbeitsauftrag. <b>Das ist die Referat-Note (kleine Note).</b></div>
+    <div class="box"><h3>Vorher bereitlegen</h3><ul>
+      <li>Jury-Bögen (material-05), 1 pro Jury-Person, Name und Datum eintragen lassen</li>
+      <li>Urkunden und Feedback-Karten (material-20) ausgedruckt, Karten ausgeschnitten</li>
+      <li>Gast (Kollegin oder Schulleitung) eingeladen, Bogen für den Gast</li>
+      <li>Beamer, Ton an, Klingelton kurz testen, Präsentationen der Teams startklar</li>
+    </ul></div>
+  </div>
+
+  <table>
+    <colgroup><col style="width:13%"><col style="width:11%"><col style="width:24%"><col style="width:29%"><col style="width:23%"></colgroup>
+    <tr><th>Phase und Zeit</th><th>Folie</th><th>Methode</th><th>Lehrkraft</th><th>Schüler</th></tr>
+    <tr class="einstieg"><td class="phase">Einstieg<small>8 Min.</small></td><td>1 bis 5<br>Titel, Regeln, Kriterien, Jury, Auslosung</td><td><b>Show-Eröffnung</b> mit Regeln in vier Karten, Kriterien, Jury-Vorstellung und <b>Auslosung</b> der Reihenfolge per Los im Deck.</td><td>Karten einblenden und kurz erklären, Gast vorstellen, Feedback-Paten zuteilen. Teamzahl wählen, Firmennamen eintragen, dann Los für Los ziehen (Pfeil rechts).</td><td>Hören zu, halten die Präsentation bereit, bekommen Bogen oder Feedback-Karte, zählen beim Ziehen mit.</td></tr>
+    <tr class="erarbeitung"><td class="phase">Pitch-Bühne<small>26 Min.</small></td><td>6<br>Bühne mit Doppel-Timer</td><td><b>Pitch</b> 3 Min., <b>Fragen der Jury</b> 2 Min., danach <b>1 Min. Bewertung</b> in Stille, pro Team. Wechsel dazwischen ca. 30 Sek.</td><td>Pro Team vier Klicks (Pfeil rechts): Pitch, Fragen, Bewertung, nächstes Team. Zeit sichtbar steuern, beim Klingeln freundlich beenden, Notizen für die Note machen.</td><td>Team pitcht, Jury hört zu, fragt nach, füllt den Bogen aus, Feedback-Paten schreiben "Zwei Sterne und ein Wunsch".</td></tr>
+    <tr class="sicherung"><td class="phase">Ehrung<small>8 Min.</small></td><td>7<br>Ehrung</td><td><b>Handzeichen-Abstimmung</b> für vier Titel (Beste Idee, Mutigster Auftritt, Bester Firmenname, Nachhaltigste Idee), nur Ehre, nicht Note.</td><td>Regeln nennen, pro Hand auf das Team klicken, Urkunde per Pfeil rechts zeigen, gedruckte Urkunde übergeben.</td><td>Stimmen per Handzeichen ab (nicht für das eigene Team), klatschen, nehmen die Urkunde entgegen.</td></tr>
+    <tr class="sicherung"><td class="phase">Abschluss<small>3 Min.</small></td><td>8<br>Dank und Ausblick</td><td>Dank, Einsammeln, Ausblick auf Stunde 6.</td><td>Bögen einsammeln, Feedback-Karten an die Teams geben, konkretes Lob, Gast verabschieden.</td><td>Geben Bögen und Karten ab, erfahren, wie es weitergeht.</td></tr>
+  </table>
+
+  <div class="unten">
+    <div class="box"><h3>Stolpersteine und Plan B</h3><ul>
+      <li><b>Mehr oder weniger als 4 Teams:</b> Teamzahl 3 bis 6 auf Folie 5 wählen. Ab 5 Teams wird es knapp (ca. 32 Min.): Bewertungsminute nach 30 Sek. mit Pfeil rechts beenden oder Ehrung auf 2 Titel begrenzen.</li>
+      <li><b>Zeit überzogen:</b> Fragen der Jury und Bewertung kürzen, nie den Pitch. Die Note hängt nicht an der Ehrung, die kann man notfalls kürzen oder in Stunde 6 nachholen.</li>
+      <li><b>Beamer fällt aus:</b> Handy-Timer, Losziehen mit Zetteln, Bögen und Karten reichen allein. Folien als PDF drucken (jede Folie eine Seite).</li>
+      <li><b>Team fehlt oder nicht fertig:</b> ans Ende der Reihenfolge, sonst Nachpitch zu Beginn von Stunde 6.</li>
+    </ul></div>
+    <div class="box"><h3>Bedienung der Folien</h3><ul>
+      <li>Pfeil rechts oder Leertaste: weiter, Pfeil links: zurück</li>
+      <li>Bühne: P pausiert oder startet die Uhr, Klick auf die leuchtende Uhr dasselbe</li>
+      <li>Auslosung und Namen bleiben beim Neuladen im selben Tab erhalten</li>
+      <li>N: Lehrernotizen ein und aus, F: Vollbild, iPad: wischen</li>
+    </ul></div>
+    <div class="box"><h3>Notengebung</h3><ul>
+      <li>Kriterien wie im Arbeitsauftrag: Kreativität, Realismus, Nachhaltigkeit, Präsentation</li>
+      <li>Eigene Notizen pro Team während der Bewertungsminute, danach Bögen als Stütze</li>
+      <li>Ehrungen und Feedback-Karten zählen nicht zur Note</li>
+    </ul></div>
+  </div>
+</div>
+</body>
+</html>
