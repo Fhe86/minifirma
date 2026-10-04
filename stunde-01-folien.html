@@ -229,8 +229,8 @@
   .zer-s .sd { font-size:17px; color:var(--muted); line-height:1.35; margin-top:2px; }
   .satz-zer { background:#fff; border:2px solid var(--line); border-radius:18px; padding:16px 22px; font-size:24px; line-height:1.7; font-weight:700; color:var(--navy); box-shadow:0 2px 14px rgba(20,50,74,.08); margin-bottom:14px; }
   .luecke2 { display:inline-block; min-width:140px; border-bottom:3px dotted var(--orange); color:var(--orange); font-weight:800; text-align:center; }
-  .teams { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
-  .team-btn { font:inherit; font-size:22px; font-weight:800; padding:14px 8px; border-radius:14px; border:2.5px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer; }
+  .teams { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
+  .team-btn { font:inherit; font-size:20px; font-weight:800; padding:8px 8px; border-radius:14px; border:2.5px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer; }
   .team-btn small { display:block; font-size:16px; font-weight:700; }
   .team-btn.dran { background:var(--orange); border-color:var(--orange); color:#3b2200; }
   .team-btn.gegruendet { background:var(--gruen); border-color:var(--gruen); color:#fff; cursor:default; }
@@ -338,7 +338,7 @@
         <div class="pointe step">Alle haben mit einer Idee und ganz wenig angefangen. Genau wie ihr gleich.</div>
       </div>
     </div>
-    <aside class="notes"><b>4 Min.:</b> Schüler raten laut, wer richtig tippt, darf am Beamer antippen. Pfeil rechts löst die nächste Firma automatisch auf, falls es hakt. Zum Schluss Pfeil rechts: Pointe einblenden. <b>Hinweis Fakten:</b> Alle vier Geschichten sind gängig belegt, die Garage bei Apple ist teils Legende, der Kern (klein, zu Hause, ohne Geld) stimmt. Bei Bedarf als Zusatz: Google startete 1998 ebenfalls in einer Garage. Bewusst keine Umsatzzahlen genannt.</aside>
+    <aside class="notes"><b>4 Min.:</b> Schüler raten laut, wer richtig tippt, darf am Beamer antippen. Pfeil rechts löst die nächste Firma automatisch auf, falls es hakt. Zum Schluss Pfeil rechts: Pointe einblenden. <b>Hinweis Fakten:</b> Alle diese Geschichten sind gängig belegt, die Garage bei Apple ist teils Legende, der Kern (klein, zu Hause, ohne Geld) stimmt. Bei Bedarf als Zusatz: Google startete 1998 ebenfalls in einer Garage. Bewusst keine Umsatzzahlen genannt.</aside>
   </section>
 
   <!-- 3 EINSTIEG: URKUNDE UMDREHEN -->
@@ -353,10 +353,10 @@
       <div class="urk"><div class="urk-in"><div class="seite hinten"><b>?</b><span>Noch nicht umdrehen</span></div><div class="seite vorn"><div class="u-titel">Gründungsurkunde</div><div class="u-text">Hiermit gründet das Team offiziell ein Unternehmen mit dem Namen</div><div class="u-name"></div><div class="u-sig">Unterschriften folgen</div></div></div></div>
     </div>
     <div class="nachricht" id="urk-nachricht">
-      <div class="gross">Ab heute seid ihr <em>vier Firmen</em>.</div>
+      <div class="gross">Ab heute seid ihr <em>echte Firmen</em>.</div>
       <div class="klein">Eure Aufgabe heute: Idee finden, Name wählen, Urkunde unterschreiben.</div>
     </div>
-    <aside class="notes"><b>2 Min.:</b> Pfeil rechts: Jetzt sagst du "Dreht das Blatt um". Dann Pfeil rechts auf der Folie, die vier Urkunden drehen sich. Kurz wirken lassen, dann die Ansage: Ab heute ist die Klasse in vier Firmen aufgeteilt, die Teams stehen fest (die Tischschilder zeigen Firma 1 bis 4). Die Urkunde bleibt vorerst leer, sie wird am Ende der Stunde ausgefüllt und unterschrieben. Fragen nach der Teamaufteilung freundlich auf später verschieben.</aside>
+    <aside class="notes"><b>2 Min.:</b> Pfeil rechts: Jetzt sagst du "Dreht das Blatt um". Dann Pfeil rechts auf der Folie, die Urkunden drehen sich. Kurz wirken lassen, dann die Ansage: Ab heute ist die Klasse in Firmen aufgeteilt, die Teams stehen fest (die Tischschilder zeigen Firma 1 bis N). Die Urkunde bleibt vorerst leer, sie wird am Ende der Stunde ausgefüllt und unterschrieben. Fragen nach der Teamaufteilung freundlich auf später verschieben.</aside>
   </section>
 
   <!-- 4 EINSTIEG: RAHMEN -->
@@ -493,6 +493,9 @@
           <button class="team-btn" data-team="2">Firma 2</button>
           <button class="team-btn" data-team="3">Firma 3</button>
           <button class="team-btn" data-team="4">Firma 4</button>
+          <button class="team-btn" data-team="5">Firma 5</button>
+          <button class="team-btn" data-team="6">Firma 6</button>
+          <button class="team-btn" data-team="7">Firma 7</button>
         </div>
         <button class="stempel-btn step" id="stempel-btn" disabled>Stempeln: Firma gegründet</button>
         <div class="zaehler" id="zaehler"></div>
@@ -805,7 +808,7 @@ window.Deck = (function () {
     fertig++; aktuell = null; stempelBtn.disabled = true;
     stempelGross.classList.remove('knall'); void stempelGross.offsetWidth; stempelGross.classList.add('knall');
     zaehler.textContent = fertig + ' von ' + teamBtns.length + ' Firmen gegründet';
-    if (fertig === teamBtns.length) { zaehler.textContent = 'Alle vier Firmen sind gegründet. Applaus!'; konfetti(); }
+    if (fertig === teamBtns.length) { zaehler.textContent = 'Alle Firmen sind gegründet. Applaus!'; konfetti(); }
   });
 
   Deck.start();

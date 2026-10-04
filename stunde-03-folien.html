@@ -404,11 +404,14 @@
           <button class="team-btn" data-team="2">Firma 2</button>
           <button class="team-btn" data-team="3">Firma 3</button>
           <button class="team-btn" data-team="4">Firma 4</button>
+          <button class="team-btn" data-team="5">Firma 5</button>
+          <button class="team-btn" data-team="6">Firma 6</button>
+          <button class="team-btn" data-team="7">Firma 7</button>
         </div>
         <div class="jury"><b>Alle anderen sind Jury.</b> Daumen hoch: Das würden wir auch machen. Daumen quer: Passt eher nicht zu uns.</div>
       </div>
     </div>
-    <aside class="notes"><b>5 Min.:</b> Knopf "Drei Firmen auslosen" markiert drei Firmen mit Rahmen, Reihenfolge steht daneben. Firma antippen startet 45 Sekunden, der Knopf wird orange, beim nächsten Antippen ist die vorige grün. Pro Firma etwa 45 Sekunden plus 10 Sekunden Daumenabstimmung. Nur ein Sprecher pro Firma, nicht der Schreiber. Wenn die Zeit knapp wird, reichen zwei Firmen. Bei weniger oder mehr als vier Firmen die Zahl der Knöpfe im Kopf anpassen.</aside>
+    <aside class="notes"><b>5 Min.:</b> Knopf "Drei Firmen auslosen" markiert drei Firmen mit Rahmen, Reihenfolge steht daneben. Firma antippen startet 45 Sekunden, der Knopf wird orange, beim nächsten Antippen ist die vorige grün. Pro Firma etwa 45 Sekunden plus 10 Sekunden Daumenabstimmung. Nur ein Sprecher pro Firma, nicht der Schreiber. Wenn die Zeit knapp wird, reichen zwei Firmen. Die Zahl der Firmen steht in quellen/shared/build_lib.py (TEAMS), danach neu bauen.</aside>
   </section>
 
   <!-- 9 SICHERUNG: MERKSATZ -->
@@ -734,7 +737,7 @@ window.Deck = (function () {
   /* ---------- Teilen: Auslosen und Timer ---------- */
   var teamBtns = Array.prototype.slice.call(document.querySelectorAll('.team-btn'));
   document.getElementById('lose-btn').addEventListener('click', function(){
-    var ids = [1,2,3,4].sort(function(){ return Math.random()-.5; }).slice(0,3);
+    var ids = [1,2,3,4,5,6,7].sort(function(){ return Math.random()-.5; }).slice(0,3);
     teamBtns.forEach(function(b){ b.classList.remove('los','dran','fertig'); if (ids.indexOf(parseInt(b.dataset.team,10)) >= 0) b.classList.add('los'); });
     document.getElementById('lose-reihe').textContent = 'Reihenfolge: ' + ids.map(function(i){ return 'Firma ' + i; }).join(', dann ');
   });

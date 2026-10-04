@@ -132,24 +132,24 @@
   .anzahl button { font:inherit; font-size:21px; font-weight:800; width:46px; height:46px; border-radius:12px; border:2.5px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer; }
   .anzahl button.an { background:var(--navy); color:#fff; }
   .anzahl button:disabled { opacity:.4; cursor:default; }
-  .firmen { display:flex; flex-direction:column; gap:8px; }
+  .firmen { display:flex; flex-direction:column; gap:5px; }
   .firma-zeile { display:flex; align-items:center; gap:12px; }
   .firma-zeile .tn { width:76px; font-size:17px; font-weight:800; color:var(--muted); letter-spacing:.4px; }
-  .firma-zeile input { flex:1; font:inherit; font-size:21px; font-weight:700; color:var(--navy); background:#fff; border:2px solid var(--line); border-radius:12px; padding:7px 14px; outline:none; min-width:0; }
+  .firma-zeile input { flex:1; font:inherit; font-size:19px; font-weight:700; color:var(--navy); background:#fff; border:2px solid var(--line); border-radius:10px; padding:3px 14px; outline:none; min-width:0; }
   .firma-zeile input:focus { border-color:var(--teal); }
-  .zeitbedarf { margin-top:12px; font-size:17px; color:var(--muted); }
+  .zeitbedarf { margin-top:6px; font-size:15px; color:var(--muted); }
   .zeitbedarf.warn { color:#9a5214; font-weight:700; }
-  .slots { display:flex; flex-direction:column; gap:8px; }
-  .slot { display:flex; align-items:center; gap:16px; background:#fff; border:2px dashed var(--line); border-radius:14px; padding:6px 18px; min-height:56px; }
+  .slots { display:flex; flex-direction:column; gap:5px; }
+  .slot { display:flex; align-items:center; gap:16px; background:#fff; border:2px dashed var(--line); border-radius:14px; padding:3px 18px; min-height:46px; }
   .slot .pl { font-size:17px; font-weight:800; color:var(--muted); width:74px; letter-spacing:.4px; text-transform:uppercase; }
-  .slot .nm { font-size:30px; font-weight:800; color:var(--line); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .slot .nm { font-size:26px; font-weight:800; color:var(--line); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .slot .tm { font-size:16px; color:var(--muted); font-weight:700; }
   .slot.fertig { border-style:solid; border-color:var(--navy); }
   .slot.fertig .nm { color:var(--navy); }
   .slot.rollt { border-style:solid; border-color:var(--orange); background:var(--orange-hell); }
   .slot.rollt .nm { color:var(--orange); }
   .los-leiste { margin-top:14px; display:flex; align-items:center; gap:18px; }
-  .btn-gross { font:inherit; font-size:24px; font-weight:800; background:var(--orange); color:#3b2200; border:none; border-radius:34px; padding:14px 38px; cursor:pointer; }
+  .btn-gross { font:inherit; font-size:24px; font-weight:800; background:var(--orange); color:#3b2200; border:none; border-radius:34px; padding:9px 34px; font-size:22px; cursor:pointer; }
   .btn-gross:hover { filter:brightness(1.08); }
   .btn-gross:disabled { background:var(--line); color:var(--muted); cursor:default; filter:none; }
   .btn-klein { font:inherit; font-size:16px; font-weight:700; color:var(--muted); background:none; border:none; text-decoration:underline; cursor:pointer; }
@@ -285,7 +285,7 @@
       <div class="regel r4 step"><div class="gross">Fair</div><div class="name">Zuhören und klatschen</div><div class="was">Nicht reinreden, Applaus am Ende. Technikprobleme kosten keine Zusatzzeit.</div></div>
     </div>
     <div class="note-box step"><span>Wichtig</span>Der Pitch ist eure Referat-Note (kleine Note). Danach gibt es zusätzlich eine Ehrung, die nichts mit der Note zu tun hat.</div>
-    <aside class="notes"><b>2 Min.:</b> Karten nacheinander einblenden (Pfeil rechts), kurz erklären, nicht vorlesen lassen. Betonen: Die Zeit läuft sichtbar für alle, ohne Ausnahme. Bei 4 Teams dauert jeder Block ca. 6 Minuten. Die Ehrung zum Schluss ist Spaß und Anerkennung, die Note kommt allein aus den Kriterien.</aside>
+    <aside class="notes"><b>2 Min.:</b> Karten nacheinander einblenden (Pfeil rechts), kurz erklären, nicht vorlesen lassen. Betonen: Die Zeit läuft sichtbar für alle, ohne Ausnahme. Jeder Block dauert ca. 6 Minuten. Die Ehrung zum Schluss ist Spaß und Anerkennung, die Note kommt allein aus den Kriterien.</aside>
   </section>
 
   <!-- 3 KRITERIEN -->
@@ -325,7 +325,7 @@
     <div class="los-grid">
       <div>
         <div class="anzahl"><span>Teams:</span>
-          <button data-n="3">3</button><button data-n="4" class="an">4</button><button data-n="5">5</button><button data-n="6">6</button>
+          <button data-n="3">3</button><button data-n="4">4</button><button data-n="5">5</button><button data-n="6">6</button><button data-n="7" class="an">7</button><button data-n="8">8</button>
         </div>
         <div class="firmen" id="los-firmen"></div>
         <div class="zeitbedarf" id="los-zeit"></div>
@@ -580,7 +580,7 @@ window.Deck = (function () {
   var KEY = 'mini-firma-pitchtag-s5';
 
   /* ---------- Zustand (bleibt beim Neuladen im selben Tab erhalten) ---------- */
-  var S = { n:4, names:['','','','','',''], order:[], idx:0, stage:0, ecat:-1, ereveal:false, votes:[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]] };
+  var S = { n:7, names:['','','','','','','',''], order:[], idx:0, stage:0, ecat:-1, ereveal:false, votes:[[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]] };
   try {
     var j = JSON.parse(sessionStorage.getItem(KEY) || 'null');
     if (j && typeof j.n === 'number') { for (var k in S) { if (j[k] !== undefined) S[k] = j[k]; } }
@@ -629,7 +629,7 @@ window.Deck = (function () {
   var firmenEl = $('los-firmen'), slotsEl = $('los-slots'), losBtn = $('los-btn'), zeitEl = $('los-zeit');
   function bauFirmen(){
     var h = '';
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 8; i++) {
       h += '<div class="firma-zeile" data-i="' + i + '"' + (i >= S.n ? ' style="display:none"' : '') + '><span class="tn">Team ' + (i + 1) + '</span><input type="text" maxlength="28" placeholder="Firmenname" value="' + esc(S.names[i] || '') + '"></div>';
     }
     firmenEl.innerHTML = h;
@@ -650,7 +650,7 @@ window.Deck = (function () {
     slotsEl.innerHTML = h;
     var bedarf = S.n * 6 + 2;
     zeitEl.className = 'zeitbedarf' + (S.n >= 5 ? ' warn' : '');
-    zeitEl.textContent = 'Zeitbedarf Pitches: ca. ' + bedarf + ' Min (6 Min pro Team plus Wechsel).' + (S.n >= 5 ? ' Wird knapp: Bewertungsminute kürzen oder Ehrung auf 2 Titel begrenzen.' : '');
+    zeitEl.textContent = 'Zeitbedarf Pitches: ca. ' + bedarf + ' Min (6 Min pro Team plus Wechsel).' + (S.n >= 7 ? ' Passt nicht in eine Stunde: Pitch-Tag auf zwei Stunden verteilen oder Pitch auf 2 Min kürzen.' : (S.n >= 5 ? ' Wird knapp: Bewertungsminute kürzen oder Ehrung auf 2 Titel begrenzen.' : ''));
     var fertig = ausgelost();
     losBtn.disabled = fertig || busy;
     losBtn.textContent = fertig ? 'Ausgelost' : (S.order.length ? 'Nächstes Los ziehen' : 'Los ziehen');
@@ -692,7 +692,7 @@ window.Deck = (function () {
     }
     clearTimeout(resetTimer); resetArmed = false; resetBtn.textContent = 'Auslosung zurücksetzen'; resetBtn.classList.remove('ernst');
     S.order = []; S.idx = 0; S.stage = 0; S.ecat = -1; S.ereveal = false;
-    S.votes = [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
+    S.votes = [[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]];
     resetBuehne(); save(); renderSlots();
   });
   Deck.custom['s-los'] = {

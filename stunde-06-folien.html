@@ -290,7 +290,7 @@
         <div class="rund"><span class="ic ic-staat"></span></div>
       </div>
     </div>
-    <aside class="notes"><b>Vorher:</b> Spielgeld (Taler) und Waren-Kärtchen aus material-06 ausgeschnitten (ca. 4 Seiten Taler, pro Firma 1 Seite Waren-Kärtchen), Rollenkarten, Ereigniskarten und Kassenzettel (material-21), Merkblatt (material-13) für alle. Tische für 4 Firmenstände und einen Staatstisch vorbereiten, Mitte frei lassen. Beamer an, Timer testen. Tipp: Für Bewegung Stühle an die Wand schieben.</aside>
+    <aside class="notes"><b>Vorher:</b> Spielgeld (Taler) und Waren-Kärtchen aus material-06 ausgeschnitten (ca. 4 Seiten Taler, pro Firma 1 Seite Waren-Kärtchen), Rollenkarten, Ereigniskarten und Kassenzettel (material-21), Merkblatt (material-13) für alle. Tische für die Firmenstände und einen Staatstisch vorbereiten, Mitte frei lassen. Beamer an, Timer testen. Tipp: Für Bewegung Stühle an die Wand schieben.</aside>
   </section>
 
   <!-- 2 FAHRPLAN -->
@@ -397,7 +397,7 @@
     <h2>Jetzt spielt ihr die Wirtschaft</h2>
     <p class="sub">Drei Rollen, vier Runden. Jede Mini-Firma ist ein Unternehmen.</p>
     <div class="rollen3">
-      <div class="rk u step"><span class="ic ic-unternehmen"></span><h3>Unternehmen</h3><div class="wer">4 Firmen, je 1 Person pro Team</div><ul><li>Steht am Firmenstand.</li><li>Hat 8 Waren-Kärtchen mit dem eigenen Produkt.</li><li>Legt den Preis selbst fest: 5 bis 20 Taler.</li><li>Startet ohne Geld.</li></ul></div>
+      <div class="rk u step"><span class="ic ic-unternehmen"></span><h3>Unternehmen</h3><div class="wer">je Firma 1 Person</div><ul><li>Steht am Firmenstand.</li><li>Hat 8 Waren-Kärtchen mit dem eigenen Produkt.</li><li>Legt den Preis selbst fest: 5 bis 20 Taler.</li><li>Startet ohne Geld.</li></ul></div>
       <div class="rk h step"><span class="ic ic-haushalt"></span><h3>Haushalte</h3><div class="wer">alle anderen, auch aus eurem Team</div><ul><li>Startet mit 20 Talern Lohn.</li><li>Geht herum und kauft ein.</li><li>Vergleicht die Preise.</li><li>Später zahlt die eigene Firma euren Lohn.</li></ul></div>
       <div class="rk s step"><span class="ic ic-staat"></span><h3>Staat</h3><div class="wer">2 Freiwillige am Staatstisch</div><ul><li>Startet mit leerer Kasse.</li><li>Sammelt die Steuern ein.</li><li>Entscheidet, was der Staat kauft.</li><li>Schreibt alles im Kassenbuch auf.</li></ul></div>
     </div>
@@ -923,7 +923,7 @@ window.Deck = (function () {
   function ziehen(){
     if (!evIdx.length) { evIdx = EVENTS.map(function(_,i){return i;}).sort(function(){return Math.random()-.5;}); evUsed = 0; }
     var c = EVENTS[evIdx.pop()]; evUsed++;
-    var n = 1 + Math.floor(Math.random()*4);
+    var n = 1 + Math.floor(Math.random()*7);
     evTi.textContent = c.titel;
     evTx.textContent = c.text.replace('{N}', n);
     evIcon.className = 'ic ic-' + c.icon;

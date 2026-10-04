@@ -289,7 +289,7 @@
         <div class="rund"><span class="ic ic-ziel"></span></div>
       </div>
     </div>
-    <aside class="notes"><b>Vorher:</b> Pro Team 1 Geschäftsplan (material-04), Pitch-Arbeitsauftrag (material-10) pro Schüler, Feedback-Karten (material-19, Seite 2) mindestens 12 Stück für 4 Teams, grüne und orange Klebepunkte (je Team etwa 3 von jeder Farbe), Preisliste (material-19, Seite 1) als Plan B ausgedruckt, iPads oder Handys freigeben. Beamer an, Timer-Knopf testen. Die Teams und ihre Geschäftsidee stehen seit Stunde 1 fest.</aside>
+    <aside class="notes"><b>Vorher:</b> Pro Team 1 Geschäftsplan (material-04), Pitch-Arbeitsauftrag (material-10) pro Schüler, Feedback-Karten (material-19, Seite 2) pro Team 3 Stück (Seite 2 mehrfach drucken), grüne und orange Klebepunkte (je Team etwa 3 von jeder Farbe), Preisliste (material-19, Seite 1) als Plan B ausgedruckt, iPads oder Handys freigeben. Beamer an, Timer-Knopf testen. Die Teams und ihre Geschäftsidee stehen seit Stunde 1 fest.</aside>
   </section>
 
   <!-- 2 FAHRPLAN -->
@@ -476,13 +476,13 @@
         <div class="regel step"><span class="n">3</span><div><b>Punkt kleben.</b> <span class="punkt g"></span> grün: stimmt und wirkt realistisch. <span class="punkt o"></span> orange: hier wackelt etwas. Pro Plan einen Punkt.</div></div>
       </div>
       <div class="gal-rot step">
-        <div class="gal-top">Teams: <button class="teamzahl" data-n="3">3</button><button class="teamzahl on" data-n="4">4</button><button class="teamzahl" data-n="5">5</button><button class="teamzahl" data-n="6">6</button></div>
+        <div class="gal-top">Teams: <button class="teamzahl" data-n="3">3</button><button class="teamzahl" data-n="4">4</button><button class="teamzahl" data-n="5">5</button><button class="teamzahl" data-n="6">6</button><button class="teamzahl on" data-n="7">7</button><button class="teamzahl" data-n="8">8</button></div>
         <div class="runden" id="runden"></div>
         <table class="rot-tab" id="rot-tab"></table>
         <div class="rot-hinweis" id="rot-hinweis"></div>
       </div>
     </div>
-    <aside class="notes"><b>7 Min.:</b> Alle Teams legen den Geschäftsplan offen auf den Tisch und bleiben beim Wechsel nicht sitzen. Karte und Punkte liegen bereit. Auf den Knopf "Runde 1" klicken: Der Timer startet mit 2 Minuten, die Tabelle zeigt, wer wohin geht. Nach dem Klingeln "Runde 2", danach "Runde 3". Bei "Zurück" (1 Min.) gehen alle an den eigenen Tisch und lesen Punkte und Karten. Bei mehr oder weniger als 4 Teams oben die Zahl wählen, die Tabelle passt sich an (max. 3 Runden). Gute Fragen beim Herumgehen: Welche Zeile habt ihr nachgerechnet? Wo habt ihr einen Fehler gefunden? Der orange Punkt ist ausdrücklich erlaubt, es geht um besser werden, nicht um Gewinner. Plan B ohne Klebepunkte: mit grünem und orangem Stift einen Punkt malen. Karten einsammeln und pro Team verteilen.</aside>
+    <aside class="notes"><b>7 Min.:</b> Alle Teams legen den Geschäftsplan offen auf den Tisch und bleiben beim Wechsel nicht sitzen. Karte und Punkte liegen bereit. Auf den Knopf "Runde 1" klicken: Der Timer startet mit 2 Minuten, die Tabelle zeigt, wer wohin geht. Nach dem Klingeln "Runde 2", danach "Runde 3". Bei "Zurück" (1 Min.) gehen alle an den eigenen Tisch und lesen Punkte und Karten. Stimmt die Zahl der Firmen nicht, oben die Zahl wählen, die Tabelle passt sich an (max. 3 Runden). Gute Fragen beim Herumgehen: Welche Zeile habt ihr nachgerechnet? Wo habt ihr einen Fehler gefunden? Der orange Punkt ist ausdrücklich erlaubt, es geht um besser werden, nicht um Gewinner. Plan B ohne Klebepunkte: mit grünem und orangem Stift einen Punkt malen. Karten einsammeln und pro Team verteilen.</aside>
   </section>
 
   <!-- 9 SICHERUNG: MERKSATZ -->
@@ -782,7 +782,7 @@ window.Deck = (function () {
   });
 
   /* Galeriegang: Rotationstabelle */
-  var N = 4, runde = 0, fertig = {};
+  var N = 7, runde = 0, fertig = {};
   var rundenEl = document.getElementById('runden'), tab = document.getElementById('rot-tab'), hin = document.getElementById('rot-hinweis');
   function zeichne(){
     var maxR = Math.min(3, N-1);
