@@ -82,6 +82,18 @@
     .chip { background:var(--teal-hell) !important; color:var(--navy) !important; }
   }
 
+  /* Firmenzahl-Stepper (Bildschirm), für Decks in der Werkzeugleiste, für Materialien als Leiste oben */
+  .firmen-stepper { display:inline-flex; align-items:center; gap:6px; font-family:system-ui,"Trebuchet MS",sans-serif; font-size:15px; font-weight:700; color:var(--navy,#14324a); background:#fff; border:2px solid var(--line,#d8e2e8); border-radius:12px; padding:2px 8px; }
+  .firmen-stepper .fs-label { color:var(--muted,#5a6a73); font-size:13px; text-transform:uppercase; letter-spacing:.4px; }
+  .firmen-stepper .fs-num { min-width:1.6em; text-align:center; font-size:20px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .firmen-stepper button { font:inherit; font-size:18px; font-weight:800; width:30px; height:30px; border-radius:50%; border:none; background:var(--navy,#14324a); color:#fff; cursor:pointer; line-height:1; padding:0; }
+  .firmen-stepper button:disabled { opacity:.35; cursor:default; }
+  .dunkel-aktiv .firmen-stepper { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.3); color:#fff; }
+  .dunkel-aktiv .firmen-stepper .fs-label { color:#b6cbd4; }
+  .dunkel-aktiv .firmen-stepper button { background:rgba(255,255,255,.22); }
+  .firmen-bar { max-width:210mm; margin:0 auto 10px auto; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; font-family:system-ui,sans-serif; font-size:13px; color:#555; }
+  @media print { .firmen-bar, .firmen-stepper { display:none !important; } }
+
   /* ===== Zusatz: fünfte Phase "Vorbereitung" und Plan-B-Umschalter ===== */
   .chip.vorbereitung { background:#e3eef0; color:#2c6671; }
   #progress .seg.vorbereitung i { background:#2c6671; }
@@ -196,7 +208,12 @@
   .lose-btn { font:inherit; font-size:21px; font-weight:800; background:var(--orange); color:#3b2200; border:none; border-radius:30px; padding:10px 28px; cursor:pointer; margin-bottom:10px; }
   .lose-btn:hover { filter:brightness(1.08); }
   .lose-reihe { font-size:20px; font-weight:800; color:var(--navy); min-height:30px; margin-bottom:10px; }
-  .teams { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+  .teams { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; }
+  .teams.c3 { grid-template-columns:1fr 1fr 1fr; gap:8px; }
+  .teams.c3 .team-btn { font-size:18px; padding:9px 4px; border-radius:12px; border-width:2px; }
+  .teams.c2 .team-btn { padding:12px 8px; }
+  .lose-info { font-size:16px; color:var(--muted); line-height:1.3; margin-bottom:10px; }
+  .lose-info b { color:var(--navy); }
   .team-btn { font:inherit; font-size:22px; font-weight:800; padding:16px 8px; border-radius:14px; border:2.5px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer; }
   .team-btn.fertig { background:var(--gruen); border-color:var(--gruen); color:#fff; }
   .team-btn.dran { background:var(--orange); border-color:var(--orange); color:#3b2200; }
@@ -283,7 +300,7 @@
       <div class="phase einstieg step"><div class="min">8 <small>Min</small></div><div class="name">Blitzlicht</div><div class="was">Doppelkreis: zwei Fragen, zwei Partner</div></div>
       <div class="phase input step"><div class="min">5 <small>Min</small></div><div class="name">Check</div><div class="was">Was ist ein brauchbares Learning?</div></div>
       <div class="phase erarbeitung step"><div class="min">10 <small>Min</small></div><div class="name">Update-Box</div><div class="was">Im Team auswählen und aufschreiben</div></div>
-      <div class="phase sicherung step"><div class="min">7 <small>Min</small></div><div class="name">Teilen</div><div class="was">Drei Teams stellen ihr Learning vor</div></div>
+      <div class="phase sicherung step"><div class="min">7 <small>Min</small></div><div class="name">Teilen</div><div class="was">Ausgeloste Firmen stellen ihr Learning vor</div></div>
     </div>
     <div class="werkstatt-band step"><div class="min">15 <small>Min</small></div><div><div class="name">Werkstattzeit: Von der Idee zum Plan</div><div class="was">Lohnt sich eure Idee überhaupt? Das rechnen wir nächste Stunde. Heute bereitet ihr es vor.</div></div></div>
     <div class="ziel-box step"><span>Das habt ihr am Ende</span>Ein bis zwei echte Ideen in der Update-Box und einen Vorsprung für den Geschäftsplan.</div>
@@ -393,25 +410,18 @@
   <section class="slide" id="s-teilen" data-phase="sicherung" data-timer="45">
     <div class="kopf"><span class="chip sicherung">Sicherung</span><span class="zeit">5 Min &middot; Learnings teilen</span></div>
     <h2>Was nehmt ihr mit?</h2>
-    <p class="sub">Drei Firmen stellen ihr Learning vor. Wer dran ist, lost ihr aus.</p>
+    <p class="sub" id="teilen-sub">Firmen stellen ihr Learning vor.</p>
     <div class="pitch-grid">
       <div class="satz2">Wir übernehmen: <span class="luecke" style="min-width:300px;">&nbsp;</span><br>Das hilft uns, weil <span class="luecke" style="min-width:300px;">&nbsp;</span><br><span style="font-size:22px;color:var(--muted);font-weight:600;">Ein Satz pro Teil, ungefähr 30 Sekunden.</span></div>
       <div>
-        <button class="lose-btn" id="lose-btn">Drei Firmen auslosen</button>
+        <button class="lose-btn" id="lose-btn">Auslosen</button>
         <div class="lose-reihe" id="lose-reihe"></div>
-        <div class="teams">
-          <button class="team-btn" data-team="1">Firma 1</button>
-          <button class="team-btn" data-team="2">Firma 2</button>
-          <button class="team-btn" data-team="3">Firma 3</button>
-          <button class="team-btn" data-team="4">Firma 4</button>
-          <button class="team-btn" data-team="5">Firma 5</button>
-          <button class="team-btn" data-team="6">Firma 6</button>
-          <button class="team-btn" data-team="7">Firma 7</button>
-        </div>
+        <div class="lose-info" id="lose-info"></div>
+        <div class="teams" id="team-box"></div>
         <div class="jury"><b>Alle anderen sind Jury.</b> Daumen hoch: Das würden wir auch machen. Daumen quer: Passt eher nicht zu uns.</div>
       </div>
     </div>
-    <aside class="notes"><b>5 Min.:</b> Knopf "Drei Firmen auslosen" markiert drei Firmen mit Rahmen, Reihenfolge steht daneben. Firma antippen startet 45 Sekunden, der Knopf wird orange, beim nächsten Antippen ist die vorige grün. Pro Firma etwa 45 Sekunden plus 10 Sekunden Daumenabstimmung. Nur ein Sprecher pro Firma, nicht der Schreiber. Wenn die Zeit knapp wird, reichen zwei Firmen. Die Zahl der Firmen steht in quellen/shared/build_lib.py (TEAMS), danach neu bauen.</aside>
+    <aside class="notes"><b>5 Min.:</b> Wie viele Firmen vortragen, richtet sich nach der Firmenzahl im Stepper oben rechts: bei wenigen Firmen alle, sonst eine Auswahl (die Folie schreibt es über den Knöpfen hin). Der Auslosen-Knopf markiert die Firmen mit Rahmen, die Reihenfolge steht daneben. Firma antippen startet 45 Sekunden, der Knopf wird orange, beim nächsten Antippen ist die vorige grün. Pro Firma etwa 45 Sekunden plus 10 Sekunden Daumenabstimmung. Nur ein Sprecher pro Firma, nicht der Schreiber. Wenn die Zeit knapp wird, lieber weniger Firmen vortragen lassen. Alle anderen Firmen haben ihr Learning in der Update-Box, die du einsammeln oder ansehen kannst.</aside>
   </section>
 
   <!-- 9 SICHERUNG: MERKSATZ -->
@@ -468,6 +478,79 @@
 
 <script>
 window.DECK_CONFIG = { phases: [["einstieg",8],["input",5],["erarbeitung",10],["sicherung",7],["vorbereitung",15]] };
+/* Firmenzahl der Klasse, einmal eingeben, überall wirksam.
+ *
+ * Die Zahl kommt (in dieser Reihenfolge) aus: Adresszeile (?firmen=7), dem Browserspeicher
+ * (localStorage, gilt für alle Mini-Firma-Seiten im selben Browser), sonst Standard 8.
+ * Sie wird zwischen 2 und 12 begrenzt.
+ *
+ * Benutzung in einer Stunde:
+ *   MiniFirma.get()                  -> aktuelle Zahl
+ *   MiniFirma.onChange(function(n){ ... })   -> wird sofort und bei jeder Änderung aufgerufen
+ *   MiniFirma.set(7)                 -> setzt die Zahl (speichert, benachrichtigt alle)
+ *   MiniFirma.renderButtons(container, {className:'team-btn', label:function(i){return 'Firma '+i;}})
+ *                                    -> füllt container mit n Knöpfen (data-team="1".."n")
+ *   MiniFirma.mountStepper(element)  -> setzt dort "Firmen [-] 8 [+]" ein
+ */
+window.MiniFirma = (function () {
+  var MIN = 2, MAX = 12, DEF = 8, KEY = 'minifirma_firmen';
+  var listeners = [];
+
+  function clamp(v) { v = parseInt(v, 10); if (isNaN(v)) return null; return Math.max(MIN, Math.min(MAX, v)); }
+  function fromUrl() { var m = /[?&]firmen=(\d+)/.exec(location.search); return m ? clamp(m[1]) : null; }
+  function fromStore() { try { return clamp(localStorage.getItem(KEY)); } catch (e) { return null; } }
+  function toStore(v) { try { localStorage.setItem(KEY, String(v)); } catch (e) {} }
+
+  var n = fromUrl() || fromStore() || DEF;
+  var steppers = [];
+
+  function paintSteppers() { steppers.forEach(function (s) { s.num.textContent = n; s.minus.disabled = n <= MIN; s.plus.disabled = n >= MAX; }); }
+  function notify() { listeners.forEach(function (fn) { fn(n); }); paintSteppers(); }
+
+  function set(v) {
+    var c = clamp(v); if (c === null || c === n) return;
+    n = c; toStore(n); notify();
+  }
+
+  function onChange(fn) { listeners.push(fn); fn(n); }
+
+  function list() { var a = []; for (var i = 1; i <= n; i++) a.push(i); return a; }
+
+  function renderButtons(container, opts) {
+    opts = opts || {};
+    var cls = opts.className || 'team-btn';
+    var label = opts.label || function (i) { return 'Firma ' + i; };
+    container.innerHTML = '';
+    for (var i = 1; i <= n; i++) {
+      var b = document.createElement('button');
+      b.className = cls; b.dataset.team = String(i); b.textContent = label(i);
+      container.appendChild(b);
+    }
+  }
+
+  function mountStepper(el) {
+    el.classList.add('firmen-stepper');
+    el.innerHTML = '<span class="fs-label">Firmen</span><button type="button" class="fs-minus" aria-label="Eine Firma weniger">&minus;</button><span class="fs-num"></span><button type="button" class="fs-plus" aria-label="Eine Firma mehr">+</button>';
+    var s = { num: el.querySelector('.fs-num'), minus: el.querySelector('.fs-minus'), plus: el.querySelector('.fs-plus') };
+    s.minus.addEventListener('click', function () { set(n - 1); });
+    s.plus.addEventListener('click', function () { set(n + 1); });
+    steppers.push(s); paintSteppers();
+  }
+
+  /* Links auf Mini-Firma-Seiten tragen die Zahl in der Adresse mit (hilft, wenn der Browser
+     den Speicher zwischen Dateien nicht teilt, z. B. beim Öffnen von lokalen Dateien). */
+  function decorateLinks() {
+    Array.prototype.forEach.call(document.querySelectorAll('a[data-firmen-link]'), function (a) {
+      var base = a.getAttribute('data-firmen-link');
+      a.setAttribute('href', base + (base.indexOf('?') < 0 ? '?' : '&') + 'firmen=' + n);
+    });
+  }
+  listeners.push(decorateLinks);
+  if (document.readyState !== 'loading') decorateLinks(); else document.addEventListener('DOMContentLoaded', decorateLinks);
+
+  return { get: function () { return n; }, set: set, list: list, onChange: onChange, renderButtons: renderButtons, mountStepper: mountStepper, MIN: MIN, MAX: MAX };
+})();
+
 /* Gemeinsames Foliengerüst für die Mini-Firma-Stunden.
  *
  * Was es kann: Folien auf 1280x720 skalieren, Pfeiltasten/Wischen/Knöpfe, Schritt-Einblendung
@@ -623,6 +706,15 @@ window.Deck = (function () {
   }
   timerEl.addEventListener('click', toggleTimer);
 
+  /* ---------- Firmenzahl-Stepper in der Werkzeugleiste ---------- */
+  (function () {
+    var tools = document.getElementById('tools');
+    if (!tools || !window.MiniFirma) return;
+    var holder = document.createElement('div');
+    tools.insertBefore(holder, tools.firstChild);
+    MiniFirma.mountStepper(holder);
+  })();
+
   /* ---------- Start ---------- */
   function start() {
     var h = parseInt((location.hash || '').replace('#', ''), 10);
@@ -734,20 +826,51 @@ window.Deck = (function () {
     el.addEventListener('click', function(){ Deck.setTimer(parseInt(el.dataset.sek,10), true); });
   });
 
-  /* ---------- Teilen: Auslosen und Timer ---------- */
-  var teamBtns = Array.prototype.slice.call(document.querySelectorAll('.team-btn'));
-  document.getElementById('lose-btn').addEventListener('click', function(){
-    var ids = [1,2,3,4,5,6,7].sort(function(){ return Math.random()-.5; }).slice(0,3);
-    teamBtns.forEach(function(b){ b.classList.remove('los','dran','fertig'); if (ids.indexOf(parseInt(b.dataset.team,10)) >= 0) b.classList.add('los'); });
-    document.getElementById('lose-reihe').textContent = 'Reihenfolge: ' + ids.map(function(i){ return 'Firma ' + i; }).join(', dann ');
-  });
-  teamBtns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      teamBtns.forEach(function(o){ if (o !== btn && o.classList.contains('dran')) { o.classList.remove('dran'); o.classList.add('fertig'); } });
-      btn.classList.remove('fertig'); btn.classList.add('dran');
-      Deck.setTimer(45, true);
+  /* ---------- Teilen: Auslosen und Timer (Zahl der Vortragenden aus der Firmenzahl) ---------- */
+  var MAX_VORTRAG = 3, SPRECH = 45, DAUMEN = 10;
+  var teamBox = document.getElementById('team-box'), loseBtn = document.getElementById('lose-btn');
+  var loseReihe = document.getElementById('lose-reihe'), loseInfo = document.getElementById('lose-info'), teilenSub = document.getElementById('teilen-sub');
+  var WORT = ['', 'Eine', 'Zwei', 'Drei'];
+  var los = [], fertig = {}, dran = null, losFuerN = 0;
+  function vortragende(n){ return Math.min(MAX_VORTRAG, n); }
+  function teilenZeichnen(n){
+    var k = vortragende(n);
+    // andere Zahl der Vortragenden oder entfernte Firmen: Auslosung sauber zurücksetzen
+    if (los.length && (los.length !== k || los.some(function(i){ return i > n; }))) { los = []; fertig = {}; dran = null; }
+    Object.keys(fertig).forEach(function(i){ if (+i > n) delete fertig[i]; });
+    if (dran !== null && dran > n) dran = null;
+    MiniFirma.renderButtons(teamBox, { className: 'team-btn' });
+    teamBox.classList.toggle('c3', n > 6);
+    teamBox.classList.toggle('c2', n <= 6);
+    Array.prototype.forEach.call(teamBox.querySelectorAll('.team-btn'), function(b){
+      var nr = +b.dataset.team;
+      if (los.indexOf(nr) >= 0) b.classList.add('los');
+      if (fertig[nr]) b.classList.add('fertig');
+      if (nr === dran) { b.classList.remove('fertig'); b.classList.add('dran'); }
     });
+    var alle = n <= MAX_VORTRAG;
+    teilenSub.textContent = alle ? 'Alle Firmen stellen ihr Learning vor. Die Reihenfolge lost ihr aus.' : WORT[k] + ' Firmen stellen ihr Learning vor. Wer dran ist, lost ihr aus.';
+    loseBtn.textContent = alle ? 'Reihenfolge auslosen' : WORT[k] + ' Firmen auslosen';
+    var gesamt = Math.ceil(k * (SPRECH + DAUMEN) / 60);
+    loseInfo.innerHTML = '<b>' + k + ' Firmen à ' + SPRECH + ' Sekunden</b>, mit Daumenabstimmung etwa ' + gesamt + ' Min.' + (alle ? '' : ' Die anderen geben die Update-Box ab.');
+    loseReihe.textContent = los.length ? 'Reihenfolge: ' + los.map(function(i){ return 'Firma ' + i; }).join(', dann ') : '';
+  }
+  loseBtn.addEventListener('click', function(){
+    var n = MiniFirma.get();
+    los = MiniFirma.list().sort(function(){ return Math.random()-.5; }).slice(0, vortragende(n));
+    fertig = {}; dran = null;
+    teilenZeichnen(n);
   });
+  teamBox.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.team-btn') : null;
+    if (!btn || !teamBox.contains(btn)) return;
+    var nr = +btn.dataset.team;
+    if (dran !== null && dran !== nr) fertig[dran] = true;
+    delete fertig[nr]; dran = nr;
+    teilenZeichnen(MiniFirma.get());
+    Deck.setTimer(SPRECH, true);
+  });
+  MiniFirma.onChange(teilenZeichnen);
 
   /* ---------- Werkstatt: Karten abhaken ---------- */
   Array.prototype.forEach.call(document.querySelectorAll('.wk'), function(el){

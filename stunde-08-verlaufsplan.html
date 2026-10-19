@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verlaufsplan Stunde 8: Was wärt ihr wert?</title>
+<style>
+  :root { --navy:#14324a; --teal:#4f9aa6; --teal-hell:#eaf4f4; --orange:#f2994a; --orange-hell:#fdeee0; --ink:#20303d; --linie:#b9c7ce; --gruen:#2f8f5b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Trebuchet MS","Verdana","Segoe UI",sans-serif; font-size:8.2pt; line-height:1.28; color:var(--ink); background:#e8e8e8; }
+  .blatt { width:297mm; min-height:210mm; margin:15px auto; padding:10mm 12mm; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.15); }
+  .kopf { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--navy); padding-bottom:2mm; margin-bottom:3mm; }
+  .kopf .label { font-size:8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--teal); font-weight:800; }
+  .kopf h1 { font-size:17pt; color:var(--navy); line-height:1.1; }
+  .kopf .meta { text-align:right; font-size:8.4pt; color:#4a5a63; }
+  .ziele { display:grid; grid-template-columns:1fr 1.3fr; gap:4mm; margin-bottom:3mm; }
+  .box { border:1.5px solid var(--linie); border-radius:3mm; padding:2mm 3.6mm; }
+  .box.ziel { background:var(--orange-hell); border-color:var(--orange); }
+  .box h3 { font-size:8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--navy); margin-bottom:.8mm; }
+  .box ul { padding-left:4mm; }
+  table { width:100%; border-collapse:collapse; table-layout:fixed; }
+  th { background:var(--navy); color:#fff; font-size:8.2pt; text-align:left; padding:1.3mm 2.2mm; }
+  td { vertical-align:top; padding:1.1mm 2mm; border:1px solid var(--linie); font-size:7.9pt; }
+  td.phase { font-weight:800; color:var(--navy); }
+  td.phase small { display:block; font-weight:700; color:var(--teal); }
+  tr.einstieg td.phase { border-left:6px solid var(--orange); }
+  tr.input td.phase { border-left:6px solid var(--teal); }
+  tr.erarbeitung td.phase { border-left:6px solid var(--navy); }
+  tr.sicherung td.phase { border-left:6px solid var(--gruen); }
+  td b { color:var(--navy); }
+  .unten { display:grid; grid-template-columns:1.1fr 1fr 1fr; gap:3mm; margin-top:2.2mm; font-size:7.8pt; }
+  .unten ul { padding-left:3.6mm; }
+  .btn-bar { width:297mm; margin:0 auto 10px auto; text-align:right; }
+  .btn { font-family:system-ui,sans-serif; font-size:13px; padding:8px 16px; border-radius:6px; border:none; background:var(--navy); color:#fff; cursor:pointer; }
+  @page { size:A4 landscape; margin:0; }
+  @media print { body { background:#fff; } .blatt { margin:0; box-shadow:none; width:100%; min-height:0; padding:6mm 9mm; } .btn-bar { display:none; } tr, .box { page-break-inside:avoid; } }
+</style>
+</head>
+<body>
+<div class="btn-bar"><button class="btn" onclick="window.print()">Als PDF speichern</button></div>
+<div class="blatt">
+  <div class="kopf">
+    <div><div class="label">Wirtschaft und Beruf &middot; Verlaufsplan für die Lehrkraft</div><h1>Stunde 8: Was wärt ihr wert? (Löhne und Gehälter)</h1></div>
+    <div class="meta">Klasse 8 M-Zweig &middot; 45 Min. &middot; Mini-Firma<br>Folien: <b>stunde-08-folien.html</b></div>
+  </div>
+
+  <div class="ziele">
+    <div class="box ziel"><h3>Lernziel</h3>Die Schüler unterscheiden Stundenlohn, Gehalt, Akkordlohn und Mindestlohn, lesen reale Gehaltsangaben und legen für ihre Mini-Firma ein begründetes Gehalt fest. <b>Dieses Gehalt ist die Übergabe an Stunde 10.</b></div>
+    <div class="box"><h3>Vorher bereitlegen</h3><ul>
+      <li><b>Firmenzahl</b> im Stepper oben rechts einstellen. Folie 8 sagt, wie viele Anzeigen im Raum hängen sollen</li>
+      <li>Stellenanzeigen-Karten, Verhandlungskarten, Plan-B-Tabelle und Gehaltskarte (material-23), Merkblatt (material-14), Recherche-Blatt (material-07)</li>
+      <li>Papier für den Akkord-Wettbewerb, 2 Freiwillige, iPads für den Entgeltatlas (nur wenn Netz da ist)</li>
+    </ul></div>
+  </div>
+
+  <table>
+    <colgroup><col style="width:11%"><col style="width:10%"><col style="width:23%"><col style="width:30%"><col style="width:26%"></colgroup>
+    <tr><th>Phase und Zeit</th><th>Folie</th><th>Methode</th><th>Lehrkraft</th><th>Schüler</th></tr>
+    <tr class="einstieg"><td class="phase">Einstieg<small>6 Min.</small></td><td>3<br>Wer verdient mehr?</td><td><b>Schätzspiel in Bewegung.</b> Drei Duelle zwischen zwei Berufen. Klasse teilt sich links und rechts auf.</td><td>Pro Duell kurz begründen lassen, Tipp der Klasse antippen, mit Pfeil rechts auflösen. Zahlen sind brutto, Vollzeit.</td><td>Stellen sich zu ihrer Seite, begründen, staunen.</td></tr>
+    <tr class="input"><td class="phase">Input<small>11 Min.</small></td><td>4 bis 7<br>Formen, Diagramm, Akkord, Rechner</td><td><b>Direkte Instruktion</b> (4 Min.), <b>Akkord-Mini-Wettbewerb</b> mit zwei Freiwilligen (4 Min.), <b>Mindestlohn-Rechner</b> (3 Min.).</td><td>Merkblatt austeilen. Wettbewerb starten, Zähler bedienen lassen, Fairness-Fragen aufdecken. Rechner: erst Vorhersage, dann Test (bei 40 Std. ca. 2.400 € im Monat).</td><td>Nennen Beispiele, beobachten und zählen, geben Stunden ein und lesen den Monatsbetrag ab.</td></tr>
+    <tr class="erarbeitung"><td class="phase">Erarbeitung<small>20 Min.</small></td><td>8, 9, 10<br>Marktplatz, Gehalt, Verhandlung</td><td><b>Berufe-Marktplatz</b> (6 Min.), <b>Gehaltsfestlegung im Team</b> (6 Min.), <b>Verhandlungs-Rollenspiel</b> Bewerber/in gegen Chef/in (8 Min.).</td><td>Anzeigen im Raum verteilen (Anzahl auf Folie 8). Beim Gehalt auf Mindestlohn und Begründung achten. Rollenspiel: Szenario ziehen, Beobachter einteilen, danach aus der Rolle treten.</td><td>Gehen herum, tragen drei Berufe ins Recherche-Blatt ein, einigen sich auf Stunden und Lohn, verhandeln, tauschen Rollen.</td></tr>
+    <tr class="sicherung"><td class="phase">Sicherung<small>8 Min.</small></td><td>11, 12<br>Sortieren, Merksatz</td><td><b>Sortierspiel</b> (4 Min.), dann <b>Lückensatz</b> und Hefteintrag (4 Min.).</td><td>Klasse einigt sich auf die Reihenfolge, Prüfen, Balken auswerten. Merksatz aufdecken, Merkblatt einkleben, Gehalt ins Heft eintragen lassen.</td><td>Sortieren per Zuruf, schreiben Merksatz und das eigene Gehalt ins Heft.</td></tr>
+    <tr><td class="phase">Ausblick<small>1 Min.</small></td><td>13</td><td>Impuls</td><td>Stunde 9 (Gender Pay Gap) und Stunde 10 (Brutto und Netto) ankündigen.</td><td>Wissen, dass ihr Gehalt wiederkommt.</td></tr>
+  </table>
+
+  <div class="unten">
+    <div class="box"><h3>Zahlen, Quellen, Stand (Oktober 2026)</h3><ul>
+      <li>Mindestlohn <b>13,90 €</b> brutto je Stunde seit 01.01.2026, <b>14,60 €</b> ab 01.01.2027 (Mindestlohnkommission, Bundesregierung)</li>
+      <li>Mindestausbildungsvergütung 2026: <b>724 €</b> im 1. Ausbildungsjahr (BIBB). Ø tarifliche Vergütung 2024: 1.133 € (BIBB)</li>
+      <li>Median Vollzeit brutto, Daten 2024 (Bundesagentur für Arbeit, Entgeltatlas): Friseur/in ca. 2.200 €, Bäcker/in ca. 3.000 €, Elektroniker/in ca. 3.900 €, Erzieher/in ca. 4.300 €. Alle Berufe: 4.013 € (ca. 4.000 €)</li>
+      <li>Rechenmodell: Stunden pro Woche mal 52, geteilt durch 12, mal Stundenlohn. Berufswerte vor Einsatz im Entgeltatlas gegenprüfen.</li>
+    </ul></div>
+    <div class="box"><h3>Stolpersteine und Plan B</h3><ul>
+      <li>Kein Internet: Plan-B-Tabelle und Stellenanzeigen-Karten (material-23) reichen für die ganze Recherche.</li>
+      <li>Akkord-Wettbewerb wird zu laut: nur die Fairness-Fragen besprechen.</li>
+      <li>Zeitnot: Verhandlung auf eine Runde kürzen, Sortierspiel bleibt.</li>
+      <li>Sehr viele Firmen: Anzeigen doppelt drucken. Sehr wenige: Anzeigen auf Tische legen.</li>
+      <li>Gehalt unter Mindestlohn: Rechner warnt, im Team neu entscheiden.</li>
+      <li>Beamer fällt aus: Folien als PDF drucken, jede Folie eine Seite.</li>
+    </ul></div>
+    <div class="box"><h3>Merksatz und Bedienung</h3>Beim <b>Stundenlohn</b> zählt die <b>Zeit</b>, beim <b>Akkordlohn</b> die <b>Menge</b>. Ein <b>Gehalt</b> ist ein fester Betrag pro Monat. Den <b>Mindestlohn</b> darf kein Betrieb unterschreiten, er liegt 2026 bei <b>13,90 €</b> pro Stunde brutto.<ul style="margin-top:1mm;">
+      <li>Pfeil rechts oder Leertaste: weiter, links: zurück. N: Notizen, F: Vollbild, Klick auf Timer: Start und Pause.</li>
+      <li>Gehalt festlegen speichert im Browser, Übergabe an Stunde 10 über Gehaltskarte und Heft.</li>
+    </ul></div>
+  </div>
+</div>
+</body>
+</html>

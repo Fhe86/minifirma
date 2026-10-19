@@ -82,6 +82,18 @@
     .chip { background:var(--teal-hell) !important; color:var(--navy) !important; }
   }
 
+  /* Firmenzahl-Stepper (Bildschirm), für Decks in der Werkzeugleiste, für Materialien als Leiste oben */
+  .firmen-stepper { display:inline-flex; align-items:center; gap:6px; font-family:system-ui,"Trebuchet MS",sans-serif; font-size:15px; font-weight:700; color:var(--navy,#14324a); background:#fff; border:2px solid var(--line,#d8e2e8); border-radius:12px; padding:2px 8px; }
+  .firmen-stepper .fs-label { color:var(--muted,#5a6a73); font-size:13px; text-transform:uppercase; letter-spacing:.4px; }
+  .firmen-stepper .fs-num { min-width:1.6em; text-align:center; font-size:20px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .firmen-stepper button { font:inherit; font-size:18px; font-weight:800; width:30px; height:30px; border-radius:50%; border:none; background:var(--navy,#14324a); color:#fff; cursor:pointer; line-height:1; padding:0; }
+  .firmen-stepper button:disabled { opacity:.35; cursor:default; }
+  .dunkel-aktiv .firmen-stepper { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.3); color:#fff; }
+  .dunkel-aktiv .firmen-stepper .fs-label { color:#b6cbd4; }
+  .dunkel-aktiv .firmen-stepper button { background:rgba(255,255,255,.22); }
+  .firmen-bar { max-width:210mm; margin:0 auto 10px auto; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; font-family:system-ui,sans-serif; font-size:13px; color:#555; }
+  @media print { .firmen-bar, .firmen-stepper { display:none !important; } }
+
   /* ===== Folie 1: Titel ===== */
   .titel-reihe { display:flex; gap:18px; margin:34px 0 0; }
   .titel-reihe .rund { width:92px; height:92px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,.25); }
@@ -207,16 +219,18 @@
   .punkt.g { background:var(--gruen); }
   .punkt.o { background:var(--orange); }
   .gal-rot { background:#fff; border:1.5px solid var(--line); border-radius:16px; padding:14px 18px; box-shadow:0 2px 14px rgba(20,50,74,.08); }
-  .gal-top { display:flex; align-items:center; gap:10px; margin-bottom:12px; font-size:17px; font-weight:800; color:var(--muted); }
-  .teamzahl { font:inherit; font-size:16px; font-weight:800; width:34px; height:34px; border-radius:50%; border:2px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer; }
-  .teamzahl.on { background:var(--navy); color:#fff; }
+    .gal-info { font-size:16px; line-height:1.35; color:var(--muted); margin-bottom:10px; }
+  .gal-info b { color:var(--navy); }
+  .gal-warn { margin-top:2px; font-size:19px; line-height:1.35; padding:6px 10px; border-radius:10px; background:var(--orange-hell); border:1.5px solid var(--orange); color:#7a4310; font-weight:700; }
   .runden { display:flex; gap:8px; margin-bottom:10px; }
   .runde-btn { font:inherit; flex:1; font-size:18px; font-weight:800; padding:12px 6px; border-radius:12px; border:2.5px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer; }
   .runde-btn.on { background:var(--orange); border-color:var(--orange); color:#3b2200; }
   .runde-btn.fertig { background:var(--gruen); border-color:var(--gruen); color:#fff; }
-  .rot-tab { width:100%; border-collapse:collapse; font-size:21px; }
-  .rot-tab td { padding:8px 8px; border-bottom:1.5px dotted var(--line); color:var(--navy); font-weight:700; }
-  .rot-tab td:last-child { font-weight:800; text-align:right; }
+  .rot-tab { width:100%; display:grid; grid-template-columns:1fr; column-gap:22px; font-size:20px; }
+  .rot-tab.zwei { grid-template-columns:1fr 1fr; font-size:17px; }
+  .rot-tab .zl { display:flex; justify-content:space-between; gap:8px; padding:7px 6px; border-bottom:1.5px dotted var(--line); color:var(--navy); font-weight:700; }
+  .rot-tab.zwei .zl { padding:4px 6px; }
+  .rot-tab .zl span:last-child { font-weight:800; text-align:right; }
   .rot-hinweis { margin-top:10px; font-size:17px; color:var(--muted); }
 
   /* ===== Folie 9: Merksatz ===== */
@@ -289,7 +303,7 @@
         <div class="rund"><span class="ic ic-ziel"></span></div>
       </div>
     </div>
-    <aside class="notes"><b>Vorher:</b> Pro Team 1 Geschäftsplan (material-04), Pitch-Arbeitsauftrag (material-10) pro Schüler, Feedback-Karten (material-19, Seite 2) pro Team 3 Stück (Seite 2 mehrfach drucken), grüne und orange Klebepunkte (je Team etwa 3 von jeder Farbe), Preisliste (material-19, Seite 1) als Plan B ausgedruckt, iPads oder Handys freigeben. Beamer an, Timer-Knopf testen. Die Teams und ihre Geschäftsidee stehen seit Stunde 1 fest.</aside>
+    <aside class="notes"><b>Vorher:</b> Die Firmenzahl steht im Stepper oben rechts (jetzt <span class="v-firmen"></span>), die Folie 8 rechnet danach alles aus. Pro Team 1 Geschäftsplan (material-04), Pitch-Arbeitsauftrag (material-10) pro Schüler, Feedback-Karten (material-19 erzeugt sie passend zur Firmenzahl: je Firma <span class="v-karten"></span> Karten, zusammen <span class="v-karten-ges"></span>, das sind <span class="v-seiten"></span> Seite(n) zum Ausschneiden), grüne und orange Klebepunkte (je Firma so viele wie Runden, also <span class="v-karten"></span> Stück, grün und orange gemischt), Preisliste (material-19, Seite 1) als Plan B ausgedruckt, iPads oder Handys freigeben. Beamer an, Timer-Knopf testen. Die Teams und ihre Geschäftsidee stehen seit Stunde 1 fest.</aside>
   </section>
 
   <!-- 2 FAHRPLAN -->
@@ -435,7 +449,7 @@
       </div>
     </div>
     <div class="material-leiste step"><b>Material:</b> Geschäftsplan, Handy oder iPad, Preisliste. Fertig? Rechnet euren Break-even aus.</div>
-    <aside class="notes"><b>19 Min.:</b> Rollen vorher klären, bei 4 Personen ist alles abgedeckt, bei 6 teilen sich zwei den Qualitätscheck. Bei Schritt 2 sind Handys oder iPads freigegeben, sonst die Preisliste (material-19, Seite 1) auf den Tisch legen. Echte Preise sind besser als Schätzungen: Supermarkt-App, Online-Shop, Bäcker oder Kiosk als Vergleich. Du gehst herum und achtest darauf, dass die einmaligen Kosten (Plakat, Stand, Werbung) nicht fehlen. Sie gehören in die Zeile "Sonstige Kosten" oder werden bei den Gesamtkosten dazugezählt. Zu schöne Zahlen im Realitätscheck hinterfragen: "Kaufen wirklich 200 Leute eure Armbänder?" Schnelle Teams rechnen den Break-even aus.</aside>
+    <aside class="notes"><b>19 Min.:</b> Rollen vorher klären: Sind es vier Personen im Team, ist alles abgedeckt. In kleineren Teams teilen sich zwei eine Rolle, in größeren teilen sich zwei den Qualitätscheck. Bei Schritt 2 sind Handys oder iPads freigegeben, sonst die Preisliste (material-19, Seite 1) auf den Tisch legen. Echte Preise sind besser als Schätzungen: Supermarkt-App, Online-Shop, Bäcker oder Kiosk als Vergleich. Du gehst herum und achtest darauf, dass die einmaligen Kosten (Plakat, Stand, Werbung) nicht fehlen. Sie gehören in die Zeile "Sonstige Kosten" oder werden bei den Gesamtkosten dazugezählt. Zu schöne Zahlen im Realitätscheck hinterfragen: "Kaufen wirklich 200 Leute eure Armbänder?" Schnelle Teams rechnen den Break-even aus.</aside>
   </section>
 
   <!-- 7 ERARBEITUNG: RECHENHILFE -->
@@ -468,21 +482,22 @@
   <section class="slide" id="s-galerie" data-phase="sicherung" data-timer="120">
     <div class="kopf"><span class="chip sicherung">Sicherung</span><span class="zeit">7 Min &middot; Galeriegang</span></div>
     <h2>Galeriegang: Schaut euch die anderen Pläne an</h2>
-    <p class="sub">Jeder Plan liegt auf seinem Tisch. Ihr geht als Team von Tisch zu Tisch.</p>
+    <p class="sub">Jeder Plan liegt auf seinem Tisch. Ihr geht als Firma von Tisch zu Tisch.</p>
     <div class="gal-grid">
       <div class="gal-regeln">
         <div class="regel step"><span class="n">1</span><div><b>Nachrechnen.</b> Lest den Plan und rechnet die Gewinnzeile kurz nach.</div></div>
         <div class="regel step"><span class="n">2</span><div><b>Karte ausfüllen.</b> Pro Plan eine Feedback-Karte, nur ankreuzen und einen Tipp notieren.</div></div>
-        <div class="regel step"><span class="n">3</span><div><b>Punkt kleben.</b> <span class="punkt g"></span> grün: stimmt und wirkt realistisch. <span class="punkt o"></span> orange: hier wackelt etwas. Pro Plan einen Punkt.</div></div>
+        <div class="regel step"><span class="n">3</span><div><b>Punkt kleben.</b> <span class="punkt g"></span> grün: stimmt und wirkt realistisch. <span class="punkt o"></span> orange: hier wackelt etwas. Pro besuchtem Plan einen Punkt.</div></div>
+        <div class="gal-warn" id="gal-warn" style="display:none"></div>
       </div>
       <div class="gal-rot step">
-        <div class="gal-top">Teams: <button class="teamzahl" data-n="3">3</button><button class="teamzahl" data-n="4">4</button><button class="teamzahl" data-n="5">5</button><button class="teamzahl" data-n="6">6</button><button class="teamzahl on" data-n="7">7</button><button class="teamzahl" data-n="8">8</button></div>
+        <div class="gal-info" id="gal-info"></div>
         <div class="runden" id="runden"></div>
-        <table class="rot-tab" id="rot-tab"></table>
+        <div class="rot-tab" id="rot-tab"></div>
         <div class="rot-hinweis" id="rot-hinweis"></div>
       </div>
     </div>
-    <aside class="notes"><b>7 Min.:</b> Alle Teams legen den Geschäftsplan offen auf den Tisch und bleiben beim Wechsel nicht sitzen. Karte und Punkte liegen bereit. Auf den Knopf "Runde 1" klicken: Der Timer startet mit 2 Minuten, die Tabelle zeigt, wer wohin geht. Nach dem Klingeln "Runde 2", danach "Runde 3". Bei "Zurück" (1 Min.) gehen alle an den eigenen Tisch und lesen Punkte und Karten. Stimmt die Zahl der Firmen nicht, oben die Zahl wählen, die Tabelle passt sich an (max. 3 Runden). Gute Fragen beim Herumgehen: Welche Zeile habt ihr nachgerechnet? Wo habt ihr einen Fehler gefunden? Der orange Punkt ist ausdrücklich erlaubt, es geht um besser werden, nicht um Gewinner. Plan B ohne Klebepunkte: mit grünem und orangem Stift einen Punkt malen. Karten einsammeln und pro Team verteilen.</aside>
+    <aside class="notes"><b>7 Min.:</b> Alle Teams legen den Geschäftsplan offen auf den Tisch und bleiben beim Wechsel nicht sitzen. Karte und Punkte liegen bereit. Die Firmenzahl steht im Stepper oben rechts. Die Folie rechnet daraus Rundenzahl (höchstens 3, höchstens Firmenzahl minus 1) und Rundenzeit aus. Aktuell: <span class="v-runden"></span> Runde(n) zu je <span class="v-rzeit"></span>. Auf den Knopf "Runde 1" klicken: Der Timer startet mit der berechneten Zeit, die Tabelle zeigt, wer wohin geht. Nach dem Klingeln die nächste Runde. Bei "Zurück" gehen alle an den eigenen Tisch und lesen Punkte und Karten. Bei nur zwei Firmen ist es ein direkter Austausch, bei sehr vielen Firmen warnt die Folie vor Gedränge. Pro Firma werden <span class="v-karten"></span> Feedback-Karten und ebenso viele Klebepunkte gebraucht. Gute Fragen beim Herumgehen: Welche Zeile habt ihr nachgerechnet? Wo habt ihr einen Fehler gefunden? Der orange Punkt ist ausdrücklich erlaubt, es geht um besser werden, nicht um Gewinner. Plan B ohne Klebepunkte: mit grünem und orangem Stift einen Punkt malen. Karten einsammeln und pro Team verteilen.</aside>
   </section>
 
   <!-- 9 SICHERUNG: MERKSATZ -->
@@ -543,6 +558,79 @@
 
 <script>
 window.DECK_CONFIG = { phases: [["einstieg",6],["input",8],["erarbeitung",19],["sicherung",12]] };
+/* Firmenzahl der Klasse, einmal eingeben, überall wirksam.
+ *
+ * Die Zahl kommt (in dieser Reihenfolge) aus: Adresszeile (?firmen=7), dem Browserspeicher
+ * (localStorage, gilt für alle Mini-Firma-Seiten im selben Browser), sonst Standard 8.
+ * Sie wird zwischen 2 und 12 begrenzt.
+ *
+ * Benutzung in einer Stunde:
+ *   MiniFirma.get()                  -> aktuelle Zahl
+ *   MiniFirma.onChange(function(n){ ... })   -> wird sofort und bei jeder Änderung aufgerufen
+ *   MiniFirma.set(7)                 -> setzt die Zahl (speichert, benachrichtigt alle)
+ *   MiniFirma.renderButtons(container, {className:'team-btn', label:function(i){return 'Firma '+i;}})
+ *                                    -> füllt container mit n Knöpfen (data-team="1".."n")
+ *   MiniFirma.mountStepper(element)  -> setzt dort "Firmen [-] 8 [+]" ein
+ */
+window.MiniFirma = (function () {
+  var MIN = 2, MAX = 12, DEF = 8, KEY = 'minifirma_firmen';
+  var listeners = [];
+
+  function clamp(v) { v = parseInt(v, 10); if (isNaN(v)) return null; return Math.max(MIN, Math.min(MAX, v)); }
+  function fromUrl() { var m = /[?&]firmen=(\d+)/.exec(location.search); return m ? clamp(m[1]) : null; }
+  function fromStore() { try { return clamp(localStorage.getItem(KEY)); } catch (e) { return null; } }
+  function toStore(v) { try { localStorage.setItem(KEY, String(v)); } catch (e) {} }
+
+  var n = fromUrl() || fromStore() || DEF;
+  var steppers = [];
+
+  function paintSteppers() { steppers.forEach(function (s) { s.num.textContent = n; s.minus.disabled = n <= MIN; s.plus.disabled = n >= MAX; }); }
+  function notify() { listeners.forEach(function (fn) { fn(n); }); paintSteppers(); }
+
+  function set(v) {
+    var c = clamp(v); if (c === null || c === n) return;
+    n = c; toStore(n); notify();
+  }
+
+  function onChange(fn) { listeners.push(fn); fn(n); }
+
+  function list() { var a = []; for (var i = 1; i <= n; i++) a.push(i); return a; }
+
+  function renderButtons(container, opts) {
+    opts = opts || {};
+    var cls = opts.className || 'team-btn';
+    var label = opts.label || function (i) { return 'Firma ' + i; };
+    container.innerHTML = '';
+    for (var i = 1; i <= n; i++) {
+      var b = document.createElement('button');
+      b.className = cls; b.dataset.team = String(i); b.textContent = label(i);
+      container.appendChild(b);
+    }
+  }
+
+  function mountStepper(el) {
+    el.classList.add('firmen-stepper');
+    el.innerHTML = '<span class="fs-label">Firmen</span><button type="button" class="fs-minus" aria-label="Eine Firma weniger">&minus;</button><span class="fs-num"></span><button type="button" class="fs-plus" aria-label="Eine Firma mehr">+</button>';
+    var s = { num: el.querySelector('.fs-num'), minus: el.querySelector('.fs-minus'), plus: el.querySelector('.fs-plus') };
+    s.minus.addEventListener('click', function () { set(n - 1); });
+    s.plus.addEventListener('click', function () { set(n + 1); });
+    steppers.push(s); paintSteppers();
+  }
+
+  /* Links auf Mini-Firma-Seiten tragen die Zahl in der Adresse mit (hilft, wenn der Browser
+     den Speicher zwischen Dateien nicht teilt, z. B. beim Öffnen von lokalen Dateien). */
+  function decorateLinks() {
+    Array.prototype.forEach.call(document.querySelectorAll('a[data-firmen-link]'), function (a) {
+      var base = a.getAttribute('data-firmen-link');
+      a.setAttribute('href', base + (base.indexOf('?') < 0 ? '?' : '&') + 'firmen=' + n);
+    });
+  }
+  listeners.push(decorateLinks);
+  if (document.readyState !== 'loading') decorateLinks(); else document.addEventListener('DOMContentLoaded', decorateLinks);
+
+  return { get: function () { return n; }, set: set, list: list, onChange: onChange, renderButtons: renderButtons, mountStepper: mountStepper, MIN: MIN, MAX: MAX };
+})();
+
 /* Gemeinsames Foliengerüst für die Mini-Firma-Stunden.
  *
  * Was es kann: Folien auf 1280x720 skalieren, Pfeiltasten/Wischen/Knöpfe, Schritt-Einblendung
@@ -698,6 +786,15 @@ window.Deck = (function () {
   }
   timerEl.addEventListener('click', toggleTimer);
 
+  /* ---------- Firmenzahl-Stepper in der Werkzeugleiste ---------- */
+  (function () {
+    var tools = document.getElementById('tools');
+    if (!tools || !window.MiniFirma) return;
+    var holder = document.createElement('div');
+    tools.insertBefore(holder, tools.firstChild);
+    MiniFirma.mountStepper(holder);
+  })();
+
   /* ---------- Start ---------- */
   function start() {
     var h = parseInt((location.hash || '').replace('#', ''), 10);
@@ -781,42 +878,70 @@ window.Deck = (function () {
     el.addEventListener('click', function(){ Deck.setTimer(parseInt(el.dataset.sek,10), true); });
   });
 
-  /* Galeriegang: Rotationstabelle */
-  var N = 7, runde = 0, fertig = {};
-  var rundenEl = document.getElementById('runden'), tab = document.getElementById('rot-tab'), hin = document.getElementById('rot-hinweis');
+  /* Galeriegang: Rundenzahl, Rundenzeit und Rotation hängen an der Firmenzahl (Stepper oben rechts) */
+  var SICHERUNG = 420;   /* vorgesehene Sekunden für den ganzen Galeriegang */
+  var runde = 0, fertig = {};
+  var rundenEl = document.getElementById('runden'), tab = document.getElementById('rot-tab'),
+      hin = document.getElementById('rot-hinweis'), info = document.getElementById('gal-info');
+  function mmss(sek){ var m = Math.floor(sek/60), r = sek % 60; return m + ':' + (r < 10 ? '0' : '') + r + ' Min'; }
+  function galPlan(N){
+    var R = Math.min(3, N-1);
+    var rt = Math.round((SICHERUNG - 60) / R / 5) * 5;
+    rt = Math.max(60, Math.min(150, rt));
+    var zr = Math.max(60, Math.min(120, SICHERUNG - R * rt));
+    return { N: N, R: R, rt: rt, zr: zr, gesamt: R * rt + zr, karten: N * R, seiten: Math.ceil(N * R / 6) };
+  }
+  window.galPlan = galPlan;
+  function ziel(t, r, N){ return ((t - 1 + r) % N) + 1; }
   function zeichne(){
-    var maxR = Math.min(3, N-1);
+    var P = galPlan(MiniFirma.get()), N = P.N;
     rundenEl.innerHTML = '';
-    for (var r = 1; r <= maxR; r++) rundenEl.appendChild(knopf('Runde ' + r, r));
-    rundenEl.appendChild(knopf('Zurück', 99));
+    for (var r = 1; r <= P.R; r++) rundenEl.appendChild(knopf(N === 2 ? 'Austausch' : 'Runde ' + r, r, P));
+    rundenEl.appendChild(knopf('Zurück', 99, P));
     var rows = '';
     for (var t = 1; t <= N; t++) {
-      rows += '<tr><td>Firma ' + t + '</td><td>' + (runde === 0 ? 'wartet' : (runde === 99 ? 'eigener Tisch' : 'geht zu Tisch ' + (((t-1+runde) % N) + 1))) + '</td></tr>';
+      var was = runde === 0 ? 'wartet' : (runde === 99 ? 'eigener Tisch' : (N === 2 ? 'prüft Plan ' + ziel(t, runde, N) : 'geht zu Tisch ' + ziel(t, runde, N)));
+      rows += '<div class="zl"><span>Firma ' + t + '</span><span>' + was + '</span></div>';
     }
+    tab.className = 'rot-tab' + (N > 6 ? ' zwei' : '');
     tab.innerHTML = rows;
-    hin.textContent = runde === 0 ? 'Runde wählen: Der Timer läuft 2 Minuten, bei "Zurück" 1 Minute.' :
-      (runde === 99 ? 'Zurück am eigenen Tisch: Punkte und Karten lesen, eine Sache im Plan verbessern.' : 'Runde ' + runde + ' von ' + maxR + ': nachrechnen, Karte ausfüllen, Punkt kleben.');
+    var txt = '<b>' + N + ' Firmen:</b> ' + (N === 2 ? 'direkter Austausch' : P.R + (P.R === 1 ? ' Runde' : ' Runden')) +
+      ' zu je <b>' + mmss(P.rt) + '</b>, zurück <b>' + mmss(P.zr) + '</b>, zusammen ca. ' + mmss(P.gesamt) + '.<br>' +
+      'Pro Firma ' + (P.R === 1 ? 'wird <b>1</b> Feedback-Karte und 1 Klebepunkt' : 'werden <b>' + P.R + '</b> Feedback-Karten und ' + P.R + ' Klebepunkte') + ' gebraucht, zusammen ' + P.karten + ' Karten (' + P.seiten + ' Seite' + (P.seiten === 1 ? '' : 'n') + ' von material-19).';
+    var warn = '';
+    if (N === 2) warn = 'Nur zwei Firmen: Beide tauschen die Pläne, rechnen nach und sprechen direkt miteinander. Bleibt Zeit, erklären sie sich die Karten.';
+    else if (N <= 3) warn = 'Wenig Firmen: Es gibt nur ' + P.R + ' Runden, jede Firma sieht alle anderen Pläne.';
+    else if (N >= 10) warn = 'Viele Firmen: Jede Firma sieht nur ' + P.R + ' von ' + (N-1) + ' fremden Plänen. Tische im ganzen Raum verteilen, die Wechselrichtung vorher zeigen, sonst staut es sich.';
+    info.innerHTML = txt;
+    var wEl = document.getElementById('gal-warn'); wEl.textContent = warn; wEl.style.display = warn ? 'block' : 'none';
+    hin.textContent = runde === 0 ? 'Runde wählen: Der Timer startet mit der berechneten Rundenzeit.' :
+      (runde === 99 ? 'Zurück am eigenen Tisch: Punkte und Karten lesen, eine Sache im Plan verbessern.' : (N === 2 ? 'Austausch' : 'Runde ' + runde + ' von ' + P.R) + ': nachrechnen, Karte ausfüllen, Punkt kleben.');
+    paintVorher(P);
   }
-  function knopf(text, r){
+  function knopf(text, r, P){
     var b = document.createElement('button');
     b.className = 'runde-btn' + (runde === r ? ' on' : (fertig[r] ? ' fertig' : ''));
     b.textContent = text;
     b.addEventListener('click', function(){
       if (runde && runde !== r) fertig[runde] = true;
       runde = r;
-      Deck.setTimer(r === 99 ? 60 : 120, true);
+      Deck.setTimer(r === 99 ? P.zr : P.rt, true);
       zeichne();
     });
     return b;
   }
-  Array.prototype.forEach.call(document.querySelectorAll('.teamzahl'), function(b){
-    b.addEventListener('click', function(){
-      N = parseInt(b.dataset.n, 10); runde = 0; fertig = {};
-      Array.prototype.forEach.call(document.querySelectorAll('.teamzahl'), function(x){ x.classList.toggle('on', x === b); });
-      zeichne();
-    });
-  });
-  zeichne();
+  /* Berechnete Mengen in den Lehrernotizen (Titelfolie und Galeriefolie) */
+  function paintVorher(P){
+    Array.prototype.forEach.call(document.querySelectorAll('.v-karten'), function(e){ e.textContent = P.R; });
+    Array.prototype.forEach.call(document.querySelectorAll('.v-karten-ges'), function(e){ e.textContent = P.karten; });
+    Array.prototype.forEach.call(document.querySelectorAll('.v-seiten'), function(e){ e.textContent = P.seiten; });
+    Array.prototype.forEach.call(document.querySelectorAll('.v-runden'), function(e){ e.textContent = P.R; });
+    Array.prototype.forEach.call(document.querySelectorAll('.v-rzeit'), function(e){ e.textContent = mmss(P.rt); });
+    Array.prototype.forEach.call(document.querySelectorAll('.v-firmen'), function(e){ e.textContent = P.N; });
+    var act = document.querySelector('.slide.active .notes');
+    if (act) document.getElementById('notes').innerHTML = '<b>Lehrernotiz Folie ' + (Deck.slides.indexOf(act.parentNode) + 1) + ' von ' + Deck.slides.length + ':</b> ' + act.innerHTML;
+  }
+  MiniFirma.onChange(function(){ runde = 0; fertig = {}; zeichne(); });
 
   Deck.start();
 })();

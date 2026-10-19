@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verlaufsplan Stunde 10: Lohnabrechnungs-Check</title>
+<style>
+:root { --navy:#14324a; --teal:#4f9aa6; --teal-hell:#eaf4f4; --orange:#f2994a; --orange-hell:#fdeee0; --ink:#20303d; --linie:#b9c7ce; --gruen:#2f8f5b; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:"Trebuchet MS","Verdana","Segoe UI",sans-serif; font-size:8.3pt; line-height:1.27; color:var(--ink); background:#e8e8e8; }
+.blatt { width:297mm; min-height:210mm; margin:15px auto; padding:9mm 11mm; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.15); }
+.kopf { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--navy); padding-bottom:2mm; margin-bottom:3mm; }
+.kopf .label { font-size:7.8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--teal); font-weight:800; }
+.kopf h1 { font-size:17pt; color:var(--navy); line-height:1.1; }
+.kopf .meta { text-align:right; font-size:8pt; color:#4a5a63; }
+.ziele { display:grid; grid-template-columns:1.05fr 1.5fr; gap:3mm; margin-bottom:3mm; }
+.box { border:1.3px solid var(--linie); border-radius:2.5mm; padding:2mm 3mm; }
+.box.ziel { background:var(--orange-hell); border-color:var(--orange); font-size:8.4pt; font-weight:700; }
+.box h3 { font-size:7.8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--navy); margin-bottom:.8mm; }
+.box ul { padding-left:4mm; }
+table { width:100%; border-collapse:collapse; table-layout:fixed; }
+th { background:var(--navy); color:#fff; font-size:7.6pt; text-align:left; padding:1.25mm 2mm; }
+td { vertical-align:top; padding:1.1mm 1.8mm; border:1px solid var(--linie); font-size:7.5pt; }
+td.phase { font-weight:800; color:var(--navy); }
+td.phase small { display:block; font-weight:700; color:var(--teal); }
+tr.einstieg td.phase { border-left:5px solid var(--orange); }
+tr.input td.phase { border-left:5px solid var(--teal); }
+tr.erarbeitung td.phase { border-left:5px solid var(--navy); }
+tr.sicherung td.phase { border-left:5px solid var(--gruen); }
+td ul { padding-left:3mm; }
+td b { color:var(--navy); }
+.unten { display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:2.5mm; margin-top:2.5mm; font-size:7.5pt; }
+.unten .box { padding:2mm 2.6mm; }
+.btn-bar { width:297mm; margin:0 auto 10px; text-align:right; }
+.btn { font-family:system-ui,sans-serif; font-size:13px; padding:8px 16px; border-radius:6px; border:none; background:var(--navy); color:#fff; cursor:pointer; }
+@page { size:A4 landscape; margin:0; }
+@media print { body { background:#fff; } .blatt { margin:0; box-shadow:none; width:100%; min-height:0; padding:5mm 8mm; } .btn-bar { display:none; } tr,.box { page-break-inside:avoid; } }
+</style>
+</head>
+<body>
+<div class="btn-bar"><button class="btn" onclick="window.print()">Als PDF speichern</button></div>
+<div class="blatt">
+ <div class="kopf"><div><div class="label">Wirtschaft und Beruf · Verlaufsplan für die Lehrkraft</div><h1>Stunde 10: Lohnabrechnungs-Check</h1></div><div class="meta">Klasse 8 M-Zweig · 45 Min. · Mini-Firma<br>Folien: <b>stunde-10-folien.html</b></div></div>
+ <div class="ziele"><div class="box ziel"><h3>Lernziel</h3>Die Schüler unterscheiden Brutto und Netto, berechnen vereinfachte Abzüge und reflektieren, was sie aus der Mini-Firmen-Sequenz mitnehmen.</div><div class="box"><h3>Vorher bereitlegen</h3><ul><li>Merkblatt Brutto/Netto (material-15) und Lohnabrechnungs-Check (material-09) bereitlegen.</li><li>Ein fiktives Beispiel oder eine vollständig anonymisierte Lohnabrechnung zeigen. Keine persönlichen Daten verwenden.</li><li>Ergebnisse aus der Gehalts-Recherche aus Stunde 8 griffbereit halten.</li></ul></div></div>
+ <table><colgroup><col style="width:11%"><col style="width:8%"><col style="width:27%"><col style="width:28%"><col style="width:26%"></colgroup><tr><th>Phase und Zeit</th><th>Folie</th><th>Methode</th><th>Lehrkraft</th><th>Schüler</th></tr><tr class="einstieg"><td class="phase">Einstieg<small>5 Min.</small></td><td>3</td><td><b>Abrechnung lesen</b><br>Eine fiktive oder anonymisierte Abrechnung betrachten: Welcher Betrag kommt auf dem Konto an?</td><td>Keine echten Namen, Kontodaten oder persönlichen Abrechnungen zeigen.</td><td>Brutto und Auszahlungsbetrag suchen und Fragen sammeln.</td></tr>
+<tr class="input"><td class="phase">Input<small>10 Min.</small></td><td>4, 5</td><td><b>Direkte Instruktion mit Rechencheck</b><br>Brutto, Abzüge, Netto und Aufgaben der Sozialversicherungen erklären. Eine einfache Prozentrechnung gemeinsam lösen.</td><td>Merkblatt 15 austeilen. Prozentsätze aus material-09 ausdrücklich als vereinfachte Übungswerte bezeichnen, nicht als echte persönliche Abrechnung.</td><td>Begriffe markieren, Rechenweg nachvollziehen und Ergebnis prüfen.</td></tr>
+<tr class="erarbeitung"><td class="phase">Erarbeitung<small>20 Min.</small></td><td>6, 7</td><td><b>Eigene fiktive Abrechnung</b><br>Bruttolohn aus dem Lohnplan in Stunde 8 eintragen, vereinfachte Abzüge auf material-09 berechnen und Nettolohn bestimmen.</td><td>Bei fehlendem Lohnplan einen Beispielbetrag vorgeben. Rundung auf ganze Euro genügt.</td><td>Rechenweg zeigen, Ergebnis mit Partner vergleichen und Überraschung notieren.</td></tr>
+<tr class="sicherung"><td class="phase">Sicherung<small>10 Min.</small></td><td>8, 9</td><td><b>Lernbilanz und Ausblick</b><br>Eine Erkenntnis und eine offene Frage teilen. Lernbilanz und optionales Abschlusszertifikat ausfüllen.</td><td>Leistungsnachweis in Stunde 11 ankündigen und Themenübersicht nennen, keine Lösungen vorwegnehmen.</td><td>Lernbilanz verfassen und Material für die letzte Stunde mitnehmen.</td></tr></table>
+ <div class="unten"><div class="box"><h3>Stolpersteine und Plan B</h3><ul><li>Keine echte Abrechnung verfügbar: ausschließlich mit dem fiktiven Beispiel auf Folie 4 arbeiten.</li><li>Rechnen fällt schwer: vorbereitete Beispielwerte und Taschenrechner erlauben.</li><li>Zeit knapp: Lernbilanz als Exit-Zettel beenden lassen.</li></ul></div><div class="box"><h3>Hefteintrag / Merksatz</h3>Bruttolohn ist der Betrag vor Abzügen. Nach Abzug von Steuern und Sozialabgaben bleibt der Nettolohn.<h3 style="margin-top:2mm">Material</h3><ul><li>Merkblatt Brutto/Netto (material-15).</li><li>Lohnabrechnungs-Check und Lernbilanz (material-09).</li><li>Bleistift und Taschenrechner optional.</li></ul></div><div class="box"><h3>Bedienung der Folien</h3><ul><li>Pfeil rechts oder Leertaste: weiter, Pfeil links: zurück.</li><li>N: Lehrernotizen ein- und ausblenden, F: Vollbild.</li><li>Timer oben rechts: starten oder pausieren.</li><li>Auf dem iPad: nach links und rechts wischen.</li></ul></div></div>
+</div>
+</body>
+</html>

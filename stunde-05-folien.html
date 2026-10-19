@@ -82,6 +82,18 @@
     .chip { background:var(--teal-hell) !important; color:var(--navy) !important; }
   }
 
+  /* Firmenzahl-Stepper (Bildschirm), für Decks in der Werkzeugleiste, für Materialien als Leiste oben */
+  .firmen-stepper { display:inline-flex; align-items:center; gap:6px; font-family:system-ui,"Trebuchet MS",sans-serif; font-size:15px; font-weight:700; color:var(--navy,#14324a); background:#fff; border:2px solid var(--line,#d8e2e8); border-radius:12px; padding:2px 8px; }
+  .firmen-stepper .fs-label { color:var(--muted,#5a6a73); font-size:13px; text-transform:uppercase; letter-spacing:.4px; }
+  .firmen-stepper .fs-num { min-width:1.6em; text-align:center; font-size:20px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .firmen-stepper button { font:inherit; font-size:18px; font-weight:800; width:30px; height:30px; border-radius:50%; border:none; background:var(--navy,#14324a); color:#fff; cursor:pointer; line-height:1; padding:0; }
+  .firmen-stepper button:disabled { opacity:.35; cursor:default; }
+  .dunkel-aktiv .firmen-stepper { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.3); color:#fff; }
+  .dunkel-aktiv .firmen-stepper .fs-label { color:#b6cbd4; }
+  .dunkel-aktiv .firmen-stepper button { background:rgba(255,255,255,.22); }
+  .firmen-bar { max-width:210mm; margin:0 auto 10px auto; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; font-family:system-ui,sans-serif; font-size:13px; color:#555; }
+  @media print { .firmen-bar, .firmen-stepper { display:none !important; } }
+
   /* ===== Folie 1: Titel ===== */
   .slide.show { background:radial-gradient(ellipse at 50% 18%, #2a5d7e 0%, var(--navy) 42%, var(--navy-dark) 100%); }
   .titel-label { display:inline-block; font-size:16px; font-weight:800; letter-spacing:.7px; text-transform:uppercase; color:var(--orange); background:rgba(255,255,255,.1); padding:6px 14px; border-radius:20px; margin-bottom:18px; }
@@ -126,34 +138,88 @@
   .jury-pate { margin-top:18px; border:2.5px solid var(--teal); background:var(--teal-hell); border-radius:16px; padding:14px 24px; font-size:20px; line-height:1.4; color:var(--navy); }
   .jury-pate b { color:#2c6671; }
 
-  /* ===== Folie 5: Auslosung ===== */
-  .los-grid { display:grid; grid-template-columns:5fr 7fr; gap:28px; margin-top:4px; }
-  .anzahl { display:flex; align-items:center; gap:10px; font-size:19px; color:var(--muted); font-weight:700; margin-bottom:10px; }
-  .anzahl button { font:inherit; font-size:21px; font-weight:800; width:46px; height:46px; border-radius:12px; border:2.5px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer; }
-  .anzahl button.an { background:var(--navy); color:#fff; }
-  .anzahl button:disabled { opacity:.4; cursor:default; }
-  .firmen { display:flex; flex-direction:column; gap:5px; }
-  .firma-zeile { display:flex; align-items:center; gap:12px; }
-  .firma-zeile .tn { width:76px; font-size:17px; font-weight:800; color:var(--muted); letter-spacing:.4px; }
-  .firma-zeile input { flex:1; font:inherit; font-size:19px; font-weight:700; color:var(--navy); background:#fff; border:2px solid var(--line); border-radius:10px; padding:3px 14px; outline:none; min-width:0; }
+  /* ===== Folie 5: Auslosung und Modus ===== */
+  .modi { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .modus { font:inherit; text-align:left; position:relative; background:#fff; border:2.5px solid var(--line); border-radius:16px; padding:9px 16px 9px; cursor:pointer; color:var(--ink); display:block; }
+  .modus .mk { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .modus .mt { display:block; font-size:20px; font-weight:800; color:var(--navy); line-height:1.15; white-space:nowrap; }
+  .modus .mz { display:block; font-size:18px; font-weight:800; color:var(--ink); margin-top:2px; font-variant-numeric:tabular-nums; }
+  .modus .mg { display:block; font-size:16px; color:var(--muted); margin-top:1px; line-height:1.25; }
+  .modus .tag { font-size:14px; white-space:nowrap; flex-shrink:0; font-weight:800; letter-spacing:.4px; text-transform:uppercase; padding:2px 10px; border-radius:14px; background:var(--teal-hell); color:#2c6671; }
+  .modus.empf .tag { background:var(--gruen); color:#fff; }
+  .modus.an { border-color:var(--orange); background:var(--orange-hell); box-shadow:0 4px 16px rgba(242,153,74,.28); }
+  .modus.nein { opacity:.55; cursor:default; background:#f2f2f0; }
+  .modus.nein .tag { background:#f9e6e2; color:var(--rot); }
+  .modus.zu { cursor:default; }
+  .modi-info { display:flex; align-items:center; justify-content:space-between; gap:18px; margin:8px 0 8px; font-size:18px; line-height:1.3; color:var(--navy); min-height:48px; }
+  .modi-info .txt { flex:1; }
+  .modi-info .txt b { color:#2c6671; }
+  .rahmen { display:flex; align-items:center; gap:10px; font-size:16px; font-weight:700; color:var(--muted); flex-shrink:0; }
+  .rahmen .rg { display:flex; align-items:center; gap:4px; }
+  .rahmen button { font:inherit; font-size:17px; font-weight:800; width:28px; height:28px; border-radius:50%; border:2px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer; line-height:1; padding:0; }
+  .rahmen button:disabled { opacity:.3; cursor:default; }
+  .rahmen b { color:var(--navy); min-width:1.4em; text-align:center; font-variant-numeric:tabular-nums; }
+  .los-grid { display:grid; grid-template-columns:5fr 7fr; gap:28px; margin-top:0; }
+  .firmen { display:grid; grid-template-columns:1fr; gap:3px 14px; }
+  .firmen.zwei { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  .firma-zeile { display:flex; align-items:center; gap:8px; }
+  .firma-zeile .tn { width:72px; white-space:nowrap; font-size:16px; font-weight:800; color:var(--muted); letter-spacing:.2px; flex-shrink:0; }
+  .firma-zeile input { flex:1; font:inherit; font-size:17px; font-weight:700; color:var(--navy); background:#fff; border:2px solid var(--line); border-radius:9px; padding:0 10px; height:30px; outline:none; min-width:0; }
   .firma-zeile input:focus { border-color:var(--teal); }
-  .zeitbedarf { margin-top:6px; font-size:15px; color:var(--muted); }
-  .zeitbedarf.warn { color:#9a5214; font-weight:700; }
-  .slots { display:flex; flex-direction:column; gap:5px; }
-  .slot { display:flex; align-items:center; gap:16px; background:#fff; border:2px dashed var(--line); border-radius:14px; padding:3px 18px; min-height:46px; }
-  .slot .pl { font-size:17px; font-weight:800; color:var(--muted); width:74px; letter-spacing:.4px; text-transform:uppercase; }
-  .slot .nm { font-size:26px; font-weight:800; color:var(--line); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .slot .tm { font-size:16px; color:var(--muted); font-weight:700; }
+  .slots { display:grid; grid-template-columns:1fr; gap:3px 12px; }
+  .slots.zwei { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  .slot { display:flex; align-items:center; gap:12px; background:#fff; border:2px dashed var(--line); border-radius:12px; padding:2px 14px; min-height:36px; }
+  .slot .pl { font-size:16px; font-weight:800; color:var(--muted); width:70px; letter-spacing:.3px; text-transform:uppercase; flex-shrink:0; }
+  .slots.zwei .slot .pl { width:30px; }
+  .slot .nm { font-size:22px; font-weight:800; color:var(--line); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .slots.zwei .slot .nm { font-size:19px; }
+  .slots.zwei .slot { gap:8px; padding:2px 10px; }
+  .slot .tm { font-size:16px; color:var(--muted); font-weight:700; flex-shrink:0; }
+  .slot .tl { font-size:15px; font-weight:800; color:#2c6671; background:var(--teal-hell); border-radius:10px; padding:0 8px; flex-shrink:0; }
+  .slot .tl.t2 { background:var(--orange-hell); color:#9a5214; }
   .slot.fertig { border-style:solid; border-color:var(--navy); }
   .slot.fertig .nm { color:var(--navy); }
   .slot.rollt { border-style:solid; border-color:var(--orange); background:var(--orange-hell); }
   .slot.rollt .nm { color:var(--orange); }
-  .los-leiste { margin-top:14px; display:flex; align-items:center; gap:18px; }
-  .btn-gross { font:inherit; font-size:24px; font-weight:800; background:var(--orange); color:#3b2200; border:none; border-radius:34px; padding:9px 34px; font-size:22px; cursor:pointer; }
+  .los-leiste { margin-top:10px; display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+  .btn-gross { font:inherit; font-weight:800; background:var(--orange); color:#3b2200; border:none; border-radius:34px; padding:8px 32px; font-size:22px; cursor:pointer; }
   .btn-gross:hover { filter:brightness(1.08); }
   .btn-gross:disabled { background:var(--line); color:var(--muted); cursor:default; filter:none; }
   .btn-klein { font:inherit; font-size:16px; font-weight:700; color:var(--muted); background:none; border:none; text-decoration:underline; cursor:pointer; }
   .btn-klein.ernst { color:var(--rot); }
+  .modi-lock { font-size:16px; color:#9a5214; font-weight:700; }
+
+  /* Titel: Plan-Pille und gespeicherter Stand */
+  .plan-pille { position:absolute; left:64px; bottom:104px; font-size:22px; font-weight:800; color:#fff; background:rgba(255,255,255,.14); border:2px solid rgba(255,255,255,.3); border-radius:30px; padding:10px 24px; max-width:760px; }
+  .plan-pille small { display:block; font-size:16px; font-weight:700; color:#b6cbd4; }
+  .stand-box { position:absolute; left:64px; bottom:196px; max-width:820px; font-size:18px; color:#fff; background:rgba(242,153,74,.18); border:2px solid var(--orange); border-radius:16px; padding:10px 18px; display:none; align-items:center; gap:16px; flex-wrap:wrap; }
+  .stand-box.da { display:flex; }
+  .stand-box button { font:inherit; font-size:17px; font-weight:800; border:none; border-radius:22px; padding:6px 18px; cursor:pointer; background:var(--orange); color:#3b2200; }
+  .stand-box button.zweit { background:transparent; color:#fff; border:2px solid rgba(255,255,255,.5); }
+
+  /* Weiter am nächsten Termin */
+  .wt-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:6px; }
+  .wt-k { background:#fff; border:1.5px solid var(--line); border-radius:18px; padding:16px 22px 14px; box-shadow:0 2px 14px rgba(20,50,74,.08); }
+  .wt-k.heute { border-top:8px solid var(--gruen); }
+  .wt-k.spaeter { border-top:8px solid var(--orange); }
+  .wt-k h3 { font-size:24px; color:var(--navy); margin-bottom:8px; }
+  .wt-k h3 small { font-size:17px; color:var(--muted); font-weight:700; margin-left:6px; }
+  .wt-k ol { list-style:none; display:grid; grid-template-columns:1fr; gap:3px; }
+  .wt-k li { display:flex; align-items:center; gap:12px; font-size:21px; font-weight:800; color:var(--navy); min-height:34px; }
+  .wt-k li i { font-style:normal; width:30px; height:30px; border-radius:50%; background:var(--teal-hell); color:#2c6671; font-size:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .wt-k.heute li i { background:var(--gruen); color:#fff; }
+  .wt-k li span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+  /* Modal (Rückfrage bei geänderter Firmenzahl) */
+  #modal { position:absolute; inset:0; background:rgba(10,26,38,.72); z-index:40; display:none; align-items:center; justify-content:center; }
+  #modal.offen { display:flex; }
+  #modal .box { width:760px; background:#fff; border-radius:22px; padding:30px 36px; box-shadow:0 20px 60px rgba(0,0,0,.4); }
+  #modal h3 { font-size:30px; color:var(--navy); margin-bottom:10px; }
+  #modal p { font-size:21px; line-height:1.4; color:var(--ink); margin-bottom:22px; }
+  #modal .btns { display:flex; gap:14px; flex-wrap:wrap; }
+  #modal button { font:inherit; font-size:21px; font-weight:800; border-radius:30px; padding:12px 28px; cursor:pointer; border:2.5px solid var(--navy); background:#fff; color:var(--navy); }
+  #modal button.ja { background:var(--orange); border-color:var(--orange); color:#3b2200; }
+  body.skipping .slide { visibility:hidden; }
 
   /* ===== Folie 6: Pitch-Bühne ===== */
   .bn-top { display:flex; justify-content:space-between; align-items:flex-end; height:124px; gap:24px; }
@@ -211,6 +277,11 @@
   .tile .zahl { font-size:52px; font-weight:800; color:var(--navy); line-height:1; min-width:56px; text-align:center; font-variant-numeric:tabular-nums; }
   .tile .minus { font:inherit; font-size:24px; font-weight:800; width:40px; height:40px; border-radius:50%; border:2px solid var(--line); background:#fff; color:var(--muted); cursor:pointer; }
   .tile.vorn { border-color:var(--orange); background:var(--orange-hell); }
+  .tiles.dicht { grid-template-columns:repeat(4,1fr); gap:10px; }
+  .tiles.dicht .tile { padding:8px 10px; gap:8px; }
+  .tiles.dicht .tn b { font-size:19px; }
+  .tiles.dicht .zahl { font-size:38px; min-width:38px; }
+  .tiles.dicht .minus { width:34px; height:34px; font-size:20px; }
   .eh-hinweis { margin-top:14px; font-size:18px; color:var(--muted); }
   .urkunde-wrap { display:flex; justify-content:center; margin-top:4px; }
   .urkunde { width:880px; height:430px; background:#fff; border:6px double var(--orange); border-radius:14px; padding:18px; box-shadow:0 14px 40px rgba(20,50,74,.18); position:relative; animation:ziehen .5s ease; }
@@ -221,6 +292,7 @@
   .urkunde .an { font-size:19px; color:var(--muted); margin-top:4px; }
   .urkunde .sieger { font-size:56px; font-weight:800; color:var(--navy); line-height:1.1; margin-top:2px; border-bottom:3px solid var(--orange); padding:0 26px 4px; max-width:780px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .urkunde .sieger.lang { font-size:38px; }
+  .urkunde .sieger.mehr { font-size:28px; white-space:normal; overflow:visible; line-height:1.2; }
   .urkunde .fuss { margin-top:auto; font-size:16px; color:var(--muted); }
   @keyframes ziehen { 0%{transform:rotate(-3deg) translateY(26px);opacity:0} 100%{transform:none;opacity:1} }
 
@@ -238,7 +310,9 @@
     .note-pille { transform:none; }
     .uhr, .uhr.erledigt { opacity:1; }
     .urkunde { box-shadow:none; animation:none; }
-    .btn-gross, .btn-klein, .anzahl button { display:none; }
+    .btn-gross, .btn-klein, .rahmen button, .stand-box, #modal { display:none; }
+    .plan-pille { border-color:var(--line); background:#fff; color:var(--navy); }
+    .plan-pille small { color:var(--muted); }
   }
 </style>
 <style>
@@ -261,7 +335,7 @@
     <div style="margin-top:34px;">
       <span class="titel-label">Stunde 5</span>
       <h1 style="font-size:96px;">Pitch-Tag</h1>
-      <p class="titel-claim">Drei Minuten, vier Kriterien, eine Bühne. Heute zeigt ihr, was eure Firma kann.</p>
+      <p class="titel-claim">Eine Bühne, vier Kriterien, eure Firma im Rampenlicht. Heute zeigt ihr, was eure Firma kann.</p>
       <div class="titel-reihe">
         <div class="rund"><span class="ic ic-idee"></span></div>
         <div class="rund"><span class="ic ic-lupe"></span></div>
@@ -269,28 +343,30 @@
         <div class="rund"><span class="ic ic-megafon"></span></div>
       </div>
     </div>
+    <div class="stand-box" id="stand-box"><span id="stand-txt"></span><button type="button" id="stand-teil2">Teil 2 beginnen</button><button type="button" class="zweit" id="stand-neu">Neu beginnen</button></div>
+    <div class="plan-pille" id="plan-pille">Heute</div>
     <div class="note-pille">Zählt als Referat-Note</div>
-    <aside class="notes"><b>Vorher:</b> Beamer an, Ton an (der Klingelton kommt aus dem Deck), Jury-Bögen (material-05) für jede Person der Jury ausgedruckt, Urkunden und Feedback-Karten (material-20) ausgedruckt und bereitgelegt. Raum so stellen, dass vorne eine freie Bühne ist und die Klasse als Publikum sitzt. Gast an der Tür begrüßen. Die Stimmung setzen: Das hier ist ein echter Auftritt, kein Abfragen. Noch nichts erklären, einfach die Folie wirken lassen und Teams nach vorne bitten, ihre Präsentationen startklar zu halten (USB-Stick, Ausdruck, Gerät). Taste N zeigt diese Notizen, F ist Vollbild.</aside>
+    <aside class="notes"><b>Vorher:</b> Firmenzahl oben rechts im Stepper einstellen (das Deck rechnet daraus den Ablauf und empfiehlt einen Modus, steht unten links auf dieser Folie). Beamer an, Ton an (der Klingelton kommt aus dem Deck), Jury-Bögen (material-05) für jede Person der Jury ausgedruckt, Urkunden und Feedback-Karten (material-20) ausgedruckt, Karten so oft wie es Jury-Personen gibt. Raum so stellen, dass vorne eine freie Bühne ist und die Klasse als Publikum sitzt. Gast an der Tür begrüßen. Die Stimmung setzen: Das hier ist ein echter Auftritt, kein Abfragen. Noch nichts erklären, einfach die Folie wirken lassen und Teams nach vorne bitten, ihre Präsentationen startklar zu halten (USB-Stick, Ausdruck, Gerät). Taste N zeigt diese Notizen, F ist Vollbild.</aside>
   </section>
 
   <!-- 2 REGELN -->
   <section class="slide" id="s-regeln" data-phase="einstieg" data-timer="0">
-    <div class="kopf"><span class="chip einstieg">Einstieg</span><span class="zeit">8 Min &middot; Show und Regeln</span></div>
+    <div class="kopf"><span class="chip einstieg">Einstieg</span><span class="zeit" data-z="einstieg" data-t="Show und Regeln">Show und Regeln</span></div>
     <h2>Die Regeln der Bühne</h2>
-    <p class="sub">Für jedes Team gilt dasselbe, deshalb ist es fair.</p>
+    <p class="sub">Für jede Firma gilt dasselbe, deshalb ist es fair.</p>
     <div class="regeln">
-      <div class="regel r1 step"><div class="gross">3 <small>Min</small></div><div class="name">Pitch</div><div class="was">Euer Team präsentiert. Alle sprechen mindestens einmal. Wenn es klingelt, ist Schluss.</div></div>
-      <div class="regel r2 step"><div class="gross">2 <small>Min</small></div><div class="name">Fragen der Jury</div><div class="was">Die Jury fragt nach. Antwortet ehrlich. "Das wissen wir noch nicht" ist besser als etwas erfinden.</div></div>
-      <div class="regel step"><div class="gross">1 <small>Min</small></div><div class="name">Bewertung</div><div class="was">Jetzt ist es leise. Die Jury füllt den Bogen aus, euer Team setzt sich.</div></div>
+      <div class="regel r1 step"><div class="gross" id="rg-p">3 <small>Min</small></div><div class="name">Pitch</div><div class="was">Eure Firma präsentiert. Alle sprechen mindestens einmal. Wenn es klingelt, ist Schluss.</div></div>
+      <div class="regel r2 step"><div class="gross" id="rg-q">2 <small>Min</small></div><div class="name">Fragen der Jury</div><div class="was">Die Jury fragt nach. Antwortet ehrlich. "Das wissen wir noch nicht" ist besser als etwas erfinden.</div></div>
+      <div class="regel step"><div class="gross" id="rg-b">1 <small>Min</small></div><div class="name">Bewertung</div><div class="was">Jetzt ist es leise. Die Jury füllt den Bogen aus, eure Firma setzt sich.</div></div>
       <div class="regel r4 step"><div class="gross">Fair</div><div class="name">Zuhören und klatschen</div><div class="was">Nicht reinreden, Applaus am Ende. Technikprobleme kosten keine Zusatzzeit.</div></div>
     </div>
     <div class="note-box step"><span>Wichtig</span>Der Pitch ist eure Referat-Note (kleine Note). Danach gibt es zusätzlich eine Ehrung, die nichts mit der Note zu tun hat.</div>
-    <aside class="notes"><b>2 Min.:</b> Karten nacheinander einblenden (Pfeil rechts), kurz erklären, nicht vorlesen lassen. Betonen: Die Zeit läuft sichtbar für alle, ohne Ausnahme. Jeder Block dauert ca. 6 Minuten. Die Ehrung zum Schluss ist Spaß und Anerkennung, die Note kommt allein aus den Kriterien.</aside>
+    <aside class="notes"><b>2 Min.:</b> Karten nacheinander einblenden (Pfeil rechts), kurz erklären, nicht vorlesen lassen. Betonen: Die Zeit läuft sichtbar für alle, ohne Ausnahme. Die drei Zeiten sind für jede Firma gleich, sie stehen schon so da, wie das Deck sie aus der Firmenzahl berechnet hat (siehe Folie 5). Die Ehrung zum Schluss ist Spaß und Anerkennung, die Note kommt allein aus den Kriterien.</aside>
   </section>
 
   <!-- 3 KRITERIEN -->
   <section class="slide" id="s-kriterien" data-phase="einstieg" data-timer="0">
-    <div class="kopf"><span class="chip einstieg">Einstieg</span><span class="zeit">8 Min &middot; Kriterien</span></div>
+    <div class="kopf"><span class="chip einstieg">Einstieg</span><span class="zeit" data-z="einstieg" data-t="Kriterien">Kriterien</span></div>
     <h2>Woran wir euch messen</h2>
     <p class="sub">Diese vier Kriterien stehen auch auf eurem Arbeitsauftrag. Nichts davon ist neu.</p>
     <div class="krit">
@@ -305,45 +381,42 @@
 
   <!-- 4 JURY -->
   <section class="slide" id="s-jury" data-phase="einstieg" data-timer="0">
-    <div class="kopf"><span class="chip einstieg">Einstieg</span><span class="zeit">8 Min &middot; Jury</span></div>
+    <div class="kopf"><span class="chip einstieg">Einstieg</span><span class="zeit" data-z="einstieg" data-t="Jury">Jury</span></div>
     <h2>Das ist heute die Jury</h2>
     <p class="sub">Jede Stimme zählt, aber jede Person urteilt für sich.</p>
     <div class="jury-grid">
-      <div class="jury-k step"><span class="ic ic-waage"></span><div class="nm">Die Klasse</div><div class="was">Jede Schülerin und jeder Schüler hat einen <b>Bewertungsbogen</b>. Für jedes Team gibt es vier Kriterien mit 1 bis 5 Punkten. Nicht abschreiben, nicht absprechen.</div></div>
+      <div class="jury-k step"><span class="ic ic-waage"></span><div class="nm">Die Klasse</div><div class="was">Jede Schülerin und jeder Schüler hat einen <b>Bewertungsbogen</b>. Für jede Firma gibt es vier Kriterien mit 1 bis 5 Punkten. Nicht abschreiben, nicht absprechen.</div></div>
       <div class="jury-k step"><span class="ic ic-unternehmen"></span><div class="nm">Unser Gast</div><div class="was">Heute dabei: <span class="edit" contenteditable="true" spellcheck="false">Gast eintragen oder leer lassen</span><br>Der Gast bekommt denselben Bogen und stellt auch Fragen.</div></div>
       <div class="jury-k step"><span class="ic ic-ziel"></span><div class="nm">Die Lehrkraft</div><div class="was">Ich schaue auf dieselben vier Kriterien. Aus meinem Eindruck und den Bögen entsteht <b>die Note</b>.</div></div>
     </div>
-    <div class="jury-pate step"><b>Feedback-Patenschaft:</b> Jede Jury-Person bekommt ein Team zugeteilt und schreibt dafür eine Karte "Zwei Sterne und ein Wunsch": zwei Dinge, die gut waren, und eine Sache für das nächste Mal.</div>
-    <aside class="notes"><b>1,5 Min.:</b> Den Gast namentlich vorstellen, das Feld auf der Folie lässt sich anklicken und tippen. Patenschaften zuteilen: Jede Schülerin und jeder Schüler zieht oder bekommt ein Team (nicht das eigene), schreibt dafür auf eine Feedback-Karte (material-20, Seite 3) zwei Sterne und einen Wunsch. Das macht die Bewertungsminute sinnvoll und die Rückmeldung persönlicher. Wer lieber nur den Bogen ausfüllt, darf das, die Karte ist ein Angebot und gehört nicht zur Note.</aside>
+    <div class="jury-pate step"><b>Feedback-Patenschaft:</b> Jede Jury-Person bekommt eine Firma zugeteilt und schreibt dafür eine Karte "Zwei Sterne und ein Wunsch": zwei Dinge, die gut waren, und eine Sache für das nächste Mal.</div>
+    <aside class="notes"><b>1,5 Min.:</b> Den Gast namentlich vorstellen, das Feld auf der Folie lässt sich anklicken und tippen. Patenschaften zuteilen: Jede Schülerin und jeder Schüler zieht oder bekommt eine Firma (nicht die eigene), schreibt dafür auf eine Feedback-Karte (material-20, Seite 3) zwei Sterne und einen Wunsch. Das macht die Bewertungsminute sinnvoll und die Rückmeldung persönlicher. Wer lieber nur den Bogen ausfüllt, darf das, die Karte ist ein Angebot und gehört nicht zur Note.</aside>
   </section>
 
   <!-- 5 AUSLOSUNG -->
   <section class="slide" id="s-los" data-phase="einstieg" data-timer="0">
-    <div class="kopf"><span class="chip einstieg">Einstieg</span><span class="zeit">8 Min &middot; Auslosung</span></div>
-    <h2>Wer macht den Anfang?</h2>
-    <p class="sub">Die Reihenfolge entscheidet das Los. Firmennamen eintragen, dann ziehen.</p>
+    <div class="kopf"><span class="chip einstieg">Einstieg</span><span class="zeit" data-z="einstieg" data-t="Auslosung und Ablauf">Auslosung und Ablauf</span></div>
+    <h2 id="los-h2">Wer macht den Anfang?</h2>
+    <p class="sub" style="margin-bottom:10px;" id="los-sub">Das Deck rechnet den Ablauf aus der Firmenzahl. Dann Namen eintragen und ziehen.</p>
+    <div class="modi" id="modi"></div>
+    <div class="modi-info"><div class="txt" id="modi-txt"></div><div class="rahmen" id="rahmen"></div></div>
     <div class="los-grid">
-      <div>
-        <div class="anzahl"><span>Teams:</span>
-          <button data-n="3">3</button><button data-n="4">4</button><button data-n="5">5</button><button data-n="6">6</button><button data-n="7" class="an">7</button><button data-n="8">8</button>
-        </div>
-        <div class="firmen" id="los-firmen"></div>
-        <div class="zeitbedarf" id="los-zeit"></div>
-      </div>
+      <div><div class="firmen" id="los-firmen"></div></div>
       <div>
         <div class="slots" id="los-slots"></div>
         <div class="los-leiste">
           <button class="btn-gross" id="los-btn">Los ziehen</button>
           <button class="btn-klein" id="los-reset">Auslosung zurücksetzen</button>
+          <span class="modi-lock" id="modi-lock"></span>
         </div>
       </div>
     </div>
-    <aside class="notes"><b>2 Min.:</b> Zuerst Teams wählen (Standard 4), dann Firmennamen links eintragen, das geht auch später noch. Dann Pfeil rechts oder Knopf "Los ziehen": Pro Druck wird ein Team gezogen, die Namen laufen kurz durch, dann steht der Platz fest. Die Auslosung gilt nur einmal und bleibt für den ganzen Verlauf gespeichert, auch wenn du die Seite neu lädst. Zurücksetzen verlangt zwei Klicks. Lass die Klasse beim Ziehen mitzählen, das macht Spannung. <b>Plan B:</b> Ohne Beamer Zettel mit Teamnummern aus einem Beutel ziehen.</aside>
+    <aside class="notes"><b>Auslosung und Ablauf:</b> Die Firmenzahl steht oben rechts im Stepper (2 bis 12). Das Deck rechnet daraus, wie viel Zeit jede Firma bekommt, und empfiehlt einen Modus. Die drei Karten sind anklickbar: <b>Eine Stunde, volle Länge</b> (Pitch, Fragen und Bewertung in voller Länge), <b>Eine Stunde, kompakt</b> (alle drei Zeiten gleichmäßig gekürzt, damit alle Firmen hineinpassen) und <b>Zwei Stunden</b> (volle Länge, die Reihenfolge wird in zwei Hälften geteilt, heute die erste, nächstes Mal die zweite). Eröffnung, Ehrung und Abschluss lassen sich mit den kleinen Plus- und Minus-Knöpfen kürzen, dann gewinnt der Pitch-Block Zeit. Danach Firmennamen eintragen (geht auch später) und mit Pfeil rechts oder dem Knopf Los für Los ziehen: Die Namen laufen kurz durch, dann steht der Platz fest. Die Auslosung gilt für den ganzen Tag, bei Zwei Stunden für beide Teile. Sie bleibt in diesem Browser gespeichert, auch nach Neuladen und über den Tag hinaus. Sobald die erste Firma pitcht, sind Modus und Zeiten gesperrt, damit es fair bleibt. Änderst du die Firmenzahl nach der Auslosung, fragt das Deck, ob es zurücksetzen soll. Zurücksetzen verlangt zwei Klicks. <b>Plan B:</b> Ohne Beamer Zettel mit Firmennummern aus einem Beutel ziehen.</aside>
   </section>
 
   <!-- 6 PITCH-BÜHNE -->
   <section class="slide" id="s-buehne" data-phase="erarbeitung" data-timer="0">
-    <div class="kopf"><span class="chip erarbeitung">Pitch-Bühne</span><span class="zeit" id="bn-zeit">26 Min &middot; 3 + 2 + 1 Min pro Team</span></div>
+    <div class="kopf"><span class="chip erarbeitung">Pitch-Bühne</span><span class="zeit" id="bn-zeit">Pitch-Bühne</span></div>
     <div class="bn-top">
       <div>
         <div class="bn-label" id="bn-label">Jetzt auf der Bühne</div>
@@ -356,39 +429,54 @@
       </div>
     </div>
     <div class="uhren">
-      <div class="uhr" id="u-pitch"><div class="l">Pitch</div><div class="z">03:00</div><div class="s"></div></div>
-      <div class="uhr" id="u-fragen"><div class="l">Fragen der Jury</div><div class="z">02:00</div><div class="s"></div></div>
-      <div class="uhr klein" id="u-bew"><div class="l">Jury bewertet</div><div class="z">01:00</div><div class="s"></div></div>
+      <div class="uhr" id="u-pitch"><div class="l">Pitch</div><div class="z">00:00</div><div class="s"></div></div>
+      <div class="uhr" id="u-fragen"><div class="l">Fragen der Jury</div><div class="z">00:00</div><div class="s"></div></div>
+      <div class="uhr klein" id="u-bew"><div class="l">Jury bewertet</div><div class="z">00:00</div><div class="s"></div></div>
     </div>
     <div class="bn-unten">
       <div class="reihe" id="bn-reihe"></div>
       <button class="bn-btn" id="bn-btn">Pitch starten<small>Pfeil rechts oder Leertaste</small></button>
     </div>
-    <div class="bn-hinweis">P: Pause und weiter &middot; Klick auf die leuchtende Uhr: Start oder Pause &middot; Pfeil links: Team zurücksetzen</div>
-    <aside class="notes"><b>Regie:</b> Pro Team vier Klicks. 1) Pitch starten (3:00). 2) Wenn es klingelt oder das Team fertig ist: Fragen der Jury (2:00). 3) Jury bewertet (1:00, Stille, Bögen und Feedback-Karten). 4) Fertig, nächstes Team. Die Uhr wird in den letzten 10 Sekunden rot und pulsiert, am Ende klingelt es dreimal. Überzogene Zeit nicht abwürgen, aber freundlich beenden. Technikprobleme kosten keine Zusatzzeit, mit P pausierst du die Uhr bei einem echten Notfall. Pfeil links setzt das aktuelle Team zurück (z. B. nach einem Fehlstart). Wer als Nächstes dran ist, steht oben rechts. Bei Zeitnot: Bewertungsminute mit Pfeil rechts verkürzen.</aside>
+    <div class="bn-hinweis" id="bn-hinweis">P: Pause und weiter &middot; Klick auf die leuchtende Uhr: Start oder Pause &middot; Pfeil links: Firma zurücksetzen</div>
+    <aside class="notes"><b>Regie:</b> Pro Firma vier Klicks. 1) Pitch starten. 2) Wenn es klingelt oder die Firma fertig ist: Fragen der Jury. 3) Jury bewertet (Stille, Bögen und Feedback-Karten). 4) Fertig, nächste Firma. Die drei Zeiten hat das Deck aus der Firmenzahl berechnet, sie stehen auf den Uhren und im Kopf oben. Die Uhr wird in den letzten 10 Sekunden rot und pulsiert, am Ende klingelt es dreimal. Überzogene Zeit nicht abwürgen, aber freundlich beenden. Technikprobleme kosten keine Zusatzzeit, mit P pausierst du die Uhr bei einem echten Notfall. Pfeil links setzt die aktuelle Firma zurück (z. B. nach einem Fehlstart). Wer als Nächstes dran ist, steht oben rechts. Bei Zeitnot: Bewertungsphase mit Pfeil rechts verkürzen. Im Modus Zwei Stunden endet Teil 1 nach der Hälfte der Firmen mit einer Zwischenfolie, die Ehrung folgt am Ende von Teil 2.</aside>
+  </section>
+
+  <!-- 6b WEITER AM NÄCHSTEN TERMIN (nur Modus Zwei Stunden, Teil 1) -->
+  <section class="slide" id="s-weiter" data-phase="sicherung" data-timer="0">
+    <div class="kopf"><span class="chip sicherung">Pause bis zum nächsten Termin</span><span class="zeit">Teil 1 ist geschafft</span></div>
+    <h2>Weiter am nächsten Termin</h2>
+    <p class="sub">Die Auslosung gilt für beide Teile. Der Stand bleibt in diesem Browser gespeichert.</p>
+    <div class="wt-grid">
+      <div class="wt-k heute"><h3>Heute waren dran<small id="wt-n1"></small></h3><ol id="wt-l1"></ol></div>
+      <div class="wt-k spaeter"><h3>Nächstes Mal sind dran<small id="wt-n2"></small></h3><ol id="wt-l2"></ol></div>
+    </div>
+    <div class="note-box" style="margin-top:16px; padding:12px 24px; font-size:20px;"><span>Danach</span>Ehrung und Abschluss gibt es am Ende von Teil 2. Bis dahin: Präsentation und Material bereithalten.</div>
+    <aside class="notes"><b>Teil 1 vorbei:</b> Die Liste zeigt, wer heute dran war und wer beim nächsten Termin pitcht. Die Reihenfolge ist ausgelost und gilt weiter. Beim nächsten Termin dieselbe Folien-Datei im selben Browser öffnen: Auf der Titelfolie steht dann der gespeicherte Stand, mit "Teil 2 beginnen" geht es weiter. Wenn du auf einem anderen Gerät arbeitest, ist der Stand dort nicht da. Dann kurz die Firmenzahl einstellen, Modus Zwei Stunden wählen und die Reihenfolge von dieser Folie übernehmen.</aside>
   </section>
 
   <!-- 7 EHRUNG -->
   <section class="slide" id="s-ehrung" data-phase="sicherung" data-timer="0">
-    <div class="kopf"><span class="chip sicherung">Ehrung</span><span class="zeit">8 Min &middot; Handzeichen</span></div>
+    <div class="kopf"><span class="chip sicherung">Ehrung</span><span class="zeit" data-z="ehrung" data-t="Handzeichen">Handzeichen</span></div>
     <h2 id="eh-h2">Jetzt wird geehrt</h2>
     <p class="sub" id="eh-sub">Die Ehrungen gibt es zusätzlich zur Note, abgestimmt wird per Handzeichen.</p>
     <div id="eh-body"></div>
-    <aside class="notes"><b>8 Min.:</b> Zuerst die drei Regeln zeigen. Dann pro Ehrentitel: Pfeil rechts startet die Abstimmung, die Klasse zeigt per Handzeichen, du klickst für jede Hand auf das Team (mit der Minus-Taste korrigierst du). Pfeil rechts zeigt die Urkunde mit dem Sieger. Keine Stimme für das eigene Team. Bei Gleichstand: Stichwahl per Handzeichen oder beide ehren. Wenn es zu lange dauert, nur zwei oder drei Titel vergeben und den Rest weglassen. Danach die gedruckten Urkunden (material-20) übergeben oder von Hand ausfüllen.</aside>
+    <aside class="notes"><b>Ehrung:</b> Zuerst die drei Regeln zeigen. Dann pro Ehrentitel: Pfeil rechts startet die Abstimmung, die Klasse zeigt per Handzeichen, du klickst für jede Hand auf die Firma (mit der Minus-Taste korrigierst du). Pfeil rechts zeigt die Urkunde mit dem Sieger. Keine Stimme für die eigene Firma. Bei Gleichstand: Stichwahl per Handzeichen oder beide ehren. Wie viele Titel vergeben werden, richtet sich nach der Ehrungszeit und der Firmenzahl (steht auf der Einführungsfolie). Bei sehr vielen Firmen reicht es, wenn du pro Titel nur kurz zählst und bei knappen Mehrheiten beide ehrst. Danach die gedruckten Urkunden (material-20) übergeben oder von Hand ausfüllen.</aside>
   </section>
 
   <!-- 8 SCHLUSS -->
   <section class="slide dunkel" id="s-schluss" data-phase="sicherung" data-timer="0">
-    <div class="kopf"><span class="chip">Abschluss</span><span class="zeit">3 Min</span></div>
-    <h2>Das war stark. Danke.</h2>
-    <p class="sub">Ihr habt euch getraut, vor Publikum eine eigene Firma zu verkaufen.</p>
+    <div class="kopf"><span class="chip">Abschluss</span><span class="zeit" data-z="abschluss" data-t="Abschluss">Abschluss</span></div>
+    <h2 id="sl-h2">Das war stark. Danke.</h2>
+    <p class="sub" id="sl-sub">Ihr habt euch getraut, vor Publikum eine eigene Firma zu verkaufen.</p>
     <div class="schluss-grid">
-      <div class="ab-karte step"><b>Jetzt gleich</b>Bögen und Feedback-Karten werden eingesammelt. Die Karten gehen an die Teams.</div>
-      <div class="ab-karte step"><b>Eure Note</b>Die Note beruht auf den vier Kriterien. Die Rückmeldung bekommt ihr zeitnah.</div>
-      <div class="ab-karte step"><b>Als Nächstes</b>Stunde 6: Der Wirtschaftskreislauf live. Wie hängen eure Firmen mit Haushalten, Staat und Banken zusammen?</div>
+      <div class="ab-karte step" id="sl-k1"><b>Jetzt gleich</b>Bögen und Feedback-Karten werden eingesammelt. Die Karten gehen an die Firmen.</div>
+      <div class="ab-karte step" id="sl-k2"><b>Eure Note</b>Die Note beruht auf den vier Kriterien. Die Rückmeldung bekommt ihr zeitnah.</div>
+      <div class="ab-karte step" id="sl-k3"><b>Als Nächstes</b>Stunde 6: Der Wirtschaftskreislauf live. Wie hängen eure Firmen mit Haushalten, Staat und Banken zusammen?</div>
     </div>
-    <aside class="notes"><b>3 Min.:</b> Alle Bögen einsammeln (Name auf den Bogen nicht vergessen lassen), Feedback-Karten an die jeweiligen Teams verteilen, kurz Dank und Anerkennung: konkret loben, was heute besonders gut war. Dem Gast danken. Ausblick auf Stunde 6 geben.</aside>
+    <aside class="notes"><b>Abschluss:</b> Alle Bögen einsammeln (Name auf den Bogen nicht vergessen lassen), Feedback-Karten an die jeweiligen Firmen verteilen, kurz Dank und Anerkennung: konkret loben, was heute besonders gut war. Dem Gast danken. Ausblick auf Stunde 6 geben.</aside>
   </section>
+
+  <div id="modal"><div class="box"><h3 id="modal-h"></h3><p id="modal-p"></p><div class="btns"><button type="button" class="ja" id="modal-ja"></button><button type="button" id="modal-nein"></button></div></div></div>
 
 </div>
 
@@ -403,6 +491,79 @@
 
 <script>
 window.DECK_CONFIG = { phases: [["einstieg",8],["erarbeitung",26],["sicherung",11]] };
+/* Firmenzahl der Klasse, einmal eingeben, überall wirksam.
+ *
+ * Die Zahl kommt (in dieser Reihenfolge) aus: Adresszeile (?firmen=7), dem Browserspeicher
+ * (localStorage, gilt für alle Mini-Firma-Seiten im selben Browser), sonst Standard 8.
+ * Sie wird zwischen 2 und 12 begrenzt.
+ *
+ * Benutzung in einer Stunde:
+ *   MiniFirma.get()                  -> aktuelle Zahl
+ *   MiniFirma.onChange(function(n){ ... })   -> wird sofort und bei jeder Änderung aufgerufen
+ *   MiniFirma.set(7)                 -> setzt die Zahl (speichert, benachrichtigt alle)
+ *   MiniFirma.renderButtons(container, {className:'team-btn', label:function(i){return 'Firma '+i;}})
+ *                                    -> füllt container mit n Knöpfen (data-team="1".."n")
+ *   MiniFirma.mountStepper(element)  -> setzt dort "Firmen [-] 8 [+]" ein
+ */
+window.MiniFirma = (function () {
+  var MIN = 2, MAX = 12, DEF = 8, KEY = 'minifirma_firmen';
+  var listeners = [];
+
+  function clamp(v) { v = parseInt(v, 10); if (isNaN(v)) return null; return Math.max(MIN, Math.min(MAX, v)); }
+  function fromUrl() { var m = /[?&]firmen=(\d+)/.exec(location.search); return m ? clamp(m[1]) : null; }
+  function fromStore() { try { return clamp(localStorage.getItem(KEY)); } catch (e) { return null; } }
+  function toStore(v) { try { localStorage.setItem(KEY, String(v)); } catch (e) {} }
+
+  var n = fromUrl() || fromStore() || DEF;
+  var steppers = [];
+
+  function paintSteppers() { steppers.forEach(function (s) { s.num.textContent = n; s.minus.disabled = n <= MIN; s.plus.disabled = n >= MAX; }); }
+  function notify() { listeners.forEach(function (fn) { fn(n); }); paintSteppers(); }
+
+  function set(v) {
+    var c = clamp(v); if (c === null || c === n) return;
+    n = c; toStore(n); notify();
+  }
+
+  function onChange(fn) { listeners.push(fn); fn(n); }
+
+  function list() { var a = []; for (var i = 1; i <= n; i++) a.push(i); return a; }
+
+  function renderButtons(container, opts) {
+    opts = opts || {};
+    var cls = opts.className || 'team-btn';
+    var label = opts.label || function (i) { return 'Firma ' + i; };
+    container.innerHTML = '';
+    for (var i = 1; i <= n; i++) {
+      var b = document.createElement('button');
+      b.className = cls; b.dataset.team = String(i); b.textContent = label(i);
+      container.appendChild(b);
+    }
+  }
+
+  function mountStepper(el) {
+    el.classList.add('firmen-stepper');
+    el.innerHTML = '<span class="fs-label">Firmen</span><button type="button" class="fs-minus" aria-label="Eine Firma weniger">&minus;</button><span class="fs-num"></span><button type="button" class="fs-plus" aria-label="Eine Firma mehr">+</button>';
+    var s = { num: el.querySelector('.fs-num'), minus: el.querySelector('.fs-minus'), plus: el.querySelector('.fs-plus') };
+    s.minus.addEventListener('click', function () { set(n - 1); });
+    s.plus.addEventListener('click', function () { set(n + 1); });
+    steppers.push(s); paintSteppers();
+  }
+
+  /* Links auf Mini-Firma-Seiten tragen die Zahl in der Adresse mit (hilft, wenn der Browser
+     den Speicher zwischen Dateien nicht teilt, z. B. beim Öffnen von lokalen Dateien). */
+  function decorateLinks() {
+    Array.prototype.forEach.call(document.querySelectorAll('a[data-firmen-link]'), function (a) {
+      var base = a.getAttribute('data-firmen-link');
+      a.setAttribute('href', base + (base.indexOf('?') < 0 ? '?' : '&') + 'firmen=' + n);
+    });
+  }
+  listeners.push(decorateLinks);
+  if (document.readyState !== 'loading') decorateLinks(); else document.addEventListener('DOMContentLoaded', decorateLinks);
+
+  return { get: function () { return n; }, set: set, list: list, onChange: onChange, renderButtons: renderButtons, mountStepper: mountStepper, MIN: MIN, MAX: MAX };
+})();
+
 /* Gemeinsames Foliengerüst für die Mini-Firma-Stunden.
  *
  * Was es kann: Folien auf 1280x720 skalieren, Pfeiltasten/Wischen/Knöpfe, Schritt-Einblendung
@@ -558,6 +719,15 @@ window.Deck = (function () {
   }
   timerEl.addEventListener('click', toggleTimer);
 
+  /* ---------- Firmenzahl-Stepper in der Werkzeugleiste ---------- */
+  (function () {
+    var tools = document.getElementById('tools');
+    if (!tools || !window.MiniFirma) return;
+    var holder = document.createElement('div');
+    tools.insertBefore(holder, tools.firstChild);
+    MiniFirma.mountStepper(holder);
+  })();
+
   /* ---------- Start ---------- */
   function start() {
     var h = parseInt((location.hash || '').replace('#', ''), 10);
@@ -569,30 +739,107 @@ window.Deck = (function () {
 
 </script>
 <script>
+/* Zeitplanung für den Pitch-Tag, wird in Folien und Verlaufsplan eingebaut.
+ *
+ * Rechnet aus Firmenzahl und Rahmenzeiten (Eröffnung, Ehrung, Abschluss), wie viel Zeit jede Firma bekommt,
+ * und bietet drei Modi an: "voll" (3+2+1 Min, eine Stunde), "kompakt" (gleichmäßig gekürzt, eine Stunde),
+ * "zwei" (volle Länge, auf zwei Stunden verteilt, bei sehr vielen Firmen pro Teil leicht gekürzt).
+ *
+ * Alle Zeiten in Sekunden.
+ */
+window.PitchPlan = (function () {
+  var STUNDE = 45 * 60;
+  var WECHSEL = 30;                                  /* Auf- und Abbau zwischen zwei Firmen */
+  var VOLL = { p: 180, q: 120, b: 60 };               /* Pitch, Fragen der Jury, Bewertung */
+  var MINW = { p: 90, q: 45, b: 30 };                 /* Untergrenzen beim Kürzen */
+  var SINNVOLL_PITCH = 120;                           /* kürzer als 2:00 Pitch empfehlen wir keinen Ein-Stunden-Modus */
+  var WIEDER = 3 * 60;                                /* Wiedereinstieg zu Beginn von Teil 2 */
+  var STANDARD = { e: 8, eh: 5, a: 2 };               /* Minuten: Eröffnung, Ehrung, Abschluss */
+  var SCHRITT = 5;
+
+  function summe(t) { return t.p + t.q + t.b; }
+
+  /* Verteilt die verfügbare Zeit pro Firma (ohne Wechsel) auf Pitch, Fragen, Bewertung. */
+  function verteile(budget) {
+    var vs = summe(VOLL), ms = summe(MINW);
+    if (budget >= vs) return { t: { p: VOLL.p, q: VOLL.q, b: VOLL.b }, passt: true, gekuerzt: false };
+    if (budget < ms) return { t: { p: MINW.p, q: MINW.q, b: MINW.b }, passt: false, gekuerzt: true };
+    var extra = budget - ms, spare = vs - ms, t = {}, k;
+    var keys = ['p', 'q', 'b'];
+    keys.forEach(function (k) {
+      var anteil = extra * (VOLL[k] - MINW[k]) / spare;
+      t[k] = MINW[k] + Math.floor(anteil / SCHRITT) * SCHRITT;
+    });
+    var rest = budget - summe(t), guard = 0;
+    while (rest >= SCHRITT && guard++ < 50) {
+      for (var i = 0; i < keys.length && rest >= SCHRITT; i++) {
+        k = keys[i];
+        if (t[k] + SCHRITT <= VOLL[k]) { t[k] += SCHRITT; rest -= SCHRITT; }
+      }
+    }
+    return { t: t, passt: true, gekuerzt: true };
+  }
+
+  function min(sek) { return Math.ceil(sek / 60); }
+
+  function plan(n, rahmen) {
+    var f = { e: STANDARD.e, eh: STANDARD.eh, a: STANDARD.a };
+    if (rahmen) { for (var k in f) { if (typeof rahmen[k] === 'number') f[k] = rahmen[k]; } }
+    var frei1 = STUNDE - (f.e + f.eh + f.a) * 60;      /* Pitch-Zeit in einer Stunde */
+    var res = { n: n, rahmen: f, frei: frei1, modi: {} };
+
+    /* eine Stunde, volle Länge */
+    var needVoll = n * (summe(VOLL) + WECHSEL);
+    res.modi.voll = { t: { p: VOLL.p, q: VOLL.q, b: VOLL.b }, passt: needVoll <= frei1, braucht: needVoll, frei: frei1, block: needVoll, teile: 1 };
+
+    /* eine Stunde, kompakt */
+    var v = verteile(Math.floor(frei1 / n) - WECHSEL);
+    var blockK = n * (summe(v.t) + WECHSEL);
+    res.modi.kompakt = { t: v.t, passt: v.passt && blockK <= frei1, braucht: n * (summe(MINW) + WECHSEL), frei: frei1, block: blockK, teile: 1, unnoetig: needVoll <= frei1 };
+
+    /* zwei Stunden */
+    var h1 = Math.ceil(n / 2), h2 = n - h1;
+    var frei2 = Math.min(STUNDE - (f.e + f.a) * 60, STUNDE - WIEDER - (f.eh + f.a) * 60);
+    var vz = verteile(Math.floor(frei2 / h1) - WECHSEL);
+    res.modi.zwei = { t: vz.t, passt: true, braucht: n * (summe(VOLL) + WECHSEL), frei: frei2, block: h1 * (summe(vz.t) + WECHSEL), block2: h2 * (summe(vz.t) + WECHSEL), teile: 2, h1: h1, h2: h2, gekuerzt: vz.gekuerzt };
+
+    /* Empfehlung: kleinster Modus, der noch sinnvoll passt */
+    if (res.modi.voll.passt) res.empfohlen = 'voll';
+    else if (res.modi.kompakt.passt && res.modi.kompakt.t.p >= SINNVOLL_PITCH) res.empfohlen = 'kompakt';
+    else res.empfohlen = 'zwei';
+    return res;
+  }
+
+  function mmss(s) { var m = Math.floor(s / 60), r = s % 60; return m + ':' + (r < 10 ? '0' : '') + r; }
+  function zeitText(t) { return mmss(t.p) + ' + ' + mmss(t.q) + ' + ' + mmss(t.b); }
+  var NAMEN = { voll: 'Eine Stunde, volle Länge', kompakt: 'Eine Stunde, kompakt', zwei: 'Zwei Stunden' };
+
+  return { plan: plan, mmss: mmss, min: min, zeitText: zeitText, NAMEN: NAMEN, STANDARD: STANDARD, WECHSEL: WECHSEL, WIEDER: WIEDER, STUNDE: STUNDE, summe: summe };
+})();
+
+</script>
+<script>
 (function(){
   var $ = function(id){ return document.getElementById(id); };
-  var TITEL = [
+  var KEY = 'mini-firma-pitchtag-s5-v2';
+  /* Reihenfolge = Wichtigkeit: wenn die Ehrungszeit knapp ist, entfallen die hinteren Titel */
+  var TITEL_ALLE = [
     {t:"Beste Idee", ic:"idee", q:"Welche Geschäftsidee würdet ihr sofort selbst nutzen?"},
+    {t:"Nachhaltigste Idee", ic:"oekologie", q:"Welche Firma denkt an die Umwelt?"},
     {t:"Mutigster Auftritt", ic:"megafon", q:"Wer hat sich heute am meisten getraut?"},
-    {t:"Bester Firmenname", ic:"unternehmen", q:"Welcher Name bleibt im Kopf?"},
-    {t:"Nachhaltigste Idee", ic:"oekologie", q:"Welche Firma denkt an die Umwelt?"}
+    {t:"Bester Firmenname", ic:"unternehmen", q:"Welcher Name bleibt im Kopf?"}
   ];
-  var KEY = 'mini-firma-pitchtag-s5';
+  var LIM = { e:[3,12], eh:[2,10], a:[1,5] };
+  var LAB = { e:'Eröffnung', eh:'Ehrung', a:'Abschluss' };
 
-  /* ---------- Zustand (bleibt beim Neuladen im selben Tab erhalten) ---------- */
-  var S = { n:7, names:['','','','','','','',''], order:[], idx:0, stage:0, ecat:-1, ereveal:false, votes:[[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]] };
-  try {
-    var j = JSON.parse(sessionStorage.getItem(KEY) || 'null');
-    if (j && typeof j.n === 'number') { for (var k in S) { if (j[k] !== undefined) S[k] = j[k]; } }
-  } catch (e) {}
-  function save(){ try { sessionStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
-  function nm(i){ var t = (S.names[i] || '').trim(); return t || ('Team ' + (i + 1)); }
-  function hatName(i){ return !!(S.names[i] || '').trim(); }
+  /* ---------- Hilfen ---------- */
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function zufall(max){
     try { var a = new Uint32Array(1); crypto.getRandomValues(a); return a[0] % max; } catch (e) { return Math.floor(Math.random() * max); }
   }
   function fmt(s){ var m = Math.floor(s / 60), r = s % 60; return (m < 10 ? '0' : '') + m + ':' + (r < 10 ? '0' : '') + r; }
+  function kurz(s){ return s % 60 === 0 ? (s / 60) + ' <small>Min</small>' : PitchPlan.mmss(s) + ' <small>Min</small>'; }
+  function mi(s){ return PitchPlan.min(s); }
 
   /* Tastatur in Eingabefeldern nicht ans Deck weiterreichen */
   window.addEventListener('keydown', function(e){
@@ -600,6 +847,312 @@ window.Deck = (function () {
     if (t && (t.tagName === 'INPUT' || t.isContentEditable)) e.stopPropagation();
   }, true);
 
+  /* ---------- Speicher ---------- */
+  function lies(){
+    var v = null;
+    try { v = localStorage.getItem(KEY); } catch (e) {}
+    if (!v) { try { v = sessionStorage.getItem(KEY); } catch (e) {} }
+    try { return JSON.parse(v || 'null'); } catch (e) { return null; }
+  }
+  function schreib(txt){
+    var ok = false;
+    try { localStorage.setItem(KEY, txt); ok = true; } catch (e) {}
+    if (!ok) { try { sessionStorage.setItem(KEY, txt); } catch (e) {} }
+  }
+  function loesche(){
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    try { sessionStorage.removeItem(KEY); } catch (e) {}
+  }
+
+  /* ---------- Zustand ---------- */
+  function frisch(n){
+    return { v:2, n:n, names:[], order:[], modus:null,
+      rahmen:{ e:PitchPlan.STANDARD.e, eh:PitchPlan.STANDARD.eh, a:PitchPlan.STANDARD.a },
+      started:false, teil:1, teil1fertig:false, idx:0, stage:0, ecat:-1, ereveal:false, votes:[[],[],[],[]] };
+  }
+  function mische(basis, alt){
+    for (var k in basis) { if (alt[k] !== undefined && alt[k] !== null) basis[k] = alt[k]; }
+    return basis;
+  }
+  var nJetzt = MiniFirma.get();
+  var S, pending = null;
+  (function(){
+    var s = lies();
+    if (s && s.v === 2 && typeof s.n === 'number') {
+      if (s.n === nJetzt) { S = mische(frisch(nJetzt), s); }
+      else {
+        S = frisch(nJetzt);
+        S.names = s.names || []; if (s.rahmen) S.rahmen = s.rahmen;
+        if (s.order && s.order.length) pending = s;
+      }
+    } else { S = frisch(nJetzt); }
+  })();
+  function save(){ pending = null; schreib(JSON.stringify(S)); }
+  function nm(i){ var t = (S.names[i] || '').trim(); return t || ('Firma ' + (i + 1)); }
+  function hatName(i){ return !!(S.names[i] || '').trim(); }
+
+  /* ---------- Planung (Zeiten, Modus) ---------- */
+  var P;
+  function berechne(){ P = PitchPlan.plan(S.n, S.rahmen); }
+  function wahlbar(m){ return m === 'zwei' ? true : !!P.modi[m].passt; }
+  function modus(){ var m = S.modus; if (!m || !wahlbar(m)) m = P.empfohlen; return m; }
+  function istZwei(){ return modus() === 'zwei'; }
+  function T(){ return P.modi[modus()].t; }
+  function bereich(){
+    if (!istZwei()) return { a:0, b:S.n - 1 };
+    var h1 = P.modi.zwei.h1;
+    return S.teil === 1 ? { a:0, b:h1 - 1 } : { a:h1, b:S.n - 1 };
+  }
+  function nTitel(){
+    var sek = 30 + 4 * S.n;
+    var k = Math.floor((P.rahmen.eh * 60 - 30) / sek);
+    return Math.max(1, Math.min(TITEL_ALLE.length, k));
+  }
+  function TITEL(){ return TITEL_ALLE.slice(0, nTitel()); }
+  function sperre(){ return !!S.started; }
+
+  /* ---------- Reihenfolge ---------- */
+  function ausgelost(){ return S.order.length >= S.n; }
+  function reihenfolge(){
+    var o = S.order.slice(0, S.n);
+    for (var i = 0; i < S.n; i++) { if (o.indexOf(i) < 0) o.push(i); }
+    return o;
+  }
+
+  /* ---------- Modal ---------- */
+  var modalJa = null, modalNein = null;
+  function frage(h, p, ja, nein, onJa, onNein){
+    $('modal-h').textContent = h; $('modal-p').textContent = p;
+    $('modal-ja').textContent = ja; $('modal-nein').textContent = nein;
+    modalJa = onJa; modalNein = onNein;
+    $('modal').classList.add('offen');
+  }
+  function zu(){ $('modal').classList.remove('offen'); }
+  $('modal-ja').addEventListener('click', function(){ zu(); if (modalJa) modalJa(); });
+  $('modal-nein').addEventListener('click', function(){ zu(); if (modalNein) modalNein(); });
+
+  /* ---------- Navigation ohne Deck-Schnittstelle ---------- */
+  function slideNr(id){ return Deck.slides.indexOf($(id)) + 1; }
+  function springe(id){
+    try { history.replaceState(null, '', location.pathname + location.search + '#' + slideNr(id)); } catch (e) {}
+    location.reload();
+  }
+  function ueberspringe(zurueck){
+    document.body.classList.add('skipping');
+    setTimeout(function(){
+      $(zurueck ? 'btn-prev' : 'btn-next').click();
+      setTimeout(function(){ document.body.classList.remove('skipping'); }, 60);
+    }, 0);
+  }
+
+  /* ---------- Kopf, Regeln, Fortschritt, Titel ---------- */
+  function renderChrome(){
+    var t = T(), x = P.modi[modus()], r = P.rahmen;
+    $('rg-p').innerHTML = kurz(t.p); $('rg-q').innerHTML = kurz(t.q); $('rg-b').innerHTML = kurz(t.b);
+    var mins = { einstieg:r.e, ehrung:r.eh, abschluss:r.a };
+    Array.prototype.forEach.call(document.querySelectorAll('.zeit[data-z]'), function(el){
+      el.textContent = el.getAttribute('data-t') + ' · ' + mins[el.getAttribute('data-z')] + ' Min.';
+    });
+    /* Fortschrittsleiste: Breiten nach den berechneten Minuten */
+    var zw = istZwei();
+    var eP = (zw && S.teil === 2) ? mi(PitchPlan.WIEDER) : r.e;
+    var bl = zw ? (S.teil === 2 ? x.block2 : x.block) : x.block;
+    var si = (zw && S.teil === 1) ? r.a : r.eh + r.a;
+    var segs = { einstieg:eP, erarbeitung:mi(bl), sicherung:si };
+    Array.prototype.forEach.call(document.querySelectorAll('#progress .seg'), function(seg){ seg.style.flex = segs[seg.dataset.phase] || 1; });
+    /* Titelfolie */
+    var teilTxt = zw ? ' · zwei Termine' : '';
+    $('plan-pille').innerHTML = '<small>Plan für ' + S.n + ' Firmen' + teilTxt + '</small>' + esc(PitchPlan.NAMEN[modus()]) + ': ' + PitchPlan.zeitText(t);
+    /* Schlussfolie */
+    var teil1 = zw && S.teil === 1;
+    $('sl-h2').textContent = teil1 ? 'Teil 1 geschafft. Danke.' : 'Das war stark. Danke.';
+    $('sl-sub').textContent = teil1 ? 'Der Rest der Firmen folgt beim nächsten Termin, die Ehrung ganz am Ende.' : 'Ihr habt euch getraut, vor Publikum eine eigene Firma zu verkaufen.';
+    $('sl-k3').innerHTML = teil1
+      ? '<b>Nächstes Mal</b>Teil 2: Die übrigen Firmen pitchen in der ausgelosten Reihenfolge. Danach gibt es die Ehrung.'
+      : '<b>Als Nächstes</b>Stunde 6: Der Wirtschaftskreislauf live. Wie hängen eure Firmen mit Haushalten, Staat und Banken zusammen?';
+  }
+
+  function renderStand(){
+    var box = $('stand-box'), txt = $('stand-txt'), b1 = $('stand-teil2'), b2 = $('stand-neu');
+    var hid = document.querySelector('.titel-reihe');
+    var da = true;
+    if (pending) {
+      txt.textContent = 'Gespeicherter Stand für ' + pending.n + ' Firmen gefunden.';
+      b1.textContent = 'Laden (' + pending.n + ' Firmen)'; b1.dataset.aktion = 'laden';
+    } else if (S.order.length && istZwei() && S.teil === 1 && S.teil1fertig) {
+      txt.textContent = 'Gespeichert: Teil 1 ist geschafft (' + P.modi.zwei.h1 + ' von ' + S.n + ' Firmen haben gepitcht).';
+      b1.textContent = 'Teil 2 beginnen'; b1.dataset.aktion = 'teil2';
+    } else if (S.order.length && S.started) {
+      var b = bereich();
+      txt.textContent = 'Gespeichert: Pitch-Tag läuft' + (istZwei() ? ' (Teil ' + S.teil + ')' : '') + ', Firma ' + (S.idx + 1) + ' von ' + S.n + '.';
+      b1.textContent = 'Weitermachen'; b1.dataset.aktion = 'weiter';
+    } else if (S.order.length) {
+      txt.textContent = 'Gespeichert: ' + S.order.length + ' von ' + S.n + ' Plätzen sind ausgelost.';
+      b1.textContent = 'Weitermachen'; b1.dataset.aktion = 'los';
+    } else { da = false; }
+    box.classList.toggle('da', da);
+    if (hid) hid.style.display = da ? 'none' : '';
+  }
+  $('stand-teil2').addEventListener('click', function(){
+    var a = $('stand-teil2').dataset.aktion;
+    if (a === 'laden') {
+      var p = pending; S = mische(frisch(p.n), p); save();
+      MiniFirma.set(p.n);
+      try { history.replaceState(null, '', location.pathname + '#1'); } catch (e) {}
+      location.reload();
+    } else if (a === 'teil2') {
+      S.teil = 2; S.idx = P.modi.zwei.h1; S.stage = 0; save(); springe('s-buehne');
+    } else if (a === 'weiter') { springe('s-buehne'); }
+    else { springe('s-los'); }
+  });
+  $('stand-neu').addEventListener('click', function(){
+    frage('Wirklich neu beginnen?', 'Auslosung, Platzierungen, Namen und Stimmen werden gelöscht.', 'Ja, neu beginnen', 'Abbrechen', function(){
+      loesche(); pending = null;
+      try { history.replaceState(null, '', location.pathname + '#1'); } catch (e) {}
+      location.reload();
+    });
+  });
+
+  /* ---------- Folie 5: Modus, Rahmen, Auslosung ---------- */
+  var busy = false;
+  var firmenEl = $('los-firmen'), slotsEl = $('los-slots'), losBtn = $('los-btn');
+
+  function renderModi(){
+    var h = '';
+    ['voll', 'kompakt', 'zwei'].forEach(function(m){
+      var x = P.modi[m], an = modus() === m, emp = P.empfohlen === m, ok = wahlbar(m);
+      var cls = 'modus' + (an ? ' an' : '') + (emp ? ' empf' : '') + (!ok ? ' nein' : '') + (sperre() ? ' zu' : '');
+      var tag = emp ? 'Empfohlen' : (!ok ? 'Passt nicht' : (m === 'kompakt' && x.unnoetig ? 'Nicht nötig' : 'Möglich'));
+      var mg;
+      if (m === 'voll') mg = ok ? 'Block ' + mi(x.block) + ' von ' + mi(x.frei) + ' Min.' : 'Braucht ' + mi(x.braucht) + ' Min, frei sind ' + mi(x.frei) + '.';
+      else if (m === 'kompakt') mg = !ok ? 'Selbst mit Mindestzeiten zu knapp.' : (x.unnoetig ? 'Nicht nötig, volle Länge passt.' : 'Alle Zeiten gekürzt, Block ' + mi(x.block) + ' Min.');
+      else mg = 'Teil 1: ' + x.h1 + (x.h1 === 1 ? ' Firma' : ' Firmen') + ', Teil 2: ' + x.h2 + (x.gekuerzt ? ', leicht gekürzt' : ', volle Länge');
+      h += '<button type="button" class="' + cls + '" data-m="' + m + '"><span class="mk"><span class="mt">' + esc(PitchPlan.NAMEN[m]) + '</span><span class="tag">' + tag + '</span></span>' +
+        '<span class="mz">' + PitchPlan.zeitText(x.t) + ' pro Firma</span><span class="mg">' + mg + '</span></button>';
+    });
+    $('modi').innerHTML = h;
+    /* Erklärung */
+    var e = P.empfohlen, x = P.modi, r = P.rahmen, ex;
+    if (e === 'voll') ex = 'Alle Firmen passen in voller Länge in eine Stunde (frei: ' + mi(P.frei) + ' Min).';
+    else if (e === 'kompakt') ex = 'Volle Länge bräuchte ' + mi(x.voll.braucht) + ' Min, frei sind ' + mi(P.frei) + ' Min. Darum werden alle Zeiten gleichmäßig gekürzt.';
+    else ex = 'In eine Stunde passen die Firmen nur mit zu kurzen Pitches. Besser: volle Länge, verteilt auf zwei Termine.';
+    var s = 'Empfehlung bei <b>' + S.n + ' Firmen</b>: <b>' + esc(PitchPlan.NAMEN[e]) + '</b>. ' + ex;
+    if (modus() !== e) s += ' Gewählt: <b>' + esc(PitchPlan.NAMEN[modus()]) + '</b>.';
+    $('modi-txt').innerHTML = s;
+    /* Rahmen */
+    var rh = '';
+    ['e', 'eh', 'a'].forEach(function(k){
+      rh += '<span class="rg">' + LAB[k] + ' <button type="button" data-k="' + k + '" data-d="-1"' + (sperre() || r[k] <= LIM[k][0] ? ' disabled' : '') + '>&minus;</button><b>' + r[k] + '</b><button type="button" data-k="' + k + '" data-d="1"' + (sperre() || r[k] >= LIM[k][1] ? ' disabled' : '') + '>+</button></span>';
+    });
+    $('rahmen').innerHTML = rh;
+    $('modi-lock').textContent = sperre() ? 'Gesperrt: Die erste Firma hat schon gepitcht.' : '';
+  }
+  $('modi').addEventListener('click', function(ev){
+    var b = ev.target.closest ? ev.target.closest('.modus') : null;
+    if (!b || sperre() || !wahlbar(b.dataset.m)) return;
+    S.modus = (b.dataset.m === P.empfohlen) ? null : b.dataset.m;
+    save(); paintAll();
+  });
+  $('rahmen').addEventListener('click', function(ev){
+    var b = ev.target.closest ? ev.target.closest('button') : null;
+    if (!b || sperre() || b.disabled) return;
+    var k = b.dataset.k, v = S.rahmen[k] + parseInt(b.dataset.d, 10);
+    if (v < LIM[k][0] || v > LIM[k][1]) return;
+    S.rahmen[k] = v; save(); paintAll();
+  });
+
+  function bauFirmen(){
+    var h = '';
+    for (var i = 0; i < S.n; i++) {
+      h += '<div class="firma-zeile" data-i="' + i + '"><span class="tn">Firma ' + (i + 1) + '</span><input type="text" maxlength="28" placeholder="Firmenname" value="' + esc(S.names[i] || '') + '"></div>';
+    }
+    firmenEl.innerHTML = h;
+    firmenEl.classList.toggle('zwei', S.n > 6);
+    Array.prototype.forEach.call(firmenEl.querySelectorAll('input'), function(inp, i){
+      inp.addEventListener('input', function(){ S.names[i] = inp.value; save(); renderSlots(); renderBuehne(); renderWeiter(); });
+    });
+  }
+  function renderSlots(){
+    var h = '', zw = istZwei(), h1 = P.modi.zwei.h1;
+    for (var p = 0; p < S.n; p++) {
+      var t = S.order[p], tl = zw ? '<span class="tl' + (p >= h1 ? ' t2' : '') + '">' + (p >= h1 ? 'Teil 2' : 'Teil 1') + '</span>' : '';
+      if (t !== undefined) {
+        h += '<div class="slot fertig"><span class="pl">' + (S.n > 6 ? '' : 'Platz ') + (p + 1) + '</span><span class="nm">' + esc(nm(t)) + '</span>' + (hatName(t) && S.n <= 6 ? '<span class="tm">Firma ' + (t + 1) + '</span>' : '') + tl + '</div>';
+      } else {
+        h += '<div class="slot"><span class="pl">' + (S.n > 6 ? '' : 'Platz ') + (p + 1) + '</span><span class="nm">?</span>' + tl + '</div>';
+      }
+    }
+    slotsEl.innerHTML = h;
+    slotsEl.classList.toggle('zwei', S.n > 6);
+    var fertig = ausgelost();
+    losBtn.disabled = fertig || busy;
+    losBtn.textContent = fertig ? 'Ausgelost' : (S.order.length ? 'Nächstes Los ziehen' : 'Los ziehen');
+  }
+  function ziehen(){
+    if (busy || ausgelost()) return;
+    var pool = [];
+    for (var i = 0; i < S.n; i++) { if (S.order.indexOf(i) < 0) pool.push(i); }
+    var wahl = pool[zufall(pool.length)];
+    var slot = slotsEl.children[S.order.length];
+    var nmEl = slot.querySelector('.nm');
+    slot.classList.add('rollt');
+    busy = true; losBtn.disabled = true;
+    var tick = setInterval(function(){ nmEl.textContent = nm(pool[zufall(pool.length)]); }, 70);
+    setTimeout(function(){
+      clearInterval(tick);
+      S.order.push(wahl); S.idx = 0; S.stage = 0; S.teil = 1; S.teil1fertig = false; save();
+      busy = false; paintAll();
+    }, pool.length === 1 ? 700 : 1300);
+  }
+  losBtn.addEventListener('click', ziehen);
+
+  function alleVotesLeer(){ return [[], [], [], []]; }
+  function setzeZurueck(behalteNamen){
+    var n = S.n, names = S.names, rahmen = S.rahmen, modus0 = S.modus;
+    S = frisch(n);
+    if (behalteNamen) { S.names = names; S.rahmen = rahmen; S.modus = modus0; }
+    resetBuehne(); save(); bauFirmen(); paintAll();
+  }
+  var resetArmed = false, resetTimer = null, resetBtn = $('los-reset');
+  resetBtn.addEventListener('click', function(){
+    if (!resetArmed) {
+      resetArmed = true; resetBtn.textContent = 'Wirklich alles zurücksetzen? Noch einmal klicken.'; resetBtn.classList.add('ernst');
+      resetTimer = setTimeout(function(){ resetArmed = false; resetBtn.textContent = 'Auslosung zurücksetzen'; resetBtn.classList.remove('ernst'); }, 4000);
+      return;
+    }
+    clearTimeout(resetTimer); resetArmed = false; resetBtn.textContent = 'Auslosung zurücksetzen'; resetBtn.classList.remove('ernst');
+    setzeZurueck(true);
+  });
+  Deck.custom['s-los'] = {
+    enter: function(){ renderModi(); renderSlots(); },
+    next: function(){ if (busy) return true; if (!ausgelost()) { ziehen(); return true; } return false; }
+  };
+
+  /* ---------- Folie 6: Pitch-Bühne ---------- */
+  var KEYS = ['pitch', 'fragen', 'bew'];
+  var KT = { pitch:'p', fragen:'q', bew:'b' };
+  var uhrEl = { pitch:$('u-pitch'), fragen:$('u-fragen'), bew:$('u-bew') };
+  var vals = { pitch:0, fragen:0, bew:0 };
+  var fin = { pitch:false, fragen:false, bew:false };
+  var run = null; /* { key, end, paused, left, rung } */
+  function dauer(k){ return T()[KT[k]]; }
+
+  function resetBuehne(){
+    run = null;
+    KEYS.forEach(function(k){ vals[k] = dauer(k); fin[k] = false; });
+  }
+  function restOf(r){ return r.paused ? r.left : Math.max(0, Math.ceil((r.end - Date.now()) / 1000)); }
+  function startTimer(key){
+    run = { key:key, end:Date.now() + dauer(key) * 1000, paused:false, left:dauer(key), rung:false };
+    vals[key] = dauer(key);
+  }
+  function stopRun(){ if (run) { fin[run.key] = true; vals[run.key] = restOf(run); run = null; } }
+  function togglePause(){
+    if (!run) return;
+    if (run.paused) { run.end = Date.now() + run.left * 1000; run.paused = false; }
+    else { run.left = restOf(run); run.paused = true; }
+    paintUhren(); paintStatus();
+  }
   /* Klingelton (eigener, damit er unabhängig vom Deck-Timer funktioniert) */
   var ac = null;
   function klingel(){
@@ -614,115 +1167,6 @@ window.Deck = (function () {
         o.start(n); o.stop(n + 0.28);
       });
     } catch (e) {}
-  }
-
-  /* ---------- Reihenfolge ---------- */
-  function ausgelost(){ return S.order.length >= S.n; }
-  function reihenfolge(){
-    var o = S.order.slice(0, S.n);
-    for (var i = 0; i < S.n; i++) { if (o.indexOf(i) < 0) o.push(i); }
-    return o;
-  }
-
-  /* ---------- Folie 5: Auslosung ---------- */
-  var busy = false;
-  var firmenEl = $('los-firmen'), slotsEl = $('los-slots'), losBtn = $('los-btn'), zeitEl = $('los-zeit');
-  function bauFirmen(){
-    var h = '';
-    for (var i = 0; i < 8; i++) {
-      h += '<div class="firma-zeile" data-i="' + i + '"' + (i >= S.n ? ' style="display:none"' : '') + '><span class="tn">Team ' + (i + 1) + '</span><input type="text" maxlength="28" placeholder="Firmenname" value="' + esc(S.names[i] || '') + '"></div>';
-    }
-    firmenEl.innerHTML = h;
-    Array.prototype.forEach.call(firmenEl.querySelectorAll('input'), function(inp, i){
-      inp.addEventListener('input', function(){ S.names[i] = inp.value; save(); renderSlots(); });
-    });
-  }
-  function renderSlots(){
-    var h = '';
-    for (var p = 0; p < S.n; p++) {
-      var t = S.order[p];
-      if (t !== undefined) {
-        h += '<div class="slot fertig"><span class="pl">Platz ' + (p + 1) + '</span><span class="nm">' + esc(nm(t)) + '</span>' + (hatName(t) ? '<span class="tm">Team ' + (t + 1) + '</span>' : '') + '</div>';
-      } else {
-        h += '<div class="slot"><span class="pl">Platz ' + (p + 1) + '</span><span class="nm">?</span></div>';
-      }
-    }
-    slotsEl.innerHTML = h;
-    var bedarf = S.n * 6 + 2;
-    zeitEl.className = 'zeitbedarf' + (S.n >= 5 ? ' warn' : '');
-    zeitEl.textContent = 'Zeitbedarf Pitches: ca. ' + bedarf + ' Min (6 Min pro Team plus Wechsel).' + (S.n >= 7 ? ' Passt nicht in eine Stunde: Pitch-Tag auf zwei Stunden verteilen oder Pitch auf 2 Min kürzen.' : (S.n >= 5 ? ' Wird knapp: Bewertungsminute kürzen oder Ehrung auf 2 Titel begrenzen.' : ''));
-    var fertig = ausgelost();
-    losBtn.disabled = fertig || busy;
-    losBtn.textContent = fertig ? 'Ausgelost' : (S.order.length ? 'Nächstes Los ziehen' : 'Los ziehen');
-    Array.prototype.forEach.call(document.querySelectorAll('.anzahl button'), function(b){
-      b.classList.toggle('an', parseInt(b.dataset.n, 10) === S.n);
-      b.disabled = S.order.length > 0;
-    });
-    Array.prototype.forEach.call(firmenEl.querySelectorAll('.firma-zeile'), function(z, i){ z.style.display = i < S.n ? '' : 'none'; });
-  }
-  function ziehen(){
-    if (busy || ausgelost()) return;
-    var pool = [];
-    for (var i = 0; i < S.n; i++) { if (S.order.indexOf(i) < 0) pool.push(i); }
-    var wahl = pool[zufall(pool.length)];
-    var slot = slotsEl.children[S.order.length];
-    var nmEl = slot.querySelector('.nm');
-    slot.classList.add('rollt');
-    busy = true; losBtn.disabled = true;
-    var tick = setInterval(function(){ nmEl.textContent = nm(pool[zufall(pool.length)]); }, 70);
-    setTimeout(function(){
-      clearInterval(tick);
-      S.order.push(wahl); S.idx = 0; S.stage = 0; save();
-      busy = false; renderSlots();
-    }, pool.length === 1 ? 700 : 1300);
-  }
-  Array.prototype.forEach.call(document.querySelectorAll('.anzahl button'), function(b){
-    b.addEventListener('click', function(){
-      if (S.order.length) return;
-      S.n = parseInt(b.dataset.n, 10); save(); renderSlots();
-    });
-  });
-  losBtn.addEventListener('click', ziehen);
-  var resetArmed = false, resetTimer = null, resetBtn = $('los-reset');
-  resetBtn.addEventListener('click', function(){
-    if (!resetArmed) {
-      resetArmed = true; resetBtn.textContent = 'Wirklich alles zurücksetzen? Noch einmal klicken.'; resetBtn.classList.add('ernst');
-      resetTimer = setTimeout(function(){ resetArmed = false; resetBtn.textContent = 'Auslosung zurücksetzen'; resetBtn.classList.remove('ernst'); }, 4000);
-      return;
-    }
-    clearTimeout(resetTimer); resetArmed = false; resetBtn.textContent = 'Auslosung zurücksetzen'; resetBtn.classList.remove('ernst');
-    S.order = []; S.idx = 0; S.stage = 0; S.ecat = -1; S.ereveal = false;
-    S.votes = [[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]];
-    resetBuehne(); save(); renderSlots();
-  });
-  Deck.custom['s-los'] = {
-    enter: function(){ renderSlots(); },
-    next: function(){ if (busy) return true; if (!ausgelost()) { ziehen(); return true; } return false; }
-  };
-
-  /* ---------- Folie 6: Pitch-Bühne ---------- */
-  var DAUER = { pitch:180, fragen:120, bew:60 };
-  var uhrEl = { pitch:$('u-pitch'), fragen:$('u-fragen'), bew:$('u-bew') };
-  var KEYS = ['pitch', 'fragen', 'bew'];
-  var vals = { pitch:180, fragen:120, bew:60 };
-  var fin = { pitch:false, fragen:false, bew:false };
-  var run = null; /* { key, end, paused, left, rung } */
-
-  function resetBuehne(){
-    run = null;
-    KEYS.forEach(function(k){ vals[k] = DAUER[k]; fin[k] = false; });
-  }
-  function restOf(r){ return r.paused ? r.left : Math.max(0, Math.ceil((r.end - Date.now()) / 1000)); }
-  function startTimer(key){
-    run = { key:key, end:Date.now() + DAUER[key] * 1000, paused:false, left:DAUER[key], rung:false };
-    vals[key] = DAUER[key];
-  }
-  function stopRun(){ if (run) { fin[run.key] = true; vals[run.key] = restOf(run); run = null; } }
-  function togglePause(){
-    if (!run) return;
-    if (run.paused) { run.end = Date.now() + run.left * 1000; run.paused = false; }
-    else { run.left = restOf(run); run.paused = true; }
-    paintUhren(); paintStatus();
   }
   setInterval(function(){
     if (!run || run.paused) return;
@@ -756,7 +1200,7 @@ window.Deck = (function () {
   function paintStatus(){
     var st = $('bn-status'), txt, cls = '';
     var r = run ? restOf(run) : 0;
-    if (S.stage === 4) txt = 'Alle Teams durch';
+    if (S.stage === 4) txt = (istZwei() && S.teil === 1) ? 'Teil 1 geschafft' : 'Alle Firmen durch';
     else if (S.stage === 0) txt = 'Bereit';
     else if (run && run.paused) { txt = 'Pause'; }
     else if (run && r <= 0) { txt = 'Zeit ist um'; cls = 'aus'; }
@@ -766,50 +1210,60 @@ window.Deck = (function () {
     st.textContent = txt; st.className = 'bn-status ' + cls;
   }
   function paintButton(){
-    var last = S.idx >= S.n - 1;
-    var t = ['Pitch starten', 'Weiter: Fragen der Jury', 'Weiter: Jury bewertet', last ? 'Fertig, zur Ehrung' : 'Fertig, nächstes Team', 'Weiter zur Ehrung'][S.stage];
+    var b = bereich(), last = S.idx >= b.b, zw = istZwei() && S.teil === 1;
+    var t = ['Pitch starten', 'Weiter: Fragen der Jury', 'Weiter: Jury bewertet',
+      last ? (zw ? 'Fertig, Teil 1 abschließen' : 'Fertig, zur Ehrung') : 'Fertig, nächste Firma',
+      zw ? 'Weiter: Pause bis zum nächsten Termin' : 'Weiter zur Ehrung'][S.stage];
     $('bn-btn').innerHTML = esc(t) + '<small>Pfeil rechts oder Leertaste</small>';
   }
   function renderBuehne(){
-    var o = reihenfolge();
+    var o = reihenfolge(), b = bereich(), zw = istZwei(), x = P.modi[modus()];
     var nameEl = $('bn-name');
+    var teilTxt = zw ? 'Teil ' + S.teil + ' · ' : '';
     if (S.stage === 4) {
       $('bn-label').textContent = 'Geschafft';
       nameEl.textContent = 'Applaus für alle'; nameEl.className = 'bn-name';
-      $('bn-team').textContent = 'Alle ' + S.n + ' Teams haben gepitcht.';
-      $('bn-danach').innerHTML = 'Als Nächstes: <b>Ehrung</b>';
+      $('bn-team').textContent = zw && S.teil === 1 ? 'Teil 1 ist durch, ' + (S.n - P.modi.zwei.h1) + ' Firmen folgen beim nächsten Termin.' : 'Alle ' + S.n + ' Firmen haben gepitcht.';
+      $('bn-danach').innerHTML = zw && S.teil === 1 ? 'Als Nächstes: <b>Pause bis zum nächsten Termin</b>' : 'Als Nächstes: <b>Ehrung</b>';
     } else {
       var t = o[S.idx];
-      $('bn-label').textContent = 'Jetzt auf der Bühne · Pitch ' + (S.idx + 1) + ' von ' + S.n;
+      $('bn-label').textContent = 'Jetzt auf der Bühne · ' + teilTxt + 'Pitch ' + (S.idx + 1) + ' von ' + S.n;
       nameEl.textContent = nm(t);
       nameEl.className = 'bn-name' + (nm(t).length > 20 ? ' lang' : '');
-      $('bn-team').textContent = hatName(t) ? 'Team ' + (t + 1) : '';
-      $('bn-danach').innerHTML = S.idx < S.n - 1 ? 'Danach: <b>' + esc(nm(o[S.idx + 1])) + '</b>' : 'Danach: <b>Ehrung</b>';
+      $('bn-team').textContent = hatName(t) ? 'Firma ' + (t + 1) : '';
+      $('bn-danach').innerHTML = S.idx < b.b ? 'Danach: <b>' + esc(nm(o[S.idx + 1])) + '</b>' : 'Danach: <b>' + (zw && S.teil === 1 ? 'Pause' : 'Ehrung') + '</b>';
     }
     var h = '';
     o.forEach(function(t, p){
-      var c = (p < S.idx || S.stage === 4) ? 'fertig' : (p === S.idx ? 'dran' : '');
+      var c = (p < S.idx || S.stage === 4 && p <= b.b) ? 'fertig' : (p === S.idx ? 'dran' : '');
+      if (zw && S.teil === 2 && p < b.a) c = 'fertig';
       h += '<span class="c ' + c + '">' + (p + 1) + '. ' + esc(nm(t)) + '</span>';
     });
     $('bn-reihe').innerHTML = h;
-    $('bn-zeit').textContent = (S.n * 6 + 2) + ' Min · 3 + 2 + 1 Min pro Team';
+    var bl = zw ? (S.teil === 2 ? x.block2 : x.block) : x.block;
+    $('bn-zeit').textContent = (zw ? 'Teil ' + S.teil + ' · ' : '') + 'Pitch-Block ca. ' + mi(bl) + ' Min. · ' + PitchPlan.zeitText(x.t) + ' pro Firma';
+    $('bn-hinweis').textContent = 'P: Pause und weiter · Klick auf die leuchtende Uhr: Start oder Pause · Pfeil links: Firma zurücksetzen' + (zw && S.teil === 2 ? ' · Teil 2: erst kurz die Regeln wiederholen (Pfeil links bis Folie 2)' : '');
     paintUhren(); paintStatus(); paintButton();
   }
   function bnNext(){
     if (S.stage === 4) return false;
-    if (S.stage === 0) { resetBuehne(); stopRun(); S.stage = 1; startTimer('pitch'); }
+    if (S.stage === 0) {
+      if (!S.started) { S.modus = modus(); S.started = true; }
+      resetBuehne(); stopRun(); S.stage = 1; startTimer('pitch');
+    }
     else if (S.stage === 1) { stopRun(); S.stage = 2; startTimer('fragen'); }
     else if (S.stage === 2) { stopRun(); S.stage = 3; startTimer('bew'); }
     else if (S.stage === 3) {
       stopRun();
-      if (S.idx < S.n - 1) { S.idx++; S.stage = 0; resetBuehne(); }
-      else { S.stage = 4; resetBuehne(); }
+      if (S.idx < bereich().b) { S.idx++; S.stage = 0; resetBuehne(); }
+      else { S.stage = 4; resetBuehne(); if (istZwei() && S.teil === 1) S.teil1fertig = true; }
     }
-    save(); renderBuehne(); return true;
+    save(); renderBuehne(); renderModi(); renderStand(); return true;
   }
   function bnPrev(){
-    if (S.stage === 0 && S.idx === 0) return false;
-    if (S.stage === 4) { S.idx = S.n - 1; S.stage = 0; }
+    var b = bereich();
+    if (S.stage === 0 && S.idx === b.a) return false;
+    if (S.stage === 4) { S.idx = b.b; S.stage = 0; if (S.teil === 1) S.teil1fertig = false; }
     else if (S.stage === 0) { S.idx--; }
     else { S.stage = 0; }
     resetBuehne(); save(); renderBuehne(); return true;
@@ -827,54 +1281,70 @@ window.Deck = (function () {
     if ((e.key === 'p' || e.key === 'P') && $('s-buehne').classList.contains('active')) togglePause();
   });
   Deck.custom['s-buehne'] = {
-    enter: function(back){
-      if (S.stage === 4 && !back) { /* wieder hineingeklickt nach der Ehrung: Zustand zeigen */ }
-      renderBuehne();
-    },
+    enter: function(){ if (!run) resetBuehne(); renderBuehne(); },
     next: bnNext,
     prev: bnPrev
   };
 
+  /* ---------- Folie 6b: Weiter am nächsten Termin ---------- */
+  function renderWeiter(){
+    var o = reihenfolge(), h1 = P.modi.zwei.h1, a = '', b = '';
+    o.forEach(function(t, p){
+      var li = '<li><i>' + (p + 1) + '</i><span>' + esc(nm(t)) + '</span></li>';
+      if (p < h1) a += li; else b += li;
+    });
+    $('wt-l1').innerHTML = a; $('wt-l2').innerHTML = b;
+    $('wt-n1').textContent = '(' + h1 + ' Firmen)'; $('wt-n2').textContent = '(' + (S.n - h1) + ' Firmen)';
+  }
+  Deck.custom['s-weiter'] = {
+    enter: function(back){
+      if (!(istZwei() && S.teil === 1)) { ueberspringe(back); return; }
+      renderWeiter();
+    }
+  };
+
   /* ---------- Folie 7: Ehrung ---------- */
   var ehBody = $('eh-body');
+  function stimmen(c, i){ return (S.votes[c] && S.votes[c][i]) || 0; }
   function gewinner(c){
-    var v = S.votes[c], max = 0, i, w = [];
-    for (i = 0; i < S.n; i++) { if (v[i] > max) max = v[i]; }
+    var max = 0, i, w = [];
+    for (i = 0; i < S.n; i++) { if (stimmen(c, i) > max) max = stimmen(c, i); }
     if (max === 0) return { namen:[], max:0 };
-    for (i = 0; i < S.n; i++) { if (v[i] === max) w.push(i); }
+    for (i = 0; i < S.n; i++) { if (stimmen(c, i) === max) w.push(i); }
     return { namen:w, max:max };
   }
   function renderEhrung(){
-    var h2 = $('eh-h2'), sub = $('eh-sub'), h = '';
+    var h2 = $('eh-h2'), sub = $('eh-sub'), h = '', TT = TITEL();
+    if (S.ecat >= TT.length) { S.ecat = -1; S.ereveal = false; }
     if (S.ecat < 0) {
       h2.textContent = 'Jetzt wird geehrt';
-      sub.textContent = 'Die Note kommt später. Jetzt geht es um Anerkennung.';
+      sub.textContent = 'Die Note kommt später. Jetzt geht es um Anerkennung. Heute gibt es ' + TT.length + ' Ehrentitel.';
       h += '<div class="eh-intro">' +
-        '<div class="eh-regel"><b>Nur für die Ehren</b><span>Die Ehrungen haben nichts mit der Note zu tun. Hier zählt, was die Klasse beeindruckt hat.</span></div>' +
+        '<div class="eh-regel"><b>Nur für die Ehre</b><span>Die Ehrungen haben nichts mit der Note zu tun. Hier zählt, was die Klasse beeindruckt hat.</span></div>' +
         '<div class="eh-regel"><b>Handzeichen</b><span>Pro Titel hat jede Person eine Stimme. Ich zähle laut mit.</span></div>' +
-        '<div class="eh-regel"><b>Nicht das eigene Team</b><span>Für das eigene Team gibt es keine Stimme. Das macht es fair.</span></div>' +
+        '<div class="eh-regel"><b>Nicht die eigene Firma</b><span>Für die eigene Firma gibt es keine Stimme. Das macht es fair.</span></div>' +
         '</div><div class="eh-titel-liste">';
-      TITEL.forEach(function(t){ h += '<div class="eh-t"><span class="ic ic-' + t.ic + '"></span>' + esc(t.t) + '</div>'; });
+      TT.forEach(function(t){ h += '<div class="eh-t"><span class="ic ic-' + t.ic + '"></span>' + esc(t.t) + '</div>'; });
       h += '</div>';
     } else {
-      var T = TITEL[S.ecat];
-      h2.textContent = 'Ehrung ' + (S.ecat + 1) + ' von ' + TITEL.length;
-      sub.textContent = S.ereveal ? 'Und die Urkunde geht an ...' : 'Handzeichen: Pro Hand ein Klick auf das Team.';
+      var Ti = TT[S.ecat];
+      h2.textContent = 'Ehrung ' + (S.ecat + 1) + ' von ' + TT.length;
+      sub.textContent = S.ereveal ? 'Und die Urkunde geht an ...' : 'Handzeichen: Pro Hand ein Klick auf die Firma.';
       if (!S.ereveal) {
-        h += '<div class="eh-kopf"><span class="ic ic-' + T.ic + '"></span><div><div class="t">' + esc(T.t) + '</div><div class="q">' + esc(T.q) + '</div></div></div><div class="tiles">';
+        h += '<div class="eh-kopf"><span class="ic ic-' + Ti.ic + '"></span><div><div class="t">' + esc(Ti.t) + '</div><div class="q">' + esc(Ti.q) + '</div></div></div><div class="tiles' + (S.n > 9 ? ' dicht' : '') + '">';
         var g = gewinner(S.ecat);
         for (var i = 0; i < S.n; i++) {
           var vorn = g.max > 0 && g.namen.indexOf(i) >= 0;
-          h += '<div class="tile' + (vorn ? ' vorn' : '') + '" data-i="' + i + '"><div class="tn"><b>' + esc(nm(i)) + '</b><span>' + (hatName(i) ? 'Team ' + (i + 1) : '&nbsp;') + '</span></div><button class="minus" data-m="' + i + '" title="Eine Stimme zurück">&minus;</button><div class="zahl">' + S.votes[S.ecat][i] + '</div></div>';
+          h += '<div class="tile' + (vorn ? ' vorn' : '') + '" data-i="' + i + '"><div class="tn"><b>' + esc(nm(i)) + '</b><span>' + (hatName(i) ? 'Firma ' + (i + 1) : '&nbsp;') + '</span></div><button class="minus" data-m="' + i + '" title="Eine Stimme zurück">&minus;</button><div class="zahl">' + stimmen(S.ecat, i) + '</div></div>';
         }
         h += '</div><div class="eh-hinweis">Pfeil rechts zeigt die Urkunde.</div>';
       } else {
         var w = gewinner(S.ecat);
         var namen = w.namen.map(function(i){ return nm(i); });
-        var txt = namen.length ? namen.join(' und ') : '';
+        var txt = namen.length > 1 ? namen.slice(0, -1).join(', ') + ' und ' + namen[namen.length - 1] : (namen[0] || '');
         h += '<div class="urkunde-wrap"><div class="urkunde"><div class="urkunde-innen">' +
-          '<div class="lab">Ehrenurkunde</div><div class="titel">' + esc(T.t) + '</div><span class="ic ic-' + T.ic + '"></span>' +
-          '<div class="an">geht an</div><div class="sieger' + (txt.length > 18 ? ' lang' : '') + '">' + (txt ? esc(txt) : '&nbsp;') + '</div>' +
+          '<div class="lab">Ehrenurkunde</div><div class="titel">' + esc(Ti.t) + '</div><span class="ic ic-' + Ti.ic + '"></span>' +
+          '<div class="an">geht an</div><div class="sieger' + (namen.length > 1 ? ' mehr' : (txt.length > 18 ? ' lang' : '')) + '">' + (txt ? esc(txt) : '&nbsp;') + '</div>' +
           '<div class="fuss">' + (w.namen.length > 1 ? 'Gleichstand: Stichwahl per Handzeichen oder beide ehren.' : (w.namen.length ? w.max + ' Stimmen' : 'Keine Stimmen gezählt, bitte von Hand eintragen.')) + '</div>' +
           '</div></div></div>';
       }
@@ -884,20 +1354,28 @@ window.Deck = (function () {
   ehBody.addEventListener('click', function(e){
     if (S.ecat < 0 || S.ereveal) return;
     var m = e.target.closest ? e.target.closest('[data-m]') : null;
-    if (m) { var i = parseInt(m.dataset.m, 10); if (S.votes[S.ecat][i] > 0) S.votes[S.ecat][i]--; save(); renderEhrung(); return; }
+    if (m) { var i = parseInt(m.dataset.m, 10); if (stimmen(S.ecat, i) > 0) S.votes[S.ecat][i] = stimmen(S.ecat, i) - 1; save(); renderEhrung(); return; }
     var t = e.target.closest ? e.target.closest('.tile') : null;
-    if (t) { S.votes[S.ecat][parseInt(t.dataset.i, 10)]++; save(); renderEhrung(); }
+    if (t) { var j = parseInt(t.dataset.i, 10); S.votes[S.ecat][j] = stimmen(S.ecat, j) + 1; save(); renderEhrung(); }
   });
   Deck.custom['s-ehrung'] = {
-    enter: function(back){ if (back) { S.ecat = TITEL.length - 1; S.ereveal = true; } else if (S.ecat >= TITEL.length) { S.ecat = -1; S.ereveal = false; } renderEhrung(); },
+    enter: function(back){
+      if (istZwei() && S.teil === 1) { ueberspringe(back); return; }
+      var TT = TITEL();
+      if (back) { S.ecat = TT.length - 1; S.ereveal = true; } else if (S.ecat >= TT.length) { S.ecat = -1; S.ereveal = false; }
+      renderEhrung();
+    },
     next: function(){
+      if (istZwei() && S.teil === 1) return false;
+      var TT = TITEL();
       if (S.ecat < 0) { S.ecat = 0; S.ereveal = false; }
       else if (!S.ereveal) { S.ereveal = true; }
-      else if (S.ecat < TITEL.length - 1) { S.ecat++; S.ereveal = false; }
+      else if (S.ecat < TT.length - 1) { S.ecat++; S.ereveal = false; }
       else return false;
       save(); renderEhrung(); return true;
     },
     prev: function(){
+      if (istZwei() && S.teil === 1) return false;
       if (S.ecat < 0) return false;
       if (S.ereveal) { S.ereveal = false; }
       else if (S.ecat > 0) { S.ecat--; S.ereveal = true; }
@@ -906,7 +1384,30 @@ window.Deck = (function () {
     }
   };
 
-  bauFirmen(); renderSlots(); renderBuehne(); renderEhrung();
+  /* ---------- Alles neu zeichnen ---------- */
+  function paintAll(){
+    berechne();
+    renderChrome(); renderModi(); renderSlots(); renderBuehne(); renderWeiter(); renderEhrung(); renderStand();
+  }
+
+  /* ---------- Firmenzahl (Stepper oben rechts) ---------- */
+  var zurueck = false;
+  MiniFirma.onChange(function(n){
+    if (n === S.n) return;
+    if (zurueck) return;
+    if (S.order.length > 0) {
+      var alt = S.n;
+      frage('Firmenzahl geändert', 'Die Auslosung gilt für ' + alt + ' Firmen, jetzt sind es ' + n + '. Auslosung und Platzierungen zurücksetzen?', 'Ja, zurücksetzen', 'Nein, bei ' + alt + ' bleiben', function(){
+        S.n = n; setzeZurueck(true);
+      }, function(){
+        zurueck = true; MiniFirma.set(alt); zurueck = false;
+      });
+      return;
+    }
+    S.n = n; save(); resetBuehne(); bauFirmen(); paintAll();
+  });
+
+  berechne(); resetBuehne(); bauFirmen(); paintAll();
   Deck.start();
 })();
 </script>

@@ -82,6 +82,18 @@
     .chip { background:var(--teal-hell) !important; color:var(--navy) !important; }
   }
 
+  /* Firmenzahl-Stepper (Bildschirm), für Decks in der Werkzeugleiste, für Materialien als Leiste oben */
+  .firmen-stepper { display:inline-flex; align-items:center; gap:6px; font-family:system-ui,"Trebuchet MS",sans-serif; font-size:15px; font-weight:700; color:var(--navy,#14324a); background:#fff; border:2px solid var(--line,#d8e2e8); border-radius:12px; padding:2px 8px; }
+  .firmen-stepper .fs-label { color:var(--muted,#5a6a73); font-size:13px; text-transform:uppercase; letter-spacing:.4px; }
+  .firmen-stepper .fs-num { min-width:1.6em; text-align:center; font-size:20px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .firmen-stepper button { font:inherit; font-size:18px; font-weight:800; width:30px; height:30px; border-radius:50%; border:none; background:var(--navy,#14324a); color:#fff; cursor:pointer; line-height:1; padding:0; }
+  .firmen-stepper button:disabled { opacity:.35; cursor:default; }
+  .dunkel-aktiv .firmen-stepper { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.3); color:#fff; }
+  .dunkel-aktiv .firmen-stepper .fs-label { color:#b6cbd4; }
+  .dunkel-aktiv .firmen-stepper button { background:rgba(255,255,255,.22); }
+  .firmen-bar { max-width:210mm; margin:0 auto 10px auto; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; font-family:system-ui,sans-serif; font-size:13px; color:#555; }
+  @media print { .firmen-bar, .firmen-stepper { display:none !important; } }
+
   /* ===== Titel und Fahrplan ===== */
   .titel-reihe { display:flex; gap:18px; margin:34px 0 0; align-items:center; }
   .titel-reihe .rund { width:92px; height:92px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,.25); }
@@ -176,15 +188,18 @@
 
   /* ===== Spielregeln ===== */
   .rollen3 { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:6px; }
-  .rk { background:#fff; border:2px solid var(--line); border-top:8px solid var(--navy); border-radius:16px; padding:16px 18px 14px; box-shadow:0 2px 14px rgba(20,50,74,.08); min-height:352px; }
+  .rk { background:#fff; border:2px solid var(--line); border-top:8px solid var(--navy); border-radius:16px; padding:12px 18px 8px; box-shadow:0 2px 14px rgba(20,50,74,.08); }
   .rk.u { border-top-color:var(--teal); }
   .rk.s { border-top-color:var(--orange); }
-  .rk .ic { width:70px; height:70px; }
+  .rk .ic { width:56px; height:56px; }
   .rk h3 { font-size:25px; color:var(--navy); margin:4px 0 2px; }
   .rk .wer { font-size:17px; font-weight:800; color:#2c6671; margin-bottom:8px; }
   .rk ul { padding-left:20px; font-size:18px; line-height:1.34; }
-  .rk li { margin-bottom:5px; }
-  .material-leiste { margin-top:14px; font-size:17px; color:var(--muted); }
+  .rk li { margin-bottom:3px; }
+  .material-leiste { margin-top:12px; font-size:17px; color:var(--muted); }
+  .rechnung { margin-top:10px; background:#fff; border:2px solid var(--teal); border-radius:14px; padding:8px 18px; font-size:17px; line-height:1.36; color:var(--ink); }
+  .rechnung b { color:var(--navy); }
+  .rechnung .hin { margin-top:4px; padding:4px 10px; border-radius:8px; background:var(--orange-hell); border:1.5px solid var(--orange); color:#7a4310; font-weight:700; }
   .material-leiste b { color:var(--navy); }
 
   /* ===== Runden ===== */
@@ -290,7 +305,7 @@
         <div class="rund"><span class="ic ic-staat"></span></div>
       </div>
     </div>
-    <aside class="notes"><b>Vorher:</b> Spielgeld (Taler) und Waren-Kärtchen aus material-06 ausgeschnitten (ca. 4 Seiten Taler, pro Firma 1 Seite Waren-Kärtchen), Rollenkarten, Ereigniskarten und Kassenzettel (material-21), Merkblatt (material-13) für alle. Tische für die Firmenstände und einen Staatstisch vorbereiten, Mitte frei lassen. Beamer an, Timer testen. Tipp: Für Bewegung Stühle an die Wand schieben.</aside>
+    <aside class="notes"><b>Vorher:</b> Firmenzahl im Stepper oben rechts einstellen, dazu daneben die Zahl der Schüler in der Klasse (aktuell <span class="k-K"></span>), die Folie 6 rechnet die Mengen aus. Spielgeld (Taler) und Waren-Kärtchen aus material-06 ausgeschnitten: etwa <span class="k-T"></span> Taler, das sind <span class="k-TS"></span> Seite(n) Taler (20 Taler pro Haushalt plus Wechselgeld), und <span class="k-W"></span> Waren-Kärtchen pro Firma (<span class="k-WS"></span> Seite(n) je Firma). Rollenkarten, Ereigniskarten und Kassenzettel (material-21, erzeugt pro Firma einen Zettel passend zur Firmenzahl), Merkblatt (material-13) für alle. Tische für die Firmenstände und einen Staatstisch vorbereiten, Mitte frei lassen. Beamer an, Timer testen. Tipp: Für Bewegung Stühle an die Wand schieben.</aside>
   </section>
 
   <!-- 2 FAHRPLAN -->
@@ -397,12 +412,13 @@
     <h2>Jetzt spielt ihr die Wirtschaft</h2>
     <p class="sub">Drei Rollen, vier Runden. Jede Mini-Firma ist ein Unternehmen.</p>
     <div class="rollen3">
-      <div class="rk u step"><span class="ic ic-unternehmen"></span><h3>Unternehmen</h3><div class="wer">je Firma 1 Person</div><ul><li>Steht am Firmenstand.</li><li>Hat 8 Waren-Kärtchen mit dem eigenen Produkt.</li><li>Legt den Preis selbst fest: 5 bis 20 Taler.</li><li>Startet ohne Geld.</li></ul></div>
-      <div class="rk h step"><span class="ic ic-haushalt"></span><h3>Haushalte</h3><div class="wer">alle anderen, auch aus eurem Team</div><ul><li>Startet mit 20 Talern Lohn.</li><li>Geht herum und kauft ein.</li><li>Vergleicht die Preise.</li><li>Später zahlt die eigene Firma euren Lohn.</li></ul></div>
+      <div class="rk u step"><span class="ic ic-unternehmen"></span><h3>Unternehmen</h3><div class="wer"><span class="k-N"></span> Personen, je Firma eine</div><ul><li>Steht am Firmenstand.</li><li>Hat <span class="k-W"></span> Waren-Kärtchen mit dem eigenen Produkt.</li><li>Legt den Preis selbst fest: 5 bis 20 Taler.</li><li>Startet ohne Geld.</li></ul></div>
+      <div class="rk h step"><span class="ic ic-haushalt"></span><h3>Haushalte</h3><div class="wer"><span class="k-H"></span> Personen, alle anderen</div><ul><li>Startet mit 20 Talern Lohn.</li><li>Geht herum und kauft ein.</li><li>Vergleicht die Preise.</li><li>Später zahlt die eigene Firma euren Lohn.</li></ul></div>
       <div class="rk s step"><span class="ic ic-staat"></span><h3>Staat</h3><div class="wer">2 Freiwillige am Staatstisch</div><ul><li>Startet mit leerer Kasse.</li><li>Sammelt die Steuern ein.</li><li>Entscheidet, was der Staat kauft.</li><li>Schreibt alles im Kassenbuch auf.</li></ul></div>
     </div>
-    <div class="material-leiste step"><b>Material:</b> Taler, Waren-Kärtchen, Rollenkarten, Kassenzettel (material-06 und material-21). Pro Runde läuft der Timer, der Rundenzähler zeigt, wo wir sind.</div>
-    <aside class="notes"><b>2 Min.:</b> Rollen verteilen, bevor die Möbel gerückt werden: Pro Team eine Person wird Unternehmer, zwei Freiwillige sind Staat (sie holen sich die Staat-Rollenkarten und den Kassenzettel). Alle anderen sind Haushalte und bekommen 20 Taler. Firmen schreiben ihr Produkt auf die Waren-Kärtchen und legen den Preis auf einem Zettel fest. Wichtig: Haushalte dürfen auch bei fremden Firmen kaufen. Bei sehr kleinen Klassen übernehmen Firmen mit 3 Mitgliedern weniger Haushalte.</aside>
+    <div class="rechnung step" id="rechnung"></div>
+    <div class="material-leiste step"><b>Material:</b> Taler, Waren-Kärtchen, Rollenkarten, Kassenzettel (material-06 und material-21). Pro Runde läuft der Timer.</div>
+    <aside class="notes"><b>2 Min.:</b> Rollen verteilen, bevor die Möbel gerückt werden: Aus jedem Team wird eine Person Unternehmer (zusammen <span class="k-N"></span> Firmenstände), zwei Freiwillige sind Staat (sie holen sich die Staat-Rollenkarten und das Kassenbuch). Alle anderen sind Haushalte (<span class="k-H"></span>) und bekommen 20 Taler. Die Folie rechnet aus Firmenzahl und Schülerzahl die Mengen aus, bei zu wenig Haushalten oder sehr vielen oder sehr wenigen Ständen steht dort ein Hinweis. Firmen schreiben ihr Produkt auf die Waren-Kärtchen und legen den Preis auf einem Zettel fest. Wichtig: Haushalte dürfen auch bei fremden Firmen kaufen. Der Lohn in Runde 3 geht an die Haushalte im eigenen Team.</aside>
   </section>
 
   <!-- 7 RUNDE 1 -->
@@ -551,7 +567,7 @@
         </div>
       </div>
     </div>
-    <aside class="notes"><b>4 Min.:</b> Zuerst die Karte ziehen, laut vorlesen und kurz wirken lassen (Panne und Trendprodukt lösen eine Firmennummer aus). Danach Runde starten. Falls die Zeit knapp ist, Haushalte und Firmen nur eine kurze Einkaufsrunde machen und Steuern direkt im Anschluss einsammeln. Eine Karte ist erlaubt: Wer nach dem Kassensturz noch Fragen hat, kann ein zweites Ereignis ziehen. Alternativ liegen die Karten ausgedruckt vor (material-21).</aside>
+    <aside class="notes"><b>4 Min.:</b> Zuerst die Karte ziehen, laut vorlesen und kurz wirken lassen (Panne und Trendprodukt lösen eine Firmennummer aus, die zufällig aus den vorhandenen Firmen gezogen wird). Danach Runde starten. Falls die Zeit knapp ist, Haushalte und Firmen nur eine kurze Einkaufsrunde machen und Steuern direkt im Anschluss einsammeln. Eine Karte ist erlaubt: Wer nach dem Kassensturz noch Fragen hat, kann ein zweites Ereignis ziehen. Alternativ liegen die Karten ausgedruckt vor (material-21).</aside>
   </section>
 
   <!-- 11 KASSENSTURZ -->
@@ -698,6 +714,79 @@
 
 <script>
 window.DECK_CONFIG = { phases: [["einstieg",5],["input",10],["erarbeitung",20],["sicherung",10]] };
+/* Firmenzahl der Klasse, einmal eingeben, überall wirksam.
+ *
+ * Die Zahl kommt (in dieser Reihenfolge) aus: Adresszeile (?firmen=7), dem Browserspeicher
+ * (localStorage, gilt für alle Mini-Firma-Seiten im selben Browser), sonst Standard 8.
+ * Sie wird zwischen 2 und 12 begrenzt.
+ *
+ * Benutzung in einer Stunde:
+ *   MiniFirma.get()                  -> aktuelle Zahl
+ *   MiniFirma.onChange(function(n){ ... })   -> wird sofort und bei jeder Änderung aufgerufen
+ *   MiniFirma.set(7)                 -> setzt die Zahl (speichert, benachrichtigt alle)
+ *   MiniFirma.renderButtons(container, {className:'team-btn', label:function(i){return 'Firma '+i;}})
+ *                                    -> füllt container mit n Knöpfen (data-team="1".."n")
+ *   MiniFirma.mountStepper(element)  -> setzt dort "Firmen [-] 8 [+]" ein
+ */
+window.MiniFirma = (function () {
+  var MIN = 2, MAX = 12, DEF = 8, KEY = 'minifirma_firmen';
+  var listeners = [];
+
+  function clamp(v) { v = parseInt(v, 10); if (isNaN(v)) return null; return Math.max(MIN, Math.min(MAX, v)); }
+  function fromUrl() { var m = /[?&]firmen=(\d+)/.exec(location.search); return m ? clamp(m[1]) : null; }
+  function fromStore() { try { return clamp(localStorage.getItem(KEY)); } catch (e) { return null; } }
+  function toStore(v) { try { localStorage.setItem(KEY, String(v)); } catch (e) {} }
+
+  var n = fromUrl() || fromStore() || DEF;
+  var steppers = [];
+
+  function paintSteppers() { steppers.forEach(function (s) { s.num.textContent = n; s.minus.disabled = n <= MIN; s.plus.disabled = n >= MAX; }); }
+  function notify() { listeners.forEach(function (fn) { fn(n); }); paintSteppers(); }
+
+  function set(v) {
+    var c = clamp(v); if (c === null || c === n) return;
+    n = c; toStore(n); notify();
+  }
+
+  function onChange(fn) { listeners.push(fn); fn(n); }
+
+  function list() { var a = []; for (var i = 1; i <= n; i++) a.push(i); return a; }
+
+  function renderButtons(container, opts) {
+    opts = opts || {};
+    var cls = opts.className || 'team-btn';
+    var label = opts.label || function (i) { return 'Firma ' + i; };
+    container.innerHTML = '';
+    for (var i = 1; i <= n; i++) {
+      var b = document.createElement('button');
+      b.className = cls; b.dataset.team = String(i); b.textContent = label(i);
+      container.appendChild(b);
+    }
+  }
+
+  function mountStepper(el) {
+    el.classList.add('firmen-stepper');
+    el.innerHTML = '<span class="fs-label">Firmen</span><button type="button" class="fs-minus" aria-label="Eine Firma weniger">&minus;</button><span class="fs-num"></span><button type="button" class="fs-plus" aria-label="Eine Firma mehr">+</button>';
+    var s = { num: el.querySelector('.fs-num'), minus: el.querySelector('.fs-minus'), plus: el.querySelector('.fs-plus') };
+    s.minus.addEventListener('click', function () { set(n - 1); });
+    s.plus.addEventListener('click', function () { set(n + 1); });
+    steppers.push(s); paintSteppers();
+  }
+
+  /* Links auf Mini-Firma-Seiten tragen die Zahl in der Adresse mit (hilft, wenn der Browser
+     den Speicher zwischen Dateien nicht teilt, z. B. beim Öffnen von lokalen Dateien). */
+  function decorateLinks() {
+    Array.prototype.forEach.call(document.querySelectorAll('a[data-firmen-link]'), function (a) {
+      var base = a.getAttribute('data-firmen-link');
+      a.setAttribute('href', base + (base.indexOf('?') < 0 ? '?' : '&') + 'firmen=' + n);
+    });
+  }
+  listeners.push(decorateLinks);
+  if (document.readyState !== 'loading') decorateLinks(); else document.addEventListener('DOMContentLoaded', decorateLinks);
+
+  return { get: function () { return n; }, set: set, list: list, onChange: onChange, renderButtons: renderButtons, mountStepper: mountStepper, MIN: MIN, MAX: MAX };
+})();
+
 /* Gemeinsames Foliengerüst für die Mini-Firma-Stunden.
  *
  * Was es kann: Folien auf 1280x720 skalieren, Pfeiltasten/Wischen/Knöpfe, Schritt-Einblendung
@@ -853,6 +942,15 @@ window.Deck = (function () {
   }
   timerEl.addEventListener('click', toggleTimer);
 
+  /* ---------- Firmenzahl-Stepper in der Werkzeugleiste ---------- */
+  (function () {
+    var tools = document.getElementById('tools');
+    if (!tools || !window.MiniFirma) return;
+    var holder = document.createElement('div');
+    tools.insertBefore(holder, tools.firstChild);
+    MiniFirma.mountStepper(holder);
+  })();
+
   /* ---------- Start ---------- */
   function start() {
     var h = parseInt((location.hash || '').replace('#', ''), 10);
@@ -923,7 +1021,7 @@ window.Deck = (function () {
   function ziehen(){
     if (!evIdx.length) { evIdx = EVENTS.map(function(_,i){return i;}).sort(function(){return Math.random()-.5;}); evUsed = 0; }
     var c = EVENTS[evIdx.pop()]; evUsed++;
-    var n = 1 + Math.floor(Math.random()*7);
+    var n = 1 + Math.floor(Math.random()*MiniFirma.get());
     evTi.textContent = c.titel;
     evTx.textContent = c.text.replace('{N}', n);
     evIcon.className = 'ic ic-' + c.icon;
@@ -937,6 +1035,53 @@ window.Deck = (function () {
   Array.prototype.forEach.call(document.querySelectorAll('.start-btn[data-sek]'), function(el){
     el.addEventListener('click', function(){ Deck.setTimer(parseInt(el.dataset.sek,10), true); });
   });
+
+  /* ===== Klassengröße (nur Stunde 6): zweites Stepper-Feld neben "Firmen" ===== */
+  var KLASSE = { MIN: 10, MAX: 34, DEF: 24, KEY: 'minifirma_klasse' };
+  var klasse = (function(){
+    var m = /[?&]klasse=(\d+)/.exec(location.search), v = m ? parseInt(m[1], 10) : NaN;
+    if (isNaN(v)) { try { v = parseInt(localStorage.getItem(KLASSE.KEY), 10); } catch (e) {} }
+    if (isNaN(v)) v = KLASSE.DEF;
+    return Math.max(KLASSE.MIN, Math.min(KLASSE.MAX, v));
+  })();
+  function setKlasse(v){
+    v = Math.max(KLASSE.MIN, Math.min(KLASSE.MAX, v)); if (v === klasse) return;
+    klasse = v; try { localStorage.setItem(KLASSE.KEY, String(v)); } catch (e) {}
+    rechne();
+  }
+  var kNum, kMinus, kPlus;
+  (function(){
+    var tools = document.getElementById('tools');
+    var h = document.createElement('div'); h.className = 'firmen-stepper';
+    h.innerHTML = '<span class="fs-label">Schüler</span><button type="button" class="fs-minus" aria-label="Ein Schüler weniger">&minus;</button><span class="fs-num"></span><button type="button" class="fs-plus" aria-label="Ein Schüler mehr">+</button>';
+    tools.insertBefore(h, tools.children[1] || null);
+    kNum = h.querySelector('.fs-num'); kMinus = h.querySelector('.fs-minus'); kPlus = h.querySelector('.fs-plus');
+    kMinus.addEventListener('click', function(){ setKlasse(klasse - 1); });
+    kPlus.addEventListener('click', function(){ setKlasse(klasse + 1); });
+  })();
+
+  function setAll(cls, text){ Array.prototype.forEach.call(document.querySelectorAll('.' + cls), function(e){ e.textContent = text; }); }
+  function sp(n, ein, mehr){ return n + ' ' + (n === 1 ? ein : mehr); }
+  function rechne(){
+    var N = MiniFirma.get(), K = klasse;
+    var H = Math.max(0, K - N - 2);
+    var taler = Math.ceil(H * 20 * 1.25 / 10) * 10;          /* 20 je Haushalt plus 25 % Wechselgeld */
+    var talerSeiten = Math.max(1, Math.ceil(taler / 140));   /* eine Seite material-06 = 140 Taler */
+    var W = Math.max(8, Math.ceil(2 * H / N / 4) * 4);       /* Waren je Firma: etwa 2 Käufe je Haushalt, mindestens 8 */
+    var WS = Math.ceil(W / 8);                               /* 8 Kärtchen je Seite */
+    kNum.textContent = K; kMinus.disabled = K <= KLASSE.MIN; kPlus.disabled = K >= KLASSE.MAX;
+    setAll('k-K', K); setAll('k-N', N); setAll('k-H', H); setAll('k-T', taler); setAll('k-TS', talerSeiten); setAll('k-W', W); setAll('k-WS', WS);
+    var hin = '';
+    if (K < N + 2 + N) hin += '<div class="hin">Zu wenig Haushalte: Nur ' + sp(H, 'Haushalt', 'Haushalte') + ' für ' + sp(N, 'Firma', 'Firmen') + '. Zwei Teams führen dann gemeinsam einen Stand, oder ihr spielt mit weniger Firmen.</div>';
+    if (N <= 3) hin += '<div class="hin">Wenige Stände: Nur ' + sp(N, 'Firmenstand', 'Firmenstände') + ' plus Staatstisch. Vor jedem Stand bilden sich Schlangen, deshalb gibt es mehr Waren-Kärtchen je Firma (siehe Zahl oben).</div>';
+    if (N >= 9) hin += '<div class="hin">Viele Stände: ' + N + ' Firmenstände plus Staatstisch brauchen Platz. Tische an die Wände und in zwei Reihen stellen, Mitte frei lassen, notfalls Flur oder Aula nutzen.</div>';
+    var box = document.getElementById('rechnung');
+    if (box) box.innerHTML = '<b>Eure Klasse:</b> ' + sp(K, 'Schüler', 'Schüler') + ', ' + sp(N, 'Firma', 'Firmen') + '. Also ' + sp(N, 'Unternehmen', 'Unternehmen') + ', 2 Staat und <b>' + sp(H, 'Haushalt', 'Haushalte') + '</b>.<br>' +
+      '<b>Material:</b> etwa <b>' + taler + ' Taler</b> (' + sp(talerSeiten, 'Seite', 'Seiten') + ', 20 je Haushalt plus Wechselgeld) und <b>' + W + ' Waren-Kärtchen pro Firma</b>.' + hin;
+    var act = document.querySelector('.slide.active .notes');
+    if (act) document.getElementById('notes').innerHTML = '<b>Lehrernotiz Folie ' + (Deck.slides.indexOf(act.parentNode) + 1) + ' von ' + Deck.slides.length + ':</b> ' + act.innerHTML;
+  }
+  MiniFirma.onChange(rechne);
 
   Deck.start();
 })();

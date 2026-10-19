@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerecht bezahlt? Karten zu Stunde 9</title>
+<style>
+  :root { --navy:#14324a; --teal:#4f9aa6; --teal-hell:#eaf4f4; --orange:#f2994a; --orange-hell:#fdeee0; --ink:#20303d; --linie:#b9c7ce; --gruen:#2f8f5b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Trebuchet MS","Verdana","Segoe UI",sans-serif; font-size:10pt; line-height:1.38; color:var(--ink); background:#e8e8e8; }
+  .blatt { width:210mm; height:297mm; margin:15px auto; padding:11mm 12mm; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.15); overflow:hidden; display:flex; flex-direction:column; }
+  .kopf { text-align:center; border:2px solid var(--navy); border-radius:5mm; background:var(--teal-hell); padding:2.6mm 5mm; margin-bottom:3.5mm; flex-shrink:0; }
+  .kopf .label { font-size:8pt; text-transform:uppercase; letter-spacing:.5px; color:var(--teal); font-weight:800; }
+  .kopf .titel { font-size:15pt; font-weight:800; color:var(--navy); }
+  .kopf .hilfe { font-size:8.8pt; color:#4a5a63; margin-top:.6mm; }
+  .raster { flex:1; min-height:0; display:grid; gap:0; }
+  .karte { border:1.5px dashed #8a9ba4; padding:3.6mm 4.4mm; display:flex; flex-direction:column; overflow:hidden; page-break-inside:avoid; }
+  .k-typ { font-size:7.4pt; text-transform:uppercase; letter-spacing:.6px; font-weight:800; color:var(--orange); margin-bottom:.8mm; }
+  .k-titel { font-size:11.5pt; font-weight:800; color:var(--navy); margin-bottom:1.2mm; line-height:1.18; }
+  .karte p { font-size:9.2pt; margin-bottom:1.2mm; }
+  .zahl { font-size:22pt; font-weight:800; color:var(--navy); line-height:1.05; margin:.5mm 0 1mm; }
+  .quelle { margin-top:auto; font-size:7pt; color:#6a7a83; border-top:1px solid var(--linie); padding-top:1mm; }
+  .schnitt { text-align:center; font-size:7.8pt; color:#7a8a93; margin:1.6mm 0 0; flex-shrink:0; }
+
+  /* Seite 1: Schilder */
+  .g-schilder { grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; }
+  .schild { border:2px dashed #8a9ba4; display:flex; align-items:center; justify-content:center; text-align:center; padding:8mm; }
+  .schild span { font-size:30pt; font-weight:800; color:var(--navy); line-height:1.12; border-bottom:2.5mm solid var(--orange); padding-bottom:3mm; }
+  /* Seite 2: Aussagen */
+  .g-aussagen { grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; }
+  .aussage { border-color:var(--orange); }
+  .aussage .aus { font-size:15pt; font-weight:800; color:var(--navy); line-height:1.22; margin:auto 0; }
+  .aussage .nach { font-size:8.4pt; color:#4a5a63; border-top:1px solid var(--linie); padding-top:1.6mm; }
+  /* Seite 3: Statistik */
+  .g-stat { grid-template-columns:1fr 1fr; grid-template-rows:repeat(3,1fr); }
+  .fakt { border-color:var(--teal); }
+  .fakt .k-typ { color:var(--teal); }
+  /* Seite 4: Ursachen */
+  .g-urs { grid-template-columns:1fr 1fr; grid-template-rows:repeat(3,1fr); }
+  .ursache { border-color:var(--navy); }
+  .ursache .k-typ { color:var(--navy); }
+  .ursache .euro { font-size:8.8pt; font-weight:700; color:#2c6671; margin-bottom:1.2mm; }
+  /* Seite 5: Szenen */
+  .g-szenen { grid-template-columns:1fr; grid-template-rows:repeat(3,1fr); }
+  .reihe { display:grid; grid-template-columns:1.25fr 1fr 1fr 1fr; min-height:0; }
+  .szene { background:var(--teal-hell); border-color:var(--teal); }
+  .szene .k-typ { color:var(--teal); }
+  .szene p { font-size:9pt; }
+  .rolle { border-color:var(--orange); }
+  .rolle .k-titel { font-size:10.2pt; }
+  .rolle p { font-size:8.6pt; }
+  .rolle .auftrag { font-weight:700; color:#2c6671; margin-top:auto; border-top:1px solid var(--linie); padding-top:1mm; margin-bottom:0; }
+  /* Seite 6: Kriterien */
+  .g-krit { grid-template-columns:1fr 1fr; grid-template-rows:repeat(4,1fr); }
+  .krit { border-color:var(--navy); justify-content:space-between; }
+  .krit .k-titel { font-size:13pt; }
+  .krit .boxen { display:flex; gap:3mm; font-size:8.2pt; font-weight:700; color:#4a5a63; }
+  .krit .boxen span::before { content:""; display:inline-block; width:4mm; height:4mm; border:1.5px solid var(--navy); border-radius:1mm; margin-right:1.4mm; vertical-align:-.9mm; }
+  /* Seite 7: Firmenkarten */
+  .g-firma { grid-template-columns:1fr 1fr; grid-auto-rows:1fr; }
+  .firma { border-color:var(--navy); }
+  .firma .k-titel { font-size:12.5pt; }
+  .firma .satz { font-size:9pt; line-height:1.15; }
+  .firma .zeile { border-bottom:1px dotted #8a9ba4; height:6.8mm; display:flex; align-items:flex-end; font-size:8.4pt; color:#4a5a63; }
+  /* Seite 8: Reflexion */
+  .g-refl { grid-template-columns:1fr; grid-template-rows:1fr 1fr; }
+  .refl { border-color:var(--navy); padding:4mm 5mm; }
+  .refl .k-titel { font-size:12.5pt; }
+  .refl .feld { margin-bottom:2.2mm; }
+  .refl .fl { font-weight:800; font-size:9.2pt; color:var(--navy); }
+  .refl .zeile { border-bottom:1px dotted #8a9ba4; height:5.6mm; }
+  .refl .name { display:flex; gap:6mm; font-size:9pt; margin-bottom:2mm; }
+  .refl .name span { border-bottom:1px solid #999; display:inline-block; min-width:36mm; }
+  .refl .fazit { border:2px solid var(--orange); background:var(--orange-hell); border-radius:3mm; padding:2mm 3mm; }
+  .skala { display:flex; gap:3mm; font-size:8.6pt; font-weight:700; margin:1mm 0 2mm; }
+  .skala span::before { content:""; display:inline-block; width:4mm; height:4mm; border:1.5px solid var(--navy); border-radius:50%; margin-right:1.4mm; vertical-align:-.9mm; }
+
+  .lehrer { width:210mm; margin:0 auto 10px auto; background:#fff3cd; border:1px solid #b8860b; border-radius:6px; padding:8px 16px; font-family:system-ui,sans-serif; font-size:12.5px; color:#5c4400; }
+  .btn-bar { width:210mm; margin:0 auto 10px auto; text-align:right; }
+  .btn { font-family:system-ui,sans-serif; font-size:13px; padding:8px 16px; border-radius:6px; border:none; background:var(--navy); color:#fff; cursor:pointer; }
+    /* Firmenzahl-Stepper (Bildschirm), für Decks in der Werkzeugleiste, für Materialien als Leiste oben */
+  .firmen-stepper { display:inline-flex; align-items:center; gap:6px; font-family:system-ui,"Trebuchet MS",sans-serif; font-size:15px; font-weight:700; color:var(--navy,#14324a); background:#fff; border:2px solid var(--line,#d8e2e8); border-radius:12px; padding:2px 8px; }
+  .firmen-stepper .fs-label { color:var(--muted,#5a6a73); font-size:13px; text-transform:uppercase; letter-spacing:.4px; }
+  .firmen-stepper .fs-num { min-width:1.6em; text-align:center; font-size:20px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .firmen-stepper button { font:inherit; font-size:18px; font-weight:800; width:30px; height:30px; border-radius:50%; border:none; background:var(--navy,#14324a); color:#fff; cursor:pointer; line-height:1; padding:0; }
+  .firmen-stepper button:disabled { opacity:.35; cursor:default; }
+  .dunkel-aktiv .firmen-stepper { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.3); color:#fff; }
+  .dunkel-aktiv .firmen-stepper .fs-label { color:#b6cbd4; }
+  .dunkel-aktiv .firmen-stepper button { background:rgba(255,255,255,.22); }
+  .firmen-bar { max-width:210mm; margin:0 auto 10px auto; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; font-family:system-ui,sans-serif; font-size:13px; color:#555; }
+  @media print { .firmen-bar, .firmen-stepper { display:none !important; } }
+
+  @page { size:A4; margin:0; }
+  @media print {
+    body { background:#fff; }
+    .blatt { margin:0; box-shadow:none; width:210mm; height:297mm; page-break-after:always; break-after:page; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .blatt:last-of-type { page-break-after:auto; break-after:auto; }
+    .btn-bar, .lehrer, .firmen-bar { display:none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="lehrer"><strong>Hinweis für die Lehrkraft:</strong> Seite 1 bis 4 und 6 einmal drucken, Seite 5 (Szenen) einmal pro Gruppe oder als Klassensatz, Seite 7 (Firmenkarten) wird passend zur Firmenzahl erzeugt (Stepper oben), Seite 8 ausreichend oft (2 Zettel pro Blatt, zerschneiden). Entlang der gestrichelten Linien ausschneiden. Die Zahlen gelten für das Jahr 2025 (Destatis, Pressemitteilung Nr. 453 vom 16.12.2025, Stand 2026). Vor erneutem Einsatz die aktuellen Werte prüfen. Sensibles Thema: respektvollen Ton sichern, niemanden bloßstellen, keine persönlichen Erfahrungen einfordern.</div>
+<div class="firmen-bar"><span>Firmen in der Klasse (für die Firmenkarten):</span><div id="firmen-stepper"></div></div>
+<div class="btn-bar"><button class="btn" onclick="window.print()">Als PDF speichern</button></div>
+
+<!-- 1 SCHILDER -->
+<div class="blatt">
+  <div class="kopf"><div class="label">Wirtschaft und Beruf &middot; Stunde 9</div><div class="titel">Schilder für Positionslinie und Vier-Ecken</div><div class="hilfe">Positionslinie: der Reihe nach von links nach rechts aufhängen. Vier-Ecken: je ein Schild pro Ecke.</div></div>
+  <div class="raster g-schilder">
+<div class="schild"><span>Stimme zu</span></div>
+<div class="schild"><span>Stimme eher zu</span></div>
+<div class="schild"><span>Stimme eher nicht zu</span></div>
+<div class="schild"><span>Stimme nicht zu</span></div>
+  </div>
+  <div class="schnitt">Entlang der gestrichelten Linien ausschneiden.</div>
+</div>
+
+<!-- 2 AUSSAGEN -->
+<div class="blatt">
+  <div class="kopf"><div class="label">Wirtschaft und Beruf &middot; Stunde 9</div><div class="titel">Aussagekarten für die Vier-Ecken-Runde</div><div class="hilfe">Eine Karte vorlesen, alle stellen sich in eine Ecke, dann kommt die passende Statistikkarte.</div></div>
+  <div class="raster g-aussagen">
+<div class="karte aussage"><div class="k-typ">Aussage 1</div><div class="aus">Für gleiche Arbeit gibt es gleichen Lohn. Ungerecht ist da nichts mehr.</div><div class="nach"><b>Nach dem Aufstellen:</b> Statistikkarte lesen. Wer die Ecke wechselt, sagt warum.</div></div>
+<div class="karte aussage"><div class="k-typ">Aussage 2</div><div class="aus">Der Unterschied kommt nur daher, dass Frauen und Männer verschiedene Berufe wählen.</div><div class="nach"><b>Nach dem Aufstellen:</b> Statistikkarte lesen. Wer die Ecke wechselt, sagt warum.</div></div>
+<div class="karte aussage"><div class="k-typ">Aussage 3</div><div class="aus">Wer Kinder oder Angehörige betreut, sollte dafür später keinen Nachteil haben.</div><div class="nach"><b>Nach dem Aufstellen:</b> Statistikkarte lesen. Wer die Ecke wechselt, sagt warum.</div></div>
+<div class="karte aussage"><div class="k-typ">Aussage 4</div><div class="aus">Im Osten Deutschlands ist der Lohnunterschied kleiner. Das zeigt: Es liegt nicht an den Menschen.</div><div class="nach"><b>Nach dem Aufstellen:</b> Statistikkarte lesen. Wer die Ecke wechselt, sagt warum.</div></div>
+  </div>
+  <div class="schnitt">Entlang der gestrichelten Linien ausschneiden.</div>
+</div>
+
+<!-- 3 STATISTIK -->
+<div class="blatt">
+  <div class="kopf"><div class="label">Wirtschaft und Beruf &middot; Stunde 9</div><div class="titel">Statistikkarten (Stand 2026)</div><div class="hilfe">Karten erst nach dem Aufstellen aufdecken und vorlesen. Die Zahlen sind Durchschnittswerte.</div></div>
+  <div class="raster g-stat">
+<div class="karte fakt"><div class="k-typ">Statistik, Stand 2026</div><div class="zahl">16 %</div><div class="k-titel">Unbereinigter Gender Pay Gap</div><p>Frauen verdienten 2025 im Schnitt 22,81 € pro Stunde, Männer 27,05 €. Unterschied: 4,24 € pro Stunde.</p><div class="quelle">Quelle: Destatis, Gender Pay Gap 2025, Pressemitteilung Nr. 453 vom 16.12.2025</div></div>
+<div class="karte fakt"><div class="k-typ">Statistik, Stand 2026</div><div class="zahl">6 %</div><div class="k-titel">Bereinigter Gender Pay Gap</div><p>Vergleicht man Frauen und Männer mit gleichen Merkmalen (Branche, Beruf, Arbeitsumfang, Anforderungsniveau), bleiben 6 %. Das ist nur ein Durchschnittswert, kein Beweis für eine einzelne Ursache.</p><div class="quelle">Quelle: Destatis, Gender Pay Gap 2025, Pressemitteilung Nr. 453 vom 16.12.2025</div></div>
+<div class="karte fakt"><div class="k-typ">Statistik, Stand 2026</div><div class="zahl">5 % und 17 %</div><div class="k-titel">Ost und West</div><p>Der unbereinigte Gender Pay Gap lag 2025 in Ostdeutschland bei 5 %, in Westdeutschland bei 17 %.</p><div class="quelle">Quelle: Destatis, Gender Pay Gap 2025, Pressemitteilung Nr. 453 vom 16.12.2025</div></div>
+<div class="karte fakt"><div class="k-typ">Statistik, Stand 2026</div><div class="zahl">4 % und 17 %</div><div class="k-titel">Öffentlicher Dienst und Privatwirtschaft</div><p>Der unbereinigte Gender Pay Gap lag 2025 im öffentlichen Dienst bei 4 %, in der Privatwirtschaft bei 17 %.</p><div class="quelle">Quelle: Destatis, Gender Pay Gap 2025, Pressemitteilung Nr. 453 vom 16.12.2025</div></div>
+<div class="karte fakt"><div class="k-typ">Statistik, Stand 2026</div><div class="zahl">49 % und 12 %</div><div class="k-titel">Teilzeit</div><p>2024 arbeiteten 49 % der erwerbstätigen Frauen (15 bis 64 Jahre) in Teilzeit, aber nur 12 % der Männer.</p><div class="quelle">Quelle: Destatis, Teilzeitquoten 2024, Pressemitteilung vom 19.05.2025</div></div>
+<div class="karte fakt"><div class="k-typ">Statistik, Stand 2026</div><div class="zahl">76 Minuten</div><div class="k-titel">Unbezahlte Sorgearbeit</div><p>Frauen leisten pro Tag im Schnitt 76 Minuten mehr unbezahlte Care-Arbeit als Männer (Gender Care Gap: 43,4 %).</p><div class="quelle">Quelle: Destatis, Zeitverwendungserhebung 2022 (Gender Care Gap, Bundesfamilienministerium)</div></div>
+  </div>
+  <div class="schnitt">Entlang der gestrichelten Linien ausschneiden.</div>
+</div>
+
+<!-- 4 URSACHEN -->
+<div class="blatt">
+  <div class="kopf"><div class="label">Wirtschaft und Beruf &middot; Stunde 9</div><div class="titel">Ursachenkarten: Woher kommen die 4,24 &euro;?</div><div class="hilfe">Der durchschnittliche Stundenlohn-Unterschied 2025 beträgt 4,24 &euro; (Destatis, Pressemitteilung Nr. 453 vom 16.12.2025). Plan B zum Buchauftrag.</div></div>
+  <div class="raster g-urs">
+<div class="karte ursache"><div class="k-typ">Ursachen-Detektive</div><div class="k-titel">Teilzeit</div><div class="zahl">19 %</div><div class="euro">0,81 € von 4,24 €</div><p>Wer weniger Stunden arbeitet, hat oft weniger Aufstiegschancen und einen anderen Stundenlohn. Frauen arbeiten häufiger in Teilzeit.</p></div>
+<div class="karte ursache"><div class="k-typ">Ursachen-Detektive</div><div class="k-titel">Branche und Beruf</div><div class="zahl">18 %</div><div class="euro">0,75 € von 4,24 €</div><p>Berufe und Branchen werden unterschiedlich bezahlt. Frauen und Männer arbeiten zu verschieden großen Teilen in ihnen.</p></div>
+<div class="karte ursache"><div class="k-typ">Ursachen-Detektive</div><div class="k-titel">Anforderungsniveau</div><div class="zahl">13 %</div><div class="euro">0,55 € von 4,24 €</div><p>Jobs mit mehr Verantwortung und Führungsaufgaben bringen mehr Geld. Dort sind Frauen seltener vertreten.</p></div>
+<div class="karte ursache"><div class="k-typ">Ursachen-Detektive</div><div class="k-titel">Weitere Merkmale</div><div class="zahl">10 %</div><div class="euro">0,42 € von 4,24 €</div><p>Der übrige erklärte Teil (gerechnet: erklärt insgesamt 2,53 € minus die drei Einzelposten). Dazu zählen weitere Merkmale aus dem Schätzmodell.</p></div>
+<div class="karte ursache"><div class="k-typ">Ursachen-Detektive</div><div class="k-titel">Nicht erklärt</div><div class="zahl">40 %</div><div class="euro">1,71 € von 4,24 €</div><p>Dieser Teil entspricht dem bereinigten Gender Pay Gap von 6 %. Möglich sind Merkmale, die in den Daten fehlen. Eine einzelne Ursache lässt sich daraus nicht ablesen.</p></div>
+<div class="karte ursache"><div class="k-typ">Ursachen-Detektive</div><div class="k-titel">Hintergrund: Care-Arbeit</div><div class="zahl">76 Min.</div><div class="euro">pro Tag mehr bei Frauen</div><p>Kinder, Pflege und Haushalt kosten Zeit. Das hängt eng mit Teilzeit zusammen. Es erklärt die Zahlen nicht allein, ist aber ein wichtiger Zusammenhang.</p></div>
+  </div>
+  <div class="schnitt">Entlang der gestrichelten Linien ausschneiden. Aufgabe: Ordnet die Karten nach der Größe des Anteils und besprecht, was jede Karte erklärt und was nicht.</div>
+</div>
+
+<!-- 5 SZENEN -->
+<div class="blatt">
+  <div class="kopf"><div class="label">Wirtschaft und Beruf &middot; Stunde 9</div><div class="titel">Perspektivwechsel: Szenen und Rollen</div><div class="hilfe">Dreiergruppen. Szene lesen, Rollen verteilen, 3 Minuten spielen, dann bewusst aus der Rolle treten.</div></div>
+  <div class="raster g-szenen">
+<div class="reihe"><div class="karte szene"><div class="k-typ">Szene 1</div><div class="k-titel">Die freie Teamleitung</div><p>In einer Firma wird die Teamleitung frei. Zwei Personen sind fachlich gleich gut. Eine arbeitet 40 Stunden pro Woche, die andere 30 Stunden, weil sie sich um den kranken Opa kümmert.</p></div><div class="karte rolle"><div class="k-typ">Rolle</div><div class="k-titel">Chef oder Chefin</div><p>Du musst entscheiden und dein Ergebnis begründen.</p><p class="auftrag">Stelle beiden Fragen und entscheide am Ende.</p></div><div class="karte rolle"><div class="k-typ">Rolle</div><div class="k-titel">Person mit 40 Stunden</div><p>Du bist immer da und hast viel Erfahrung.</p><p class="auftrag">Sage, warum du die Stelle verdienst.</p></div><div class="karte rolle"><div class="k-typ">Rolle</div><div class="k-titel">Person mit 30 Stunden</div><p>Du bist genauso gut, aber weniger Stunden im Büro.</p><p class="auftrag">Sage, warum du die Stelle verdienst.</p></div></div>
+<div class="reihe"><div class="karte szene"><div class="k-typ">Szene 2</div><div class="k-titel">Das Baby kommt</div><p>Ein Paar bekommt ein Baby. Beide arbeiten Vollzeit. Einer der beiden soll für einige Jahre weniger arbeiten. Wer, und wie wird das entschieden?</p></div><div class="karte rolle"><div class="k-typ">Rolle</div><div class="k-titel">Elternteil A</div><p>Du verdienst 27 € pro Stunde und liebst deinen Job.</p><p class="auftrag">Sage, was dir wichtig ist, und hör gut zu.</p></div><div class="karte rolle"><div class="k-typ">Rolle</div><div class="k-titel">Elternteil B</div><p>Du verdienst 23 € pro Stunde und wärst gern viel beim Baby.</p><p class="auftrag">Sage, was dir wichtig ist, und hör gut zu.</p></div><div class="karte rolle"><div class="k-typ">Rolle</div><div class="k-titel">Arbeitgeber oder Arbeitgeberin</div><p>Du brauchst die Person eigentlich dringend im Betrieb.</p><p class="auftrag">Sage, was du anbieten würdest.</p></div></div>
+<div class="reihe"><div class="karte szene"><div class="k-typ">Szene 3</div><div class="k-titel">Das Vorstellungsgespräch</div><p>Zwei Bewerbungen für denselben Job. Gleiche Noten, gleiche Erfahrung. Person 1 wünscht sich 2.800 € im Monat, Person 2 wünscht sich 2.500 €. Das Budget der Firma reicht bis 2.900 €.</p></div><div class="karte rolle"><div class="k-typ">Rolle</div><div class="k-titel">Chef oder Chefin</div><p>Du sollst die Stelle besetzen und fair bezahlen.</p><p class="auftrag">Entscheide, was du beiden anbietest, und begründe es.</p></div><div class="karte rolle"><div class="k-typ">Rolle</div><div class="k-titel">Bewerber oder Bewerberin 1</div><p>Du hast 2.800 € im Kopf.</p><p class="auftrag">Verhandle ruhig und mit Argumenten.</p></div><div class="karte rolle"><div class="k-typ">Rolle</div><div class="k-titel">Bewerber oder Bewerberin 2</div><p>Du hast 2.500 € im Kopf.</p><p class="auftrag">Verhandle ruhig und mit Argumenten.</p></div></div>
+  </div>
+  <div class="schnitt">Zahlen in den Szenen sind erfunden. Zum Schluss alle: &bdquo;Ich bin nicht mehr ..., ich bin wieder ...&ldquo; (eigener Name).</div>
+</div>
+
+<!-- 6 KRITERIEN -->
+<div class="blatt">
+  <div class="kopf"><div class="label">Wirtschaft und Beruf &middot; Stunde 9</div><div class="titel">Fairer Lohn in unserer Firma: Kriterien</div><div class="hilfe">Legt jede Karte in eine von drei Gruppen oder kreuzt an: fairer Grund, kein fairer Grund, diskutieren.</div></div>
+  <div class="raster g-krit">
+<div class="karte krit"><div class="k-typ">Lohnkriterium</div><div class="k-titel">Arbeitszeit</div><div class="boxen"><span>fairer Grund</span><span>kein fairer Grund</span><span>diskutieren</span></div></div>
+<div class="karte krit"><div class="k-typ">Lohnkriterium</div><div class="k-titel">Verantwortung und Führungsaufgaben</div><div class="boxen"><span>fairer Grund</span><span>kein fairer Grund</span><span>diskutieren</span></div></div>
+<div class="karte krit"><div class="k-typ">Lohnkriterium</div><div class="k-titel">Ausbildung und Erfahrung</div><div class="boxen"><span>fairer Grund</span><span>kein fairer Grund</span><span>diskutieren</span></div></div>
+<div class="karte krit"><div class="k-typ">Lohnkriterium</div><div class="k-titel">Leistung und Ergebnis</div><div class="boxen"><span>fairer Grund</span><span>kein fairer Grund</span><span>diskutieren</span></div></div>
+<div class="karte krit"><div class="k-typ">Lohnkriterium</div><div class="k-titel">Belastende oder gefährliche Arbeit</div><div class="boxen"><span>fairer Grund</span><span>kein fairer Grund</span><span>diskutieren</span></div></div>
+<div class="karte krit"><div class="k-typ">Lohnkriterium</div><div class="k-titel">Geschlecht</div><div class="boxen"><span>fairer Grund</span><span>kein fairer Grund</span><span>diskutieren</span></div></div>
+<div class="karte krit"><div class="k-typ">Lohnkriterium</div><div class="k-titel">Ob jemand Kinder hat</div><div class="boxen"><span>fairer Grund</span><span>kein fairer Grund</span><span>diskutieren</span></div></div>
+<div class="karte krit"><div class="k-typ">Lohnkriterium</div><div class="k-titel">Wer lauter verhandelt</div><div class="boxen"><span>fairer Grund</span><span>kein fairer Grund</span><span>diskutieren</span></div></div>
+  </div>
+  <div class="schnitt">Entlang der gestrichelten Linien ausschneiden.</div>
+</div>
+
+<!-- 7 FIRMENKARTEN (zur Laufzeit passend zur Firmenzahl) -->
+<div id="firma-seiten"></div>
+
+<!-- 8 REFLEXION -->
+<div class="blatt">
+  <div class="kopf"><div class="label">Wirtschaft und Beruf &middot; Stunde 9</div><div class="titel">Mein Fazit</div><div class="hilfe">Reflexionszettel, zwei pro Blatt. Nach der Stunde ausfüllen und ins Heft kleben.</div></div>
+  <div class="raster g-refl">
+    <div class="karte refl"><div class="k-titel">Gerecht bezahlt? Mein Fazit</div>
+      <div class="name"><div>Name: <span></span></div><div>Datum: <span style="min-width:22mm"></span></div></div>
+      <div class="feld"><div class="fl">Meine Position am Anfang</div><div class="skala"><span>stimme voll zu</span><span>eher zu</span><span>eher nicht zu</span><span>gar nicht zu</span></div></div>
+      <div class="feld"><div class="fl">Die wichtigsten Ursachen für Lohnunterschiede, die ich kenne:</div><div class="zeile"></div><div class="zeile"></div></div>
+      <div class="feld"><div class="fl">Ein Argument oder eine Zahl, die mich zum Nachdenken gebracht hat:</div><div class="zeile"></div></div>
+      <div class="fazit"><div class="fl">Mein Fazit in einem Satz</div><div class="zeile"></div></div>
+    </div>
+    <div class="karte refl"><div class="k-titel">Gerecht bezahlt? Mein Fazit</div>
+      <div class="name"><div>Name: <span></span></div><div>Datum: <span style="min-width:22mm"></span></div></div>
+      <div class="feld"><div class="fl">Meine Position am Anfang</div><div class="skala"><span>stimme voll zu</span><span>eher zu</span><span>eher nicht zu</span><span>gar nicht zu</span></div></div>
+      <div class="feld"><div class="fl">Die wichtigsten Ursachen für Lohnunterschiede, die ich kenne:</div><div class="zeile"></div><div class="zeile"></div></div>
+      <div class="feld"><div class="fl">Ein Argument oder eine Zahl, die mich zum Nachdenken gebracht hat:</div><div class="zeile"></div></div>
+      <div class="fazit"><div class="fl">Mein Fazit in einem Satz</div><div class="zeile"></div></div>
+    </div>
+  </div>
+  <div class="schnitt">Mittig durchschneiden.</div>
+</div>
+
+<script>
+/* Firmenzahl der Klasse, einmal eingeben, überall wirksam.
+ *
+ * Die Zahl kommt (in dieser Reihenfolge) aus: Adresszeile (?firmen=7), dem Browserspeicher
+ * (localStorage, gilt für alle Mini-Firma-Seiten im selben Browser), sonst Standard 8.
+ * Sie wird zwischen 2 und 12 begrenzt.
+ *
+ * Benutzung in einer Stunde:
+ *   MiniFirma.get()                  -> aktuelle Zahl
+ *   MiniFirma.onChange(function(n){ ... })   -> wird sofort und bei jeder Änderung aufgerufen
+ *   MiniFirma.set(7)                 -> setzt die Zahl (speichert, benachrichtigt alle)
+ *   MiniFirma.renderButtons(container, {className:'team-btn', label:function(i){return 'Firma '+i;}})
+ *                                    -> füllt container mit n Knöpfen (data-team="1".."n")
+ *   MiniFirma.mountStepper(element)  -> setzt dort "Firmen [-] 8 [+]" ein
+ */
+window.MiniFirma = (function () {
+  var MIN = 2, MAX = 12, DEF = 8, KEY = 'minifirma_firmen';
+  var listeners = [];
+
+  function clamp(v) { v = parseInt(v, 10); if (isNaN(v)) return null; return Math.max(MIN, Math.min(MAX, v)); }
+  function fromUrl() { var m = /[?&]firmen=(\d+)/.exec(location.search); return m ? clamp(m[1]) : null; }
+  function fromStore() { try { return clamp(localStorage.getItem(KEY)); } catch (e) { return null; } }
+  function toStore(v) { try { localStorage.setItem(KEY, String(v)); } catch (e) {} }
+
+  var n = fromUrl() || fromStore() || DEF;
+  var steppers = [];
+
+  function paintSteppers() { steppers.forEach(function (s) { s.num.textContent = n; s.minus.disabled = n <= MIN; s.plus.disabled = n >= MAX; }); }
+  function notify() { listeners.forEach(function (fn) { fn(n); }); paintSteppers(); }
+
+  function set(v) {
+    var c = clamp(v); if (c === null || c === n) return;
+    n = c; toStore(n); notify();
+  }
+
+  function onChange(fn) { listeners.push(fn); fn(n); }
+
+  function list() { var a = []; for (var i = 1; i <= n; i++) a.push(i); return a; }
+
+  function renderButtons(container, opts) {
+    opts = opts || {};
+    var cls = opts.className || 'team-btn';
+    var label = opts.label || function (i) { return 'Firma ' + i; };
+    container.innerHTML = '';
+    for (var i = 1; i <= n; i++) {
+      var b = document.createElement('button');
+      b.className = cls; b.dataset.team = String(i); b.textContent = label(i);
+      container.appendChild(b);
+    }
+  }
+
+  function mountStepper(el) {
+    el.classList.add('firmen-stepper');
+    el.innerHTML = '<span class="fs-label">Firmen</span><button type="button" class="fs-minus" aria-label="Eine Firma weniger">&minus;</button><span class="fs-num"></span><button type="button" class="fs-plus" aria-label="Eine Firma mehr">+</button>';
+    var s = { num: el.querySelector('.fs-num'), minus: el.querySelector('.fs-minus'), plus: el.querySelector('.fs-plus') };
+    s.minus.addEventListener('click', function () { set(n - 1); });
+    s.plus.addEventListener('click', function () { set(n + 1); });
+    steppers.push(s); paintSteppers();
+  }
+
+  /* Links auf Mini-Firma-Seiten tragen die Zahl in der Adresse mit (hilft, wenn der Browser
+     den Speicher zwischen Dateien nicht teilt, z. B. beim Öffnen von lokalen Dateien). */
+  function decorateLinks() {
+    Array.prototype.forEach.call(document.querySelectorAll('a[data-firmen-link]'), function (a) {
+      var base = a.getAttribute('data-firmen-link');
+      a.setAttribute('href', base + (base.indexOf('?') < 0 ? '?' : '&') + 'firmen=' + n);
+    });
+  }
+  listeners.push(decorateLinks);
+  if (document.readyState !== 'loading') decorateLinks(); else document.addEventListener('DOMContentLoaded', decorateLinks);
+
+  return { get: function () { return n; }, set: set, list: list, onChange: onChange, renderButtons: renderButtons, mountStepper: mountStepper, MIN: MIN, MAX: MAX };
+})();
+
+(function(){
+  MiniFirma.mountStepper(document.getElementById('firmen-stepper'));
+  var holder = document.getElementById('firma-seiten');
+  function seiten(n){
+    var pro = 6, html = '';
+    for (var start = 1; start <= n; start += pro) {
+      var karten = '';
+      for (var i = start; i < start + pro && i <= n; i++) {
+        karten += '<div class="karte firma"><div class="k-typ">Fairness-Satz</div><div class="k-titel">Firma ' + i + '</div>' +
+          '<div class="satz">Firmenname:</div><div class="zeile"></div>' +
+          '<div class="satz">Bei uns gilt: ...</div><div class="zeile"></div><div class="zeile"></div>' +
+          '<div class="satz">Für den Lohn zählt ... Nie zählt ... weil ...</div><div class="zeile"></div><div class="zeile"></div></div>';
+      }
+      html += '<div class="blatt"><div class="kopf"><div class="label">Wirtschaft und Beruf &middot; Stunde 9</div><div class="titel">Firmenkarten: Unser fairer Lohn</div><div class="hilfe">Jede Firma schreibt ihren Fairness-Satz auf die eigene Karte. Das Gehalt aus Stunde 8 darf als Beispiel dienen.</div></div>' +
+        '<div class="raster g-firma">' + karten + '</div><div class="schnitt">Entlang der gestrichelten Linien ausschneiden. Eine Karte pro Firma.</div></div>';
+    }
+    holder.innerHTML = html;
+  }
+  MiniFirma.onChange(seiten);
+})();
+</script>
+</body>
+</html>

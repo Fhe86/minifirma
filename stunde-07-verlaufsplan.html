@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verlaufsplan Stunde 7: Ökologie im Kreislauf</title>
+<style>
+  :root { --navy:#14324a; --teal:#4f9aa6; --teal-hell:#eaf4f4; --orange:#f2994a; --orange-hell:#fdeee0; --ink:#20303d; --linie:#b9c7ce; --gruen:#2f8f5b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Trebuchet MS","Verdana","Segoe UI",sans-serif; font-size:8.2pt; line-height:1.25; color:var(--ink); background:#e8e8e8; }
+  .blatt { width:297mm; min-height:210mm; margin:15px auto; padding:9mm 11mm; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.15); }
+  .kopf { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--navy); padding-bottom:2mm; margin-bottom:2.8mm; }
+  .kopf .label { font-size:8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--teal); font-weight:800; }
+  .kopf h1 { font-size:17pt; color:var(--navy); line-height:1.1; }
+  .kopf .meta { text-align:right; font-size:8.4pt; color:#4a5a63; }
+  .ziele { display:grid; grid-template-columns:1.1fr 1fr; gap:3.5mm; margin-bottom:2.8mm; }
+  .box { border:1.5px solid var(--linie); border-radius:3mm; padding:2mm 3.6mm; }
+  .box.ziel { background:var(--orange-hell); border-color:var(--orange); }
+  .box h3 { font-size:7.8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--navy); margin-bottom:.8mm; }
+  .box ul { padding-left:3.8mm; }
+  table { width:100%; border-collapse:collapse; table-layout:fixed; }
+  th { background:var(--navy); color:#fff; font-size:8pt; text-align:left; padding:1.3mm 2.2mm; }
+  td { vertical-align:top; padding:1.1mm 2mm; border:1px solid var(--linie); font-size:7.8pt; }
+  td.phase { font-weight:800; color:var(--navy); }
+  td.phase small { display:block; font-weight:700; color:var(--teal); }
+  tr.einstieg td.phase { border-left:6px solid var(--orange); }
+  tr.input td.phase { border-left:6px solid var(--teal); }
+  tr.erarbeitung td.phase { border-left:6px solid var(--navy); }
+  tr.sicherung td.phase { border-left:6px solid var(--gruen); }
+  td b { color:var(--navy); }
+  .unten { display:grid; grid-template-columns:1.1fr .9fr 1fr 1fr; gap:2.6mm; margin-top:2.4mm; font-size:7.8pt; }
+  .btn-bar { width:297mm; margin:0 auto 10px auto; text-align:right; }
+  .btn { font-family:system-ui,sans-serif; font-size:13px; padding:8px 16px; border-radius:6px; border:none; background:var(--navy); color:#fff; cursor:pointer; }
+  @page { size:A4 landscape; margin:0; }
+  @media print { body { background:#fff; } .blatt { margin:0; box-shadow:none; width:100%; min-height:0; padding:5mm 8mm; } .btn-bar { display:none; } tr, .box { page-break-inside:avoid; } }
+</style>
+</head>
+<body>
+<div class="btn-bar"><button class="btn" onclick="window.print()">Als PDF speichern</button></div>
+<div class="blatt">
+  <div class="kopf">
+    <div><div class="label">Wirtschaft und Beruf &middot; Verlaufsplan für die Lehrkraft</div><h1>Stunde 7: Ökologie im Kreislauf (Puffer)</h1></div>
+    <div class="meta">Klasse 8 M-Zweig &middot; 45 Min. &middot; Mini-Firma<br>Folien: <b>stunde-07-folien.html</b> &middot; Kurzmodul: <b>stunde-07-kurzmodul.html</b></div>
+  </div>
+
+  <div class="ziele">
+    <div class="box ziel"><h3>Lernziel</h3>Die Schüler erklären, welche Rolle die Umwelt im Wirtschaftskreislauf spielt (Rohstoffe rein, Abfall und Emissionen raus), prüfen ihre Mini-Firma mit einem Öko-Check und begründen eine konkrete Verbesserung samt Preis (Zielkonflikt).</div>
+    <div class="box"><h3>Vorher bereitlegen</h3><ul>
+      <li><b>Firmenzahl</b> im Stepper oben rechts einstellen (gilt für alle Stunden)</li>
+      <li>Material 22: Öko-Check-Karte je Firma, Maßnahmenkarten ausschneiden (Anzahl wächst mit der Firmenzahl, Stepper auch im Material)</li>
+      <li>Kreislauf-Skizze und Merkblatt aus Stunde 6, Betriebs-Steckbrief (Feld Ökologie)</li>
+      <li>Raum: Tisch in der Mitte als Marktstand</li>
+    </ul></div>
+  </div>
+
+  <table>
+    <colgroup><col style="width:11%"><col style="width:12%"><col style="width:23%"><col style="width:28%"><col style="width:26%"></colgroup>
+    <tr><th>Phase und Zeit</th><th>Folie</th><th>Methode</th><th>Lehrkraft</th><th>Schüler</th></tr>
+    <tr class="einstieg"><td class="phase">Einstieg<small>6 Min.</small></td><td>3, 4<br>Schätzspiel, Lebensweg</td><td><b>Schätzspiel</b> (Wasser im T-Shirt, 4 Antworten) und <b>Lebensweg-Rätsel</b> (sechs Stationen in die richtige Reihenfolge tippen, Fakt pro Station).</td><td>Stimmen antippen, mit Pfeil rechts auflösen. Beim Rätsel einen Schüler tippen lassen, Klasse ruft. Pro Fakt 1 bis 2 Sätze. Frage: Wo hätten wir Einfluss?</td><td>Schätzen, abstimmen, Reihenfolge begründen, überrascht sein.</td></tr>
+    <tr class="input"><td class="phase">Input<small>9 Min.</small></td><td>5, 6<br>Kreislauf, Blitz-Check</td><td><b>Direkte Instruktion</b> mit animiertem Modell: Kreislauf aus Stunde 6 plus Umwelt. Danach <b>Körper-Check</b> &quot;rein, raus, zurück&quot; mit sechs Beispielen.</td><td>Pro Schritt ein Pfeil rechts, vorher raten lassen. Recycling schließt den Kreis nur ein Stück. Check nach Frage 4 beenden, wenn alle sicher sind.</td><td>Ergänzen die Skizze im Heft, zeigen rein, raus oder Kreis mit den Armen.</td></tr>
+    <tr class="erarbeitung"><td class="phase">Erarbeitung<small>22 Min.</small></td><td>7, 8, 9<br>Auftrag, Regeln, Marktstand</td><td><b>Öko-Check</b> auf der Karte (6 Min., Ampel je Grundfunktion), <b>Verbesserungsmarkt</b> mit knappem Budget und knappen Karten (11 Min., Verhandeln, Tauschen), <b>Entscheiden</b> (3 Min.), dazu 2 Min. Regeln.</td><td>Karten austeilen, Marktstand am Beamer bedienen (Karte antippen = verkauft). Herumgehen: &quot;Warum Gelb? Warum diese Karte?&quot; Auf ehrliches Rot bestehen. Timer pro Schritt per Klick.</td><td>Füllen die Check-Karte aus, handeln im Markt, kaufen höchstens drei Karten und begründen sie, legen die grünste Idee samt Nachteil fest.</td></tr>
+    <tr class="sicherung"><td class="phase">Sicherung<small>8 Min.</small></td><td>10, 11, 12<br>Pitch, Merksatz, Ausblick</td><td><b>Blitz-Pitch</b> &quot;Unsere grünste Idee&quot; mit <b>Daumen-Jury</b> (Zeit pro Firma rechnet die Folie aus der Firmenzahl), <b>Lückensatz</b> und Hefteintrag, Ausblick.</td><td>Firma antippen startet den Timer, Daumenstimmen eintippen. Bei vielen Firmen die Hälfte live pitchen lassen (Knopf auf der Folie). Merksatz Lücke für Lücke aufdecken.</td><td>Pitchen in der angezeigten Zeit, bewerten Machbarkeit und Ehrlichkeit mit dem Daumen, schreiben den Merksatz ab.</td></tr>
+  </table>
+
+  <div class="unten">
+    <div class="box"><h3>Stolpersteine und Plan B</h3><ul>
+      <li>Alles Grün im Check: nachfragen (Material, Reste, Wege), Rot gehört dazu.</li>
+      <li>Kein Beamer: Karten (material-22) tragen die Stunde, Rätsel als Kartenlegen, Quiz mündlich, Folien als PDF.</li>
+      <li>Wirkungspunkte sind Spielwerte, keine Messwerte. Das offen sagen.</li>
+      <li>Zahlen im Deck sind Schätzwerte (&quot;ca.&quot;), Stand 2026: Wasser im T-Shirt ca. 2.000 bis 4.000 Liter (WWF, wissen.de, Lehrmaterial virtuelles Wasser), ca. 44 Wäschen im Schnitt (wissen.de 2020).</li>
+    </ul></div>
+    <div class="box"><h3>Hefteintrag (Merksatz)</h3>Die Umwelt ist der vierte Mitspieler im Kreislauf. Unternehmen holen aus ihr <b>Rohstoffe</b> und geben <b>Abfall</b> und <b>Emissionen</b> zurück. Ökologisch handeln kostet oft <b>Geld</b>, schont aber die <b>Umwelt</b>. Durch <b>Recycling</b> schließt sich der Kreis ein Stück.</div>
+    <div class="box"><h3>Kurzmodul: 10 Minuten am Ende von Stunde 6</h3><ul>
+      <li>1 Min. Schätzspiel</li>
+      <li>3 Min. Kreislauf mit Umwelt (alle Schritte)</li>
+      <li>4 Min. Firmen-Check: rein/raus als Stichworte, Ideenkarte ziehen, Satz &quot;Wir würden..., weil... Das kostet uns...&quot;</li>
+      <li>2 Min. Merksatz. Kein Material nötig.</li>
+    </ul></div>
+    <div class="box"><h3>Bedienung der Folien</h3><ul>
+      <li>Pfeil rechts oder Leertaste: weiter, Pfeil links: zurück</li>
+      <li>N: Lehrernotizen (mit Quellen), F: Vollbild</li>
+      <li>Klick auf den Timer: Start und Pause, R: zurücksetzen</li>
+      <li>Auf dem iPad: nach links und rechts wischen</li>
+    </ul></div>
+  </div>
+</div>
+</body>
+</html>

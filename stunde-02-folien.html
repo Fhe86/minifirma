@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stunde 2: Wie tickt ein Betrieb? (Folien)</title>
+<title>Stunde 2: Wie tickt ein Betrieb? </title>
 <style>
   :root {
     --navy:#14324a; --navy-dark:#0d2233; --teal:#4f9aa6; --teal-hell:#eaf4f4;
@@ -81,6 +81,18 @@
     #nav, #tools, #progress, #notes { display:none !important; }
     .chip { background:var(--teal-hell) !important; color:var(--navy) !important; }
   }
+
+  /* Firmenzahl-Stepper (Bildschirm), für Decks in der Werkzeugleiste, für Materialien als Leiste oben */
+  .firmen-stepper { display:inline-flex; align-items:center; gap:6px; font-family:system-ui,"Trebuchet MS",sans-serif; font-size:15px; font-weight:700; color:var(--navy,#14324a); background:#fff; border:2px solid var(--line,#d8e2e8); border-radius:12px; padding:2px 8px; }
+  .firmen-stepper .fs-label { color:var(--muted,#5a6a73); font-size:13px; text-transform:uppercase; letter-spacing:.4px; }
+  .firmen-stepper .fs-num { min-width:1.6em; text-align:center; font-size:20px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .firmen-stepper button { font:inherit; font-size:18px; font-weight:800; width:30px; height:30px; border-radius:50%; border:none; background:var(--navy,#14324a); color:#fff; cursor:pointer; line-height:1; padding:0; }
+  .firmen-stepper button:disabled { opacity:.35; cursor:default; }
+  .dunkel-aktiv .firmen-stepper { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.3); color:#fff; }
+  .dunkel-aktiv .firmen-stepper .fs-label { color:#b6cbd4; }
+  .dunkel-aktiv .firmen-stepper button { background:rgba(255,255,255,.22); }
+  .firmen-bar { max-width:210mm; margin:0 auto 10px auto; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; font-family:system-ui,sans-serif; font-size:13px; color:#555; }
+  @media print { .firmen-bar, .firmen-stepper { display:none !important; } }
 
   /* ===== Folie 1: Titel ===== */
   .titel-reihe { display:flex; gap:18px; margin:34px 0 0; }
@@ -173,11 +185,22 @@
   .pitch-grid { display:grid; grid-template-columns:7fr 5fr; gap:30px; margin-top:6px; }
   .satz { background:#fff; border:2px solid var(--line); border-radius:18px; padding:24px 28px; font-size:28px; line-height:1.7; font-weight:700; color:var(--navy); box-shadow:0 2px 14px rgba(20,50,74,.08); }
   .luecke { display:inline-block; min-width:150px; border-bottom:3px dotted var(--orange); color:var(--orange); font-weight:800; text-align:center; }
-  .teams { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+  .teams { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; }
+  .teams.c3 { grid-template-columns:1fr 1fr 1fr; gap:8px; }
+  .teams.c3 .team-btn { font-size:18px; padding:9px 4px; border-radius:12px; border-width:2px; }
+  .teams.c2 .team-btn { padding:12px 8px; }
+  .team-btn.los { box-shadow:0 0 0 4px rgba(242,153,74,.4); }
+  .pitch-zeit { display:flex; align-items:baseline; gap:10px; background:var(--navy); color:#fff; border-radius:14px; padding:8px 16px; margin-bottom:12px; }
+  .pitch-zeit b { font-size:38px; line-height:1; color:var(--orange); font-variant-numeric:tabular-nums; }
+  .pitch-zeit span { font-size:18px; font-weight:700; }
+  .pitch-zeit small { display:block; font-size:15px; color:#b6cbd4; font-weight:600; }
+  .pitch-hinweis { background:var(--orange-hell); border:2px solid var(--orange); border-radius:14px; padding:8px 14px; margin-bottom:12px; font-size:16px; line-height:1.3; color:var(--navy); }
+  .pitch-hinweis button { margin-top:6px; font:inherit; font-size:16px; font-weight:800; background:var(--orange); color:#3b2200; border:none; border-radius:20px; padding:6px 16px; cursor:pointer; }
+  .pitch-hinweis .reihe { margin-top:6px; font-weight:800; }
   .team-btn { font:inherit; font-size:22px; font-weight:800; padding:16px 8px; border-radius:14px; border:2.5px solid var(--navy); background:#fff; color:var(--navy); cursor:pointer; }
   .team-btn.fertig { background:var(--gruen); border-color:var(--gruen); color:#fff; }
   .team-btn.dran { background:var(--orange); border-color:var(--orange); color:#3b2200; }
-  .jury { font-size:19px; line-height:1.4; color:var(--muted); background:var(--teal-hell); border-radius:14px; padding:14px 18px; }
+  .jury { font-size:18px; line-height:1.4; color:var(--muted); background:var(--teal-hell); border-radius:14px; padding:14px 18px; }
   .jury b { color:var(--navy); }
 
   /* ===== Folie 9: Merksatz ===== */
@@ -193,16 +216,60 @@
   .ab-karte { background:rgba(255,255,255,.08); border:1.5px solid rgba(255,255,255,.2); border-radius:18px; padding:26px 28px; font-size:23px; line-height:1.4; }
   .ab-karte b { color:var(--orange); display:block; font-size:15px; letter-spacing:.7px; text-transform:uppercase; margin-bottom:8px; }
 
+
+  /* ===== Krisenalarm (Einstieg) ===== */
+  .alarm-kopf { display:flex; align-items:center; gap:18px; margin-top:-6px; }
+  .alarm-kopf h2 { margin:0; }
+  .sirene { width:34px; height:34px; border-radius:50%; background:var(--rot); box-shadow:0 0 0 0 rgba(200,80,60,.7); animation:puls 1s infinite; }
+  @keyframes puls { 70%{ box-shadow:0 0 0 22px rgba(200,80,60,0);} 100%{ box-shadow:0 0 0 0 rgba(200,80,60,0);} }
+  .ton-btn { margin-left:auto; font:inherit; font-size:16px; font-weight:700; background:rgba(255,255,255,.12); color:#fff; border:1.5px solid rgba(255,255,255,.35); border-radius:20px; padding:5px 14px; cursor:pointer; }
+  .alarm-karte { margin-top:16px; background:#fff; color:var(--navy); border-radius:20px; border-left:14px solid var(--rot); padding:26px 36px; min-height:232px; box-shadow:0 14px 40px rgba(0,0,0,.35); }
+  .alarm-karte.neu { animation:ziehen .45s ease; }
+  .al-firma { font-size:34px; font-weight:800; color:var(--orange); line-height:1.1; }
+  .al-tag { font-size:17px; font-weight:800; text-transform:uppercase; letter-spacing:.7px; color:var(--muted); margin-top:4px; }
+  .al-text { font-size:38px; font-weight:800; line-height:1.22; margin-top:14px; }
+  .al-text.klein { font-size:30px; font-weight:700; }
+  .alarm-leiste { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .alarm-leiste span { font-size:16px; font-weight:800; padding:4px 12px; border-radius:16px; border:1.5px solid rgba(255,255,255,.3); color:#b6cbd4; }
+  .alarm-leiste span.an { background:var(--orange); border-color:var(--orange); color:#3b2200; }
+  .alarm-leiste span.da { border-color:#7fd1a0; color:#7fd1a0; }
+
+  /* ===== Domino-Alarm ===== */
+  .dom-reihe { display:flex; gap:16px; margin-top:6px; justify-content:center; }
+  .dom { width:140px; height:128px; background:#fff; color:var(--navy); border-radius:14px; border-bottom:8px solid var(--teal); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:17px; transform-origin:bottom left; transition:transform .55s ease-in, background .3s; }
+  .dom .ic { width:54px; height:54px; }
+  .dom.hit { background:#f9e6e2; border-bottom-color:var(--rot); }
+  .dom.fall { transform:rotate(11deg); }
+  .dom.start { background:var(--rot); color:#fff; }
+  .dom-kette { margin-top:34px; font-size:22px; font-weight:700; color:#fff; text-align:center; min-height:34px; }
+  .dom-kette em { font-style:normal; color:var(--orange); }
+  .dom-grid { display:grid; grid-template-columns:6fr 6fr; gap:24px; margin-top:12px; }
+  .dom-liste { display:grid; grid-template-columns:1fr 1fr; gap:8px; align-content:start; }
+  .dom-zeile { font:inherit; text-align:left; background:rgba(255,255,255,.1); color:#fff; border:1.5px solid rgba(255,255,255,.28); border-radius:12px; padding:8px 12px; font-size:18px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:10px; }
+  .dom-zeile .ic { width:32px; height:32px; background-color:#fff; border-radius:50%; background-size:70%; }
+  .dom-zeile small { display:block; font-weight:600; color:#b6cbd4; font-size:14px; }
+  .dom-zeile.aktiv { border-color:var(--orange); background:rgba(242,153,74,.25); }
+  .dom-auftrag { background:rgba(255,255,255,.08); border:1.5px solid rgba(255,255,255,.2); border-radius:16px; padding:16px 22px; font-size:19px; line-height:1.4; }
+  .dom-auftrag b { color:var(--orange); }
+  .dom-auftrag ol { margin:6px 0 0 20px; }
+  .dom-auftrag .inv-btn { margin-top:12px; font-size:18px; padding:8px 22px; }
+
   @media print {
     .slide.dunkel .sub, .slide.dunkel .titel-claim { color:var(--muted) !important; }
     .step, .gap { opacity:1 !important; transform:none !important; color:inherit; }
     .gap { color:var(--orange) !important; }
-    .kata .blitz { display:block; }
+    .alarm-karte { box-shadow:none; border:2px solid var(--line); border-left:14px solid var(--rot); }
+    .dom { box-shadow:none; border:2px solid var(--line); }
+    .dom-zeile, .dom-auftrag, .alarm-leiste span { color:var(--navy) !important; background:#fff !important; border-color:var(--line) !important; }
+    .dom-kette { color:var(--navy) !important; }
+    .ton-btn, .sirene { display:none; }
     .frage-gross { color:var(--navy) !important; }
     .linie-box .l, .linie-box .r { color:var(--navy) !important; }
     .inv-karte { box-shadow:none; border:2px solid var(--line); }
     .ab-karte { background:#fff; border-color:var(--line); color:var(--ink); }
     .titel-reihe .rund { box-shadow:none; border:2px solid var(--line); }
+    .pitch-zeit { background:#fff; color:var(--navy); border:2px solid var(--navy); }
+    .pitch-zeit small { color:var(--muted); }
   }
 </style>
 <style>
@@ -224,7 +291,7 @@
     <div style="margin-top:50px;">
       <span class="titel-label">Stunde 2</span>
       <h1>Wie tickt<br>ein Betrieb?</h1>
-      <p class="titel-claim">Heute nehmt ihr eure eigene Firma auseinander, Abteilung für Abteilung.</p>
+      <p class="titel-claim">Heute geraten eure Firmen in Not. Wer sie rettet, versteht, wie ein Betrieb funktioniert.</p>
       <div class="titel-reihe">
         <div class="rund"><span class="ic ic-beschaffung"></span></div>
         <div class="rund"><span class="ic ic-produktion"></span></div>
@@ -240,51 +307,48 @@
   <section class="slide" id="s-plan" data-phase="none" data-timer="0">
     <div class="kopf"><span class="chip">Fahrplan</span><span class="zeit">45 Minuten</span></div>
     <h2>So läuft die Stunde</h2>
-    <p class="sub">Erst ein Katastrophentag, dann die Begriffe, dann seid ihr dran.</p>
+    <p class="sub">Erst schlägt der Alarm an, dann lernt ihr die Begriffe, dann rettet ihr eure eigene Firma.</p>
     <div class="phasen">
-      <div class="phase einstieg step"><div class="min">8 <small>Min</small></div><div class="name">Einstieg</div><div class="was">Katastrophentag bei der Bäckerei Sonnenschein</div></div>
+      <div class="phase einstieg step"><div class="min">8 <small>Min</small></div><div class="name">Einstieg</div><div class="was">Krisenalarm: Eure Firmen in Not</div></div>
       <div class="phase input step"><div class="min">10 <small>Min</small></div><div class="name">Input</div><div class="was">Die 5 Grundfunktionen und ein Blitz-Check</div></div>
-      <div class="phase erarbeitung step"><div class="min">18 <small>Min</small></div><div class="name">Erarbeitung</div><div class="was">Eure Firma unter der Lupe, mit Rollen und Investoren-Check</div></div>
-      <div class="phase sicherung step"><div class="min">9 <small>Min</small></div><div class="name">Sicherung</div><div class="was">30-Sekunden-Pitch und Merksatz</div></div>
+      <div class="phase erarbeitung step"><div class="min">18 <small>Min</small></div><div class="name">Erarbeitung</div><div class="was">Krisenstab und Domino-Alarm für eure Firma, mit Rollen</div></div>
+      <div class="phase sicherung step"><div class="min">9 <small>Min</small></div><div class="name">Sicherung</div><div class="was">Blitz-Pitch und Merksatz</div></div>
     </div>
     <div class="ziel-box step"><span>Das könnt ihr am Ende</span>Die 5 Grundfunktionen nennen und an eurer eigenen Firma erklären.</div>
     <aside class="notes"><b>1 Min.</b> Phasen nacheinander einblenden (Pfeil rechts). Lernziel laut vorlesen lassen. Betonen: Der Steckbrief ist das Ergebnis der Stunde, er wird in Stunde 3 nach der Betriebsbesichtigung ergänzt.</aside>
   </section>
 
   <!-- 3 EINSTIEG: KATASTROPHENTAG -->
-  <section class="slide dunkel" id="s-kata" data-phase="einstieg" data-timer="60">
-    <div class="kopf"><span class="chip einstieg">Einstieg</span><span class="zeit">8 Min &middot; Positionslinie</span></div>
-    <h2>Katastrophentag bei der Bäckerei Sonnenschein</h2>
-    <p class="sub">Jede Karte ist ein Problem. Stellt euch auf die Linie: Übersteht die Bäckerei das?</p>
-    <div class="kata-raster">
-      <div class="kata step"><div class="tag">Montag, 6 Uhr</div><div class="text">Das Mehl wurde nicht geliefert.</div><div class="blitz">?</div></div>
-      <div class="kata step"><div class="tag">Dienstag</div><div class="text">Der große Ofen ist kaputt.</div><div class="blitz">?</div></div>
-      <div class="kata step"><div class="tag">Mittwoch</div><div class="text">Kein einziger Kunde kommt.</div><div class="blitz">?</div></div>
-      <div class="kata step"><div class="tag">Donnerstag</div><div class="text">Anwohner beschweren sich über Müll und Abgase. Die Stadt droht mit Strafe.</div><div class="blitz">?</div></div>
-      <div class="kata step"><div class="tag">Freitag</div><div class="text">Das ganze Team liegt krank im Bett.</div><div class="blitz">?</div></div>
+  <section class="slide dunkel" id="s-kata" data-phase="einstieg" data-timer="0">
+    <div class="kopf"><span class="chip einstieg">Einstieg</span><span class="zeit">8 Min &middot; Krisenalarm</span></div>
+    <div class="alarm-kopf"><span class="sirene" id="sirene"></span><h2>Krisenalarm!</h2><button type="button" class="ton-btn" id="ton-btn">Ton: an</button></div>
+    <div class="alarm-karte" id="alarm-karte">
+      <div class="al-firma" id="al-firma"></div>
+      <div class="al-tag" id="al-tag"></div>
+      <div class="al-text" id="al-text"></div>
     </div>
-    <div class="linie-box step">
+    <div class="alarm-leiste" id="alarm-leiste"></div>
+    <div class="linie-box">
       <span class="l" style="color:#7fd1a0;">überlebt</span>
       <div class="skala"></div>
       <span class="r" style="color:#f0a090;">ist pleite</span>
     </div>
-    <div class="frage-gross step">Jede Katastrophe trifft einen <em>anderen Bereich</em>. Wie viele Bereiche braucht ein Betrieb?</div>
-    <aside class="notes"><b>8 Min.:</b> Zuerst Raum leerräumen oder Gang freimachen, Zettel "überlebt" links und "ist pleite" rechts an die Wand. Pro Karte: einblenden, 10 Sekunden aufstellen, zwei Schüler begründen (ca. 1 Min.). Nicht auflösen. Am Ende die Frage stellen und ein bis zwei Tipps (Zahl) sammeln, dann Pfeil rechts zur Auflösung. <b>Erwartung:</b> Mehl und Ofen halten manche für überlebbar (Ersatzlieferant), Kundenmangel und Teamausfall wiegen schwerer. Genau das ist der Punkt: Jede Funktion fehlt dem Betrieb, wenn sie ausfällt.</aside>
+    <aside class="notes"><b>8 Min.:</b> Gang freimachen, Zettel "überlebt" links und "ist pleite" rechts an die Wand. Pfeil rechts löst den nächsten Alarm aus (mit Sirene, Knopf "Ton" schaltet sie ab). Pro Alarm: Firma wird genannt, alle stellen sich auf die Linie, zwei Schüler begründen (ca. 45 Sekunden). Nicht auflösen. Bei den letzten zwei Alarmen reicht Daumen hoch, quer, runter, dann spart ihr Zeit. Wichtig: Die Krisen sind Spaß und treffen jede Firma, keine Firma wird vorgeführt. Zum Schluss erscheint die Frage: Jede Krise hat einen anderen Bereich getroffen. Wie viele Bereiche braucht ein Betrieb? Schätzungen sammeln, nicht auflösen, das macht die nächste Folie.</aside>
   </section>
 
   <!-- 4 INPUT: DIE 5 GRUNDFUNKTIONEN -->
   <section class="slide" id="s-fkt" data-phase="input" data-timer="420">
     <div class="kopf"><span class="chip input">Input</span><span class="zeit">10 Min &middot; Merkblatt dazu</span></div>
     <h2>Die 5 Grundfunktionen eines Betriebs</h2>
-    <p class="sub">Jede Katastrophe von eben gehört zu genau einer Funktion.</p>
+    <p class="sub">Jeder Alarm von eben gehört zu genau einer Funktion.</p>
     <div class="fkt-raster">
-      <div class="fkt beschaffung step"><span class="ic ic-beschaffung"></span><div class="nr">1</div><div class="nm">Beschaffung</div><div class="def">Alles besorgen, was man zum Arbeiten braucht.</div><div class="bsp"><b>Bäckerei:</b> Mehl einkaufen<br><b>Fahrradwerkstatt:</b> Ersatzteile</div><div class="rueck">Montag: Mehl fehlt</div></div>
-      <div class="fkt produktion step"><span class="ic ic-produktion"></span><div class="nr">2</div><div class="nm">Produktion</div><div class="def">Die Leistung entsteht: ein Produkt oder eine Dienstleistung.</div><div class="bsp"><b>Bäckerei:</b> Brötchen backen<br><b>Werkstatt:</b> Reifen wechseln</div><div class="rueck">Dienstag: Ofen kaputt</div></div>
-      <div class="fkt absatz step"><span class="ic ic-absatz"></span><div class="nr">3</div><div class="nm">Absatz</div><div class="def">Verkaufen und Geld dafür bekommen.</div><div class="bsp"><b>Bäckerei:</b> Brötchen im Laden<br><b>Werkstatt:</b> Rechnung stellen</div><div class="rueck">Mittwoch: keine Kunden</div></div>
-      <div class="fkt oekologie step"><span class="ic ic-oekologie"></span><div class="nr">4</div><div class="nm">Ökologie</div><div class="def">Auf die Umwelt achten und sie schonen.</div><div class="bsp"><b>Bäckerei:</b> Altes Brot spenden<br><b>Werkstatt:</b> Lastenrad statt Auto</div><div class="rueck">Donnerstag: Müll, Abgase</div></div>
-      <div class="fkt arbeitsplaetze step"><span class="ic ic-arbeitsplaetze"></span><div class="nr">5</div><div class="nm">Arbeitsplätze</div><div class="def">Menschen, die die Arbeit machen.</div><div class="bsp"><b>Bäckerei:</b> Bäcker, Verkäuferin, Azubi<br><b>Werkstatt:</b> Mechaniker</div><div class="rueck">Freitag: Team krank</div></div>
+      <div class="fkt beschaffung step"><span class="ic ic-beschaffung"></span><div class="nr">1</div><div class="nm">Beschaffung</div><div class="def">Alles besorgen, was man zum Arbeiten braucht.</div><div class="bsp"><b>Bäckerei:</b> Mehl einkaufen<br><b>Fahrradwerkstatt:</b> Ersatzteile</div><div class="rueck">Alarm: Bäckerei Sonnenschein</div></div>
+      <div class="fkt produktion step"><span class="ic ic-produktion"></span><div class="nr">2</div><div class="nm">Produktion</div><div class="def">Die Leistung entsteht: ein Produkt oder eine Dienstleistung.</div><div class="bsp"><b>Bäckerei:</b> Brötchen backen<br><b>Werkstatt:</b> Reifen wechseln</div><div class="rueck">Alarm: Fahrradwerkstatt Kettenglück</div></div>
+      <div class="fkt absatz step"><span class="ic ic-absatz"></span><div class="nr">3</div><div class="nm">Absatz</div><div class="def">Verkaufen und Geld dafür bekommen.</div><div class="bsp"><b>Bäckerei:</b> Brötchen im Laden<br><b>Werkstatt:</b> Rechnung stellen</div><div class="rueck">Alarm: Eisdiele Dolce</div></div>
+      <div class="fkt oekologie step"><span class="ic ic-oekologie"></span><div class="nr">4</div><div class="nm">Ökologie</div><div class="def">Auf die Umwelt achten und sie schonen.</div><div class="bsp"><b>Bäckerei:</b> Altes Brot spenden<br><b>Werkstatt:</b> Lastenrad statt Auto</div><div class="rueck">Alarm: Pizzeria Luigi</div></div>
+      <div class="fkt arbeitsplaetze step"><span class="ic ic-arbeitsplaetze"></span><div class="nr">5</div><div class="nm">Arbeitsplätze</div><div class="def">Menschen, die die Arbeit machen.</div><div class="bsp"><b>Bäckerei:</b> Bäcker, Verkäuferin, Azubi<br><b>Werkstatt:</b> Mechaniker</div><div class="rueck">Alarm: Case&Co (Online-Shop)</div></div>
     </div>
-    <aside class="notes"><b>7 Min. (Direkte Instruktion):</b> Pro Spalte einmal Pfeil rechts. Begriff nennen, Definition in eigenen Worten, dann die Katastrophe von eben zuordnen lassen ("Welche war das?"). Das Merkblatt (material-12) ist das Handout: Am Ende der Stunde einkleben, jetzt nur kurz zeigen. <b>Wichtig:</b> Beschaffung gilt auch für Dienstleister (Fachwissen, Räume, Werkzeug). Produktion heißt nicht nur "Fabrik".</aside>
+    <aside class="notes"><b>7 Min. (Direkte Instruktion):</b> Pro Spalte einmal Pfeil rechts. Begriff nennen, Definition in eigenen Worten, dann den Alarm von eben zuordnen lassen ("Welche war das?"). Das Merkblatt (material-12) ist das Handout: Am Ende der Stunde einkleben, jetzt nur kurz zeigen. <b>Wichtig:</b> Beschaffung gilt auch für Dienstleister (Fachwissen, Räume, Werkzeug). Produktion heißt nicht nur "Fabrik".</aside>
   </section>
 
   <!-- 5 INPUT: BLITZ-CHECK -->
@@ -307,8 +371,8 @@
   <!-- 6 ERARBEITUNG: AUFTRAG -->
   <section class="slide" id="s-erab" data-phase="erarbeitung" data-timer="240">
     <div class="kopf"><span class="chip erarbeitung">Erarbeitung</span><span class="zeit">18 Min &middot; Teamarbeit</span></div>
-    <h2>Eure Firma unter der Lupe</h2>
-    <p class="sub">Jeder im Team übernimmt eine Abteilung. Klickt auf einen Schritt, dann startet der Timer.</p>
+    <h2>Krisenstab: Rettet eure Firma</h2>
+    <p class="sub">Jeder im Team leitet eine Abteilung und löst die Krise dazu. Klickt auf einen Schritt, dann startet der Timer.</p>
     <div class="erab-grid">
       <div class="rollen-liste step">
         <div class="rolle-zeile"><span class="ic ic-beschaffung"></span><div>Beschaffungs-Chef/in<small>Was müssen wir besorgen?</small></div></div>
@@ -318,18 +382,42 @@
         <div class="rolle-zeile"><span class="ic ic-arbeitsplaetze"></span><div>Personalchef/in<small>Wer macht was, wer springt ein?</small></div></div>
       </div>
       <div class="schritte step">
-        <div class="schritt" data-sek="240"><div class="sz">4<small>Min</small></div><div><div class="st">1. Allein: Deine Abteilung</div><div class="sd">Ziehe deine Rollenkarte. Trage in den Steckbrief Stichworte für deinen Bereich ein.</div></div></div>
-        <div class="schritt" data-sek="480"><div class="sz">8<small>Min</small></div><div><div class="st">2. Im Team: Abteilungsrunde</div><div class="sd">Jede Abteilung stellt sich in 1 Minute vor. Das Team ergänzt. Sucht gemeinsam die schwächste Stelle.</div></div></div>
-        <div class="schritt" data-sek="360"><div class="sz">6<small>Min</small></div><div><div class="st">3. Investoren-Check</div><div class="sd">Ein Teammitglied wird Investor/in und besucht das Nachbarteam. Es zieht eine Investorenkarte und fragt nach. Dann zurück und tauschen.</div></div></div>
+        <div class="schritt" data-sek="240"><div class="sz">4<small>Min</small></div><div><div class="st">1. Allein: Eure Krisenkarte</div><div class="sd">Ziehe eine Rolle. Öffne den Umschlag deiner Firma und nimm die Krisenkarte für deine Abteilung. Trage deine Rettungsidee im Steckbrief ein.</div></div></div>
+        <div class="schritt" data-sek="360"><div class="sz">6<small>Min</small></div><div><div class="st">2. Im Team: Krisenstab</div><div class="sd">Jede Abteilung liest ihre Krise vor und sagt die Rettungsidee. Das Team verbessert sie. Welche Abteilung ist am schwächsten?</div></div></div>
+        <div class="schritt" data-sek="0"><div class="sz">8<small>Min</small></div><div><div class="st">3. Domino-Alarm</div><div class="sd">Nächste Folie: Jede Firma bekommt einen Ausfall zugelost und zeigt, wen es als Nächstes trifft.</div></div></div>
       </div>
     </div>
-    <div class="material-leiste step"><b>Material:</b> Betriebs-Steckbrief (1 pro Team), Rollenkarten, Investorenkarten. Fertig? Ergänzt eine Idee, wie ihr eure schwächste Funktion verbessert.</div>
-    <aside class="notes"><b>18 Min.:</b> Rollen vorher klären (bei 4 Personen übernimmt der Personalchef die Ökologie mit, steht auf der Karte). Schritt 1 und 2 laufen leise und konzentriert, du gehst herum. Für Schritt 3 wandert pro Team genau eine Person im Uhrzeigersinn zum nächsten Team, so tauschen sich alle Teams aus, ohne dass Chaos entsteht. Die Investorenkarten liegen verdeckt beim besuchten Team. Bei schnellen Teams: schwächste Funktion verbessern (Zusatzzeile im Steckbrief). Auf Folie 7 liegt ein digitaler Kartenstapel, falls du es lieber am Beamer machst.</aside>
+    <div class="material-leiste step"><b>Material:</b> Krisenumschlag pro Firma (material-26), Betriebs-Steckbrief, Rollenkarten. Fertig? Überlegt, wie ihr die Krise beim nächsten Mal von vornherein verhindert.</div>
+    <aside class="notes"><b>10 Min. (Schritt 1 und 2):</b> Rollen vorher klären. Kleine Teams (2 oder 3 Personen): Jeder übernimmt mehrere Karten, Reihenfolge Beschaffung, Produktion, Absatz zuerst. Pro Team liegt ein Umschlag mit 5 Krisenkarten (material-26, Seite je nach Firma). Wenn ein Team seine Idee geändert hat, die Karten der "Anderen Firma" nehmen. Schritt 1 und 2 laufen leise und konzentriert, du gehst herum und hörst mit. Wichtig bei den Rettungsideen: konkret statt "wir überlegen uns was". Der Steckbrief ist weiter das Ergebnis, die Krisenkarte ersetzt nur das leere Formular.</aside>
+  </section>
+
+  <!-- 6b ERARBEITUNG: DOMINO-ALARM -->
+  <section class="slide dunkel" id="s-domino" data-phase="erarbeitung" data-timer="480">
+    <div class="kopf"><span class="chip erarbeitung">Erarbeitung</span><span class="zeit">8 Min &middot; Domino-Alarm</span></div>
+    <h2>Domino-Alarm</h2>
+    <p class="sub">Fällt ein Bereich aus, kippen andere mit. Jede Firma bekommt einen Ausfall zugelost.</p>
+    <div class="dom-reihe" id="dom-reihe">
+      <div class="dom" data-f="beschaffung"><span class="ic ic-beschaffung"></span><b>Beschaffung</b></div>
+      <div class="dom" data-f="produktion"><span class="ic ic-produktion"></span><b>Produktion</b></div>
+      <div class="dom" data-f="absatz"><span class="ic ic-absatz"></span><b>Absatz</b></div>
+      <div class="dom" data-f="oekologie"><span class="ic ic-oekologie"></span><b>Ökologie</b></div>
+      <div class="dom" data-f="arbeitsplaetze"><span class="ic ic-arbeitsplaetze"></span><b>Arbeitsplätze</b></div>
+    </div>
+    <div class="dom-kette" id="dom-kette">Los geht es mit "Ausfälle auslosen".</div>
+    <div class="dom-grid">
+      <div class="dom-liste" id="dom-liste"></div>
+      <div class="dom-auftrag">
+        <b>Euer Auftrag:</b> Schreibt auf die Rückseite eurer Krisenkarte (oder ins Heft):
+        <ol><li>Welche zwei Bereiche trifft es als Nächstes, und warum?</li><li>Was hätte die Firma vorher tun können?</li></ol>
+        <button type="button" class="inv-btn" id="dom-los">Ausfälle auslosen</button>
+      </div>
+    </div>
+    <aside class="notes"><b>8 Min.:</b> Knopf "Ausfälle auslosen": Jede Firma bekommt einen Bereich, der ausfällt (jeder Bereich kommt vor). 4 Min. schreiben die Teams ihre Kette auf. Dann tippst du eine Firma in der Liste an: Die Dominosteine kippen und die Kette erscheint als Musterlösung. Zwei oder drei Firmen zeigen ihre Kette zuerst, die Klasse gibt Daumen. Ziel für den Merksatz: Alle Bereiche hängen zusammen, deshalb "nur wenn alle zusammenspielen". Wichtig: Die Kette in der Musterlösung ist ein Vorschlag, andere Begründungen gelten, wenn sie stimmig sind.</aside>
   </section>
 
   <!-- 7 ERARBEITUNG: INVESTORENKARTE -->
   <section class="slide dunkel" id="s-inv" data-phase="erarbeitung" data-timer="120">
-    <div class="kopf"><span class="chip erarbeitung">Erarbeitung</span><span class="zeit">Investoren-Check</span></div>
+    <div class="kopf"><span class="chip erarbeitung">Bonus</span><span class="zeit">Investoren-Check, nur bei Zeit</span></div>
     <h2>Investoren-Karte ziehen</h2>
     <p class="sub">Für den Beamer: Klick auf die Karte oder den Knopf zieht eine neue Frage.</p>
     <div class="inv-zentrum">
@@ -337,30 +425,24 @@
       <button class="inv-btn" id="inv-btn">Karte ziehen</button>
       <div class="inv-zaehler" id="inv-zaehler"></div>
     </div>
-    <aside class="notes"><b>Optional:</b> Wenn die ausgedruckten Karten nicht gehen oder alle zusammen üben sollen. Ein Team antwortet laut, die anderen sind Investoren und bewerten mit Daumen (hoch: überzeugt, quer: unsicher, runter: Lücke).</aside>
+    <aside class="notes"><b>Bonus, nur wenn Zeit bleibt:</b> Wenn die ausgedruckten Karten nicht gehen oder alle zusammen üben sollen. Ein Team antwortet laut, die anderen sind Investoren und bewerten mit Daumen (hoch: überzeugt, quer: unsicher, runter: Lücke).</aside>
   </section>
 
   <!-- 8 SICHERUNG: BLITZ-PITCH -->
   <section class="slide" id="s-pitch" data-phase="sicherung" data-timer="30">
     <div class="kopf"><span class="chip sicherung">Sicherung</span><span class="zeit">5 Min &middot; Blitz-Pitch</span></div>
-    <h2>30 Sekunden: Eure Firma im Check</h2>
+    <h2>Blitz-Pitch: Eure Firma im Check</h2>
     <p class="sub">Ein Teammitglied pro Firma stellt sich vor die Klasse. Der Satz hilft euch.</p>
     <div class="pitch-grid">
       <div class="satz">Wir sind <span class="luecke">Firmenname</span>.<br>Unsere stärkste Funktion ist <span class="luecke">Funktion</span>, weil <span class="luecke" style="min-width:200px;">Grund</span>.<br>Am schwächsten ist <span class="luecke">Funktion</span>. Das verbessern wir so: <span class="luecke" style="min-width:200px;">Idee</span>.</div>
       <div>
-        <div class="teams">
-          <button class="team-btn" data-team="1">Firma 1</button>
-          <button class="team-btn" data-team="2">Firma 2</button>
-          <button class="team-btn" data-team="3">Firma 3</button>
-          <button class="team-btn" data-team="4">Firma 4</button>
-          <button class="team-btn" data-team="5">Firma 5</button>
-          <button class="team-btn" data-team="6">Firma 6</button>
-          <button class="team-btn" data-team="7">Firma 7</button>
-        </div>
+        <div class="pitch-zeit" id="pitch-zeit"></div>
+        <div class="pitch-hinweis" id="pitch-hinweis" hidden></div>
+        <div class="teams" id="team-box"></div>
         <div class="jury"><b>Alle anderen sind Jury.</b> Zeigt am Ende mit dem Daumen, ob ihr die schwächste Funktion genauso seht.</div>
       </div>
     </div>
-    <aside class="notes"><b>5 Min.:</b> Firma antippen = Timer startet mit 30 Sekunden, Knopf wird orange, nach dem Klingeln beim nächsten Antippen grün. Danach ein Klick auf den Timer startet erneut. Pro Firma 30 Sekunden plus 10 Sekunden Wechsel. Die Jury (Daumen) bringt alle ins Zuhören. Je nach Zahl der Firmen die Zeit pro Firma anpassen (bei vielen Firmen 20 Sekunden).</aside>
+    <aside class="notes"><b>5 Min.:</b> Firma antippen = Timer startet, Knopf wird orange, beim nächsten Antippen wird der vorige grün. Die Zeit pro Firma rechnet die Folie selbst aus: die fünf Minuten geteilt durch die Firmenzahl, abzüglich zehn Sekunden Wechsel, begrenzt auf einen sinnvollen Bereich (steht groß über den Knöpfen). Ein Klick auf den Timer startet erneut. Die Jury (Daumen) bringt alle ins Zuhören. Bei sehr vielen Firmen erscheint ein Hinweis mit einem Auslosen-Knopf, falls nur ein Teil der Firmen vortragen soll. Die Firmenzahl stellst du im Stepper oben rechts ein.</aside>
   </section>
 
   <!-- 9 SICHERUNG: MERKSATZ -->
@@ -403,6 +485,79 @@
 
 <script>
 window.DECK_CONFIG = { phases: [["einstieg",8],["input",10],["erarbeitung",18],["sicherung",9]] };
+/* Firmenzahl der Klasse, einmal eingeben, überall wirksam.
+ *
+ * Die Zahl kommt (in dieser Reihenfolge) aus: Adresszeile (?firmen=7), dem Browserspeicher
+ * (localStorage, gilt für alle Mini-Firma-Seiten im selben Browser), sonst Standard 8.
+ * Sie wird zwischen 2 und 12 begrenzt.
+ *
+ * Benutzung in einer Stunde:
+ *   MiniFirma.get()                  -> aktuelle Zahl
+ *   MiniFirma.onChange(function(n){ ... })   -> wird sofort und bei jeder Änderung aufgerufen
+ *   MiniFirma.set(7)                 -> setzt die Zahl (speichert, benachrichtigt alle)
+ *   MiniFirma.renderButtons(container, {className:'team-btn', label:function(i){return 'Firma '+i;}})
+ *                                    -> füllt container mit n Knöpfen (data-team="1".."n")
+ *   MiniFirma.mountStepper(element)  -> setzt dort "Firmen [-] 8 [+]" ein
+ */
+window.MiniFirma = (function () {
+  var MIN = 2, MAX = 12, DEF = 8, KEY = 'minifirma_firmen';
+  var listeners = [];
+
+  function clamp(v) { v = parseInt(v, 10); if (isNaN(v)) return null; return Math.max(MIN, Math.min(MAX, v)); }
+  function fromUrl() { var m = /[?&]firmen=(\d+)/.exec(location.search); return m ? clamp(m[1]) : null; }
+  function fromStore() { try { return clamp(localStorage.getItem(KEY)); } catch (e) { return null; } }
+  function toStore(v) { try { localStorage.setItem(KEY, String(v)); } catch (e) {} }
+
+  var n = fromUrl() || fromStore() || DEF;
+  var steppers = [];
+
+  function paintSteppers() { steppers.forEach(function (s) { s.num.textContent = n; s.minus.disabled = n <= MIN; s.plus.disabled = n >= MAX; }); }
+  function notify() { listeners.forEach(function (fn) { fn(n); }); paintSteppers(); }
+
+  function set(v) {
+    var c = clamp(v); if (c === null || c === n) return;
+    n = c; toStore(n); notify();
+  }
+
+  function onChange(fn) { listeners.push(fn); fn(n); }
+
+  function list() { var a = []; for (var i = 1; i <= n; i++) a.push(i); return a; }
+
+  function renderButtons(container, opts) {
+    opts = opts || {};
+    var cls = opts.className || 'team-btn';
+    var label = opts.label || function (i) { return 'Firma ' + i; };
+    container.innerHTML = '';
+    for (var i = 1; i <= n; i++) {
+      var b = document.createElement('button');
+      b.className = cls; b.dataset.team = String(i); b.textContent = label(i);
+      container.appendChild(b);
+    }
+  }
+
+  function mountStepper(el) {
+    el.classList.add('firmen-stepper');
+    el.innerHTML = '<span class="fs-label">Firmen</span><button type="button" class="fs-minus" aria-label="Eine Firma weniger">&minus;</button><span class="fs-num"></span><button type="button" class="fs-plus" aria-label="Eine Firma mehr">+</button>';
+    var s = { num: el.querySelector('.fs-num'), minus: el.querySelector('.fs-minus'), plus: el.querySelector('.fs-plus') };
+    s.minus.addEventListener('click', function () { set(n - 1); });
+    s.plus.addEventListener('click', function () { set(n + 1); });
+    steppers.push(s); paintSteppers();
+  }
+
+  /* Links auf Mini-Firma-Seiten tragen die Zahl in der Adresse mit (hilft, wenn der Browser
+     den Speicher zwischen Dateien nicht teilt, z. B. beim Öffnen von lokalen Dateien). */
+  function decorateLinks() {
+    Array.prototype.forEach.call(document.querySelectorAll('a[data-firmen-link]'), function (a) {
+      var base = a.getAttribute('data-firmen-link');
+      a.setAttribute('href', base + (base.indexOf('?') < 0 ? '?' : '&') + 'firmen=' + n);
+    });
+  }
+  listeners.push(decorateLinks);
+  if (document.readyState !== 'loading') decorateLinks(); else document.addEventListener('DOMContentLoaded', decorateLinks);
+
+  return { get: function () { return n; }, set: set, list: list, onChange: onChange, renderButtons: renderButtons, mountStepper: mountStepper, MIN: MIN, MAX: MAX };
+})();
+
 /* Gemeinsames Foliengerüst für die Mini-Firma-Stunden.
  *
  * Was es kann: Folien auf 1280x720 skalieren, Pfeiltasten/Wischen/Knöpfe, Schritt-Einblendung
@@ -558,6 +713,15 @@ window.Deck = (function () {
   }
   timerEl.addEventListener('click', toggleTimer);
 
+  /* ---------- Firmenzahl-Stepper in der Werkzeugleiste ---------- */
+  (function () {
+    var tools = document.getElementById('tools');
+    if (!tools || !window.MiniFirma) return;
+    var holder = document.createElement('div');
+    tools.insertBefore(holder, tools.firstChild);
+    MiniFirma.mountStepper(holder);
+  })();
+
   /* ---------- Start ---------- */
   function start() {
     var h = parseInt((location.hash || '').replace('#', ''), 10);
@@ -571,13 +735,12 @@ window.Deck = (function () {
 <script>
 (function(){
   var INVESTOR = [{"icon": "beschaffung", "frage": "Euer wichtigster Lieferant fällt eine Woche aus. Was macht ihr?"}, {"icon": "beschaffung", "frage": "Was braucht ihr am ersten Tag, um überhaupt loszulegen?"}, {"icon": "produktion", "frage": "Wie lange dauert es, bis ein Kunde sein Produkt oder seine Leistung bekommt?"}, {"icon": "produktion", "frage": "Was passiert, wenn bei euch etwas kaputtgeht oder schiefläuft?"}, {"icon": "absatz", "frage": "Warum soll ich bei euch kaufen und nicht bei der Konkurrenz?"}, {"icon": "absatz", "frage": "Wie erfahren die Leute überhaupt, dass es euch gibt?"}, {"icon": "oekologie", "frage": "Was ist an eurer Firma gut für die Umwelt? Und was nicht?"}, {"icon": "arbeitsplaetze", "frage": "Wer macht bei euch was? Was passiert, wenn jemand krank ist?"}, {"icon": "ziel", "frage": "Welche eurer fünf Funktionen ist im Moment am schwächsten?"}, {"icon": "ziel", "frage": "Was ist euer größtes Risiko, und wie fangt ihr es ab?"}];
-  var QUIZ = [
-    {t:"Ein Café bestellt jede Woche Kaffeebohnen beim Großhändler.", k:"beschaffung", r:"Das ist Beschaffung: etwas besorgen, das man zum Arbeiten braucht."},
-    {t:"Die Fahrradwerkstatt tauscht einen kaputten Reifen aus.", k:"produktion", r:"Das ist Produktion: Hier entsteht die Leistung, in dem Fall eine Dienstleistung."},
-    {t:"Ein Online-Shop macht Werbung auf Instagram und verschickt Pakete an Kunden.", k:"absatz", r:"Das ist Absatz: Die Leistung kommt zum Kunden und wird bezahlt."},
-    {t:"Die Pizzeria liefert nur noch mit E-Rollern aus.", k:"oekologie", r:"Das ist Ökologie: Der Betrieb schont damit die Umwelt."},
-    {t:"Die Eisdiele stellt im Sommer drei Ferienjobber ein.", k:"arbeitsplaetze", r:"Das sind Arbeitsplätze: Menschen, die im Betrieb arbeiten."}
-  ];
+  var NAMEN = [];
+  var ALARM = [{"firma": "Bäckerei Sonnenschein", "tag": "Montag, 6 Uhr", "text": "Das Mehl wurde nicht geliefert."}, {"firma": "Fahrradwerkstatt Kettenglück", "tag": "Dienstag, 15 Uhr", "text": "Ein Kunde holt sein Rad ab, aber der Reifen ist noch nicht gewechselt."}, {"firma": "Eisdiele Dolce", "tag": "Mittwoch", "text": "Es regnet seit drei Tagen, niemand kauft Eis."}, {"firma": "Pizzeria Luigi", "tag": "Donnerstag", "text": "Die Pappboxen landen im Restmüll, das Umweltamt fragt nach."}, {"firma": "Case&Co (Online-Shop)", "tag": "Freitag", "text": "Beide Mitarbeiter sind im Urlaub, und 50 Pakete warten."}];
+  function fname(i){ return NAMEN[i-1] || ('Firma ' + i); }
+  /* Die Klasse hat diese Firmen: Zahl einmal setzen, Stepper oben rechts bleibt nutzbar */
+  if (NAMEN.length) MiniFirma.set(NAMEN.length);
+  var QUIZ = [{"t": "Ein Café bestellt jede Woche Kaffeebohnen beim Großhändler.", "k": "beschaffung", "r": "Das ist Beschaffung: etwas besorgen, das man zum Arbeiten braucht."}, {"t": "Die Fahrradwerkstatt tauscht einen kaputten Reifen aus.", "k": "produktion", "r": "Das ist Produktion: Hier entsteht die Leistung, in dem Fall eine Dienstleistung."}, {"t": "Ein Online-Shop macht Werbung auf Instagram und verschickt Pakete an Kunden.", "k": "absatz", "r": "Das ist Absatz: Die Leistung kommt zum Kunden und wird bezahlt."}, {"t": "Die Pizzeria liefert nur noch mit E-Rollern aus.", "k": "oekologie", "r": "Das ist Ökologie: Der Betrieb schont damit die Umwelt."}, {"t": "Die Eisdiele stellt im Sommer drei Ferienjobber ein.", "k": "arbeitsplaetze", "r": "Das sind Arbeitsplätze: Menschen, die im Betrieb arbeiten."}];
 
   /* Quiz: Pfeil rechts = nächste Frage */
   var qi = 0;
@@ -606,6 +769,95 @@ window.Deck = (function () {
     prev: function(){ if (qi > 0) { qi--; renderQ(); return true; } return false; }
   };
 
+
+  /* Krisenalarm: Pfeil rechts = nächster Alarm */
+  var aIdx = 0, tonAn = true, ac2 = null;
+  var aKarte = document.getElementById('alarm-karte'), aFirma = document.getElementById('al-firma'), aTag = document.getElementById('al-tag'), aText = document.getElementById('al-text'), aLeiste = document.getElementById('alarm-leiste'), tonBtn = document.getElementById('ton-btn');
+  function sirene(){
+    if (!tonAn) return;
+    try {
+      ac2 = ac2 || new (window.AudioContext || window.webkitAudioContext)();
+      [0, 0.32, 0.64].forEach(function(t, i){
+        var o = ac2.createOscillator(), g = ac2.createGain();
+        o.type = 'triangle'; o.frequency.value = (i % 2) ? 520 : 760; o.connect(g); g.connect(ac2.destination);
+        var n = ac2.currentTime + t;
+        g.gain.setValueAtTime(0.0001, n); g.gain.exponentialRampToValueAtTime(0.14, n + 0.03); g.gain.exponentialRampToValueAtTime(0.0001, n + 0.3);
+        o.start(n); o.stop(n + 0.31);
+      });
+    } catch (e) {}
+  }
+  function alarmZeichnen(laut){
+    var n = ALARM.length;
+    aText.classList.toggle('klein', aIdx === 0 || aIdx > n);
+    if (aIdx === 0) {
+      aFirma.textContent = 'Gleich geht es los'; aTag.textContent = n + ' Firmen, ' + n + ' Krisen';
+      aText.textContent = 'Bei jedem Alarm stellt ihr euch auf die Linie: Überlebt die Firma, oder ist sie pleite?';
+    } else if (aIdx <= n) {
+      var a = ALARM[aIdx - 1];
+      aFirma.textContent = a.firma; aTag.textContent = a.tag; aText.textContent = a.text;
+    } else {
+      aFirma.textContent = 'Und jetzt die Frage'; aTag.textContent = 'Was ist euch aufgefallen?';
+      aText.textContent = 'Jeder Alarm hat einen anderen Bereich getroffen. Wie viele Bereiche braucht ein Betrieb?';
+    }
+    aKarte.classList.remove('neu'); void aKarte.offsetWidth; aKarte.classList.add('neu');
+    aLeiste.innerHTML = ALARM.map(function(a, i){
+      return '<span class="' + (i + 1 === aIdx ? 'an' : (i + 1 < aIdx ? 'da' : '')) + '">' + a.firma + '</span>';
+    }).join('');
+    if (laut && aIdx >= 1 && aIdx <= n) sirene();
+  }
+  tonBtn.addEventListener('click', function(){ tonAn = !tonAn; tonBtn.textContent = 'Ton: ' + (tonAn ? 'an' : 'aus'); });
+  Deck.custom['s-kata'] = {
+    enter: function(back){ aIdx = back ? ALARM.length + 1 : 0; alarmZeichnen(false); },
+    next: function(){ if (aIdx < ALARM.length + 1) { aIdx++; alarmZeichnen(true); return true; } return false; },
+    prev: function(){ if (aIdx > 0) { aIdx--; alarmZeichnen(false); return true; } return false; }
+  };
+
+  /* Domino-Alarm */
+  var DOM_KETTEN = {
+    beschaffung: {f:['beschaffung','produktion','absatz','arbeitsplaetze'], t:'Ohne Nachschub <em>steht die Produktion still</em>, es gibt nichts zu verkaufen, und das Geld für die Löhne fehlt.'},
+    produktion: {f:['produktion','absatz','arbeitsplaetze'], t:'Ohne Produkt <em>gibt es nichts zu verkaufen</em>, das Geld fehlt, und die Löhne sind in Gefahr.'},
+    absatz: {f:['absatz','arbeitsplaetze','beschaffung'], t:'Ohne Verkauf <em>kommt kein Geld rein</em>: Löhne und der nächste Einkauf sind nicht mehr bezahlbar.'},
+    oekologie: {f:['oekologie','produktion','absatz'], t:'Gibt es Ärger mit Müll oder Auflagen, <em>darf vielleicht nicht mehr produziert werden</em>, und der Ruf bei den Kunden leidet.'},
+    arbeitsplaetze: {f:['arbeitsplaetze','produktion','absatz'], t:'Ohne Leute <em>wird nichts hergestellt</em>, also kann auch nichts verkauft werden.'}
+  };
+  var DOM_NAMEN = {beschaffung:'Beschaffung', produktion:'Produktion', absatz:'Absatz', oekologie:'Ökologie', arbeitsplaetze:'Arbeitsplätze'};
+  var domListe = document.getElementById('dom-liste'), domKette = document.getElementById('dom-kette'), domSteine = Array.prototype.slice.call(document.querySelectorAll('#dom-reihe .dom'));
+  var domZuteilung = [], domTimer = [];
+  function domReset(){
+    domTimer.forEach(clearTimeout); domTimer = [];
+    domSteine.forEach(function(d){ d.classList.remove('hit','fall','start'); });
+  }
+  function domAuslosen(){
+    var n = MiniFirma.get(), keys = Object.keys(DOM_NAMEN), pool = [];
+    while (pool.length < n) pool = pool.concat(keys.slice().sort(function(){ return Math.random() - .5; }));
+    domZuteilung = pool.slice(0, n);
+    domReset(); domKette.innerHTML = 'Tippt eine Firma an: Dann kippen die Dominosteine.';
+    domZeichnen();
+  }
+  function domZeichnen(){
+    var n = MiniFirma.get();
+    if (domZuteilung.length !== n) { domZuteilung = []; domListe.innerHTML = ''; return; }
+    domListe.innerHTML = domZuteilung.map(function(f, i){
+      return '<button type="button" class="dom-zeile" data-i="' + i + '"><span class="ic ic-' + f + '"></span><div>' + fname(i + 1) + '<small>fällt aus: ' + DOM_NAMEN[f] + '</small></div></button>';
+    }).join('');
+  }
+  function domZeigen(i){
+    var f = domZuteilung[i], k = DOM_KETTEN[f];
+    domReset();
+    Array.prototype.forEach.call(domListe.children, function(b, j){ b.classList.toggle('aktiv', j === i); });
+    domKette.innerHTML = '<em>' + fname(i + 1) + ':</em> ' + k.t;
+    k.f.forEach(function(name, step){
+      var d = domSteine.filter(function(x){ return x.dataset.f === name; })[0];
+      domTimer.push(setTimeout(function(){ d.classList.add(step === 0 ? 'start' : 'hit', 'fall'); }, 350 + step * 650));
+    });
+  }
+  document.getElementById('dom-los').addEventListener('click', domAuslosen);
+  domListe.addEventListener('click', function(e){
+    var b = e.target.closest ? e.target.closest('.dom-zeile') : null;
+    if (b && domListe.contains(b)) domZeigen(+b.dataset.i);
+  });
+  MiniFirma.onChange(function(){ domZuteilung = []; domReset(); domListe.innerHTML = ''; });
+
   /* Investorenkarten ziehen */
   var invIdx = [], invUsed = 0;
   var invQ = document.getElementById('inv-q'), invIcon = document.getElementById('inv-icon'), invKarte = document.getElementById('inv-karte');
@@ -625,14 +877,66 @@ window.Deck = (function () {
     el.addEventListener('click', function(){ Deck.setTimer(parseInt(el.dataset.sek,10), true); });
   });
 
-  /* Blitz-Pitch: Firma antippen startet 30 Sekunden */
-  Array.prototype.forEach.call(document.querySelectorAll('.team-btn'), function(btn){
-    btn.addEventListener('click', function(){
-      Array.prototype.forEach.call(document.querySelectorAll('.team-btn.dran'), function(o){ if (o !== btn) { o.classList.remove('dran'); o.classList.add('fertig'); } });
-      btn.classList.remove('fertig'); btn.classList.add('dran');
-      Deck.setTimer(30, true);
+  /* Blitz-Pitch: Zeit pro Firma kommt aus Sicherungszeit und Firmenzahl */
+  var PITCH_POOL = 300, PITCH_WECHSEL = 10, PITCH_MIN = 15, PITCH_MAX = 45, TEIL_SEK = 30;
+  var teamBox = document.getElementById('team-box'), pitchZeit = document.getElementById('pitch-zeit'), hinweis = document.getElementById('pitch-hinweis');
+  var pitchFolie = document.getElementById('s-pitch');
+  var fertig = {}, dran = null, los = [], teilModus = false;
+  function zeitProFirma(n){
+    var roh = PITCH_POOL / n - PITCH_WECHSEL;
+    return Math.max(PITCH_MIN, Math.min(PITCH_MAX, Math.floor(roh / 5) * 5));
+  }
+  function sekunden(n){ return teilModus ? TEIL_SEK : zeitProFirma(n); }
+  function pitchZeichnen(n){
+    Object.keys(fertig).forEach(function(k){ if (+k > n) delete fertig[k]; });
+    if (dran !== null && dran > n) dran = null;
+    if (teilModus && n < 10) { teilModus = false; los = []; }
+    if (los.some(function(i){ return i > n; })) { los = []; teilModus = false; }
+    MiniFirma.renderButtons(teamBox, { className: 'team-btn', label: fname });
+    teamBox.classList.toggle('c3', n > 6);
+    teamBox.classList.toggle('c2', n <= 6);
+    Array.prototype.forEach.call(teamBox.querySelectorAll('.team-btn'), function(b){
+      var nr = +b.dataset.team;
+      if (fertig[nr]) b.classList.add('fertig');
+      if (nr === dran) { b.classList.remove('fertig'); b.classList.add('dran'); }
+      if (los.indexOf(nr) >= 0) b.classList.add('los');
     });
+    var sek = sekunden(n);
+    var vortragende = teilModus ? los.length : n;
+    var gesamt = Math.ceil(vortragende * (sek + PITCH_WECHSEL) / 60);
+    pitchZeit.innerHTML = '<b>' + sek + '</b><span>Sekunden pro Firma<small>' + (teilModus ? los.length + ' ausgeloste Firmen' : 'alle Firmen') + ', zusammen etwa ' + gesamt + ' Min. mit Wechsel</small></span>';
+    pitchFolie.dataset.timer = sek;
+    if (pitchFolie.classList.contains('active') && dran === null) Deck.setTimer(sek, false);
+    if (n >= 10) {
+      var k = Math.floor(PITCH_POOL / (TEIL_SEK + PITCH_WECHSEL));
+      hinweis.hidden = false;
+      hinweis.innerHTML = '<b>Viele Firmen, wenig Zeit.</b> Kürzer: nur Firmenname und stärkste Funktion nennen. Oder nur ein Teil trägt vor, die anderen geben den Steckbrief ab.' +
+        '<br><button type="button" id="teil-btn">' + (teilModus ? 'Alle Firmen vortragen lassen' : k + ' Firmen auslosen (je ' + TEIL_SEK + ' Sek.)') + '</button>' +
+        (teilModus ? '<div class="reihe">Reihenfolge: ' + los.map(function(i){ return fname(i); }).join(', dann ') + '</div>' : '');
+    } else { hinweis.hidden = true; hinweis.innerHTML = ''; }
+  }
+  teamBox.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.team-btn') : null;
+    if (!btn || !teamBox.contains(btn)) return;
+    var nr = +btn.dataset.team;
+    if (dran !== null && dran !== nr) fertig[dran] = true;
+    delete fertig[nr]; dran = nr;
+    pitchZeichnen(MiniFirma.get());
+    Deck.setTimer(sekunden(MiniFirma.get()), true);
   });
+  hinweis.addEventListener('click', function(e){
+    if (!e.target.closest || !e.target.closest('#teil-btn')) return;
+    var n = MiniFirma.get();
+    fertig = {}; dran = null;
+    if (teilModus) { teilModus = false; los = []; }
+    else {
+      var k = Math.floor(PITCH_POOL / (TEIL_SEK + PITCH_WECHSEL));
+      los = MiniFirma.list().sort(function(){ return Math.random() - .5; }).slice(0, k);
+      teilModus = true;
+    }
+    pitchZeichnen(n);
+  });
+  MiniFirma.onChange(pitchZeichnen);
 
   Deck.start();
 })();

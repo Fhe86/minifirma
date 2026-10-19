@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verlaufsplan Stunde 11: Leistungsnachweis Wirtschaft</title>
+<style>
+:root { --navy:#14324a; --teal:#4f9aa6; --teal-hell:#eaf4f4; --orange:#f2994a; --orange-hell:#fdeee0; --ink:#20303d; --linie:#b9c7ce; --gruen:#2f8f5b; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:"Trebuchet MS","Verdana","Segoe UI",sans-serif; font-size:8.3pt; line-height:1.27; color:var(--ink); background:#e8e8e8; }
+.blatt { width:297mm; min-height:210mm; margin:15px auto; padding:9mm 11mm; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.15); }
+.kopf { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--navy); padding-bottom:2mm; margin-bottom:3mm; }
+.kopf .label { font-size:7.8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--teal); font-weight:800; }
+.kopf h1 { font-size:17pt; color:var(--navy); line-height:1.1; }
+.kopf .meta { text-align:right; font-size:8pt; color:#4a5a63; }
+.ziele { display:grid; grid-template-columns:1.05fr 1.5fr; gap:3mm; margin-bottom:3mm; }
+.box { border:1.3px solid var(--linie); border-radius:2.5mm; padding:2mm 3mm; }
+.box.ziel { background:var(--orange-hell); border-color:var(--orange); font-size:8.4pt; font-weight:700; }
+.box h3 { font-size:7.8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--navy); margin-bottom:.8mm; }
+.box ul { padding-left:4mm; }
+table { width:100%; border-collapse:collapse; table-layout:fixed; }
+th { background:var(--navy); color:#fff; font-size:7.6pt; text-align:left; padding:1.25mm 2mm; }
+td { vertical-align:top; padding:1.1mm 1.8mm; border:1px solid var(--linie); font-size:7.5pt; }
+td.phase { font-weight:800; color:var(--navy); }
+td.phase small { display:block; font-weight:700; color:var(--teal); }
+tr.einstieg td.phase { border-left:5px solid var(--orange); }
+tr.input td.phase { border-left:5px solid var(--teal); }
+tr.erarbeitung td.phase { border-left:5px solid var(--navy); }
+tr.sicherung td.phase { border-left:5px solid var(--gruen); }
+td ul { padding-left:3mm; }
+td b { color:var(--navy); }
+.unten { display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:2.5mm; margin-top:2.5mm; font-size:7.5pt; }
+.unten .box { padding:2mm 2.6mm; }
+.btn-bar { width:297mm; margin:0 auto 10px; text-align:right; }
+.btn { font-family:system-ui,sans-serif; font-size:13px; padding:8px 16px; border-radius:6px; border:none; background:var(--navy); color:#fff; cursor:pointer; }
+@page { size:A4 landscape; margin:0; }
+@media print { body { background:#fff; } .blatt { margin:0; box-shadow:none; width:100%; min-height:0; padding:5mm 8mm; } .btn-bar { display:none; } tr,.box { page-break-inside:avoid; } }
+</style>
+</head>
+<body>
+<div class="btn-bar"><button class="btn" onclick="window.print()">Als PDF speichern</button></div>
+<div class="blatt">
+ <div class="kopf"><div><div class="label">Wirtschaft und Beruf · Verlaufsplan für die Lehrkraft</div><h1>Stunde 11: Leistungsnachweis Wirtschaft</h1></div><div class="meta">Klasse 8 M-Zweig · 45 Min. · Mini-Firma<br>Folien: <b>stunde-11-folien.html</b></div></div>
+ <div class="ziele"><div class="box ziel"><h3>Lernziel</h3>Die Schüler weisen schriftlich nach, dass sie zentrale Inhalte der Mini-Firmen-Sequenz verstehen, anwenden und begründet beurteilen können.</div><div class="box"><h3>Vorher bereitlegen</h3><ul><li>Leistungsnachweis material-11 doppelseitig oder wie vorgesehen drucken, ein Exemplar pro Schüler plus Reserve.</li><li>Sitzordnung und erlaubte Hilfsmittel festlegen. Merkblätter und Notizen vor Beginn wegräumen, falls kein offener Test geplant ist.</li><li>Timer und Beamerfolie öffnen. Lösung aus notes/loesung-leistungsnachweis.md getrennt und nicht sichtbar bereithalten.</li></ul></div></div>
+ <table><colgroup><col style="width:11%"><col style="width:8%"><col style="width:27%"><col style="width:28%"><col style="width:26%"></colgroup><tr><th>Phase und Zeit</th><th>Folie</th><th>Methode</th><th>Lehrkraft</th><th>Schüler</th></tr><tr class="einstieg"><td class="phase">Einstieg<small>3 Min.</small></td><td>1, 2</td><td><b>Ankommen und Materialausgabe</b><br>Plätze einnehmen, Namen auf alle Seiten schreiben und Prüfungsregeln hören.</td><td>Material erst nach der Erklärung austeilen. Nachteilsausgleich und Sitzordnung beachten.</td><td>Leise starten, Material prüfen und Rückfragen zu organisatorischen Punkten stellen.</td></tr>
+<tr class="input"><td class="phase">Input<small>2 Min.</small></td><td>3</td><td><b>Arbeitsauftrag und Zeitplan</b><br>Aufgabenüberblick, erlaubte Hilfsmittel, Abgabe und Zeitmarken klären.</td><td>Keine fachlichen Lösungshinweise geben. Auf vollständige Seitenzahl hinweisen.</td><td>Zuhören, Aufgabenüberschriften überblicken und offene Orga-Fragen stellen.</td></tr>
+<tr class="erarbeitung"><td class="phase">Erarbeitung<small>38 Min.</small></td><td>4</td><td><b>Eigenständiger Leistungsnachweis</b><br>50-Punkte-Arbeit zu Grundfunktionen, Wirtschaftskreislauf, Lohnformen, Brutto/Netto und Gerechtigkeit bearbeiten.</td><td>Zeitmarken sichtbar setzen. Nur Verständnis der Arbeitsanweisung klären, nicht den Fachinhalt.</td><td>Selbstständig bearbeiten, Rechenweg notieren und Zeit einteilen.</td></tr>
+<tr class="sicherung"><td class="phase">Sicherung<small>2 Min.</small></td><td>5</td><td><b>Abgabe und formaler Check</b><br>Namen, Seiten und Aufgaben prüfen, Arbeit abgeben.</td><td>Abgaben zählen und getrennt von der Lösung aufbewahren.</td><td>Vollständigkeit prüfen und still abgeben.</td></tr></table>
+ <div class="unten"><div class="box"><h3>Stolpersteine und Plan B</h3><ul><li>Bei Nachteilsausgleich die vereinbarte Zeitverlängerung und Hilfsmittel berücksichtigen.</li><li>Bei Beamer-Ausfall Regeln und Zeitmarken an die Tafel schreiben.</li><li>Wer früher fertig ist, prüft Rechenwege und lässt das Blatt danach still liegen.</li></ul></div><div class="box"><h3>Hefteintrag / Merksatz</h3>Aufgaben genau lesen, Begriffe präzise verwenden und bei Rechnungen den Rechenweg zeigen. Durchschnittswerte nicht mit Einzelfällen verwechseln.<h3 style="margin-top:2mm">Material</h3><ul><li>Leistungsnachweis (material-11), 50 Punkte.</li><li>Stifte; Taschenrechner nur dann, wenn du ihn für alle erlaubst.</li><li>Keine Lösung oder ausgefüllte Materialien auf Schülergeräten.</li></ul></div><div class="box"><h3>Bedienung der Folien</h3><ul><li>Pfeil rechts oder Leertaste: weiter, Pfeil links: zurück.</li><li>N: Lehrernotizen ein- und ausblenden, F: Vollbild.</li><li>Timer oben rechts: starten oder pausieren.</li><li>Auf dem iPad: nach links und rechts wischen.</li></ul></div></div>
+</div>
+</body>
+</html>
