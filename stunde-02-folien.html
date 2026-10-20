@@ -214,6 +214,11 @@
   /* ===== Folie 10: Ausblick ===== */
   .ausblick-grid { display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:14px; }
   .ab-karte { background:rgba(255,255,255,.08); border:1.5px solid rgba(255,255,255,.2); border-radius:18px; padding:26px 28px; font-size:23px; line-height:1.4; }
+  .ab-breit { grid-column:1 / -1; padding:14px 22px !important; }
+  .ab-karte .ab-liste { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:4px 26px; font-size:17px; line-height:1.3; margin:0; padding:0; }
+  .ab-karte .ab-liste b { display:inline; color:var(--orange); font-size:17px; letter-spacing:0; text-transform:none; margin:0; }
+  .ausblick-grid { gap:16px !important; }
+  .ausblick-grid .ab-karte { padding:18px 24px; font-size:21px; }
   .ab-karte b { color:var(--orange); display:block; font-size:15px; letter-spacing:.7px; text-transform:uppercase; margin-bottom:8px; }
 
 
@@ -234,6 +239,7 @@
   .alarm-leiste span.an { background:var(--orange); border-color:var(--orange); color:#3b2200; }
   .alarm-leiste span.da { border-color:#7fd1a0; color:#7fd1a0; }
 
+  .alarm-druck { display:none; }
   /* ===== Domino-Alarm ===== */
   .dom-reihe { display:flex; gap:16px; margin-top:6px; justify-content:center; }
   .dom { width:140px; height:128px; background:#fff; color:var(--navy); border-radius:14px; border-bottom:8px solid var(--teal); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:17px; transform-origin:bottom left; transition:transform .55s ease-in, background .3s; }
@@ -241,8 +247,9 @@
   .dom.hit { background:#f9e6e2; border-bottom-color:var(--rot); }
   .dom.fall { transform:rotate(11deg); }
   .dom.start { background:var(--rot); color:#fff; }
-  .dom-kette { margin-top:34px; font-size:22px; font-weight:700; color:#fff; text-align:center; min-height:34px; }
+  .dom-kette { margin-top:30px; font-size:22px; font-weight:700; color:#fff; text-align:center; min-height:34px; }
   .dom-kette em { font-style:normal; color:var(--orange); }
+  .dom-lage { margin-top:6px; font-size:17px; font-weight:600; color:#b6cbd4; }
   .dom-grid { display:grid; grid-template-columns:6fr 6fr; gap:24px; margin-top:12px; }
   .dom-liste { display:grid; grid-template-columns:1fr 1fr; gap:8px; align-content:start; }
   .dom-zeile { font:inherit; text-align:left; background:rgba(255,255,255,.1); color:#fff; border:1.5px solid rgba(255,255,255,.28); border-radius:12px; padding:8px 12px; font-size:18px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:10px; }
@@ -262,7 +269,10 @@
     .dom { box-shadow:none; border:2px solid var(--line); }
     .dom-zeile, .dom-auftrag, .alarm-leiste span { color:var(--navy) !important; background:#fff !important; border-color:var(--line) !important; }
     .dom-kette { color:var(--navy) !important; }
-    .ton-btn, .sirene { display:none; }
+    .ton-btn, .sirene, .alarm-karte, .alarm-leiste { display:none !important; }
+    .alarm-druck { display:block; list-style:none; margin-top:10px; font-size:19px; line-height:1.3; color:var(--navy); }
+    .alarm-druck li { margin-bottom:8px; }
+    .alarm-druck b { color:var(--orange); }
     .frage-gross { color:var(--navy) !important; }
     .linie-box .l, .linie-box .r { color:var(--navy) !important; }
     .inv-karte { box-shadow:none; border:2px solid var(--line); }
@@ -327,6 +337,7 @@
       <div class="al-tag" id="al-tag"></div>
       <div class="al-text" id="al-text"></div>
     </div>
+    <ol class="alarm-druck"><li><b>Bäckerei Sonnenschein</b> (Montag, 6 Uhr): Das Mehl wurde nicht geliefert.</li><li><b>Fahrradwerkstatt Kettenglück</b> (Dienstag, 15 Uhr): Ein Kunde holt sein Rad ab, aber der Reifen ist noch nicht gewechselt.</li><li><b>Eisdiele Dolce</b> (Mittwoch): Es regnet seit drei Tagen, niemand kauft Eis.</li><li><b>Pizzeria Luigi</b> (Donnerstag): Die Pappboxen landen im Restmüll, das Umweltamt fragt nach.</li><li><b>Case&amp;Co (Online-Shop)</b> (Freitag): Beide Mitarbeiter sind im Urlaub, und 50 Pakete warten.</li></ol>
     <div class="alarm-leiste" id="alarm-leiste"></div>
     <div class="linie-box">
       <span class="l" style="color:#7fd1a0;">überlebt</span>
@@ -468,6 +479,7 @@
     <div class="ausblick-grid">
       <div class="ab-karte step"><b>Betriebsbesichtigung</b>Achtet beim Rundgang darauf: Welche der 5 Funktionen sieht man am deutlichsten? Welche sieht man gar nicht?</div>
       <div class="ab-karte step"><b>Danach</b>In Stunde 3 ergänzt ihr in eurem Steckbrief ein bis zwei Dinge, die ihr vom echten Betrieb übernehmt.</div>
+      
     </div>
     <aside class="notes"><b>1 Min.:</b> Termin und Orga der Besichtigung nennen, falls bekannt. Notizzettel (material-03) für den Wandertag austeilen oder ankündigen.</aside>
   </section>
@@ -736,6 +748,8 @@ window.Deck = (function () {
 (function(){
   var INVESTOR = [{"icon": "beschaffung", "frage": "Euer wichtigster Lieferant fällt eine Woche aus. Was macht ihr?"}, {"icon": "beschaffung", "frage": "Was braucht ihr am ersten Tag, um überhaupt loszulegen?"}, {"icon": "produktion", "frage": "Wie lange dauert es, bis ein Kunde sein Produkt oder seine Leistung bekommt?"}, {"icon": "produktion", "frage": "Was passiert, wenn bei euch etwas kaputtgeht oder schiefläuft?"}, {"icon": "absatz", "frage": "Warum soll ich bei euch kaufen und nicht bei der Konkurrenz?"}, {"icon": "absatz", "frage": "Wie erfahren die Leute überhaupt, dass es euch gibt?"}, {"icon": "oekologie", "frage": "Was ist an eurer Firma gut für die Umwelt? Und was nicht?"}, {"icon": "arbeitsplaetze", "frage": "Wer macht bei euch was? Was passiert, wenn jemand krank ist?"}, {"icon": "ziel", "frage": "Welche eurer fünf Funktionen ist im Moment am schwächsten?"}, {"icon": "ziel", "frage": "Was ist euer größtes Risiko, und wie fangt ihr es ab?"}];
   var NAMEN = [];
+  var KRISEN = [];
+  var INV_FIRMA = [];
   var ALARM = [{"firma": "Bäckerei Sonnenschein", "tag": "Montag, 6 Uhr", "text": "Das Mehl wurde nicht geliefert."}, {"firma": "Fahrradwerkstatt Kettenglück", "tag": "Dienstag, 15 Uhr", "text": "Ein Kunde holt sein Rad ab, aber der Reifen ist noch nicht gewechselt."}, {"firma": "Eisdiele Dolce", "tag": "Mittwoch", "text": "Es regnet seit drei Tagen, niemand kauft Eis."}, {"firma": "Pizzeria Luigi", "tag": "Donnerstag", "text": "Die Pappboxen landen im Restmüll, das Umweltamt fragt nach."}, {"firma": "Case&Co (Online-Shop)", "tag": "Freitag", "text": "Beide Mitarbeiter sind im Urlaub, und 50 Pakete warten."}];
   function fname(i){ return NAMEN[i-1] || ('Firma ' + i); }
   /* Die Klasse hat diese Firmen: Zahl einmal setzen, Stepper oben rechts bleibt nutzbar */
@@ -845,7 +859,7 @@ window.Deck = (function () {
     var f = domZuteilung[i], k = DOM_KETTEN[f];
     domReset();
     Array.prototype.forEach.call(domListe.children, function(b, j){ b.classList.toggle('aktiv', j === i); });
-    domKette.innerHTML = '<em>' + fname(i + 1) + ':</em> ' + k.t;
+    domKette.innerHTML = '<em>' + fname(i + 1) + ':</em> ' + k.t + (KRISEN[i] ? '<div class="dom-lage">Ausgangslage bei euch: ' + KRISEN[i][f] + '</div>' : '');
     k.f.forEach(function(name, step){
       var d = domSteine.filter(function(x){ return x.dataset.f === name; })[0];
       domTimer.push(setTimeout(function(){ d.classList.add(step === 0 ? 'start' : 'hit', 'fall'); }, 350 + step * 650));
@@ -864,8 +878,9 @@ window.Deck = (function () {
   function ziehen(){
     if (!invIdx.length) { invIdx = INVESTOR.map(function(_,i){return i;}).sort(function(){return Math.random()-.5;}); invUsed = 0; }
     var c = INVESTOR[invIdx.pop()]; invUsed++;
-    invQ.textContent = c.frage;
-    invIcon.className = 'ic ic-' + c.icon;
+    var fq = INV_FIRMA.length ? INV_FIRMA[(invUsed - 1) % INV_FIRMA.length] : null;
+    invQ.textContent = fq ? fq.firma + ': ' + fq.frage : c.frage;
+    invIcon.className = 'ic ic-' + (fq ? 'ziel' : c.icon);
     invKarte.classList.remove('neu'); void invKarte.offsetWidth; invKarte.classList.add('neu');
     document.getElementById('inv-zaehler').textContent = 'Karte ' + invUsed + ' von ' + INVESTOR.length;
   }
@@ -921,6 +936,7 @@ window.Deck = (function () {
     var nr = +btn.dataset.team;
     if (dran !== null && dran !== nr) fertig[dran] = true;
     delete fertig[nr]; dran = nr;
+    var lk = document.querySelector('#s-pitch .satz .luecke'); if (lk) lk.textContent = fname(nr);
     pitchZeichnen(MiniFirma.get());
     Deck.setTimer(sekunden(MiniFirma.get()), true);
   });
