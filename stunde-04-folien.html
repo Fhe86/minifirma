@@ -181,11 +181,11 @@
 
   /* ===== Folie: Rechner-Tour ===== */
   .tour-grid { display:grid; grid-template-columns:7fr 4fr; gap:28px; margin-top:4px; align-items:start; }
-  .tour-liste { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .tour-pkt { display:flex; gap:12px; align-items:center; background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:10px 14px; font-size:19px; font-weight:800; color:var(--navy); box-shadow:0 2px 14px rgba(20,50,74,.06); }
-  .tour-pkt .n { width:34px; height:34px; border-radius:50%; background:var(--navy); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+  .tour-liste { display:flex; flex-direction:column; gap:16px; }
+  .tour-pkt { display:flex; gap:18px; align-items:center; background:#fff; border:1.5px solid var(--line); border-radius:16px; padding:18px 22px; font-size:28px; font-weight:800; color:var(--navy); box-shadow:0 2px 14px rgba(20,50,74,.06); }
+  .tour-pkt .n { width:52px; height:52px; border-radius:50%; background:var(--navy); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; }
   .tour-pkt.neu .n { background:var(--orange); color:#3b2200; }
-  .tour-pkt small { display:block; font-size:15px; font-weight:600; color:var(--muted); line-height:1.25; }
+  .tour-pkt small { display:block; font-size:19px; font-weight:600; color:var(--muted); line-height:1.25; }
   .tour-qr { background:#fff; border:3px solid var(--orange); border-radius:20px; padding:18px; text-align:center; box-shadow:0 6px 24px rgba(20,50,74,.14); }
   .tour-qr img { width:230px; height:230px; display:block; margin:0 auto 10px; image-rendering:pixelated; }
   .tour-qr b { display:block; font-size:22px; color:var(--navy); }
@@ -443,18 +443,14 @@
   <section class="slide" id="s-tour" data-phase="erarbeitung" data-timer="0">
     <div class="kopf"><span class="chip erarbeitung">Erarbeitung</span><span class="zeit">Euer Werkzeug</span></div>
     <h2>Der Gründer-Rechner: Euer iPad rechnet mit</h2>
-    <p class="sub">Ein Team, ein iPad. Alles, was ihr eintragt, bleibt gespeichert und landet später in eurem Pitch.</p>
+    <p class="sub">Ein Team, ein iPad, sieben Schritte. Ziel: Alle fünf Punkte im Löwen-Check.</p>
     <div class="tour-grid">
       <div>
         <div class="tour-liste">
-          <div class="tour-pkt step"><span class="n">1</span><div>Eure Idee<small>Firma, Produkt, Zielgruppe</small></div></div>
-          <div class="tour-pkt step"><span class="n">2</span><div>Einkauf<small>Packungspreis eintragen, der Rechner teilt</small></div></div>
-          <div class="tour-pkt step"><span class="n">3</span><div>Preis und Stückzahl<small>Regler schieben, Konkurrenz vergleichen</small></div></div>
-          <div class="tour-pkt step"><span class="n">4</span><div>Einmalige Kosten<small>Plakat, Stand, Werbung</small></div></div>
-          <div class="tour-pkt neu step"><span class="n">5</span><div>Krisentest<small>Regentag? Alles teurer? Überlebt ihr das?</small></div></div>
-          <div class="tour-pkt neu step"><span class="n">6</span><div>Löwen-Check<small>Fünf Punkte. Wie viele schafft ihr?</small></div></div>
+          <div class="tour-pkt step"><span class="n">1</span><div>Eintragen<small>Idee, Einkauf, Preis, Stückzahl, einmalige Kosten</small></div></div>
+          <div class="tour-pkt step"><span class="n">2</span><div>Prüfen<small>Lohnt es sich? Krisentest und Löwen-Check</small></div></div>
+          <div class="tour-pkt neu step"><span class="n">3</span><div>Speichern<small>Pitch-Karte als Bild für den Pitch</small></div></div>
         </div>
-        <p class="tour-hinweis step">Ziel: Alle fünf Punkte im Löwen-Check. Dann habt ihr eine Pitch-Karte, mit der ihr Investoren überzeugt.</p>
       </div>
       <div class="tour-qr step">
         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAAFoAQMAAABAK/OWAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACh0lEQVR4nO2aS47DIAyGXc2iS46Qo+RoydE4CkfIsouqHvu3IVTzWFYE2VKkOHxkgzF+QBTyWeEqUPKdeacvPKLfOMvTEUEPTWcsqQwuD/LBJ23yMD+I1uMmU1XuQY9PJxk/sND67UWUnkTL02xCp++LvJSgp6X1m+55PkjsRLc4lKAvSNuuNgcA/70+bv/YSdCXpx1QO6GVX7ARLtUB0F9nQ9Dj0VXs5BZgEzPY1X+roid3I4Iem+5E3bUEXtthqkdh9IcEfXHaTEBMA5agLtvi73pyqxMoFp0HPTqdqVvsuuch2fPi3X8a9FS0HNZWBNHD2gYTOwDTsCjM7STokWnf8/JSVEVebDRCMkovs4lCQU9G267usug9ibe3qfqjl7v+oK9Am//2zNemIhVWydUMlndvH/SQdLLvVAFEYcX/o7tYC9YtCgt6FhruWgG1Ez+sXay6pTbyrP476KFpy3yt3yC0F0DKV5dLdSsf9EQ0W3MJEE5ur1Fbw1FrYcWrnkEPTiOATu6/c+cE7D/e++/9d9Bz0Ksq2Pd3RkUE0xe0Knw60entgx6ZPizk1lP77BcXckVXf+m9fdDD0qZTK2bVsiWm3yzePv130BPRmfySx8JmFgi62vT0S3ci6JFpXWzR33IpTH2/DBD0VHStiKisLZeCWm8JqOF0932CHpM+ZfGTu9U11SaQNatSgp6M5iott9qY23Utv4HZx2xBj0tnDHgxC71/rv1ilbryfEZhQQ9LdzejvThZ+w16D4/tg0vQk9KteQyBBSXPooO+FP0gD6B95dmnc2lZc9Az0TAAoz1xZjusV6+VoDxSKOjh6Srw37XttGHQ78Tv+v4jZgv64nTIJ+UbyVjYTY+ojOUAAAAASUVORK5CYII=" alt="QR-Code zum Gründer-Rechner">
@@ -478,7 +474,6 @@
           <div class="rolle-zeile"><span class="ic ic-absatz"></span><div>Verkaufschef/in<small>Was verlangt die Konkurrenz? Wer kauft?</small></div></div>
           <div class="rolle-zeile"><span class="ic ic-lupe"></span><div>Qualitätscheck<small>Rechnet nach und fragt: Ist das realistisch?</small></div></div>
         </div>
-        <p class="rollen-hinweis step">Zu fünft: Es gibt zwei Einkäufer, jeder recherchiert die Hälfte.</p>
       </div>
       <div class="schritte step">
         <div class="schritt" data-sek="180"><div class="sz">3<small>Min</small></div><div><div class="st">1. Start</div><div class="sd">Rollen verteilen. Rechner öffnen, bei Schritt 1 Firma, Produkt und Zielgruppe eintragen.</div></div></div>
@@ -487,7 +482,6 @@
         <div class="schritt" data-sek="180"><div class="sz">3<small>Min</small></div><div><div class="st">4. Krisentest und Löwen-Check</div><div class="sd">Schiebt die Krisen-Regler. Dann Löwen-Check: Wie viele von fünf Punkten schafft ihr? Verbessert, was wackelt.</div></div></div>
       </div>
     </div>
-    <div class="material-leiste step"><b>Material:</b> iPad mit Gründer-Rechner, Preisliste. Fertig? Speichert eure Pitch-Karte als Bild.</div>
     <aside class="notes"><b>Neu:</b> Die Teams rechnen jetzt im Gründer-Rechner (material-27) statt auf Papier. Das Papier-Blatt (material-04) bleibt Plan B. Schritt 4 ist die Stelle, an der gute Teams nachbessern: Der Löwen-Check nennt konkret, was Investoren bemängeln würden. <b>19 Min.:</b> Rollen vorher klären: Sind es vier Personen im Team, ist alles abgedeckt. In kleineren Teams teilen sich zwei eine Rolle, in größeren teilen sich zwei den Qualitätscheck. Bei Schritt 2 sind Handys oder iPads freigegeben, sonst die Preisliste (material-19, Seite 1) auf den Tisch legen. Echte Preise sind besser als Schätzungen: Supermarkt-App, Online-Shop, Bäcker oder Kiosk als Vergleich. Du gehst herum und achtest darauf, dass die einmaligen Kosten (Plakat, Stand, Werbung) nicht fehlen. Sie gehören in die Zeile "Sonstige Kosten" oder werden bei den Gesamtkosten dazugezählt. Zu schöne Zahlen im Realitätscheck hinterfragen: "Kaufen wirklich 200 Leute eure Armbänder?" Schnelle Teams rechnen den Break-even aus.</aside>
   </section>
 

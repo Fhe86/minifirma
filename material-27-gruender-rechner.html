@@ -20,23 +20,22 @@
   .wrap { max-width:1180px; margin:0 auto; padding:0 18px; }
 
   /* ===== Kopf ===== */
-  header.top { background:linear-gradient(180deg,var(--navy) 0%,var(--navy-dark) 100%); color:#fff; padding:26px 0 0; position:relative; overflow:hidden; }
+  header.top { background:linear-gradient(180deg,var(--navy) 0%,var(--navy-dark) 100%); color:#fff; padding:20px 0 0; position:relative; overflow:hidden; }
   header.top::after { content:""; position:absolute; right:-60px; top:-60px; width:260px; height:260px; border-radius:50%; background:rgba(79,154,166,.18); }
   header.top::before { content:""; position:absolute; right:150px; bottom:-90px; width:200px; height:200px; border-radius:50%; background:rgba(242,153,74,.16); }
   .top .wrap { position:relative; z-index:1; }
   .top .label { display:inline-block; font-size:13px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:var(--teal); background:rgba(255,255,255,.1); padding:5px 12px; border-radius:20px; margin-bottom:10px; }
-  .top h1 { font-size:clamp(30px,5vw,46px); line-height:1.08; letter-spacing:-.4px; }
-  .top p.claim { font-size:clamp(16px,2.2vw,20px); color:#cfe0e6; margin-top:8px; max-width:640px; }
-  .pillen { display:flex; gap:8px; margin-top:22px; overflow-x:auto; padding-bottom:0; scrollbar-width:none; }
+  .top h1 { font-size:clamp(28px,4.4vw,38px); line-height:1.08; letter-spacing:-.4px; }
+  .top p.claim { font-size:clamp(15px,2vw,18px); color:#cfe0e6; margin-top:6px; max-width:640px; }
+  .pillen { display:flex; gap:8px; margin-top:16px; overflow-x:auto; padding-bottom:0; scrollbar-width:none; }
   .pillen::-webkit-scrollbar { display:none; }
-  .pille { flex:0 0 auto; display:flex; align-items:center; gap:8px; text-decoration:none; font-size:15px; font-weight:800; color:#cfe0e6; padding:11px 16px; border-radius:14px 14px 0 0; background:rgba(255,255,255,.08); min-height:44px; }
+  .pille { border:none; font:inherit; cursor:pointer; flex:0 0 auto; display:flex; align-items:center; gap:8px; text-decoration:none; font-size:15px; font-weight:800; color:#cfe0e6; padding:11px 16px; border-radius:14px 14px 0 0; background:rgba(255,255,255,.08); min-height:44px; }
   .pille b { width:24px; height:24px; border-radius:50%; background:rgba(255,255,255,.18); display:inline-flex; align-items:center; justify-content:center; font-size:13px; }
-  .pille:hover, .pille:focus-visible { background:var(--cream); color:var(--navy); outline:none; }
-  .pille:hover b { background:var(--orange); color:#3b2200; }
+  .pille:hover, .pille:focus-visible, .pille.on { background:var(--cream); color:var(--navy); outline:none; }
+  .pille.on b { background:var(--orange); color:#3b2200; }
 
   /* ===== Layout ===== */
-  .grid { display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:24px; margin-top:26px; align-items:start; }
-  .links > section { margin-bottom:22px; }
+  .grid { display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:24px; margin-top:22px; align-items:start; }
   .rechts { position:sticky; top:14px; display:flex; flex-direction:column; gap:16px; }
   .karte { background:#fff; border:1.5px solid var(--line); border-radius:20px; padding:20px 22px 22px; box-shadow:0 2px 14px rgba(20,50,74,.07); scroll-margin-top:14px; }
   .kk-kopf { display:flex; align-items:center; gap:14px; margin-bottom:6px; }
@@ -45,6 +44,17 @@
   .kk-kopf h2 { font-size:25px; line-height:1.12; color:var(--navy); letter-spacing:-.2px; }
   .hilfe { font-size:15.5px; color:var(--muted); margin:2px 0 14px; }
   .hilfe b { color:var(--navy); }
+
+  /* ===== Schritte ===== */
+  .pane[hidden] { display:none; }
+  .weiter-leiste { display:flex; justify-content:space-between; gap:12px; margin-top:22px; }
+  .teil { font-size:14px; letter-spacing:.8px; text-transform:uppercase; color:var(--teal); font-weight:800; margin:28px 0 10px; padding-top:20px; border-top:1.5px solid var(--line); }
+  .kk-kopf + .teil { border-top:none; margin-top:14px; padding-top:0; }
+  .krise-wahl { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .chip-btn.on { background:var(--navy); color:#fff; }
+  .klein-aktionen { display:flex; gap:18px; justify-content:center; }
+  .text-knopf { border:none; background:none; font-size:15px; font-weight:700; color:var(--muted); text-decoration:underline; padding:10px 4px; min-height:44px; }
+  .text-knopf:hover { color:var(--navy); }
 
   /* ===== Eingaben ===== */
   .feld { display:block; margin-bottom:12px; }
@@ -87,17 +97,8 @@
   input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:34px; height:34px; margin-top:-11px; border-radius:50%; background:var(--orange); border:4px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,.3); }
   input[type=range]::-moz-range-thumb { width:26px; height:26px; border-radius:50%; background:var(--orange); border:4px solid #fff; box-shadow:0 2px 8px rgba(0,0,0,.3); }
   input[type=range]:focus-visible { outline:3px solid var(--teal); outline-offset:2px; border-radius:8px; }
-  .markspur { position:relative; height:26px; margin-top:-2px; }
-  .mark { position:absolute; top:0; transform:translateX(-50%); font-size:12.5px; font-weight:800; color:var(--teal-dunkel); text-align:center; white-space:nowrap; transition:left .25s ease; }
-  .mark::before { content:""; display:block; width:3px; height:8px; margin:0 auto 1px; background:var(--teal-dunkel); border-radius:2px; }
   .vergleich { margin-top:6px; font-size:15px; font-weight:700; padding:8px 12px; border-radius:10px; background:var(--teal-hell); color:var(--teal-dunkel); }
   .vergleich.warn { background:var(--orange-hell); color:#7a4310; }
-  .helfer { margin-top:2px; }
-  .helfer summary { cursor:pointer; font-size:15.5px; font-weight:800; color:var(--teal-dunkel); padding:10px 2px; min-height:44px; display:flex; align-items:center; }
-  .helfer-box { background:var(--teal-hell); border-radius:14px; padding:14px 16px; }
-  .helfer-rechnung { display:flex; flex-wrap:wrap; align-items:center; gap:10px; font-size:17px; font-weight:800; color:var(--navy); }
-  .helfer-rechnung input { width:96px; text-align:right; }
-  .helfer-box p { font-size:14.5px; color:var(--teal-dunkel); margin-top:8px; }
 
   /* ===== Live-Ergebnis ===== */
   .live { border-width:3px; border-color:var(--gruen); background:var(--gruen-hell); transition:background .3s, border-color .3s; }
@@ -123,18 +124,10 @@
   .mini b { font-size:23px; color:var(--navy); font-variant-numeric:tabular-nums; }
 
   /* ===== Anschaulich ===== */
-  .breit { margin-bottom:22px; }
   .diagramm { width:100%; height:auto; display:block; margin-top:8px; }
   .diagramm text { font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif; }
   .legende { display:flex; flex-wrap:wrap; gap:6px 18px; font-size:15px; font-weight:700; color:var(--navy); margin-top:6px; }
   .legende i { display:inline-block; width:22px; height:6px; border-radius:3px; vertical-align:middle; margin-right:6px; }
-  .zwei-spalten { display:grid; grid-template-columns:7fr 5fr; gap:22px; }
-  .wasserfall { position:relative; height:280px; margin-top:12px; padding-top:30px !important; display:flex; align-items:flex-end; gap:12px; padding:0 4px 32px; box-sizing:border-box; }
-  .wf-spalte { position:relative; flex:1; height:100%; }
-  .wf-balken { position:absolute; left:6%; right:6%; border-radius:8px 8px 0 0; transition:bottom .55s cubic-bezier(.2,.8,.2,1), height .55s cubic-bezier(.2,.8,.2,1); min-height:3px; }
-  .wf-wert { position:absolute; left:0; right:0; text-align:center; font-size:14.5px; font-weight:800; color:var(--navy); transition:bottom .55s cubic-bezier(.2,.8,.2,1); white-space:nowrap; }
-  .wf-name { position:absolute; left:-4px; right:-4px; bottom:-30px; text-align:center; font-size:13px; font-weight:800; color:var(--muted); line-height:1.15; }
-  .wf-basis { position:absolute; left:0; right:0; bottom:32px; height:2px; background:var(--navy); opacity:.35; }
   .leer-hinweis { padding:30px 10px; text-align:center; color:var(--muted); font-weight:700; }
 
   /* Krisentest */
@@ -142,9 +135,7 @@
   .krise-ergebnis.verlust { background:var(--rot-hell); border-color:var(--rot); color:#9d3a29; }
   .krise-ergebnis b { font-size:34px; font-variant-numeric:tabular-nums; line-height:1.05; display:block; }
   .krise-ergebnis span { font-size:16px; font-weight:700; }
-  .krise-presets { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
 
-  /* Löwen-Check */
   .deal-kopf { display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-bottom:12px; }
   .punkte { display:flex; gap:7px; }
   .punkte i { width:34px; height:34px; border-radius:50%; border:3px solid var(--line); background:#fff; transition:background .3s, border-color .3s, transform .3s; }
@@ -202,8 +193,7 @@
     .grid { grid-template-columns:1fr; }
     .rechts { position:static; }
     .leiste { display:flex; }
-    .zwei-spalten { grid-template-columns:1fr; }
-  }
+    }
   @media (max-width:640px) {
     body { font-size:16px; }
     .karte { padding:16px 15px 18px; border-radius:16px; }
@@ -243,16 +233,15 @@
   <div class="wrap">
     <span class="label">Wirtschaft und Beruf &middot; Mini-Firma &middot; Stunde 4</span>
     <h1>Gründer-Rechner</h1>
-    <p class="claim">Lohnt sich eure Idee? Gebt eure Zahlen ein und seht sofort, ob ihr Gewinn oder Verlust macht. Das Ergebnis kommt in euren Pitch.</p>
-    <nav class="pillen" aria-label="Schritte">
-      <a class="pille" href="#s1"><b>1</b>Idee</a>
-      <a class="pille" href="#s2"><b>2</b>Einkauf</a>
-      <a class="pille" href="#s3"><b>3</b>Verkauf</a>
-      <a class="pille" href="#s4"><b>4</b>Einmalige Kosten</a>
-      <a class="pille" href="#s5"><b>5</b>Anschaulich</a>
-      <a class="pille" href="#s6"><b>6</b>Krisentest</a>
-      <a class="pille" href="#s7"><b>7</b>Löwen-Check</a>
-      <a class="pille" href="#s8"><b>8</b>Pitch-Karte</a>
+    <p class="claim">Lohnt sich eure Idee? In sieben Schritten zur Pitch-Karte.</p>
+    <nav class="pillen" aria-label="Schritte" id="pillen">
+      <button class="pille" data-gehe="1"><b>1</b>Idee</button>
+      <button class="pille" data-gehe="2"><b>2</b>Einkauf</button>
+      <button class="pille" data-gehe="3"><b>3</b>Verkauf</button>
+      <button class="pille" data-gehe="4"><b>4</b>Einmalige Kosten</button>
+      <button class="pille" data-gehe="5"><b>5</b>Check</button>
+      <button class="pille" data-gehe="6"><b>6</b>Löwen-Check</button>
+      <button class="pille" data-gehe="7"><b>7</b>Pitch-Karte</button>
     </nav>
   </div>
 </header>
@@ -262,45 +251,39 @@
 
     <div class="links">
 
-      <section class="karte" id="s1">
-        <div class="kk-kopf"><span class="ic ic-idee"></span><div><div class="nr">Schritt 1</div><h2>Eure Idee</h2></div></div>
-        <p class="hilfe">Name der Firma, euer Produkt oder eure Dienstleistung, und wer es kaufen soll.</p>
+      <section class="karte pane" id="p1">
+        <div class="kk-kopf"><span class="ic ic-idee"></span><div><div class="nr">Schritt 1 von 7</div><h2>Eure Idee</h2></div></div>
         <label class="feld"><span>Firmenname</span><input type="text" id="firma" maxlength="40" autocomplete="off" placeholder="z. B. Zitronenblitz"></label>
-        <div class="zwei">
-          <label class="feld"><span>Produkt oder Dienstleistung</span><input type="text" id="produkt" maxlength="60" autocomplete="off" placeholder="z. B. frische Limonade"></label>
-          <label class="feld"><span>Wer soll es kaufen?</span><input type="text" id="zielgruppe" maxlength="70" autocomplete="off" placeholder="z. B. Schüler in der Pause"></label>
-        </div>
+        <label class="feld"><span>Was verkauft ihr?</span><input type="text" id="produkt" maxlength="60" autocomplete="off" placeholder="z. B. frische Limonade"></label>
+        <label class="feld"><span>Wer soll es kaufen?</span><input type="text" id="zielgruppe" maxlength="70" autocomplete="off" placeholder="z. B. Schüler in der Pause"></label>
+        <div class="weiter-leiste"><span></span><button class="knopf" data-weiter>Weiter: Einkauf</button></div>
       </section>
 
-      <section class="karte" id="s2">
-        <div class="kk-kopf"><span class="ic ic-beschaffung"></span><div><div class="nr">Schritt 2 &middot; Einkäufer/in</div><h2>Was kostet ein Stück?</h2></div></div>
-        <p class="hilfe">Trage ein, <b>was ihr einkauft</b>. Du gibst den Preis der ganzen Packung ein und wie viele Stück daraus werden. Der Rechner teilt für dich. Echte Preise: Supermarkt-App oder Online-Shop, im Notfall die <a href="material-19-preisliste-feedbackkarten.html" target="_blank" style="color:var(--teal-dunkel);font-weight:800">Preisliste</a>.</p>
+      <section class="karte pane" id="p2" hidden>
+        <div class="kk-kopf"><span class="ic ic-beschaffung"></span><div><div class="nr">Schritt 2 von 7 &middot; Einkäufer/in</div><h2>Was kostet ein Stück?</h2></div></div>
+        <p class="hilfe">Packungspreis und Stückzahl eintragen. Den Rest rechnet der Rechner. Preise: <a href="material-19-preisliste-feedbackkarten.html" target="_blank" style="color:var(--teal-dunkel);font-weight:800">Preisliste</a></p>
         <div class="zeilen" id="posten"></div>
         <div class="chips">
-          <button class="chip-btn" data-add="Zutaten">+ Zutaten</button>
-          <button class="chip-btn" data-add="Material">+ Material</button>
-          <button class="chip-btn" data-add="Verpackung">+ Verpackung</button>
-          <button class="chip-btn zweit" data-add="">+ Eigener Posten</button>
+          <button class="chip-btn" data-add="">+ Posten</button>
         </div>
-        <div class="summe"><span>Kosten pro Stück oder Auftrag</span><b id="sum-kps">0,00 €</b></div>
+        <div class="summe"><span>Kosten pro Stück</span><b id="sum-kps">0,00 €</b></div>
+        <div class="weiter-leiste"><button class="knopf leise" data-zurueck>Zurück</button><button class="knopf" data-weiter>Weiter: Verkauf</button></div>
       </section>
 
-      <section class="karte" id="s3">
-        <div class="kk-kopf"><span class="ic ic-absatz"></span><div><div class="nr">Schritt 3 &middot; Verkaufschef/in</div><h2>Preis und Stückzahl</h2></div></div>
-        <p class="hilfe">Was verlangt ihr, und wie viele verkauft ihr? <b>Tipp:</b> Schaut, was die Konkurrenz verlangt, und tragt es ein. Dann seht ihr, wo ihr steht.</p>
+      <section class="karte pane" id="p3" hidden>
+        <div class="kk-kopf"><span class="ic ic-absatz"></span><div><div class="nr">Schritt 3 von 7 &middot; Verkaufschef/in</div><h2>Preis und Stückzahl</h2></div></div>
 
         <div class="regler">
           <div class="regler-kopf">
-            <label for="preis">Euer Verkaufspreis<small>pro Stück oder Auftrag</small></label>
+            <label for="preis">Euer Preis<small>pro Stück</small></label>
             <div class="stepper"><button data-st="preis" data-d="-0.1" aria-label="Preis um 10 Cent senken">&minus;</button><input type="text" id="preis" class="zahl" inputmode="decimal" autocomplete="off" aria-label="Verkaufspreis in Euro" placeholder="0,00"><span class="eh">€</span><button data-st="preis" data-d="0.1" aria-label="Preis um 10 Cent erhöhen">+</button></div>
           </div>
-          <input type="range" id="preis-r" min="0" max="50" step="0.1" value="0" aria-label="Verkaufspreis Schieberegler">
-          <div class="markspur" id="preis-marke"></div>
+          <input type="range" id="preis-r" min="0" max="20" step="0.1" value="0" aria-label="Verkaufspreis Schieberegler">
         </div>
 
         <div class="regler">
           <div class="regler-kopf">
-            <label for="konk">Konkurrenz verlangt<small>ähnliches Produkt woanders (freiwillig)</small></label>
+            <label for="konk">Preis der Konkurrenz<small>freiwillig, zum Vergleichen</small></label>
             <div class="stepper"><input type="text" id="konk" class="zahl" inputmode="decimal" autocomplete="off" aria-label="Preis der Konkurrenz in Euro" placeholder="0,00"><span class="eh">€</span></div>
           </div>
           <div class="vergleich" id="vergleich" style="display:none"></div>
@@ -308,37 +291,66 @@
 
         <div class="regler">
           <div class="regler-kopf">
-            <label for="stk">Geplante Stückzahl<small>so viele verkauft ihr insgesamt</small></label>
+            <label for="stk">Stückzahl<small>so viele verkauft ihr</small></label>
             <div class="stepper"><button data-st="stk" data-d="-5" aria-label="Fünf weniger">&minus;</button><input type="text" id="stk" class="zahl" inputmode="numeric" autocomplete="off" aria-label="Geplante Stückzahl" placeholder="0"><span class="eh">Stück</span><button data-st="stk" data-d="5" aria-label="Fünf mehr">+</button></div>
           </div>
           <input type="range" id="stk-r" min="0" max="300" step="1" value="0" aria-label="Stückzahl Schieberegler">
-          <details class="helfer">
-            <summary>Wie viele sind realistisch? Stückzahl-Helfer</summary>
-            <div class="helfer-box">
-              <div class="helfer-rechnung">
-                <input type="text" id="h-leute" class="zahl" inputmode="numeric" placeholder="100" aria-label="Wie viele Leute sehen euer Angebot">
-                <span>Leute sehen es &middot; davon kaufen</span>
-                <input type="text" id="h-von" class="zahl" inputmode="numeric" placeholder="2" aria-label="Wie viele von zehn kaufen" style="width:70px">
-                <span>von 10 &rarr; <b id="h-erg">0</b> Stück</span>
-                <button class="chip-btn" id="h-uebernehmen">Übernehmen</button>
-              </div>
-              <p>Ehrlich schätzen: Nicht jeder, der vorbeigeht, kauft auch. Zwei bis drei von zehn sind schon viel.</p>
-            </div>
-          </details>
         </div>
+        <div class="weiter-leiste"><button class="knopf leise" data-zurueck>Zurück</button><button class="knopf" data-weiter>Weiter: Einmalige Kosten</button></div>
       </section>
 
-      <section class="karte" id="s4">
-        <div class="kk-kopf"><span class="ic ic-muenze"></span><div><div class="nr">Schritt 4 &middot; Finanzchef/in</div><h2>Einmalige Kosten</h2></div></div>
-        <p class="hilfe">Was zahlt ihr <b>nur einmal</b>, egal wie viele ihr verkauft? Zum Beispiel Plakat, Stand, Werbung, Gebühren.</p>
+      <section class="karte pane" id="p4" hidden>
+        <div class="kk-kopf"><span class="ic ic-muenze"></span><div><div class="nr">Schritt 4 von 7 &middot; Finanzchef/in</div><h2>Einmalige Kosten</h2></div></div>
+        <p class="hilfe">Was zahlt ihr nur <b>einmal</b>, egal wie viele ihr verkauft? Zum Beispiel Plakat, Stand, Werbung.</p>
         <div class="zeilen" id="einm"></div>
         <div class="chips">
-          <button class="chip-btn" data-addE="Plakat und Schilder">+ Plakat</button>
-          <button class="chip-btn" data-addE="Stand oder Tisch">+ Stand</button>
-          <button class="chip-btn" data-addE="Werbung">+ Werbung</button>
-          <button class="chip-btn zweit" data-addE="">+ Eigene Kosten</button>
+          <button class="chip-btn" data-addE="">+ Posten</button>
         </div>
-        <div class="summe"><span>Einmalige Kosten zusammen</span><b id="sum-einm">0,00 €</b></div>
+        <div class="summe"><span>Einmalige Kosten</span><b id="sum-einm">0,00 €</b></div>
+        <div class="weiter-leiste"><button class="knopf leise" data-zurueck>Zurück</button><button class="knopf" data-weiter>Weiter: Check</button></div>
+      </section>
+
+      <section class="karte pane" id="p5" hidden>
+        <div class="kk-kopf"><span class="ic ic-lupe"></span><div><div class="nr">Schritt 5 von 7 &middot; Qualitätscheck</div><h2>Wann lohnt es sich?</h2></div></div>
+
+        <div id="diagramm"></div>
+
+        <h3 class="teil">Krisentest</h3>
+        <div class="krise-wahl" id="krise-wahl">
+          <button class="chip-btn on" data-k="100|0">Euer Plan</button>
+          <button class="chip-btn" data-k="50|0">Regentag: nur halb so viele kaufen</button>
+          <button class="chip-btn" data-k="100|30">Einkauf wird 30 % teurer</button>
+        </div>
+        <div class="krise-ergebnis" id="krise"><div><b id="krise-zahl">0,00 €</b><span id="krise-text"></span></div></div>
+
+        <div class="weiter-leiste"><button class="knopf leise" data-zurueck>Zurück</button><button class="knopf" data-weiter>Weiter: Löwen-Check</button></div>
+      </section>
+
+      <section class="karte pane" id="p6" hidden>
+        <div class="kk-kopf"><span class="ic ic-ziel"></span><div><div class="nr">Schritt 6 von 7 &middot; Löwen-Check</div><h2>Wie überzeugend ist euer Plan?</h2></div></div>
+        <p class="hilfe">Am Pitch-Tag sitzen Investoren vor euch. So viele Punkte schafft ihr schon:</p>
+        <div class="deal-kopf">
+          <div class="punkte" id="punkte"></div>
+          <div class="deal-urteil" id="urteil"></div>
+        </div>
+        <div class="kriterien" id="kriterien"></div>
+        <div id="fragen"></div>
+        <div class="weiter-leiste"><button class="knopf leise" data-zurueck>Zurück</button><button class="knopf" data-weiter>Weiter: Pitch-Karte</button></div>
+      </section>
+
+      <section class="karte pane" id="p7" hidden>
+        <div class="kk-kopf"><span class="ic ic-megafon"></span><div><div class="nr">Schritt 7 von 7 &middot; Für den Pitch</div><h2>Eure Pitch-Karte</h2></div></div>
+        <p class="hilfe">Speichert die Karte als Bild und baut sie in euren Pitch ein (Teil 4: Zahlen).</p>
+        <div class="pitch-vorschau" id="pitch-vorschau"></div>
+        <div class="aktionen">
+          <button class="knopf orange" id="btn-bild">Als Bild speichern</button>
+          <button class="knopf" id="btn-voll">Vollbild zeigen</button>
+          <button class="knopf leise" id="btn-druck">Drucken</button>
+          <button class="knopf leise" id="btn-link">Link teilen</button>
+        </div>
+        <div class="link-box" id="link-box"><label class="feld"><span>Diesen Link speichern oder an dein Team schicken</span><input type="text" id="link-feld" readonly></label></div>
+        <div class="meldung" id="meldung" role="status"></div>
+        <div class="weiter-leiste"><button class="knopf leise" data-zurueck>Zurück</button><span></span></div>
       </section>
 
     </div>
@@ -349,85 +361,14 @@
         <div class="l-zahl" id="l-zahl">0,00 €</div>
         <div class="l-satz" id="l-satz">Trage Zahlen ein, dann rechnet der Rechner mit.</div>
         <div class="bon" id="bon"></div>
-        <div class="live-mini">
-          <div class="mini"><small>Gewinn pro Stück</small><b id="m-gps">&ndash;</b></div>
-          <div class="mini"><small>Break-even</small><b id="m-be">&ndash;</b></div>
-        </div>
       </div>
-      <div class="aktionen" style="margin:0">
-        <button class="knopf orange" id="btn-beispiel">Beispiel laden</button>
-        <button class="knopf gefahr" id="btn-neu">Neu anfangen</button>
+      <div class="klein-aktionen">
+        <button class="text-knopf" id="btn-beispiel">Beispiel laden</button>
+        <button class="text-knopf" id="btn-neu">Neu anfangen</button>
       </div>
     </aside>
 
   </div>
-
-  <section class="karte breit" id="s5">
-    <div class="kk-kopf"><span class="ic ic-lupe"></span><div><div class="nr">Schritt 5</div><h2>So sieht eure Rechnung aus</h2></div></div>
-    <div class="zwei-spalten">
-      <div>
-        <p class="hilfe"><b>Wann lohnt es sich?</b> Solange die orange Linie (Kosten) oben liegt, macht ihr Verlust. Wo sich die Linien kreuzen, ist der <b>Break-even</b>. Danach verdient ihr.</p>
-        <div id="diagramm"></div>
-        <div class="legende"><span><i style="background:var(--teal)"></i>Einnahmen</span><span><i style="background:var(--orange)"></i>Kosten</span><span><i style="background:var(--navy);height:10px;width:10px;border-radius:50%"></i>Break-even</span></div>
-      </div>
-      <div>
-        <p class="hilfe"><b>Wohin geht das Geld?</b> Von den Einnahmen gehen die Kosten ab. Was übrig bleibt, ist euer Gewinn.</p>
-        <div id="wasserfall"></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="karte breit" id="s6">
-    <div class="kk-kopf"><span class="ic ic-waage"></span><div><div class="nr">Schritt 6 &middot; Qualitätscheck</div><h2>Krisentest: Was, wenn es schlecht läuft?</h2></div></div>
-    <p class="hilfe">Das Leben hält sich nicht an Pläne. Schiebt die Regler und seht, ob eure Firma die Krise übersteht.</p>
-    <div class="zwei-spalten">
-      <div>
-        <div class="regler">
-          <div class="regler-kopf"><label for="k-absatz">Es kaufen nur ... der geplanten Kunden<small>Regentag, Konkurrenz, weniger Interesse</small></label><b id="k-absatz-w" style="font-size:24px;color:var(--navy)">100 %</b></div>
-          <input type="range" id="k-absatz" min="10" max="120" step="5" value="100" aria-label="Anteil der geplanten Kunden in Prozent">
-        </div>
-        <div class="regler">
-          <div class="regler-kopf"><label for="k-preis">Einkaufspreise steigen um<small>Zutaten und Material werden teurer</small></label><b id="k-preis-w" style="font-size:24px;color:var(--navy)">0 %</b></div>
-          <input type="range" id="k-preis" min="0" max="100" step="5" value="0" aria-label="Preissteigerung beim Einkauf in Prozent">
-        </div>
-        <div class="krise-presets">
-          <button class="chip-btn" data-k="50|0">Regentag: nur die Hälfte</button>
-          <button class="chip-btn" data-k="100|30">Alles 30 % teurer</button>
-          <button class="chip-btn" data-k="60|20">Doppelpech</button>
-          <button class="chip-btn zweit" data-k="100|0">Zurück zum Plan</button>
-        </div>
-      </div>
-      <div>
-        <div class="krise-ergebnis" id="krise"><div><b id="krise-zahl">0,00 €</b><span id="krise-text"></span></div></div>
-        <p class="hilfe" style="margin-top:12px" id="krise-hilfe"></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="karte breit" id="s7">
-    <div class="kk-kopf"><span class="ic ic-ziel"></span><div><div class="nr">Schritt 7</div><h2>Löwen-Check: Wie überzeugend ist euer Plan?</h2></div></div>
-    <p class="hilfe">Am Pitch-Tag sitzen Investoren vor euch. Sie wollen Zahlen sehen, die stimmen. Dieser Check zeigt euch, <b>wo sie nachhaken werden</b>, bevor es ernst wird.</p>
-    <div class="deal-kopf">
-      <div class="punkte" id="punkte"></div>
-      <div class="deal-urteil" id="urteil"></div>
-    </div>
-    <div class="kriterien" id="kriterien"></div>
-    <div id="fragen"></div>
-  </section>
-
-  <section class="karte breit" id="s8">
-    <div class="kk-kopf"><span class="ic ic-megafon"></span><div><div class="nr">Schritt 8 &middot; Für den Pitch</div><h2>Eure Pitch-Karte</h2></div></div>
-    <p class="hilfe">Das sind eure Zahlen auf einen Blick. Zeigt sie im Pitch (Teil 4: Zahlen) oder beim Galeriegang auf eurem Tisch. Speichert sie als Bild und baut sie in eure Präsentation ein.</p>
-    <div class="pitch-vorschau" id="pitch-vorschau"></div>
-    <div class="aktionen">
-      <button class="knopf" id="btn-voll">Vollbild zeigen</button>
-      <button class="knopf orange" id="btn-bild">Als Bild speichern</button>
-      <button class="knopf leise" id="btn-druck">Drucken oder PDF</button>
-      <button class="knopf leise" id="btn-link">Link zu euren Zahlen</button>
-    </div>
-    <div class="link-box" id="link-box"><label class="feld"><span>Diesen Link speichern oder an dein Team schicken</span><input type="text" id="link-feld" readonly></label></div>
-    <div class="meldung" id="meldung" role="status"></div>
-  </section>
 
   <footer class="fuss">Eure Zahlen bleiben nur auf diesem Gerät gespeichert. Mini-Firma &middot; Wirtschaft und Beruf &middot; <a href="index.html">Zur Übersicht</a></footer>
 </main>
@@ -587,8 +528,6 @@
     bon += '<div class="bz sum"><span>= ' + (r.gewinn < 0 ? 'Verlust' : 'Gewinn') + '</span><span class="z">' + fe(r.gewinn) + '</span></div>';
     $('bon').innerHTML = bon;
 
-    $('m-gps').textContent = r.preis > 0 ? fe(r.gps) : '–';
-    $('m-be').textContent = r.be == null ? (r.preis > 0 ? 'nie' : '–') : (r.einm === 0 ? 'sofort' : fz(r.be) + ' Stück');
     $('sum-kps').textContent = fe(r.kps);
     $('sum-einm').textContent = fe(r.einm);
   }
@@ -603,13 +542,9 @@
 
   function zeichneRegler(r) {
     var pr = $('preis-r'), sr = $('stk-r');
-    pr.value = Math.min(50, zahl(S.preis)); pr.style.setProperty('--p', (pr.value / 50 * 100) + '%');
+    pr.value = Math.min(20, zahl(S.preis)); pr.style.setProperty('--p', (pr.value / 20 * 100) + '%');
     sr.value = Math.min(300, zahl(S.stk)); sr.style.setProperty('--p', (sr.value / 300 * 100) + '%');
-    var m = $('preis-marke'); m.innerHTML = '';
     var v = $('vergleich');
-    if (r.konk > 0 && r.konk <= 50) {
-      m.innerHTML = '<div class="mark" style="left:' + Math.min(Math.max(r.konk / 50 * 100, 10), 90) + '%">Konkurrenz ' + fe(r.konk) + '</div>';
-    }
     if (r.konk > 0 && r.preis > 0) {
       var q = r.preis / r.konk, txt, warn = false;
       if (q > 1.3) { txt = 'Ihr seid ' + Math.round((q - 1) * 100) + ' % teurer als die Konkurrenz. Warum sollte jemand bei euch kaufen?'; warn = true; }
@@ -668,7 +603,7 @@
       s += '<circle cx="' + X(xe) + '" cy="' + by + '" r="10" fill="#14324a" stroke="#fff" stroke-width="3.5"/>';
       var oben = T + 46, rechts = X(xe) > W * 0.55;
       s += '<line x1="' + X(xe) + '" x2="' + X(xe) + '" y1="' + (by - 12) + '" y2="' + (oben + 8) + '" stroke="#14324a" stroke-width="2" stroke-dasharray="3 4"/>';
-      s += '<text x="' + (rechts ? X(xe) - 8 : X(xe) + 8) + '" y="' + oben + '" text-anchor="' + (rechts ? 'end' : 'start') + '" font-size="16" fill="#14324a" font-weight="800">Break-even: ab ' + fz(r.be) + ' Stück</text>';
+      s += '<text x="' + (rechts ? X(xe) - 8 : X(xe) + 8) + '" y="' + oben + '" text-anchor="' + (rechts ? 'end' : 'start') + '" font-size="15" fill="#14324a" font-weight="800">Break-even: ' + fz(r.be) + ' Stück</text>';
     } else if (xe == null) {
       s += '<text x="' + (L + 14) + '" y="' + (T + 24) + '" font-size="16" fill="#9d3a29" font-weight="800">Jedes Stück kostet mehr, als es bringt.</text>';
     }
@@ -681,49 +616,18 @@
     return n * e;
   }
 
-  /* ---------- Wasserfall ---------- */
-  function zeichneWasserfall(r) {
-    var el = $('wasserfall');
-    if (!r.hatDaten) { el.innerHTML = '<div class="leer-hinweis">Trage Preis, Kosten und Stückzahl ein, dann wächst hier der Wasserfall.</div>'; return; }
-    var max = Math.max(r.ein, r.kosten, 1);
-    function pct(v) { return v / max * 100; }
-    var nach1 = r.ein - r.kv;
-    var sp = [
-      { n: 'Einnahmen', von: 0, bis: r.ein, farbe: 'var(--teal)', w: fe(r.ein) },
-      { n: 'Material', von: Math.min(nach1, r.ein), bis: r.ein, farbe: 'var(--orange)', w: '− ' + fe(r.kv) },
-      { n: 'Einmalig', von: Math.max(Math.min(r.ein - r.kosten, nach1), 0), bis: Math.max(nach1, 0), farbe: '#e08a3a', w: '− ' + fe(r.einm) },
-      { n: r.gewinn < 0 ? 'Verlust' : 'Gewinn', von: 0, bis: Math.max(r.gewinn, 0), farbe: r.gewinn < 0 ? 'var(--rot)' : 'var(--gruen)', w: fe(r.gewinn) }
-    ];
-    var html = '<div class="wasserfall"><div class="wf-basis"></div>';
-    sp.forEach(function (c) {
-      var hoehe = Math.max(pct(c.bis - c.von), 0);
-      html += '<div class="wf-spalte"><div class="wf-balken" style="background:' + c.farbe + ';bottom:' + pct(c.von) + '%;height:' + hoehe + '%;"></div>' +
-        '<div class="wf-wert" style="bottom:calc(' + (pct(c.bis)) + '% + 6px)">' + c.w + '</div><div class="wf-name">' + c.n + '</div></div>';
-    });
-    html += '</div>';
-    // Basis liegt auf Höhe der Spalten; Spalten bekommen unten Platz für Namen
-    el.innerHTML = html;
-    el.querySelectorAll('.wf-spalte').forEach(function (s) { s.style.height = '100%'; });
-  }
-
   /* ---------- Krisentest ---------- */
+  var KR = { a: 100, u: 0 };
   function zeichneKrise() {
-    var a = +$('k-absatz').value, u = +$('k-preis').value;
-    $('k-absatz-w').textContent = a + ' %'; $('k-preis-w').textContent = u + ' %';
-    [$('k-absatz'), $('k-preis')].forEach(function (x) { x.style.setProperty('--p', ((x.value - x.min) / (x.max - x.min) * 100) + '%'); });
-    var r = rechne(a, u), box = $('krise');
+    var r = rechne(KR.a, KR.u), box = $('krise');
     if (!r.hatDaten) {
       box.className = 'krise-ergebnis'; $('krise-zahl').textContent = fe(0);
-      $('krise-text').textContent = 'Trage zuerst Zahlen ein.'; $('krise-hilfe').textContent = ''; return;
+      $('krise-text').textContent = 'Trage zuerst Zahlen ein.'; return;
     }
     box.className = 'krise-ergebnis' + (r.gewinn < 0 ? ' verlust' : '');
     $('krise-zahl').textContent = fe(r.gewinn);
-    $('krise-text').textContent = r.gewinn < 0 ? 'Verlust in der Krise bei ' + fz(r.stk) + ' Stück' : 'Gewinn trotz Krise bei ' + fz(r.stk) + ' Stück';
-    var plan = rechne(100, 0);
-    var diff = r.gewinn - plan.gewinn;
-    $('krise-hilfe').textContent = (a === 100 && u === 0)
-      ? 'Das ist euer Plan. Probiert die Knöpfe aus: Hält eure Firma eine Krise aus?'
-      : 'Gegenüber eurem Plan verändert sich der Gewinn um ' + fe(diff) + '. ' + (r.gewinn < 0 ? 'Überlegt: Wie bleibt ihr trotzdem im Plus? Preis anheben, günstiger einkaufen, Kosten sparen?' : 'Euer Plan ist robust.');
+    var plan = KR.a === 100 && KR.u === 0;
+    $('krise-text').textContent = plan ? 'So viel Gewinn plant ihr.' : (r.gewinn < 0 ? 'Verlust. In der Krise reicht euer Plan nicht.' : 'Gewinn trotz Krise. Euer Plan hält.');
   }
 
   /* ---------- Löwen-Check ---------- */
@@ -761,14 +665,15 @@
     var u = urteile[c.n];
     $('urteil').innerHTML = esc(u[0]) + '<small>' + esc(u[1]) + '</small>';
     $('kriterien').innerHTML = c.items.map(function (x) {
-      return '<div class="krit ' + (x.ok ? 'ja' : '') + '"><span class="haken">' + (x.ok ? '✓' : '') + '</span><div><b>' + esc(x.t) + '</b><span class="tipp">' + esc(x.hint) + '</span></div></div>';
+      return '<div class="krit ' + (x.ok ? 'ja' : '') + '"><span class="haken">' + (x.ok ? '✓' : '') + '</span><div><b>' + esc(x.t) + '</b>' + (x.ok ? '' : '<span class="tipp">' + esc(x.hint) + '</span>') + '</div></div>';
     }).join('');
-    var offen = c.items.filter(function (x) { return !x.ok; }).slice(0, 3);
-    var html = '<div class="fragen-kopf">Das fragen euch die Investoren im Pitch</div>';
+    var offen = c.items.filter(function (x) { return !x.ok; }).slice(0, 2);
+    var html = '';
     if (!offen.length) {
-      html += '<div class="frage">Und wenn Zutaten und Material 20 % teurer werden?<small>Bei euch bleiben dann noch ' + fe(c.teuer.gewinn) + ' Gewinn. Sagt das im Pitch, dann wirkt ihr vorbereitet.</small></div>';
+      html = '<div class="fragen-kopf">Diese Frage kommt trotzdem</div><div class="frage">Und wenn Zutaten und Material 20 % teurer werden?<small>Bei euch bleiben dann noch ' + fe(c.teuer.gewinn) + ' Gewinn. Sagt das im Pitch.</small></div>';
     } else {
-      offen.forEach(function (x) { html += '<div class="frage">' + esc(x.frage) + '<small>' + esc(x.fh) + '</small></div>'; });
+      html = '<div class="fragen-kopf">Das fragen Investoren am Pitch-Tag</div>';
+      offen.forEach(function (x) { html += '<div class="frage">' + esc(x.frage) + '</div>'; });
     }
     $('fragen').innerHTML = html;
     return c;
@@ -799,7 +704,6 @@
     s += '<text x="90" y="450" font-size="18" font-weight="800" letter-spacing="1.2" fill="#4f9aa6">UNSERE RECHNUNG</text>';
     s += '<text x="90" y="492" font-size="34" font-weight="800" fill="#14324a">Einnahmen ' + esc(fe(r.ein)) + '  −  Kosten ' + esc(fe(r.kosten)) + '  =  <tspan fill="' + gc + '">' + esc(fe(r.gewinn)) + '</tspan></text>';
     s += '<text x="50" y="556" font-size="23" font-weight="700" fill="#14324a">' + esc(ziel) + '</text>';
-    s += '<text x="50" y="600" font-size="19" font-weight="700" fill="#5a6a73">Konkurrenz: ' + (r.konk > 0 ? esc(fe(r.konk)) : 'noch nicht eingetragen') + '  ·  Bei 70 % Verkauf: ' + (r.hatDaten ? esc(fe(c.krise.gewinn)) : '–') + '</text>';
     s += '<text x="50" y="670" font-size="20" font-weight="800" fill="#14324a">Löwen-Check</text>';
     for (var i = 0; i < 5; i++) s += '<circle cx="' + (225 + i * 42) + '" cy="662" r="15" fill="' + (i < c.n ? '#f2994a' : '#fff') + '" stroke="' + (i < c.n ? '#f2994a' : '#b9c7ce') + '" stroke-width="3"/>';
     s += '<text x="455" y="670" font-size="20" font-weight="700" fill="#5a6a73">' + esc(urteile[c.n][0]) + '</text>';
@@ -818,13 +722,11 @@
     zeichneRegler(r);
     zeichneLive(r);
     zeichneDiagramm(r);
-    zeichneWasserfall(r);
     zeichneKrise();
     var c = zeichneCheck(r);
     var svg = pitchSvg(r, c);
     $('pitch-vorschau').innerHTML = svg;
     letzter = { svg: svg, r: r };
-    $('h-erg').textContent = fz(zahl($('h-leute').value) * Math.min(zahl($('h-von').value), 10) / 10);
     speichern();
   }
 
@@ -849,16 +751,16 @@
     document.querySelectorAll('[data-addE]').forEach(function (b) {
       b.addEventListener('click', function () { if (S.einm.length >= 12) return; S.einm.push({ n: b.dataset.adde, b: '' }); zeichneZeilen(); aktualisiere(); var z = document.querySelectorAll('#einm .zeile'); var l = z[z.length - 1]; if (l) l.querySelectorAll('input')[b.dataset.adde ? 1 : 0].focus(); });
     });
-    ['h-leute', 'h-von'].forEach(function (id) { $(id).addEventListener('input', function () { $('h-erg').textContent = fz(zahl($('h-leute').value) * Math.min(zahl($('h-von').value), 10) / 10); }); });
-    $('h-uebernehmen').addEventListener('click', function () {
-      var n = Math.round(zahl($('h-leute').value) * Math.min(zahl($('h-von').value), 10) / 10);
-      if (n > 0) { S.stk = String(n); $('stk').value = S.stk; aktualisiere(); melde('Stückzahl übernommen: ' + fz(n)); }
+    document.querySelectorAll('#krise-wahl [data-k]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var v = b.dataset.k.split('|'); KR.a = +v[0]; KR.u = +v[1];
+        document.querySelectorAll('#krise-wahl [data-k]').forEach(function (x) { x.classList.toggle('on', x === b); });
+        zeichneKrise();
+      });
     });
-    ['k-absatz', 'k-preis'].forEach(function (id) { $(id).addEventListener('input', zeichneKrise); });
-    document.querySelectorAll('[data-k]').forEach(function (b) {
-      if (b.tagName !== 'BUTTON') return;
-      b.addEventListener('click', function () { var v = b.dataset.k.split('|'); $('k-absatz').value = v[0]; $('k-preis').value = v[1]; zeichneKrise(); });
-    });
+    document.querySelectorAll('[data-gehe]').forEach(function (b) { b.addEventListener('click', function () { zeige(+b.dataset.gehe); }); });
+    document.querySelectorAll('[data-weiter]').forEach(function (b) { b.addEventListener('click', function () { zeige(aktSchritt + 1); }); });
+    document.querySelectorAll('[data-zurueck]').forEach(function (b) { b.addEventListener('click', function () { zeige(aktSchritt - 1); }); });
     $('btn-beispiel').addEventListener('click', function () { S = beispiel(); fuelle(); melde('Das ist ein Beispiel: der Limo-Stand. Ändere die Zahlen und schau, was passiert.'); });
     var neuWarte = false, neuT;
     $('btn-neu').addEventListener('click', function () {
@@ -875,6 +777,15 @@
     });
     $('btn-bild').addEventListener('click', bildSpeichern);
     $('btn-link').addEventListener('click', linkZeigen);
+  }
+
+  var aktSchritt = 1;
+  function zeige(n) {
+    n = Math.max(1, Math.min(7, n)); aktSchritt = n;
+    document.querySelectorAll('.pane').forEach(function (p, i) { p.hidden = (i + 1 !== n); });
+    document.querySelectorAll('.pille').forEach(function (p) { p.classList.toggle('on', +p.dataset.gehe === n); });
+    var top = document.querySelector('header.top').getBoundingClientRect().bottom;
+    if (top < 0) window.scrollTo({ top: document.querySelector('header.top').offsetHeight, behavior: 'smooth' });
   }
 
   function fuelle() {
@@ -919,7 +830,7 @@
   laden();
   binde();
   fuelle();
-  $('k-absatz').dispatchEvent(new Event('input'));
+  zeige(1);
 })();
 </script>
 </body>
