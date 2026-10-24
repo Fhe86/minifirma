@@ -179,6 +179,19 @@
   .pre.reset { border-color:var(--orange); color:#9a5214; }
   .pre.reset:hover { background:var(--orange); color:#3b2200; }
 
+  /* ===== Folie: Rechner-Tour ===== */
+  .tour-grid { display:grid; grid-template-columns:7fr 4fr; gap:28px; margin-top:4px; align-items:start; }
+  .tour-liste { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .tour-pkt { display:flex; gap:12px; align-items:center; background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:10px 14px; font-size:19px; font-weight:800; color:var(--navy); box-shadow:0 2px 14px rgba(20,50,74,.06); }
+  .tour-pkt .n { width:34px; height:34px; border-radius:50%; background:var(--navy); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+  .tour-pkt.neu .n { background:var(--orange); color:#3b2200; }
+  .tour-pkt small { display:block; font-size:15px; font-weight:600; color:var(--muted); line-height:1.25; }
+  .tour-qr { background:#fff; border:3px solid var(--orange); border-radius:20px; padding:18px; text-align:center; box-shadow:0 6px 24px rgba(20,50,74,.14); }
+  .tour-qr img { width:230px; height:230px; display:block; margin:0 auto 10px; image-rendering:pixelated; }
+  .tour-qr b { display:block; font-size:22px; color:var(--navy); }
+  .tour-qr span { font-size:16px; color:var(--muted); font-weight:700; }
+  .tour-hinweis { margin-top:18px; font-size:20px; font-weight:700; color:var(--navy); background:var(--orange-hell); border:2.5px solid var(--orange); border-radius:14px; padding:12px 20px; }
+
   /* ===== Folie 6: Auftrag Erarbeitung ===== */
   .erab-grid { display:grid; grid-template-columns:5fr 7fr; gap:28px; margin-top:6px; }
   .rollen-liste { display:flex; flex-direction:column; gap:10px; }
@@ -294,7 +307,7 @@
     <div style="margin-top:50px;">
       <span class="titel-label">Stunde 4</span>
       <h1>Lohnt sich<br>unsere Idee?</h1>
-      <p class="titel-claim">Heute rechnet ihr nach, ob eure Firma Geld verdient oder Geld verliert.</p>
+      <p class="titel-claim">Am Pitch-Tag sitzen Investoren vor euch. Heute baut ihr die Zahlen, die sie überzeugen.</p>
       <div class="titel-reihe">
         <div class="rund"><span class="ic ic-muenze"></span></div>
         <div class="rund"><span class="ic ic-absatz"></span></div>
@@ -303,7 +316,7 @@
         <div class="rund"><span class="ic ic-ziel"></span></div>
       </div>
     </div>
-    <aside class="notes"><b>Vorher:</b> Die Firmenzahl steht im Stepper oben rechts (jetzt <span class="v-firmen"></span>), die Folie 8 rechnet danach alles aus. Pro Team 1 Geschäftsplan (material-04), Pitch-Arbeitsauftrag (material-10) pro Schüler, Feedback-Karten (material-19 erzeugt sie passend zur Firmenzahl: je Firma <span class="v-karten"></span> Karten, zusammen <span class="v-karten-ges"></span>, das sind <span class="v-seiten"></span> Seite(n) zum Ausschneiden), grüne und orange Klebepunkte (je Firma so viele wie Runden, also <span class="v-karten"></span> Stück, grün und orange gemischt), Preisliste (material-19, Seite 1) als Plan B ausgedruckt, iPads oder Handys freigeben. Beamer an, Timer-Knopf testen. Die Teams und ihre Geschäftsidee stehen seit Stunde 1 fest.</aside>
+    <aside class="notes"><b>Vorher:</b> Die Firmenzahl steht im Stepper oben rechts (jetzt <span class="v-firmen"></span>), die Folie 9 rechnet danach alles aus. Pro Team 1 iPad mit Gründer-Rechner (material-27, Link oder QR-Code auf Folie 6, vorher einmal öffnen), Geschäftsplan auf Papier (material-04) nur als Plan B, Pitch-Arbeitsauftrag (material-10) pro Schüler, Feedback-Karten (material-19 erzeugt sie passend zur Firmenzahl: je Firma <span class="v-karten"></span> Karten, zusammen <span class="v-karten-ges"></span>, das sind <span class="v-seiten"></span> Seite(n) zum Ausschneiden), grüne und orange Klebepunkte (je Firma so viele wie Runden, also <span class="v-karten"></span> Stück, grün und orange gemischt), Preisliste (material-19, Seite 1) als Plan B ausgedruckt, iPads oder Handys freigeben. Beamer an, Timer-Knopf testen. Die Teams und ihre Geschäftsidee stehen seit Stunde 1 fest.</aside>
   </section>
 
   <!-- 2 FAHRPLAN -->
@@ -426,6 +439,32 @@
     <aside class="notes"><b>3 Min.:</b> Die vier Zahlen sind aus dem Limo-Stand vorbelegt. Probiert gemeinsam die Knöpfe unten durch und lasst vorher schätzen: Gewinn oder Verlust? <b>Break-even</b> (sprich Breik-iewen) heißt: Ab dieser Stückzahl sind die Kosten wieder drin, danach beginnt der Gewinn. Beispiel Limo: 14 € einmalig, jeder Becher bringt 1,05 € Plus, also ab dem 14. Becher kein Verlust mehr. Verlust wird nur als Wort und Betrag angezeigt, keine Minuszeichen eingeben. In den Eingabefeldern lösen die Tasten N, F, T, R, Leertaste und die Pfeile nichts im Deck aus, du kannst also frei tippen. Während der Erarbeitung kann der Rechner zum Nachrechnen wieder aufgerufen werden (Pfeil links bis Folie 5).</aside>
   </section>
 
+  <!-- 5b ERARBEITUNG: RECHNER-TOUR -->
+  <section class="slide" id="s-tour" data-phase="erarbeitung" data-timer="0">
+    <div class="kopf"><span class="chip erarbeitung">Erarbeitung</span><span class="zeit">Euer Werkzeug</span></div>
+    <h2>Der Gründer-Rechner: Euer iPad rechnet mit</h2>
+    <p class="sub">Ein Team, ein iPad. Alles, was ihr eintragt, bleibt gespeichert und landet später in eurem Pitch.</p>
+    <div class="tour-grid">
+      <div>
+        <div class="tour-liste">
+          <div class="tour-pkt step"><span class="n">1</span><div>Eure Idee<small>Firma, Produkt, Zielgruppe</small></div></div>
+          <div class="tour-pkt step"><span class="n">2</span><div>Einkauf<small>Packungspreis eintragen, der Rechner teilt</small></div></div>
+          <div class="tour-pkt step"><span class="n">3</span><div>Preis und Stückzahl<small>Regler schieben, Konkurrenz vergleichen</small></div></div>
+          <div class="tour-pkt step"><span class="n">4</span><div>Einmalige Kosten<small>Plakat, Stand, Werbung</small></div></div>
+          <div class="tour-pkt neu step"><span class="n">5</span><div>Krisentest<small>Regentag? Alles teurer? Überlebt ihr das?</small></div></div>
+          <div class="tour-pkt neu step"><span class="n">6</span><div>Löwen-Check<small>Fünf Punkte. Wie viele schafft ihr?</small></div></div>
+        </div>
+        <p class="tour-hinweis step">Ziel: Alle fünf Punkte im Löwen-Check. Dann habt ihr eine Pitch-Karte, mit der ihr Investoren überzeugt.</p>
+      </div>
+      <div class="tour-qr step">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAAFoAQMAAABAK/OWAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACh0lEQVR4nO2aS47DIAyGXc2iS46Qo+RoydE4CkfIsouqHvu3IVTzWFYE2VKkOHxkgzF+QBTyWeEqUPKdeacvPKLfOMvTEUEPTWcsqQwuD/LBJ23yMD+I1uMmU1XuQY9PJxk/sND67UWUnkTL02xCp++LvJSgp6X1m+55PkjsRLc4lKAvSNuuNgcA/70+bv/YSdCXpx1QO6GVX7ARLtUB0F9nQ9Dj0VXs5BZgEzPY1X+roid3I4Iem+5E3bUEXtthqkdh9IcEfXHaTEBMA5agLtvi73pyqxMoFp0HPTqdqVvsuuch2fPi3X8a9FS0HNZWBNHD2gYTOwDTsCjM7STokWnf8/JSVEVebDRCMkovs4lCQU9G267usug9ibe3qfqjl7v+oK9Am//2zNemIhVWydUMlndvH/SQdLLvVAFEYcX/o7tYC9YtCgt6FhruWgG1Ez+sXay6pTbyrP476KFpy3yt3yC0F0DKV5dLdSsf9EQ0W3MJEE5ur1Fbw1FrYcWrnkEPTiOATu6/c+cE7D/e++/9d9Bz0Ksq2Pd3RkUE0xe0Knw60entgx6ZPizk1lP77BcXckVXf+m9fdDD0qZTK2bVsiWm3yzePv130BPRmfySx8JmFgi62vT0S3ci6JFpXWzR33IpTH2/DBD0VHStiKisLZeCWm8JqOF0932CHpM+ZfGTu9U11SaQNatSgp6M5iott9qY23Utv4HZx2xBj0tnDHgxC71/rv1ilbryfEZhQQ9LdzejvThZ+w16D4/tg0vQk9KteQyBBSXPooO+FP0gD6B95dmnc2lZc9Az0TAAoz1xZjusV6+VoDxSKOjh6Srw37XttGHQ78Tv+v4jZgv64nTIJ+UbyVjYTY+ojOUAAAAASUVORK5CYII=" alt="QR-Code zum Gründer-Rechner">
+        <b>Scannen und starten</b>
+        <span>fhe86.github.io/minifirma<br>material-27-gruender-rechner</span>
+      </div>
+    </div>
+    <aside class="notes"><b>2 Min., vor der Teamarbeit:</b> Kurz zeigen, nicht erklären: Auf dem Beamer den Rechner öffnen, auf Beispiel laden tippen und die Regler bewegen. Dann die zwei neuen Teile ansprechen: <i>Krisentest</i> (Was passiert bei Regen oder teurem Einkauf?) und <i>Löwen-Check</i> (fünf Fragen, die Investoren am Pitch-Tag auch stellen). Die Investoren kommen erst in Stunde 5, heute üben die Teams, ihnen standzuhalten. Jedes Team scannt den QR-Code oder tippt den Link. Der Stand bleibt auf dem Gerät gespeichert. Ohne iPad: Geschäftsplan auf Papier (material-04) als Plan B, Zahlen später im Rechner nachtragen. Der Rechner liegt unter <b>material-27-gruender-rechner.html</b> und braucht kein Internet nach dem Laden.</aside>
+  </section>
+
   <!-- 6 ERARBEITUNG: AUFTRAG -->
   <section class="slide" id="s-erab" data-phase="erarbeitung" data-timer="180">
     <div class="kopf"><span class="chip erarbeitung">Erarbeitung</span><span class="zeit">19 Min &middot; Teamarbeit</span></div>
@@ -442,14 +481,14 @@
         <p class="rollen-hinweis step">Zu fünft: Es gibt zwei Einkäufer, jeder recherchiert die Hälfte.</p>
       </div>
       <div class="schritte step">
-        <div class="schritt" data-sek="180"><div class="sz">3<small>Min</small></div><div><div class="st">1. Start</div><div class="sd">Rollen verteilen. Produkt und Zielgruppe ins Blatt schreiben, die Zielgruppe in einem Satz.</div></div></div>
-        <div class="schritt" data-sek="360"><div class="sz">6<small>Min</small></div><div><div class="st">2. Echte Preise suchen</div><div class="sd">Einkäufer: Materialpreise. Verkaufschef: Preise der Konkurrenz. Mit Handy oder iPad, sonst mit der Preisliste.</div></div></div>
-        <div class="schritt" data-sek="420"><div class="sz">7<small>Min</small></div><div><div class="st">3. Rechnen</div><div class="sd">Finanzchef füllt den Plan aus, der Qualitätscheck rechnet jede Zeile nach. Hilfe auf der nächsten Folie.</div></div></div>
-        <div class="schritt" data-sek="180"><div class="sz">3<small>Min</small></div><div><div class="st">4. Realitätscheck</div><div class="sd">Kaufen wirklich so viele? Ist der Preis fair? Passt eure Zahlen an, wenn sie zu schön sind.</div></div></div>
+        <div class="schritt" data-sek="180"><div class="sz">3<small>Min</small></div><div><div class="st">1. Start</div><div class="sd">Rollen verteilen. Rechner öffnen, bei Schritt 1 Firma, Produkt und Zielgruppe eintragen.</div></div></div>
+        <div class="schritt" data-sek="360"><div class="sz">6<small>Min</small></div><div><div class="st">2. Echte Preise suchen</div><div class="sd">Einkäufer: Materialpreise in Schritt 2. Verkaufschef: Konkurrenzpreis und euren Preis in Schritt 3. Echte Preise per Handy, sonst Preisliste.</div></div></div>
+        <div class="schritt" data-sek="420"><div class="sz">7<small>Min</small></div><div><div class="st">3. Rechnen</div><div class="sd">Finanzchef trägt Stückzahl und einmalige Kosten ein. Der Qualitätscheck rechnet den Rechenweg rechts nach. Hilfe auf der nächsten Folie.</div></div></div>
+        <div class="schritt" data-sek="180"><div class="sz">3<small>Min</small></div><div><div class="st">4. Krisentest und Löwen-Check</div><div class="sd">Schiebt die Krisen-Regler. Dann Löwen-Check: Wie viele von fünf Punkten schafft ihr? Verbessert, was wackelt.</div></div></div>
       </div>
     </div>
-    <div class="material-leiste step"><b>Material:</b> Geschäftsplan, Handy oder iPad, Preisliste. Fertig? Rechnet euren Break-even aus.</div>
-    <aside class="notes"><b>19 Min.:</b> Rollen vorher klären: Sind es vier Personen im Team, ist alles abgedeckt. In kleineren Teams teilen sich zwei eine Rolle, in größeren teilen sich zwei den Qualitätscheck. Bei Schritt 2 sind Handys oder iPads freigegeben, sonst die Preisliste (material-19, Seite 1) auf den Tisch legen. Echte Preise sind besser als Schätzungen: Supermarkt-App, Online-Shop, Bäcker oder Kiosk als Vergleich. Du gehst herum und achtest darauf, dass die einmaligen Kosten (Plakat, Stand, Werbung) nicht fehlen. Sie gehören in die Zeile "Sonstige Kosten" oder werden bei den Gesamtkosten dazugezählt. Zu schöne Zahlen im Realitätscheck hinterfragen: "Kaufen wirklich 200 Leute eure Armbänder?" Schnelle Teams rechnen den Break-even aus.</aside>
+    <div class="material-leiste step"><b>Material:</b> iPad mit Gründer-Rechner, Preisliste. Fertig? Speichert eure Pitch-Karte als Bild.</div>
+    <aside class="notes"><b>Neu:</b> Die Teams rechnen jetzt im Gründer-Rechner (material-27) statt auf Papier. Das Papier-Blatt (material-04) bleibt Plan B. Schritt 4 ist die Stelle, an der gute Teams nachbessern: Der Löwen-Check nennt konkret, was Investoren bemängeln würden. <b>19 Min.:</b> Rollen vorher klären: Sind es vier Personen im Team, ist alles abgedeckt. In kleineren Teams teilen sich zwei eine Rolle, in größeren teilen sich zwei den Qualitätscheck. Bei Schritt 2 sind Handys oder iPads freigegeben, sonst die Preisliste (material-19, Seite 1) auf den Tisch legen. Echte Preise sind besser als Schätzungen: Supermarkt-App, Online-Shop, Bäcker oder Kiosk als Vergleich. Du gehst herum und achtest darauf, dass die einmaligen Kosten (Plakat, Stand, Werbung) nicht fehlen. Sie gehören in die Zeile "Sonstige Kosten" oder werden bei den Gesamtkosten dazugezählt. Zu schöne Zahlen im Realitätscheck hinterfragen: "Kaufen wirklich 200 Leute eure Armbänder?" Schnelle Teams rechnen den Break-even aus.</aside>
   </section>
 
   <!-- 7 ERARBEITUNG: RECHENHILFE -->
@@ -482,10 +521,10 @@
   <section class="slide" id="s-galerie" data-phase="sicherung" data-timer="120">
     <div class="kopf"><span class="chip sicherung">Sicherung</span><span class="zeit">7 Min &middot; Galeriegang</span></div>
     <h2>Galeriegang: Schaut euch die anderen Pläne an</h2>
-    <p class="sub">Jeder Plan liegt auf seinem Tisch. Ihr geht als Firma von Tisch zu Tisch.</p>
+    <p class="sub">Jede Pitch-Karte steht auf dem iPad am Tisch. Ihr geht als Firma von Tisch zu Tisch.</p>
     <div class="gal-grid">
       <div class="gal-regeln">
-        <div class="regel step"><span class="n">1</span><div><b>Nachrechnen.</b> Lest den Plan und rechnet die Gewinnzeile kurz nach.</div></div>
+        <div class="regel step"><span class="n">1</span><div><b>Nachrechnen.</b> Lest die Pitch-Karte und rechnet die Zeile Einnahmen minus Kosten kurz nach.</div></div>
         <div class="regel step"><span class="n">2</span><div><b>Karte ausfüllen.</b> Pro Plan eine Feedback-Karte, nur ankreuzen und einen Tipp notieren.</div></div>
         <div class="regel step"><span class="n">3</span><div><b>Punkt kleben.</b> <span class="punkt g"></span> grün: stimmt und wirkt realistisch. <span class="punkt o"></span> orange: hier wackelt etwas. Pro besuchtem Plan einen Punkt.</div></div>
         <div class="gal-warn" id="gal-warn" style="display:none"></div>
@@ -497,7 +536,7 @@
         <div class="rot-hinweis" id="rot-hinweis"></div>
       </div>
     </div>
-    <aside class="notes"><b>7 Min.:</b> Alle Teams legen den Geschäftsplan offen auf den Tisch und bleiben beim Wechsel nicht sitzen. Karte und Punkte liegen bereit. Die Firmenzahl steht im Stepper oben rechts. Die Folie rechnet daraus Rundenzahl (höchstens 3, höchstens Firmenzahl minus 1) und Rundenzeit aus. Aktuell: <span class="v-runden"></span> Runde(n) zu je <span class="v-rzeit"></span>. Auf den Knopf "Runde 1" klicken: Der Timer startet mit der berechneten Zeit, die Tabelle zeigt, wer wohin geht. Nach dem Klingeln die nächste Runde. Bei "Zurück" gehen alle an den eigenen Tisch und lesen Punkte und Karten. Bei nur zwei Firmen ist es ein direkter Austausch, bei sehr vielen Firmen warnt die Folie vor Gedränge. Pro Firma werden <span class="v-karten"></span> Feedback-Karten und ebenso viele Klebepunkte gebraucht. Gute Fragen beim Herumgehen: Welche Zeile habt ihr nachgerechnet? Wo habt ihr einen Fehler gefunden? Der orange Punkt ist ausdrücklich erlaubt, es geht um besser werden, nicht um Gewinner. Plan B ohne Klebepunkte: mit grünem und orangem Stift einen Punkt malen. Karten einsammeln und pro Team verteilen.</aside>
+    <aside class="notes"><b>7 Min.:</b> Alle Teams stellen das iPad mit der Pitch-Karte im Vollbild (Knopf: Vollbild zeigen) auf den Tisch, ohne iPad liegt der Papier-Plan offen da und bleiben beim Wechsel nicht sitzen. Karte und Punkte liegen bereit. Die Firmenzahl steht im Stepper oben rechts. Die Folie rechnet daraus Rundenzahl (höchstens 3, höchstens Firmenzahl minus 1) und Rundenzeit aus. Aktuell: <span class="v-runden"></span> Runde(n) zu je <span class="v-rzeit"></span>. Auf den Knopf "Runde 1" klicken: Der Timer startet mit der berechneten Zeit, die Tabelle zeigt, wer wohin geht. Nach dem Klingeln die nächste Runde. Bei "Zurück" gehen alle an den eigenen Tisch und lesen Punkte und Karten. Bei nur zwei Firmen ist es ein direkter Austausch, bei sehr vielen Firmen warnt die Folie vor Gedränge. Pro Firma werden <span class="v-karten"></span> Feedback-Karten und ebenso viele Klebepunkte gebraucht. Gute Fragen beim Herumgehen: Welche Zeile habt ihr nachgerechnet? Wo habt ihr einen Fehler gefunden? Der orange Punkt ist ausdrücklich erlaubt, es geht um besser werden, nicht um Gewinner. Plan B ohne Klebepunkte: mit grünem und orangem Stift einen Punkt malen. Karten einsammeln und pro Team verteilen.</aside>
   </section>
 
   <!-- 9 SICHERUNG: MERKSATZ -->
@@ -512,7 +551,7 @@
       Zu den Kosten zählen auch die <span class="gap step">einmaligen</span> Kosten.<br>
       Ist das Ergebnis negativ, macht die Firma <span class="gap step">Verlust</span>.
     </div>
-    <div class="heft-box">Ins Heft: <b>Merksatz abschreiben</b>, den Geschäftsplan mit Firmennamen abheften. Er wird für den Pitch gebraucht.</div>
+    <div class="heft-box">Ins Heft: <b>Merksatz abschreiben</b>. Pitch-Karte im Rechner als Bild speichern und in die Präsentation einbauen. Sie wird für den Pitch gebraucht.</div>
     <aside class="notes"><b>2 Min.:</b> Lücke für Lücke raten lassen, dann aufdecken. Merksatz ins Heft, Geschäftsplan abheften oder einsammeln und in Stunde 5 wieder austeilen. Falls Zeit bleibt: Wer hat im Galeriegang eine gute Idee übernommen oder einen Fehler im eigenen Plan gefunden?</aside>
   </section>
 
@@ -537,7 +576,7 @@
           <li>Firma und Idee</li>
           <li>Zielgruppe und Nutzen</li>
           <li>Die 5 Grundfunktionen</li>
-          <li class="heute">Zahlen: euer Geschäftsplan von heute</li>
+          <li class="heute">Zahlen: eure Pitch-Karte von heute</li>
           <li>Schluss-Appell</li>
         </ol>
       </div>
