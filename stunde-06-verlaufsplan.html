@@ -3,86 +3,269 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verlaufsplan Stunde 6: Wirtschaftskreislauf live</title>
+<title>Regieheft Talerspiel</title>
 <style>
-  :root { --navy:#14324a; --teal:#4f9aa6; --teal-hell:#eaf4f4; --orange:#f2994a; --orange-hell:#fdeee0; --ink:#20303d; --linie:#b9c7ce; --gruen:#2f8f5b; }
+  :root { --navy:#14324a; --teal:#2c6671; --teal-hell:#eaf4f4; --orange:#a85a14; --orange-hell:#fdeee0; --ink:#20303d; --linie:#d3dce2; --gruen:#26805a; --gruen-hell:#e0f2e9; --bg:#f3f5f7; }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:"Trebuchet MS","Verdana","Segoe UI",sans-serif; font-size:8.4pt; line-height:1.28; color:var(--ink); background:#e8e8e8; }
-  .blatt { width:297mm; min-height:210mm; margin:15px auto; padding:10mm 12mm; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.15); }
-  .kopf { display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--navy); padding-bottom:2.2mm; margin-bottom:3mm; }
-  .kopf .label { font-size:8pt; letter-spacing:.5px; text-transform:uppercase; color:var(--teal); font-weight:800; }
-  .kopf h1 { font-size:17pt; color:var(--navy); line-height:1.1; }
-  .kopf .meta { text-align:right; font-size:8.4pt; color:#4a5a63; }
-  .ziele { display:grid; grid-template-columns:1fr 1.25fr; gap:4mm; margin-bottom:3mm; }
-  .box { border:1.5px solid var(--linie); border-radius:3mm; padding:2.2mm 4mm; }
-  .box.ziel { background:var(--orange-hell); border-color:var(--orange); }
-  .box h3 { font-size:8.1pt; letter-spacing:.5px; text-transform:uppercase; color:var(--navy); margin-bottom:.8mm; }
-  .box ul { padding-left:4mm; }
-  table { width:100%; border-collapse:collapse; table-layout:fixed; }
-  th { background:var(--navy); color:#fff; font-size:8.2pt; text-align:left; padding:1.4mm 2.4mm; }
-  td { vertical-align:top; padding:1.2mm 2.2mm; border:1px solid var(--linie); font-size:8pt; }
-  td.phase { font-weight:800; color:var(--navy); }
-  td.phase small { display:block; font-weight:700; color:var(--teal); }
-  tr.einstieg td.phase { border-left:6px solid var(--orange); }
-  tr.input td.phase { border-left:6px solid var(--teal); }
-  tr.erarbeitung td.phase { border-left:6px solid var(--navy); }
-  tr.sicherung td.phase { border-left:6px solid var(--gruen); }
-  td ul { padding-left:3.4mm; }
-  td b { color:var(--navy); }
-  .unten { display:grid; grid-template-columns:1.25fr 1fr 1fr; gap:3mm; margin-top:2.4mm; font-size:8pt; }
-  .btn-bar { width:297mm; margin:0 auto 10px auto; text-align:right; }
-  .btn { font-family:system-ui,sans-serif; font-size:13px; padding:8px 16px; border-radius:6px; border:none; background:var(--navy); color:#fff; cursor:pointer; }
-  @page { size:A4 landscape; margin:0; }
-  @media print { body { background:#fff; } .blatt { margin:0; box-shadow:none; width:100%; min-height:0; padding:5mm 9mm; } .btn-bar { display:none; } tr, .box { page-break-inside:avoid; } }
+  html { scroll-behavior:smooth; scroll-padding-top:12px; }
+  body { font-family:"Trebuchet MS",Verdana,"Segoe UI",sans-serif; font-size:17px; line-height:1.5; color:var(--ink); background:var(--bg); }
+  main { max-width:820px; margin:0 auto; padding:24px 16px 80px; }
+  .btns { display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 0; }
+  .btn { display:inline-flex; align-items:center; min-height:46px; padding:8px 16px; border-radius:10px; border:1px solid var(--navy); background:#fff; color:var(--navy); font:inherit; font-size:15px; font-weight:700; text-decoration:none; cursor:pointer; }
+  .btn.haupt { background:var(--navy); color:#fff; }
+  .label { font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--teal); }
+  h1 { font-size:clamp(30px,6vw,42px); color:var(--navy); line-height:1.08; letter-spacing:-.02em; margin:2px 0 8px; }
+  h2 { font-size:25px; color:var(--navy); line-height:1.15; margin:0 0 10px; }
+  .lernziel { color:#4a5a63; }
+  .block { background:#fff; border:1px solid var(--linie); border-radius:14px; padding:18px 20px; margin-top:16px; }
+  .block ol, .block ul { padding-left:22px; }
+  .block li + li { margin-top:5px; }
+  .sicher { background:var(--gruen-hell); border-color:transparent; }
+  .haken { list-style:none; padding:0 !important; }
+  .haken label { display:flex; gap:12px; align-items:flex-start; min-height:44px; padding:6px 0; cursor:pointer; }
+  .haken input { width:24px; height:24px; flex:none; margin-top:2px; accent-color:var(--navy); }
+  table { width:100%; border-collapse:collapse; font-size:15.5px; }
+  th { text-align:left; color:var(--navy); border-bottom:2px solid var(--navy); padding:5px 8px; }
+  td { padding:5px 8px; border-bottom:1px solid var(--linie); vertical-align:top; }
+  td a { color:var(--navy); text-decoration:none; font-weight:600; display:block; min-height:26px; }
+  td.z, th.z { text-align:right; width:70px; font-variant-numeric:tabular-nums; }
+  tr.summe td { font-weight:800; border-top:2px solid var(--navy); border-bottom:0; }
+  tr.spiel td:first-child { border-left:5px solid #f2994a; } tr.einstieg td:first-child { border-left:5px solid #14324a; }
+  tr.modell td:first-child { border-left:5px solid #4f9aa6; } tr.sicherung td:first-child { border-left:5px solid #2f8f5b; }
+  .ablauf-titel { margin:34px 0 0; }
+  .schritt { background:#fff; border:1px solid var(--linie); border-radius:14px; padding:16px 20px 18px; margin-top:14px; border-top:5px solid #f2994a; }
+  .schritt.einstieg { border-top-color:#14324a; } .schritt.modell { border-top-color:#4f9aa6; } .schritt.sicherung { border-top-color:#2f8f5b; }
+  .schritt header { display:flex; align-items:center; gap:12px; }
+  .schritt .nr { width:42px; height:42px; border-radius:50%; background:var(--navy); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; flex:none; }
+  .schritt h3 { font-size:22px; color:var(--navy); line-height:1.15; }
+  .schritt small { color:#4a5a63; font-size:14px; }
+  .beamer { margin:10px 0 2px; font-weight:700; color:var(--navy); }
+  .beamer span { display:block; font-size:13px; font-weight:700; color:#4a5a63; }
+  .feld { margin-top:11px; }
+  h4 { font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--teal); margin-bottom:2px; }
+  .feld ul { padding-left:20px; }
+  .sagen ul { list-style:none; padding:0; }
+  .sagen li { background:var(--orange-hell); color:#6a380a; border-radius:9px; padding:7px 12px; margin-top:6px; }
+  .sagen li::before { content:"\201E"; } .sagen li::after { content:"\201C"; }
+  .ergebnis { background:var(--gruen-hell); border-radius:9px; padding:9px 12px; }
+  .ergebnis h4 { color:var(--gruen); }
+  .panne li + li { margin-top:5px; }
+  @media print {
+    body { background:#fff; font-size:11pt; }
+    .btns { display:none; }
+    .schritt, .block { break-inside:avoid; }
+    * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
 </style>
 </head>
 <body>
-<div class="btn-bar"><button class="btn" onclick="window.print()">Als PDF speichern</button></div>
-<div class="blatt">
-  <div class="kopf">
-    <div><div class="label">Wirtschaft und Beruf &middot; Verlaufsplan für die Lehrkraft</div><h1>Stunde 6: Wirtschaftskreislauf live</h1></div>
-    <div class="meta">Klasse 8 M-Zweig &middot; 45 Min. &middot; Mini-Firma<br>Folien: <b>stunde-06-folien.html</b></div>
+<main>
+  <div class="label">Stunde 6 &middot; Regieheft für die Lehrkraft</div>
+  <h1>Das Talerspiel</h1>
+  <p class="lernziel"><b>Lernziel:</b> Die Schüler erklären den einfachen Wirtschaftskreislauf (Haushalte, Unternehmen, Staat, Geld- und Güterstrom) und zeigen, wohin ihr eigenes Taschengeld darin fließt.</p>
+  <div class="btns">
+    <a class="btn haupt" href="https://talerspiel.fhe86.workers.dev/regie" target="_blank" rel="noopener">Regie-Seite öffnen</a>
+    <a class="btn" href="https://talerspiel.fhe86.workers.dev/blatt" target="_blank" rel="noopener">Kreislauf-Blatt</a>
+    <button class="btn" onclick="window.print()">Als PDF speichern</button>
   </div>
 
-  <div class="ziele">
-    <div class="box ziel"><h3>Lernziel</h3>Die Schüler erklären den einfachen Wirtschaftskreislauf (Haushalte, Unternehmen, Staat, Geld- und Güterstrom) und zeigen, wohin ihr eigenes Taschengeld darin fließt.</div>
-    <div class="box"><h3>Vorher bereitlegen</h3><ul>
-      <li><b>Firmenzahl</b> im Stepper oben rechts, daneben <b>Schüler</b> der Klasse eintragen. Folie 6 rechnet daraus die Mengen: Taler (20 pro Haushalt plus Wechselgeld) und Waren-Kärtchen pro Firma aus material-06, Seite 3. Rollenkarten (Seite 2).</li>
-      <li>Ereigniskarten (Plan B ohne Beamer) und Kassenzettel aus material-21: Die Zettel entstehen passend zur Firmenzahl, ein Zettel pro Firma plus das Staat-Kassenbuch.</li>
-      <li>Merkblatt Wirtschaftskreislauf (material-13), 1 pro Schüler. Zettel und Stifte für Preisschilder.</li>
-      <li>Raum: Mitte frei, Firmenstände am Rand und ein Staatstisch. Stühle an die Wand. Bei sehr vielen Firmen mehr Platz einplanen (Hinweis auf Folie 6).</li>
-    </ul></div>
+  <div class="block">
+    <h2>Die Idee in 5 Sätzen</h2>
+    <ol><li>Die Klasse spielt den Kreislauf zuerst und benennt ihn erst danach. Niemand muss vorher ein Modell verstehen.</li><li>Jeder Haushalt hat 10 Taler auf dem iPad und läuft durch den Raum, um bei den Firmen einzukaufen.</li><li>Danach läuft das Geld weiter: Die Firmen zahlen Steuern, der Staat baut einen Radweg, die Firmen zahlen Löhne. Am Ende haben die Haushalte wieder Geld.</li><li>Im zweiten Durchgang geben alle nur noch die Hälfte aus. Die Klasse sieht sofort, dass Firmen und Staat dann weniger haben.</li><li>Danach bauen die Schüler aus ihren Spielzügen das Modell: Jeder Zug wird zu einem Pfeil auf dem Kreislauf-Blatt.</li></ol>
   </div>
 
-  <table>
-    <colgroup><col style="width:12%"><col style="width:11%"><col style="width:23%"><col style="width:29%"><col style="width:25%"></colgroup>
-    <tr><th>Phase und Zeit</th><th>Folie</th><th>Methode</th><th>Lehrkraft</th><th>Schüler</th></tr>
-    <tr class="einstieg"><td class="phase">Einstieg<small>5 Min.</small></td><td>3<br>Kiosk-Rätsel</td><td><b>Alltagsrätsel.</b> "Du kaufst ein Eis für 2 Euro. Wohin geht dein Geld?" Der Weg des Euros wird Station für Station aufgedeckt.</td><td>Erst raten lassen, dann pro Station einen Pfeil rechts. Begriffe Unternehmen, Haushalt, Steuern fallen hier zum ersten Mal.</td><td>Tippen den Weg, merken: Die Verkäuferin ist selbst Haushalt, das Geld kommt zurück.</td></tr>
-    <tr class="input"><td class="phase">Input<small>10 Min.</small></td><td>4, 5<br>Kreislauf, Blitz-Check</td><td><b>Direkte Instruktion</b> mit animiertem Kreislauf (Schritt für Schritt, Punkte fließen), danach <b>Blitz-Check</b> Geldstrom oder Güterstrom (Faust oder flache Hand).</td><td>Pro Klick ein Pfeil erklären, Rückbezug zum Rätsel. Blitz-Check nur so lange, bis alle sicher sind. Merkblatt austeilen.</td><td>Hören zu, erklären Pfeile in eigenen Worten, zeigen Faust oder Hand.</td></tr>
-    <tr class="erarbeitung"><td class="phase">Simulation<small>20 Min.</small></td><td>6 bis 11<br>Regeln, Runden 1 bis 4, Kassensturz</td><td><b>Live-Simulation.</b> Regeln 2 Min., Runde 1 Markt 5 Min., Runde 2 Steuern 3 Min., Runde 3 Staat kauft und Löhne 4 Min., Runde 4 mit Ereigniskarte 4 Min., Kassensturz 2 Min. Der Timer läuft pro Runde.</td><td>Rollen zuteilen, Möbel räumen. Pro Runde "Runde starten", herumgehen, nach dem Klingeln stoppen und den passenden Pfeil benennen. In Runde 4 Ereigniskarte ziehen und vorlesen.</td><td>Pro Firma ein Unternehmer, zwei Freiwillige Staat, alle anderen Haushalte (Anzahl rechnet Folie 6 aus). Kaufen, verkaufen, Steuern zählen, Löhne zahlen, Kassenzettel führen.</td></tr>
-    <tr class="sicherung"><td class="phase">Sicherung<small>10 Min.</small></td><td>12, 13, 14<br>Taschengeld, Skizze, Merksatz</td><td><b>Think-Pair-Share</b> zur Transferfrage (4 Min.), <b>Kreislauf-Skizze</b> ins Heft mit Lücken zum Aufdecken (3 Min.), <b>Lückensatz</b> und Hefteintrag (3 Min.).</td><td>Beispielantworten sammeln, Kette aufdecken. Skizze und Merksatz lückenweise erarbeiten, Merkblatt einkleben lassen.</td><td>Notieren den Weg ihres Taschengelds, vergleichen, zeichnen die Skizze, schreiben den Merksatz ab.</td></tr>
-    <tr><td class="phase">Ausblick<small>0,5 Min.</small></td><td>15</td><td>Impuls</td><td>Frage zur Umwelt im Kreislauf stellen, auf Stunde 7 verweisen.</td><td>Nehmen die Frage mit.</td></tr>
-  </table>
-
-  <div class="unten">
-    <div class="box"><h3>Stolpersteine und Plan B</h3><ul>
-      <li>Zeit knapp: Blitz-Check nach Frage 4 beenden, Runde 4 verkürzen (nur kurzer Einkauf, dann Steuern), Skizze als Hausaufgabe.</li>
-      <li>Wenig Platz: Firmen bleiben am Tisch, Haushalte gehen in zwei Schüben (Hälfte Runde 1, Hälfte Runde 4).</li>
-      <li>Sehr wenige Firmen: Schlangen vor den Ständen, Waren-Kärtchen pro Firma aufstocken. Sehr viele Firmen: Tische in zwei Reihen, Mitte frei. Beides nennt Folie 6.</li>
-      <li>Preis-Streit oder Chaos: Regel "Mindestens 5 Taler, höchstens 20 Taler". Der Staat hat das letzte Wort bei Zahlen.</li>
-      <li>Keine Panne-Karte am Beamer: ausgedruckte Ereigniskarten ziehen lassen, Firmennummer nennen (die Folie lost sie aus den vorhandenen Firmen).</li>
-      <li>Beamer fällt aus: Folien als PDF drucken, Tafelbild mit den Pfeilen nach jeder Runde.</li>
-    </ul></div>
-    <div class="box"><h3>Hefteintrag (Merksatz)</h3>Im Wirtschaftskreislauf geben <b>Haushalte</b> Geld für Waren und Dienstleistungen aus. Die <b>Unternehmen</b> zahlen davon <b>Löhne</b> und <b>Steuern</b>. Der <b>Staat</b> gibt das Geld wieder aus. Geld und Güter fließen <b>gegenläufig</b>.<br><br>Dazu: Kreislauf-Skizze (drei Kästchen mit Pfeilen) und Merkblatt einkleben.</div>
-    <div class="box"><h3>Bedienung der Folien</h3><ul>
-      <li>Pfeil rechts oder Leertaste: weiter, Pfeil links: zurück</li>
-      <li>N: Lehrernotizen ein und aus, F: Vollbild</li>
-      <li>Klick auf den Timer oder "Runde starten": Start und Pause, R: zurücksetzen</li>
-      <li>Firmenzahl und Schülerzahl: zwei Stepper oben rechts, Folie 6 und die Lehrernotizen rechnen sofort neu</li>
-      <li>Runde 4: "Karte ziehen" mischt die Ereignisse und lost die Firma aus den vorhandenen Firmen</li>
-      <li>Auf dem iPad: nach links und rechts wischen</li>
-    </ul></div>
+  <div class="block sicher">
+    <h2>Drei Dinge, die dich beruhigen</h2>
+    <ul>
+      <li><b>Du kannst nichts kaputtklicken.</b> Tippt jemand nicht, erledigt "Nächster Schritt" den offenen Zug selbst. Die Stunde hängt nie an einem iPad.</li>
+      <li><b>Neuladen ist harmlos.</b> Rolle und Taler sind gespeichert, auch wenn ein iPad einschläft.</li>
+      <li><b>Plan B ist eingebaut.</b> Ohne WLAN oder mit zu wenigen iPads läuft der Probelauf am Beamer, solange die Regie-Seite offen ist. Gedruckt wird nichts.</li>
+    </ul>
   </div>
-</div>
+
+  <div class="block">
+    <h2>So machst du dich in 10 Minuten bereit</h2>
+    <ul class="haken"><li><label><input type="checkbox"><span><b>Regieheft einmal lesen.</b> Du bist gerade dabei. Etwa 10 Minuten.</span></label></li><li><label><input type="checkbox"><span><b>Probelauf einmal durchklicken.</b> Regie-Seite öffnen, &quot;Probelauf&quot; antippen. Eine simulierte Klasse spielt mit, du klickst nur &quot;Nächster Schritt&quot; und liest mit Taste N die Notizen. Etwa 5 Minuten. Danach &quot;Probelauf beenden&quot;.</span></label></li><li><label><input type="checkbox"><span><b>Mit Lehrer-Passwort anmelden.</b> Die Regie-Seite fragt beim Öffnen danach. Es gilt, bis du den Browser-Tab schließt. Der Probelauf geht auch ohne Passwort.</span></label></li><li><label><input type="checkbox"><span><b>Firmennamen eintragen.</b> Regie-Seite, oben &quot;Einstellungen&quot;, eine Firma pro Zeile, speichern. Die Namen bleiben für später gespeichert.</span></label></li><li><label><input type="checkbox"><span><b>Kreislauf-Blatt in OneNote legen.</b> Blatt öffnen, &quot;Als PDF speichern&quot;, in OneNote als Ausdruck auf eine neue Seite im Kursnotizbuch einfügen. So hat es jeder auf dem iPad.</span></label></li><li><label><input type="checkbox"><span><b>Im Raum vor der Stunde.</b> Regie-Seite auf den Beamer, &quot;Neuer Durchgang&quot; drücken, WLAN mit deinem iPad testen. Möbel bleiben stehen: Die Verkäufer bleiben sitzen, die Haushalte laufen.</span></label></li></ul>
+  </div>
+
+  <div class="block">
+    <h2>Die Spielregeln</h2>
+    <ul><li>1 Taler = 1 Ware. Es gibt keine Preise und kein Wechselgeld.</li><li>Jeder Haushalt startet mit 10 Talern. Pro Besuch am Stand kauft er 1 bis 3 Waren.</li><li>Pro volle 5 Taler Einnahmen gibt eine Firma 1 Taler Steuer ab. Das iPad rechnet.</li><li>Der Staat verteilt seine Kasse gleichmäßig auf alle Firmen (Auftrag Radweg).</li><li>Jede Firma zahlt ihre Kasse gleichmäßig an ihre Mitarbeiter aus. Ein unteilbarer Rest bleibt in der Kasse.</li><li>Sparfieber im zweiten Durchgang: Jeder gibt höchstens 5 Taler aus.</li></ul>
+  </div>
+
+  <div class="block">
+    <h2>Welche Zahlen du erwarten kannst</h2>
+    <p>So sehen die Zahlen ungefähr aus, wenn in der M8d 11 Haushalte bei 8 Firmen einkaufen und alle ihr Geld ausgeben dürfen. Das echte Spiel schwankt, weil beliebte Firmen mehr verkaufen. Genau darüber lässt sich reden.</p>
+    <table style="margin-top:8px"><tr><th></th><th>Die Haushalte kaufen für</th><th>Der Staat bekommt</th></tr><tr><td>Durchgang 1</td><td>110 Taler, etwa 14 je Firma</td><td>etwa 16 Taler</td></tr><tr><td>Durchgang 2, Sparfieber</td><td>55 Taler, etwa 7 je Firma</td><td>etwa 8 Taler</td></tr></table>
+  </div>
+
+  <div class="block">
+    <h2>Der Fahrplan</h2>
+    <table><tr><th>Schritt</th><th class="z">Min.</th></tr><tr class="einstieg"><td><a href="#s1">1. Rätsel</a></td><td class="z">3</td></tr><tr class="einstieg"><td><a href="#s2">2. Rollen</a></td><td class="z">4</td></tr><tr class="spiel"><td><a href="#s3">3. Zug 1: Kaufen</a></td><td class="z">4</td></tr><tr class="spiel"><td><a href="#s4">4. Zug 2: Steuern</a></td><td class="z">2</td></tr><tr class="spiel"><td><a href="#s5">5. Zug 3: Staat baut</a></td><td class="z">1</td></tr><tr class="spiel"><td><a href="#s6">6. Zug 4: Löhne</a></td><td class="z">1</td></tr><tr class="spiel"><td><a href="#s7">7. Was ist passiert?</a></td><td class="z">2</td></tr><tr class="spiel"><td><a href="#s8">8. Sparfieber: Kaufen</a></td><td class="z">3</td></tr><tr class="spiel"><td><a href="#s9">9. Sparfieber: Steuern</a></td><td class="z">1</td></tr><tr class="spiel"><td><a href="#s10">10. Sparfieber: Staat baut</a></td><td class="z">0,5</td></tr><tr class="spiel"><td><a href="#s11">11. Sparfieber: Löhne</a></td><td class="z">0,5</td></tr><tr class="spiel"><td><a href="#s12">12. Vergleich</a></td><td class="z">1</td></tr><tr class="modell"><td><a href="#s13">13. Das Modell</a></td><td class="z">10</td></tr><tr class="sicherung"><td><a href="#s14">14. Merksatz</a></td><td class="z">3</td></tr><tr class="sicherung"><td><a href="#s15">15. Taschengeld und Eis</a></td><td class="z">6</td></tr><tr class="sicherung"><td><a href="#s16">16. Ausblick</a></td><td class="z">3</td></tr><tr class="summe"><td>Zusammen</td><td class="z">45</td></tr></table>
+  </div>
+
+  <h2 class="ablauf-titel">Schritt für Schritt</h2>
+  
+  <section class="schritt einstieg" id="s1">
+    <header><span class="nr">1</span><div><h3>Rätsel</h3><small>3 Min. &middot; Einstieg</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Du kaufst ein Eis für 2 Euro. Wohin geht dein Geld?</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Neugier wecken. Die Frage bleibt offen und wird am Ende der Stunde aufgelöst.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>Nichts. Die Frage steht am Beamer. Danach &quot;Nächster Schritt&quot;.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Stellt euch vor: Ihr kauft euch am Kiosk ein Eis für 2 Euro. Wohin geht euer Geld?</li><li>Und wohin geht es danach? Sagt mir alles, was euch einfällt.</li><li>Ich verrate noch nichts. Am Ende der Stunde könnt ihr mir das selbst erklären. Heute spielt ihr dafür die Wirtschaft nach.</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>iPads bleiben noch zu. Die Schüler raten und nennen Ideen.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Mehrere Vermutungen stehen im Raum, zum Beispiel: zum Verkäufer, zum Chef, zum Staat. Du bewertest nichts.</p></div>
+    <div class="feld panne"><h4>Wenn etwas schiefgeht</h4><ul><li><b>Jemand nennt schon den ganzen Kreislauf:</b> Loben, aber nicht auflösen: &quot;Merk dir das, wir prüfen es gleich.&quot;</li></ul></div>
+  </section>
+  <section class="schritt einstieg" id="s2">
+    <header><span class="nr">2</span><div><h3>Rollen</h3><small>4 Min. &middot; Einstieg</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Scannt den Code und wählt eure Rolle</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Alle sind im Spiel und wissen, was ihre Rolle tut. Am Beamer ist für jede Firma ein Verkäufer zu sehen.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>Der QR-Code erscheint von selbst. Rechts siehst du live, wer schon drin ist. Grüner Haken: Verkäufer da. Orange Warnung: Es fehlt jemand. Wenn alles passt, &quot;Nächster Schritt&quot;. Das startet den Einkauf.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Holt eure iPads raus und scannt den Code. Tippt auf eure Mini-Firma.</li><li>Pro Firma bleibt genau eine Person am Platz: der Verkäufer. Einigt euch kurz.</li><li>Alle anderen arbeiten bei ihrer Firma und sind zu Hause ein Haushalt. Ihr bekommt gleich 10 Taler.</li><li>Ich brauche zwei Freiwillige als Staat, bitte aus einer großen Firma. Ihr tippt unten auf Staat.</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>QR scannen, Firma antippen, Rolle antippen. Danach sehen sie ihre Geldbörse mit der Rolle. Kein Name, keine Anmeldung.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Jede Firma hat einen Verkäufer und möglichst mindestens einen Mitarbeiter, dazu 2 Personen im Staat.</p></div>
+    <div class="feld panne"><h4>Wenn etwas schiefgeht</h4><ul><li><b>Eine Firma hat keine Mitarbeiter (zum Beispiel eine Ein-Personen-Firma):</b> Am Beamer steht eine Warnung. Bitte jemanden aus einer großen Firma, dort anzufangen: Rolle unten auf dem iPad ändern. Sonst bleibt ihr Geld später in der Kasse hängen. Das stört das Spiel nicht, du kannst es sogar ansprechen.</li><li><b>Ein Schüler hat kein iPad oder es geht nicht:</b> Er wird Staat zusammen mit einem Partner oder arbeitet am iPad des Nachbarn mit. Das Spiel braucht nicht jeden.</li><li><b>Jemand hat sich vertippt:</b> Bis zum Spielstart kann jeder unten auf &quot;Rolle ändern&quot; tippen.</li><li><b>Der QR-Code geht nicht:</b> Die Adresse steht unter dem Code. Eintippen geht auch.</li></ul></div>
+  </section>
+  <section class="schritt spiel" id="s3">
+    <header><span class="nr">3</span><div><h3>Zug 1: Kaufen</h3><small>4 Min. &middot; Spiel</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Geht zu den Ständen und kauft ein</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Die Schüler erleben: Geld geht zur Firma, die Ware kommt zu mir. Das ist später das Pfeil-Paar Konsumausgaben und Waren.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>Mit &quot;Nächster Schritt&quot; aus der Rollen-Seite ist der Einkauf offen. Der Timer läuft. Du gehst herum. Wenn die Zeit um ist: &quot;Nächster Schritt&quot;.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Verkäufer: Auf eurem iPad steht groß ein Code. Haltet es gut sichtbar.</li><li>Haushalte: Ihr habt 10 Taler. Geht zu einem Stand, tippt den Code ein und wählt, wie viele Waren ihr kauft: 1, 2 oder 3.</li><li>Geht zu verschiedenen Firmen. Ihr müsst nicht alles ausgeben. Ihr habt 4 Minuten. Los!</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Haushalte laufen zum Stand, lesen den Code ab, tippen ihn ein, wählen die Menge. Die Taler sinken, die Waren im Korb steigen. Verkäufer sehen Code, Einnahmen und Warenbestand. Staat sieht noch nichts zu tun und beobachtet.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Die Kassen der Firmen füllen sich, am Beamer steigen die Balken. Manche Firmen verkaufen mehr als andere.</p></div>
+    <div class="feld panne"><h4>Wenn etwas schiefgeht</h4><ul><li><b>Ein Verkäufer fällt aus oder sein iPad ist leer:</b> Beim Firmennamen am Beamer auf &quot;Tauschen&quot; tippen (nur in den Notizen sichtbar, Taste N). Ein Mitarbeiter übernimmt, die Kasse bleibt erhalten.</li><li><b>Ein Schüler lädt die Seite neu oder das iPad schläft ein:</b> Nichts passiert. Rolle und Taler sind gespeichert.</li><li><b>Ein Schüler kommt zu spät:</b> Er scannt den Code und wählt &quot;Mitarbeiter&quot; einer Firma. Er bekommt 10 Taler.</li><li><b>Schüler tippen vom Platz aus:</b> Das kann passieren, wenn sie sich einen Code gemerkt haben. Der Code wechselt im zweiten Durchgang. Sag einfach: &quot;Einkaufen heißt hingehen.&quot;</li><li><b>WLAN fällt aus:</b> &quot;Probelauf&quot; oben starten und das Spiel am Beamer zeigen. Die Klasse kommentiert, du fragst: &quot;Was passiert jetzt?&quot;</li></ul></div>
+  </section>
+  <section class="schritt spiel" id="s4">
+    <header><span class="nr">4</span><div><h3>Zug 2: Steuern</h3><small>2 Min. &middot; Spiel</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Firmen: Gebt eure Steuer an den Staat</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Die Schüler sehen: Ein Teil der Einnahmen geht von den Firmen an den Staat.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>&quot;Nächster Schritt&quot; öffnet den Zug. Sobald am Beamer alle Firmen einen Haken haben, weiter. Wer nicht getippt hat, zahlt automatisch, wenn du weiterklickst.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Stopp, alle bleiben stehen. Verkäufer, schaut auf eure Einnahmen.</li><li>Von je 5 Talern Einnahmen geht 1 Taler an den Staat. Das sind die Steuern. Tippt auf den Knopf.</li><li>Staat, sagt laut an: Wie viel habt ihr jetzt in der Kasse?</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Verkäufer tippen auf &quot;Steuer abgeben&quot;. Staat sieht die Kasse wachsen und sagt den Betrag an. Haushalte schauen zum Beamer.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Die Staatskasse steht am Beamer. Die Klasse hat die erste Zahl für den späteren Vergleich.</p></div>
+    <div class="feld panne"><h4>Wenn etwas schiefgeht</h4><ul><li><b>Eine Firma hat unter 5 Taler verkauft:</b> Sie zahlt 0 Taler. Das ist richtig. Wenig Umsatz, wenig Steuer.</li><li><b>Frage: Warum nur Firmen?:</b> &quot;Haushalte zahlen auch Steuern, das lassen wir im Spiel weg. Wir vereinfachen.&quot;</li></ul></div>
+  </section>
+  <section class="schritt spiel" id="s5">
+    <header><span class="nr">5</span><div><h3>Zug 3: Staat baut</h3><small>1 Min. &middot; Spiel</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Staat: Baut den Radweg</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Die Schüler sehen: Der Staat behält das Geld nicht, er gibt es wieder aus.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>&quot;Nächster Schritt&quot; öffnet den Zug. Sobald der Staat getippt hat, weiter. Tippt er nicht, passiert es beim Weiterklicken.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Was macht der Staat jetzt mit dem Geld? Sammelt er es unter dem Kopfkissen?</li><li>Unsere Stadt braucht einen Radweg. Staat, gebt den Auftrag an die Firmen.</li><li>Schaut auf den Beamer: Das Geld geht wieder zu den Firmen.</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Staat tippt auf &quot;Radweg bauen&quot;. Verkäufer sehen, dass Geld vom Staat in ihre Kasse kommt.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Die Staatskasse ist fast leer, die Firmenkassen sind wieder voller.</p></div>
+    <div class="feld panne"><h4>Wenn etwas schiefgeht</h4><ul><li><b>Ein Rest bleibt in der Staatskasse:</b> Das ist richtig. Der Staat teilt gleichmäßig und behält, was sich nicht teilen lässt.</li></ul></div>
+  </section>
+  <section class="schritt spiel" id="s6">
+    <header><span class="nr">6</span><div><h3>Zug 4: Löhne</h3><small>1 Min. &middot; Spiel</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Firmen: Zahlt die Löhne</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Der Kreis schließt sich: Das Geld kommt zu den Haushalten zurück.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>&quot;Nächster Schritt&quot; öffnet den Zug. Sobald alle Firmen einen Haken haben, weiter.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Verkäufer: Eure Mitarbeiter wollen bezahlt werden. Tippt auf &quot;Löhne zahlen&quot;.</li><li>Haushalte: Schaut in eure Geldbörse.</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Verkäufer tippen auf &quot;Löhne zahlen&quot;. Bei den Haushalten erscheint &quot;+ Lohn&quot; und die Taler steigen.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Die Haushalte haben wieder Geld. Fast alle staunen.</p></div>
+    <div class="feld panne"><h4>Wenn etwas schiefgeht</h4><ul><li><b>Ein Haushalt bekommt wenig oder keinen Lohn:</b> Seine Firma hat wenig verkauft. Merk dir das für den nächsten Schritt.</li><li><b>Eine Firma hat keine Mitarbeiter:</b> Ihr Geld bleibt in der Kasse. Das zeigt: Wo niemand arbeitet, fließt kein Lohn.</li></ul></div>
+  </section>
+  <section class="schritt spiel" id="s7">
+    <header><span class="nr">7</span><div><h3>Was ist passiert?</h3><small>2 Min. &middot; Spiel</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Eure Taler sind zurück. Wie kann das sein?</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Der Aha-Moment: Das Geld ist nicht weg. Es ist einmal im Kreis gelaufen.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>Nichts. Der Beamer zeigt, wo die Taler jetzt liegen. Danach &quot;Nächster Schritt&quot;: Das startet das Sparfieber.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Hebt die Hand, wer wieder Taler hat. Ihr habt doch alles ausgegeben. Wie kann das sein?</li><li>Erzählt es mir: Wo waren eure Taler überall, bevor sie zurückkamen?</li><li>Ist jetzt irgendwo Geld dazugekommen? Oder weg? Schaut auf die Gesamtzahl.</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>iPads zeigen den eigenen Stand. Die Schüler erzählen den Weg: Firma, Staat, wieder Firma, Lohn.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Mindestens ein Schüler erzählt den Weg vollständig. Merksatz noch nicht festhalten, das kommt später.</p></div>
+    <div class="feld panne"><h4>Wenn etwas schiefgeht</h4><ul><li><b>Nicht jeder hat wieder genau 10 Taler:</b> Normal. Wer bei einer beliebten Firma arbeitet, bekommt mehr Lohn. Fragen: &quot;Warum hat sie mehr als er?&quot;</li><li><b>Die Zeit ist knapp:</b> Nur die erste Frage stellen, dann weiter. Sparfieber kannst du notfalls auch nur mit Kaufen und Vergleich spielen, weil das Weiterklicken die Züge selbst erledigt.</li></ul></div>
+  </section>
+  <section class="schritt spiel" id="s8">
+    <header><span class="nr">8</span><div><h3>Sparfieber: Kaufen</h3><small>3 Min. &middot; Spiel</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Sparfieber! Jeder gibt höchstens 5 Taler aus</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Eine einzige Änderung, damit die Schüler die Folge selbst sehen: Weniger Ausgaben treffen alle.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>&quot;Nächster Schritt&quot; startet die Runde. Neue Codes, frische Waren, die Taler bleiben. Timer läuft. Danach &quot;Nächster Schritt&quot;.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Es gibt schlechte Nachrichten in den Medien. Alle haben Angst um ihr Geld. Jeder gibt jetzt höchstens 5 Taler aus, den Rest spart ihr.</li><li>Was glaubt ihr: Was passiert mit den Firmen? Und mit dem Staat? Tippt kurz. Los, einkaufen!</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Haushalte kaufen wie vorher, sehen aber den Hinweis &quot;Sparfieber: noch x Taler&quot;. Bei 5 ist Schluss. Verkäufer haben einen neuen Code.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Die Balken am Beamer bleiben sichtbar niedriger.</p></div>
+    <div class="feld panne"><h4>Wenn etwas schiefgeht</h4><ul><li><b>Schüler sind in 1 Minute fertig:</b> Gut. Direkt weiterklicken. So gewinnst du Zeit für das Modell.</li></ul></div>
+  </section>
+  <section class="schritt spiel" id="s9">
+    <header><span class="nr">9</span><div><h3>Sparfieber: Steuern</h3><small>1 Min. &middot; Spiel</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Firmen: Gebt eure Steuer an den Staat</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Die Schüler kennen den Zug schon. Jetzt fällt ihnen auf, dass es weniger ist.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>&quot;Nächster Schritt&quot; öffnet den Zug. Sobald alle Haken da sind, weiter.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Verkäufer, Steuer abgeben. Staat, wie viel ist es diesmal?</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Verkäufer tippen, Staat sagt die Summe an.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Die Klasse hört die kleinere Zahl.</p></div>
+    
+  </section>
+  <section class="schritt spiel" id="s10">
+    <header><span class="nr">10</span><div><h3>Sparfieber: Staat baut</h3><small>0,5 Min. &middot; Spiel</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Staat: Der Radweg wird kürzer</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Weniger Steuern heißt weniger Geld für öffentliche Aufgaben.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>&quot;Nächster Schritt&quot; öffnet den Zug. Sobald der Staat getippt hat, weiter.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Staat, gebt aus, was ihr habt. Reicht das noch für den ganzen Radweg?</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Staat tippt. Die Summe ist kleiner.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Spontane Antworten wie: &quot;Nur noch der halbe Radweg.&quot;</p></div>
+    
+  </section>
+  <section class="schritt spiel" id="s11">
+    <header><span class="nr">11</span><div><h3>Sparfieber: Löhne</h3><small>0,5 Min. &middot; Spiel</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Firmen: Zahlt die Löhne</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Weniger Umsatz heißt weniger Lohn.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>&quot;Nächster Schritt&quot; öffnet den Zug. Sobald alle Haken da sind, weiter.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Verkäufer, Löhne zahlen. Haushalte, wie viel Lohn kam diesmal bei euch an?</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Verkäufer tippen, Haushalte sehen weniger Lohn als im ersten Durchgang.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Die Haushalte merken: Mein Sparen kommt als kleinerer Lohn zurück.</p></div>
+    
+  </section>
+  <section class="schritt spiel" id="s12">
+    <header><span class="nr">12</span><div><h3>Vergleich</h3><small>1 Min. &middot; Spiel</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Wer hat durch das Sparen verloren?</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Die Kernerkenntnis: Alles hängt zusammen. Was einer weniger ausgibt, fehlt anderen.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>Nichts. Der Beamer zeigt beide Durchgänge. Danach iPads auf die OneNote-Seite wechseln lassen und &quot;Nächster Schritt&quot;.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Schaut auf die Zahlen. Was hat sich vom ersten zum zweiten Durchgang verändert?</li><li>Wer hat durch das Sparen verloren? Die Firmen? Der Staat? Oder auch ihr?</li><li>Danke, das Spiel ist zu Ende. Setzt euch und öffnet in OneNote das Kreislauf-Blatt.</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Schüler lesen die Zahlen und antworten. Dann wechseln sie zu OneNote.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Eine Antwort wie: &quot;Wenn wir weniger kaufen, haben die Firmen weniger, der Staat weniger und wir bekommen weniger Lohn.&quot;</p></div>
+    <div class="feld panne"><h4>Wenn etwas schiefgeht</h4><ul><li><b>Frage: Ist Sparen also schlecht?:</b> &quot;Nein. Für dich allein kann Sparen klug sein. Wenn alle gleichzeitig sparen, spürt es die ganze Wirtschaft.&quot;</li></ul></div>
+  </section>
+  <section class="schritt modell" id="s13">
+    <header><span class="nr">13</span><div><h3>Das Modell</h3><small>10 Min. &middot; Modell</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Welcher Zug war welcher Pfeil?</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Das Spiel wird zum Modell. Die Schüler beschriften selbst und kennen danach die Fachbegriffe.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>Jeder Klick auf &quot;Nächster Schritt&quot; deckt einen Pfeil auf: Konsumausgaben, Waren, Steuern, Staatsausgaben, Löhne, dann der Satz zum Gegenlauf. Vor jedem Klick fragst du. Nach dem letzten Pfeil geht es zum Merksatz.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Das, was ihr gerade gespielt habt, heißt Wirtschaftskreislauf. Wir hatten drei Mitspieler. Wer war das?</li><li>Zug 1: Ihr habt eingekauft. Wohin ging euer Geld? Schreibt an den Pfeil: Konsumausgaben.</li><li>Und was kam dafür in die andere Richtung? Genau, die Waren. Das ist der einzige Pfeil, auf dem kein Geld läuft.</li><li>Zug 2: Welches Geld ging von den Firmen zum Staat? Steuern.</li><li>Zug 3: Der Radweg. Das Geld vom Staat heißt Staatsausgaben.</li><li>Zug 4: Woher hattet ihr am Ende wieder Taler? Löhne.</li><li>Schaut Pfeil 1 und 2 an: Geld und Ware laufen gegeneinander. Das nennt man gegenläufig.</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Schüler beschriften in OneNote die 5 Pfeile und die 3 Kästchen auf dem Kreislauf-Blatt, mit Apple Pencil oder Finger. Vor jedem Pfeil rufen sie die Antwort rein.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Jeder Schüler hat das vollständig beschriftete Schaubild. Es gleicht dem Schaubild aus dem Leistungsnachweis, Aufgabe 2a.</p></div>
+    <div class="feld panne"><h4>Wenn etwas schiefgeht</h4><ul><li><b>Frage: Zahlen Haushalte keine Steuern? Bekommen Lehrer nicht auch Geld vom Staat?:</b> &quot;Richtig, beides gibt es. Wer fertig ist, ergänzt diese zwei Pfeile.&quot; Das ist die Erweiterung für Schnelle.</li><li><b>OneNote-Seite fehlt oder lädt nicht:</b> Skizze ins Heft: drei Kästchen, fünf Pfeile. Geld durchgezogen, Waren gestrichelt.</li><li><b>Die Zeit ist knapp:</b> Du sagst die Pfeile selbst und sie schreiben nur. Das geht in 5 Minuten.</li></ul></div>
+  </section>
+  <section class="schritt sicherung" id="s14">
+    <header><span class="nr">14</span><div><h3>Merksatz</h3><small>3 Min. &middot; Sicherung</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Das merken wir uns</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Die Fachbegriffe stehen in einem Satz, gleich auf dem Blatt und nicht im Heft abgeschrieben.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>Jeder Klick auf &quot;Nächster Schritt&quot; deckt eine Lücke auf. Vorher raten lassen. Nach der letzten Lücke geht es zum Transfer.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Füllt die Lücken auf eurem Blatt selbst aus. Wer weiß die erste?</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Schüler ergänzen den Merksatz auf dem Blatt.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Der Merksatz ist vollständig: Im Wirtschaftskreislauf geben Haushalte Geld für Waren und Dienstleistungen aus. Die Unternehmen zahlen davon Löhne und Steuern. Der Staat gibt das Geld wieder aus. Geld und Güter fließen gegenläufig.</p></div>
+    <div class="feld panne"><h4>Wenn etwas schiefgeht</h4><ul><li><b>Einzelne hängen hinterher:</b> Den fertigen Satz stehen lassen und beim Transfer weiterlaufen. Sie holen es in der Stillarbeit nach.</li></ul></div>
+  </section>
+  <section class="schritt sicherung" id="s15">
+    <header><span class="nr">15</span><div><h3>Taschengeld und Eis</h3><small>6 Min. &middot; Sicherung</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Was passiert mit eurem Taschengeld?</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Transfer vom Spiel in den eigenen Alltag. Hier zeigt sich, ob das Lernziel erreicht ist. Das Eis-Rätsel vom Anfang wird aufgelöst.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>Erst nichts: 2 Minuten allein, 2 Minuten zu zweit schreiben lassen. Dann deckt jeder Klick eine Station auf. Der letzte Klick löst das Eis-Rätsel auf.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>Letzte Aufgabe auf dem Blatt: Schreibt auf, was mit eurem Taschengeld passiert. Woher kommt es? Wohin geht es, wenn ihr es ausgebt? 2 Minuten allein.</li><li>Jetzt erzählt es eurem Nachbarn. Ergänzt, was euch fehlt.</li><li>Wer erklärt jetzt das Eis vom Anfang? Wohin gingen die 2 Euro?</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Schüler schreiben auf dem Blatt, vergleichen, stellen eine Lösung vor.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Ein Schüler erklärt das Eis-Rätsel selbst: Kiosk, Lohn der Verkäuferin, Steuern an den Staat, Staat zahlt Gehälter und Straßen, Menschen kaufen wieder ein.</p></div>
+    <div class="feld panne"><h4>Wenn etwas schiefgeht</h4><ul><li><b>Die Zeit ist knapp:</b> Nur mündlich zu zweit, dann Eis-Rätsel. Die Taschengeld-Frage auf dem Blatt wird Hausaufgabe.</li></ul></div>
+  </section>
+  <section class="schritt sicherung" id="s16">
+    <header><span class="nr">16</span><div><h3>Ausblick</h3><small>3 Min. &middot; Sicherung</small></div></header>
+    <p class="beamer"><span>Am Beamer steht:</span> Fehlt da nicht noch etwas?</p>
+    <div class="feld"><h4>Warum dieser Schritt</h4><p>Neugier auf Stunde 7. Der Rest der Zeit ist Puffer.</p></div>
+    <div class="feld"><h4>Was du klickst</h4><p>Nichts mehr. Die iPads zeigen &quot;Danke fürs Mitspielen&quot;. Für die nächste Klasse: &quot;Neuer Durchgang&quot; in den Einstellungen.</p></div>
+    <div class="feld sagen"><h4>Was du sagst</h4><ul><li>In unserem Modell kostet nichts die Umwelt. In echt schon.</li><li>Überlegt bis zum nächsten Mal: Was kostet die Herstellung eines T-Shirts, was auf keinem Preisschild steht?</li><li>Nächste Stunde prüfen wir, wie umweltfreundlich eure Mini-Firma wirklich ist.</li></ul></div>
+    <div class="feld"><h4>Was die Schüler tun</h4><p>Schüler nehmen die Frage mit und speichern ihr Blatt in OneNote.</p></div>
+    <div class="feld ergebnis"><h4>Was herauskommen soll</h4><p>Blatt vollständig in OneNote. Die Frage zum T-Shirt steht im Raum.</p></div>
+    
+  </section>
+</main>
 </body>
 </html>
